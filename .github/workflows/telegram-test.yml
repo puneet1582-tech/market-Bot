@@ -14,14 +14,20 @@ jobs:
           python - <<EOF
           import requests
           import os
+          import csv
+          from io import StringIO
 
           token = os.environ["BOT_TOKEN"]
           chat_id = os.environ["CHAT_ID"]
 
-          url = "https://query1.finance.yahoo.com/v7/finance/quote?symbols=%5ENSEI"
-          data = requests.get(url).json()
+          url = "https://query1.finance.yahoo.com/v7/finance/download/%5ENSEI?period1=0&period2=9999999999&interval=1d&events=history&includeAdjustedClose=true"
+          resp = requests.get(url)
+          data = resp.text
 
-          price = data["quoteResponse"]["result"][0]["regularMarketPrice"]
+          reader = csv.DictReader(StringIO(data))
+          rows = list(reader)
+          last = rows[-1]
+          price = last["Close"]
 
           message = f"📊 NIFTY LIVE UPDATE\nNIFTY Price: ₹{price}\nRisk management ज़रूरी है"
 
