@@ -6,26 +6,13 @@ from fundamental_brain import fundamental_data
 mode = decide_mode(market_conditions)
 stocks = select_stocks(mode)
 
-print("📊 Daily Market Analysis (Sector Rotation System)")
+print("🚨 ONLY BUY ALERT BOT")
 print("")
 
-# ---------------- MODE ----------------
-print("MODE DECISION:")
-print(f"आज का Active Mode: {mode}")
+print(f"Market Mode: {mode}")
 print("")
 
-# ---------------- MARKET PSYCHOLOGY ----------------
-print("Market Psychology:")
-if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
-    market_mood = "Fear"
-elif market_conditions["global_trend"] == "POSITIVE":
-    market_mood = "Confidence"
-else:
-    market_mood = "Neutral"
-
-print(f"- Market Mood: {market_mood}")
-
-# ---------------- STOCK SCORING ----------------
+# -------- STOCK SCORING --------
 def score_stock(data):
     score = 0
     if data.get("risk") == "LOW":
@@ -44,73 +31,80 @@ for stock in stocks:
 scored.sort(key=lambda x: x[1], reverse=True)
 top_25 = scored[:25]
 
-# ---------------- SECTOR ROTATION LOGIC ----------------
-sector_score = {}
-sector_count = {}
+# -------- TECHNICAL --------
+def get_trend(symbol):
+    try:
+        df = yf.Ticker(symbol + ".NS").history(period="20d")
+        close = df["Close"]
+        if close.iloc[-1] > close.mean():
+            return "Uptrend"
+        elif close.iloc[-1] < close.mean():
+            return "Downtrend"
+        else:
+            return "Sideways"
+    except:
+        return "NA"
 
+def get_rsi(symbol):
+    try:
+        df = yf.Ticker(symbol + ".NS").history(period="20d")
+        delta = df["Close"].diff()
+        gain = delta.clip(lower=0)
+        loss = -delta.clip(upper=0)
+
+        avg_gain = gain.rolling(14).mean()
+        avg_loss = loss.rolling(14).mean()
+
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+
+        val = round(rsi.iloc[-1], 2)
+        if val > 70:
+            return val, "Overbought"
+        elif val < 30:
+            return val, "Oversold"
+        else:
+            return val, "Neutral"
+    except:
+        return 0, "NA"
+
+# -------- BUY LOGIC --------
+def decide_buy(data, trend, rsi_status):
+    if data.get("risk") == "LOW" and str(data.get("debt")).startswith("0") and trend == "Uptrend" and rsi_status == "Neutral":
+        return True
+    return False
+
+# -------- OUTPUT --------
+print("Stocks with BUY Signal:")
+print("")
+
+count = 1
 for stock, score in top_25:
     data = fundamental_data.get(stock, {})
-    sector = data.get("sector", "NA")
+    trend = get_trend(stock)
+    rsi_value, rsi_status = get_rsi(stock)
 
-    sector_score[sector] = sector_score.get(sector, 0) + score
-    sector_count[sector] = sector_count.get(sector, 0) + 1
+    if decide_buy(data, trend, rsi_status):
+        print("====================================")
+        print(f"{count}. {stock}")
+        print("------------------------------------")
+        print(f"Sector : {data.get('sector')}")
+        print(f"Sales  : {data.get('sales')}")
+        print(f"Profit : {data.get('profit')}")
+        print(f"Debt   : {data.get('debt')}")
+        print(f"Trend  : {trend}")
+        print(f"RSI    : {rsi_value} ({rsi_status})")
+        print("")
+        print("BUY SIGNAL क्योंकि:")
+        print("- Fundamentals strong हैं")
+        print("- Debt नहीं है")
+        print("- Trend ऊपर की तरफ है")
+        print("- RSI balanced है")
+        print("")
+        count += 1
 
-# average score per sector
-sector_avg = {}
-for sector in sector_score:
-    sector_avg[sector] = round(sector_score[sector] / sector_count[sector], 2)
-
-# classify sectors
-strong_sectors = []
-weak_sectors = []
-
-for sector, avg in sector_avg.items():
-    if avg >= 5:
-        strong_sectors.append(sector)
-    else:
-        weak_sectors.append(sector)
-
-# ---------------- OUTPUT ----------------
-print("")
-print("SECTOR ROTATION SUMMARY:")
-print("")
-
-print("Strong Sectors Today:")
-if strong_sectors:
-    for s in strong_sectors:
-        print(f"- {s}")
-else:
-    print("- कोई sector खास strong नहीं दिख रहा")
-
-print("")
-print("Weak / Neutral Sectors Today:")
-if weak_sectors:
-    for s in weak_sectors:
-        print(f"- {s}")
-else:
-    print("- सभी sectors balanced हैं")
-
-# ---------------- COMPANY DETAILS ----------------
-print("")
-print("TOP 25 Stocks (Sector Wise View):")
-print("")
-
-i = 1
-for stock, score in top_25:
-    data = fundamental_data.get(stock, {})
-    sector = data.get("sector")
-
-    print("====================================")
-    print(f"{i}. {stock}")
-    print("------------------------------------")
-    print(f"Sector : {sector}")
-    print(f"Sales  : {data.get('sales')}")
-    print(f"Profit : {data.get('profit')}")
-    print(f"Debt   : {data.get('debt')}")
-    print(f"Risk   : {data.get('risk')}")
-    print(f"Score  : {score}")
-    print("")
-    i += 1
+if count == 1:
+    print("आज कोई भी stock BUY criteria पूरा नहीं कर रहा।")
 
 print("====================================")
-print("Note: Sector strength is based on average stock score in Top 25.")
+print("Note: यह केवल study और learning के लिए है, निवेश की सलाह नहीं।")
