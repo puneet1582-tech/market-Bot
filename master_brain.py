@@ -18,24 +18,14 @@ print("Mode चुनने का कारण:")
 if mode == "DEFENSIVE MODE":
     print("- Market में volatility ज्यादा है")
     print("- Global trend कमजोर है")
-    print("- इसलिए सुरक्षित (defensive) stocks पर ध्यान दिया गया है")
+    print("- इसलिए safe stocks पर focus किया गया है")
 elif mode == "INVEST MODE":
     print("- Market का trend positive है")
     print("- Liquidity ठीक है")
     print("- इसलिए long-term investment के मौके देखे जा रहे हैं")
 else:
     print("- Market में साफ दिशा नहीं है")
-    print("- इसलिए trading / short-term नजरिया रखा गया है")
-
-# ---------------- MARKET STATUS ----------------
-print("")
-print("Market स्थिति:")
-if market_conditions["volatility"] == "HIGH":
-    print("- Volatility ज्यादा है")
-if market_conditions["liquidity"] == "LOW":
-    print("- Liquidity कम है")
-if market_conditions["global_trend"] == "NEGATIVE":
-    print("- Global trend कमजोर है")
+    print("- इसलिए short-term trading नजरिया रखा गया है")
 
 # ---------------- MARKET PSYCHOLOGY ----------------
 print("")
@@ -45,7 +35,7 @@ if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volati
 elif market_conditions["global_trend"] == "POSITIVE":
     market_mood = "Confidence (भरोसे का माहौल)"
 else:
-    market_mood = "Neutral (ना डर, ना ज्यादा भरोसा)"
+    market_mood = "Neutral"
 
 print(f"- Market Mood: {market_mood}")
 
@@ -98,17 +88,26 @@ def get_rsi(symbol):
         rsi_value = round(rsi.iloc[-1], 2)
 
         if rsi_value > 70:
-            return f"{rsi_value} (Overbought)"
+            return rsi_value, "Overbought"
         elif rsi_value < 30:
-            return f"{rsi_value} (Oversold)"
+            return rsi_value, "Oversold"
         else:
-            return f"{rsi_value} (Neutral)"
+            return rsi_value, "Neutral"
     except:
-        return "RSI not available"
+        return 0, "Not available"
+
+# ---------------- BUY / HOLD / AVOID LOGIC ----------------
+def decide_signal(mode, data, trend, rsi_status):
+    if data.get("risk") == "LOW" and str(data.get("debt")).startswith("0") and trend == "Uptrend" and rsi_status == "Neutral":
+        return "BUY"
+    elif trend == "Downtrend" or rsi_status == "Overbought":
+        return "AVOID"
+    else:
+        return "HOLD"
 
 # ---------------- OUTPUT ----------------
 print("")
-print("TOP 25 Stocks – Fundamental + Technical View:")
+print("TOP 25 Stocks – Final Signal:")
 print("")
 
 i = 1
@@ -116,7 +115,9 @@ for stock, score in top_25:
     data = fundamental_data.get(stock, {})
 
     trend = get_trend(stock)
-    rsi_status = get_rsi(stock)
+    rsi_value, rsi_status = get_rsi(stock)
+
+    signal = decide_signal(mode, data, trend, rsi_status)
 
     print("====================================")
     print(f"{i}. {stock}")
@@ -126,24 +127,23 @@ for stock, score in top_25:
     print(f"Profit : {data.get('profit')}")
     print(f"Debt   : {data.get('debt')}")
     print(f"Risk   : {data.get('risk')}")
-    print(f"Score  : {score}")
+    print(f"Trend  : {trend}")
+    print(f"RSI    : {rsi_value} ({rsi_status})")
+    print("")
+    print(f"FINAL SIGNAL: {signal}")
     print("")
 
-    print("Technical Analysis:")
-    print(f"- Trend : {trend}")
-    print(f"- RSI   : {rsi_status}")
-    print("")
-
-    print("Why selected:")
-    if data.get("risk") == "LOW":
-        print("- Business risk low")
-    if str(data.get("debt")).startswith("0"):
-        print("- Company is debt free")
-    if "Cr" in str(data.get("profit")):
-        print("- Company is profitable")
+    print("Reason:")
+    if signal == "BUY":
+        print("- Company fundamentals strong हैं")
+        print("- Trend positive है और RSI balanced है")
+    elif signal == "HOLD":
+        print("- Stock stable है लेकिन clear entry नहीं है")
+    else:
+        print("- Trend कमजोर है या stock overbought है")
 
     print("")
     i += 1
 
 print("====================================")
-print("Note: Mode is auto-selected based on real market conditions.")
+print("Note: Signals are based on combined Fundamental + Technical logic.")
