@@ -1,0 +1,9 @@
+TITLE : TOMORROW MARKET OUTLOOK (MASTER REPORT)
+MODE : INVEST
+FINAL_DECISION : BUY
+LIKELY_GAINERS : ['RELIANCE']
+LIKELY_LOSERS : ['TCS', 'ABC_MICRO', 'XYZ_SMALL']
+WHY_DECISION : ['Sales rising', 'Profit rising', 'FII buying', 'Price trend up', 'Positive sector news']
+EVIDENCE_INTERNET : [{'source': 'YouTube analyst', 'sector': 'Energy', 'sentiment': 'POSITIVE'}, {'source': 'Finance blog', 'sector': 'Finance', 'sentiment': 'NEGATIVE'}, {'source': 'Podcast discussion', 'sector': 'IT', 'sentiment': 'NEGATIVE'}, {'source': 'Twitter trend', 'sector': 'Micro', 'sentiment': 'NEGATIVE'}]
+SUMMARY : Decision is based on fundamentals, smart money, technicals, price action, global news, and internet narrative cross-verification.
+SUGGESTION : {'BUY_OR_ACCUMULATE': ['RELIANCE'], 'SELL_OR_AVOID': ['TCS', 'ABC_MICRO', 'XYZ_SMALL'], 'RISK_NOTE': 'If global risk rises, defensive sectors may outperform.'}
