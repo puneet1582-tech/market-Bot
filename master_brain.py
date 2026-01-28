@@ -14,26 +14,12 @@ print("MODE DECISION:")
 print(f"आज का Active Mode: {mode}")
 print("")
 
-print("Mode चुनने का कारण:")
-if mode == "DEFENSIVE MODE":
-    print("- Market में volatility ज्यादा है")
-    print("- Global trend कमजोर है")
-    print("- इसलिए safe stocks पर focus किया गया है")
-elif mode == "INVEST MODE":
-    print("- Market का trend positive है")
-    print("- Liquidity ठीक है")
-    print("- इसलिए long-term investment के मौके देखे जा रहे हैं")
-else:
-    print("- Market में साफ दिशा नहीं है")
-    print("- इसलिए short-term trading नजरिया रखा गया है")
-
 # ---------------- MARKET PSYCHOLOGY ----------------
-print("")
 print("Market Psychology:")
 if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
-    market_mood = "Fear (डर का माहौल)"
+    market_mood = "Fear"
 elif market_conditions["global_trend"] == "POSITIVE":
-    market_mood = "Confidence (भरोसे का माहौल)"
+    market_mood = "Confidence"
 else:
     market_mood = "Neutral"
 
@@ -96,8 +82,8 @@ def get_rsi(symbol):
     except:
         return 0, "Not available"
 
-# ---------------- BUY / HOLD / AVOID LOGIC ----------------
-def decide_signal(mode, data, trend, rsi_status):
+# ---------------- SIGNAL LOGIC ----------------
+def decide_signal(data, trend, rsi_status):
     if data.get("risk") == "LOW" and str(data.get("debt")).startswith("0") and trend == "Uptrend" and rsi_status == "Neutral":
         return "BUY"
     elif trend == "Downtrend" or rsi_status == "Overbought":
@@ -105,9 +91,26 @@ def decide_signal(mode, data, trend, rsi_status):
     else:
         return "HOLD"
 
+# ---------------- RISK MANAGEMENT ----------------
+def position_size(signal):
+    if signal == "BUY":
+        return "Capital का 5–7% से ज़्यादा नहीं"
+    elif signal == "HOLD":
+        return "नया पैसा न लगाएँ, जो है वही रखें"
+    else:
+        return "कोई position न लें"
+
+def stoploss_idea(trend):
+    if trend == "Uptrend":
+        return "Recent swing low के नीचे Stoploss रखें"
+    elif trend == "Sideways":
+        return "Tight Stoploss रखें (2–3%)"
+    else:
+        return "Trade avoid करें"
+
 # ---------------- OUTPUT ----------------
 print("")
-print("TOP 25 Stocks – Final Signal:")
+print("TOP 25 Stocks – Signal + Risk Management:")
 print("")
 
 i = 1
@@ -116,8 +119,7 @@ for stock, score in top_25:
 
     trend = get_trend(stock)
     rsi_value, rsi_status = get_rsi(stock)
-
-    signal = decide_signal(mode, data, trend, rsi_status)
+    signal = decide_signal(data, trend, rsi_status)
 
     print("====================================")
     print(f"{i}. {stock}")
@@ -130,20 +132,14 @@ for stock, score in top_25:
     print(f"Trend  : {trend}")
     print(f"RSI    : {rsi_value} ({rsi_status})")
     print("")
-    print(f"FINAL SIGNAL: {signal}")
+    print(f"FINAL SIGNAL : {signal}")
     print("")
-
-    print("Reason:")
-    if signal == "BUY":
-        print("- Company fundamentals strong हैं")
-        print("- Trend positive है और RSI balanced है")
-    elif signal == "HOLD":
-        print("- Stock stable है लेकिन clear entry नहीं है")
-    else:
-        print("- Trend कमजोर है या stock overbought है")
+    print("Risk Management:")
+    print(f"- Position Size : {position_size(signal)}")
+    print(f"- Stoploss Idea : {stoploss_idea(trend)}")
 
     print("")
     i += 1
 
 print("====================================")
-print("Note: Signals are based on combined Fundamental + Technical logic.")
+print("Note: यह Risk Management केवल guideline है, financial advice नहीं।")
