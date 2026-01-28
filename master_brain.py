@@ -6,7 +6,7 @@ from fundamental_brain import fundamental_data
 mode = decide_mode(market_conditions)
 stocks = select_stocks(mode)
 
-print("📊 Daily Market Analysis (Portfolio Builder)")
+print("📊 Daily Market Analysis (Daily Change Tracker)")
 print("")
 
 # ---------------- MODE SECTION ----------------
@@ -42,9 +42,7 @@ for stock in stocks:
     scored.append((stock, score_stock(data)))
 
 scored.sort(key=lambda x: x[1], reverse=True)
-
 top_25 = scored[:25]
-portfolio_10 = top_25[:10]
 
 # ---------------- TECHNICAL FUNCTIONS ----------------
 def get_trend(symbol):
@@ -60,15 +58,26 @@ def get_trend(symbol):
     except:
         return "Data not available"
 
-# ---------------- PORTFOLIO SECTION ----------------
+def get_daily_change(symbol):
+    try:
+        df = yf.Ticker(symbol + ".NS").history(period="2d")
+        today = df["Close"].iloc[-1]
+        yesterday = df["Close"].iloc[-2]
+        change_pct = ((today - yesterday) / yesterday) * 100
+        return round(change_pct, 2)
+    except:
+        return "NA"
+
+# ---------------- OUTPUT ----------------
 print("")
-print("📌 LONG TERM PORTFOLIO (TOP 10 STOCKS)")
+print("TOP 25 Stocks – With Daily Change:")
 print("")
 
 i = 1
-for stock, score in portfolio_10:
+for stock, score in top_25:
     data = fundamental_data.get(stock, {})
     trend = get_trend(stock)
+    change = get_daily_change(stock)
 
     print("====================================")
     print(f"{i}. {stock}")
@@ -79,29 +88,22 @@ for stock, score in portfolio_10:
     print(f"Debt   : {data.get('debt')}")
     print(f"Risk   : {data.get('risk')}")
     print(f"Trend  : {trend}")
+    print(f"Daily Change : {change}%")
     print("")
 
-    print("Why in Portfolio:")
-    if data.get("risk") == "LOW":
-        print("- Business risk कम है")
-    if str(data.get("debt")).startswith("0"):
-        print("- Company debt free है")
-    if "Cr" in str(data.get("profit")):
-        print("- Company लगातार profit में है")
-    if trend == "Uptrend":
-        print("- Price trend positive है")
-
-    print("")
-    print("Portfolio Allocation Idea:")
-    print("- Total capital का लगभग 8–10%")
+    print("Observation:")
+    if isinstance(change, float):
+        if change > 0:
+            print("- Stock आज ऊपर बंद हुआ है")
+        elif change < 0:
+            print("- Stock आज नीचे बंद हुआ है")
+        else:
+            print("- Stock में कोई खास बदलाव नहीं हुआ")
+    else:
+        print("- Daily data available नहीं है")
 
     print("")
     i += 1
 
 print("====================================")
-print("Portfolio Note:")
-print("- ये Top 10 stocks long-term नजरिए से चुने गए हैं")
-print("- हर stock में बराबर weight रखना बेहतर रहेगा")
-print("- हर महीने review करना जरूरी है")
-print("")
-print("⚠️ यह portfolio केवल study और learning के लिए है, निवेश की सलाह नहीं।")
+print("Note: Daily Change = आज का close vs कल का close")
