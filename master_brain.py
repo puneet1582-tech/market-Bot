@@ -21,7 +21,6 @@ if market_conditions["global_trend"] == "NEGATIVE":
 # -------- MARKET PSYCHOLOGY --------
 print("")
 print("Market Psychology:")
-
 if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
     market_mood = "Fear (डर का माहौल)"
     trend_strength = "Weak Trend"
@@ -39,7 +38,6 @@ print(f"- Trend Strength: {trend_strength}")
 print("")
 print("Sector-wise Summary:")
 sector_count = {}
-
 for stock in stocks:
     data = fundamental_data.get(stock, {})
     sector = data.get("sector", "NA")
@@ -48,13 +46,41 @@ for stock in stocks:
 for sector, count in sector_count.items():
     print(f"- {sector} sector से {count} कंपनी चुनी गई")
 
+# -------- STOCK RANKING --------
+print("")
+print("Stock Ranking (Best to Worst):")
+
+def score_stock(data):
+    score = 0
+    if data.get("risk") == "LOW":
+        score += 3
+    if str(data.get("debt")).startswith("0"):
+        score += 2
+    if "Cr" in str(data.get("profit")):
+        score += 1
+    return score
+
+scored_stocks = []
+for stock in stocks:
+    data = fundamental_data.get(stock, {})
+    s = score_stock(data)
+    scored_stocks.append((stock, s))
+
+# sort by score descending
+scored_stocks.sort(key=lambda x: x[1], reverse=True)
+
+rank = 1
+for stock, score in scored_stocks:
+    print(f"{rank}) {stock} (Score: {score})")
+    rank += 1
+
 # -------- COMPANY DETAILS --------
 print("")
 print("नीचे चुनी गई कंपनियों का विवरण दिया गया है:")
 print("")
 
 company_no = 1
-for stock in stocks:
+for stock, _ in scored_stocks:
     data = fundamental_data.get(stock, {})
 
     print("====================================")
