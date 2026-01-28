@@ -5,49 +5,70 @@ from fundamental_brain import fundamental_data
 mode = decide_mode(market_conditions)
 stocks = select_stocks(mode)
 
-print("🧠 ULTIMATE BRAIN DAILY REPORT")
-print("================================")
-print(f"आज का MODE: {mode}")
+print("📄 DAILY MARKET INTELLIGENCE REPORT")
+print("===================================")
+print("प्रेषक : Ultimate Brain Market System")
+print("विषय   : आज के बाजार की स्थिति एवं चयनित कंपनियाँ")
 print("")
 
-print("Market की स्थिति:")
-count = 1
+print(f"आज का Market Mode : {mode}")
+print("")
+
+print("आदरणीय निवेशक,")
+print("आज के बाजार के आँकड़ों एवं परिस्थितियों के आधार पर निम्नलिखित विश्लेषण प्रस्तुत किया जा रहा है:")
+print("")
+
+print("1. बाजार की वर्तमान स्थिति:")
+line = 1
 if market_conditions["volatility"] == "HIGH":
-    print(f"{count}) Volatility ज्यादा है")
-    count += 1
+    print(f"   {line}. बाजार में उतार-चढ़ाव (Volatility) अधिक देखा गया है।")
+    line += 1
 if market_conditions["liquidity"] == "LOW":
-    print(f"{count}) Liquidity कम है")
-    count += 1
+    print(f"   {line}. बाजार में तरलता (Liquidity) कम पाई गई है।")
+    line += 1
 if market_conditions["global_trend"] == "NEGATIVE":
-    print(f"{count}) Global trend negative है")
-    count += 1
+    print(f"   {line}. वैश्विक संकेत (Global Trend) नकारात्मक पाए गए हैं।")
+    line += 1
 
 print("")
-print("चुनी गई कंपनियाँ (Fundamental + कारण):")
+print("2. उपरोक्त परिस्थितियों को ध्यान में रखते हुए निम्नलिखित कंपनियों का चयन किया गया है:")
 print("")
 
-num = 1
+count = 1
 for stock in stocks:
     data = fundamental_data.get(stock, {})
 
-    print(f"{num}. कंपनी का नाम: {stock}")
-    print(f"   1) Sector: {data.get('sector')}")
-    print(f"   2) Sales: {data.get('sales')}")
-    print(f"   3) Profit: {data.get('profit')}")
-    print(f"   4) Debt: {data.get('debt')}")
-    print(f"   5) Promoter Holding: {data.get('promoter_holding')}%")
-    print(f"   6) FII Holding: {data.get('fii_holding')}%")
-    print(f"   7) Risk Level: {data.get('risk')}")
+    print(f"{count}. कंपनी का नाम : {stock}")
+    print("   कंपनी का मूलभूत विवरण (Fundamental Details):")
+    print(f"      (i)   सेक्टर               : {data.get('sector')}")
+    print(f"      (ii)  कुल बिक्री (Sales)   : {data.get('sales')}")
+    print(f"      (iii) शुद्ध लाभ (Profit)   : {data.get('profit')}")
+    print(f"      (iv)  कुल कर्ज (Debt)      : {data.get('debt')}")
+    print(f"      (v)   प्रमोटर होल्डिंग     : {data.get('promoter_holding')}%")
+    print(f"      (vi)  FII होल्डिंग         : {data.get('fii_holding')}%")
+    print(f"      (vii) जोखिम स्तर (Risk)    : {data.get('risk')}")
 
     reasons = []
     if data.get("risk") == "LOW":
-        reasons.append("Low risk business")
+        reasons.append("कंपनी का व्यवसाय अपेक्षाकृत कम जोखिम वाला है")
     if str(data.get("debt")).startswith("0"):
-        reasons.append("Debt free company")
+        reasons.append("कंपनी पर कोई उल्लेखनीय कर्ज नहीं है")
     if "Cr" in str(data.get("profit")):
-        reasons.append("Profit generating company")
+        reasons.append("कंपनी लाभ की स्थिति में है")
 
-    reason_text = ", ".join(reasons)
-    print(f"   8) क्यों चुनी गई: {reason_text}")
+    reason_text = " तथा ".join(reasons)
+
+    print("   चयन का कारण:")
+    print(f"      → {reason_text}")
+    print("------------------------------------------------------------")
     print("")
-    num += 1
+    count += 1
+
+print("3. निष्कर्ष:")
+print("उपरोक्त सभी तथ्यों एवं बाजार की वर्तमान परिस्थितियों को देखते हुए,")
+print("ये कंपनियाँ वर्तमान Market Mode के अंतर्गत अपेक्षाकृत उपयुक्त मानी जा सकती हैं।")
+print("")
+print("यह रिपोर्ट केवल शैक्षिक एवं सूचना उद्देश्य के लिए प्रस्तुत की गई है।")
+print("")
+print("सादर,")
+print("Ultimate Brain Market System")
