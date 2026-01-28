@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install libraries
+      - name: Install Python libraries
         run: |
           pip install yfinance
 
