@@ -8,10 +8,27 @@ stocks = select_stocks(mode)
 
 print("📊 Daily Market Analysis (TOP 25 Stocks)")
 print("")
-print(f"Market Mode: {mode}")
+
+# ---------------- MODE SECTION ----------------
+print("MODE DECISION:")
+print(f"आज का Active Mode: {mode}")
 print("")
 
+print("Mode चुनने का कारण:")
+if mode == "DEFENSIVE MODE":
+    print("- Market में volatility ज्यादा है")
+    print("- Global trend कमजोर है")
+    print("- इसलिए सुरक्षित (defensive) stocks पर ध्यान दिया गया है")
+elif mode == "INVEST MODE":
+    print("- Market का trend positive है")
+    print("- Liquidity ठीक है")
+    print("- इसलिए long-term investment के मौके देखे जा रहे हैं")
+else:
+    print("- Market में साफ दिशा नहीं है")
+    print("- इसलिए trading / short-term नजरिया रखा गया है")
+
 # ---------------- MARKET STATUS ----------------
+print("")
 print("Market स्थिति:")
 if market_conditions["volatility"] == "HIGH":
     print("- Volatility ज्यादा है")
@@ -24,13 +41,13 @@ if market_conditions["global_trend"] == "NEGATIVE":
 print("")
 print("Market Psychology:")
 if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
-    market_mood = "Negative"
+    market_mood = "Fear (डर का माहौल)"
 elif market_conditions["global_trend"] == "POSITIVE":
-    market_mood = "Positive"
+    market_mood = "Confidence (भरोसे का माहौल)"
 else:
-    market_mood = "Neutral"
+    market_mood = "Neutral (ना डर, ना ज्यादा भरोसा)"
 
-print(f"- Overall Market Mood: {market_mood}")
+print(f"- Market Mood: {market_mood}")
 
 # ---------------- STOCK SCORING ----------------
 def score_stock(data):
@@ -129,4 +146,4 @@ for stock, score in top_25:
     i += 1
 
 print("====================================")
-print("Note: Trend and RSI are based on last 20 days price data.")
+print("Note: Mode is auto-selected based on real market conditions.")
