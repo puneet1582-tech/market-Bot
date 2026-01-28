@@ -6,20 +6,24 @@ mode = decide_mode(market_conditions)
 stocks = select_stocks(mode)
 
 print("🧠 ULTIMATE BRAIN DAILY REPORT")
-print("--------------------------------")
+print("================================")
 print(f"आज का MODE: {mode}")
 print("")
 
 print("Market की स्थिति:")
+count = 1
 if market_conditions["volatility"] == "HIGH":
-    print("1) Volatility ज्यादा है")
+    print(f"{count}) Volatility ज्यादा है")
+    count += 1
 if market_conditions["liquidity"] == "LOW":
-    print("2) Liquidity कम है")
+    print(f"{count}) Liquidity कम है")
+    count += 1
 if market_conditions["global_trend"] == "NEGATIVE":
-    print("3) Global trend negative है")
+    print(f"{count}) Global trend negative है")
+    count += 1
 
 print("")
-print("चुनी गई कंपनियाँ और कारण:")
+print("चुनी गई कंपनियाँ (Fundamental के साथ):")
 print("")
 
 num = 1
@@ -27,23 +31,18 @@ for stock in stocks:
     data = fundamental_data.get(stock, {})
 
     print(f"{num}. कंपनी का नाम: {stock}")
+    print(f"   1) Sector: {data.get('sector')}")
+    print(f"   2) Sales: {data.get('sales')}")
+    print(f"   3) Profit: {data.get('profit')}")
 
-    # Risk
-    print(f"   1) Risk Level: {data.get('risk')}")
-
-    # Debt
     debt = data.get("debt", 0)
     if debt == 0:
-        print("   2) Debt: 0 (Debt free)")
+        print("   4) Debt: 0 (Debt free)")
     else:
-        print(f"   2) Debt: {debt}")
+        print(f"   4) Debt: {debt}")
 
-    # Profit
-    profit = data.get("profit", 0)
-    if profit > 30000:
-        print(f"   3) Profit: Strong ({profit})")
-    else:
-        print(f"   3) Profit: Normal ({profit})")
-
-    print("")  # खाली लाइन हर कंपनी के बाद
+    print(f"   5) Promoter Holding: {data.get('promoter_holding')}%")
+    print(f"   6) FII Holding: {data.get('fii_holding')}%")
+    print(f"   7) Risk Level: {data.get('risk')}")
+    print("")
     num += 1
