@@ -1,4 +1,4 @@
-name: Ultimate Brain Runner
+name: Ultimate Brain Runner (Real Market Data)
 
 on:
   schedule:
@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      - name: Install libraries
+        run: |
+          pip install yfinance
 
       - name: Run Ultimate Brain and send to Telegram
         run: |
