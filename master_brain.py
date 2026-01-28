@@ -18,6 +18,24 @@ if market_conditions["liquidity"] == "LOW":
 if market_conditions["global_trend"] == "NEGATIVE":
     print("- Global trend कमजोर है")
 
+# -------- MARKET PSYCHOLOGY --------
+print("")
+print("Market Psychology:")
+
+if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
+    market_mood = "Fear (डर का माहौल)"
+    trend_strength = "Weak Trend"
+elif market_conditions["global_trend"] == "POSITIVE" and market_conditions["volatility"] == "LOW":
+    market_mood = "Confidence (भरोसे का माहौल)"
+    trend_strength = "Strong Trend"
+else:
+    market_mood = "Neutral (ना डर, ना ज्यादा भरोसा)"
+    trend_strength = "Sideways / Mixed Trend"
+
+print(f"- Market Mood: {market_mood}")
+print(f"- Trend Strength: {trend_strength}")
+
+# -------- SECTOR SUMMARY --------
 print("")
 print("Sector-wise Summary:")
 sector_count = {}
@@ -30,6 +48,7 @@ for stock in stocks:
 for sector, count in sector_count.items():
     print(f"- {sector} sector से {count} कंपनी चुनी गई")
 
+# -------- COMPANY DETAILS --------
 print("")
 print("नीचे चुनी गई कंपनियों का विवरण दिया गया है:")
 print("")
