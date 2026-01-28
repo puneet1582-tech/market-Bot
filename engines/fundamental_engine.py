@@ -8,7 +8,8 @@ class FundamentalEngine:
         self.df = pd.read_csv(DATA_PATH)
 
     def get_stock_data(self, symbol):
-        df = self.df[self.df["symbol"] == symbol].sort_values(["year", "quarter"])
+        df = self.df[self.df["symbol"] == symbol]
+
         if df.empty:
             return None, False
         is_complete = len(df) >= 12
