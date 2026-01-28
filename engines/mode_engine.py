@@ -10,7 +10,8 @@ class ModeEngine:
         if not ranked:
             return "DEFENSIVE"
 
-        top_sector, top_score = ranked[0]
+        top_sector, top_score, sector_why = ranked[0]
+
 
         if top_score >= 1:
             return "INVEST"
