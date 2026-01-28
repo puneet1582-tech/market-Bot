@@ -34,25 +34,19 @@ for stock in stocks:
     print(f"   1) Sector: {data.get('sector')}")
     print(f"   2) Sales: {data.get('sales')}")
     print(f"   3) Profit: {data.get('profit')}")
-
-    debt = data.get("debt", 0)
-    if debt == 0:
-        print("   4) Debt: 0 (Debt free)")
-    else:
-        print(f"   4) Debt: {debt}")
-
+    print(f"   4) Debt: {data.get('debt')}")
     print(f"   5) Promoter Holding: {data.get('promoter_holding')}%")
     print(f"   6) FII Holding: {data.get('fii_holding')}%")
     print(f"   7) Risk Level: {data.get('risk')}")
 
-    # WHY LOGIC
+    # WHY LOGIC (text based, no number comparison)
     reasons = []
     if data.get("risk") == "LOW":
         reasons.append("Low risk business")
-    if data.get("debt") == 0:
+    if str(data.get("debt")).startswith("0"):
         reasons.append("Debt free company")
-    if data.get("profit", 0) > 30000:
-        reasons.append("Strong profit")
+    if "Cr" in str(data.get("profit")):
+        reasons.append("Profit generating company")
 
     reason_text = ", ".join(reasons)
     print(f"   8) क्यों चुनी गई: {reason_text}")
