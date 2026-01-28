@@ -5,7 +5,7 @@ from fundamental_brain import fundamental_data
 mode = decide_mode(market_conditions)
 stocks = select_stocks(mode)
 
-print("📊 Daily Market Analysis")
+print("📊 Daily Market Analysis (TOP 25 Stocks)")
 print("")
 print(f"Market Mode: {mode}")
 print("")
@@ -69,18 +69,21 @@ for stock in stocks:
 # sort by score descending
 scored_stocks.sort(key=lambda x: x[1], reverse=True)
 
+# TAKE ONLY TOP 25
+top_25 = scored_stocks[:25]
+
 rank = 1
-for stock, score in scored_stocks:
+for stock, score in top_25:
     print(f"{rank}) {stock} (Score: {score})")
     rank += 1
 
-# -------- COMPANY DETAILS --------
+# -------- COMPANY DETAILS (ONLY TOP 25) --------
 print("")
-print("नीचे चुनी गई कंपनियों का विवरण दिया गया है:")
+print("नीचे TOP 25 कंपनियों का विवरण दिया गया है:")
 print("")
 
 company_no = 1
-for stock, _ in scored_stocks:
+for stock, _ in top_25:
     data = fundamental_data.get(stock, {})
 
     print("====================================")
