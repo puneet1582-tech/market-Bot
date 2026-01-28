@@ -3,8 +3,7 @@ name: Telegram Test Bot
 on:
   schedule:
     - cron: "30 3 * * *"
-
-  
+  workflow_dispatch:
 
 jobs:
   send-message:
@@ -12,5 +11,8 @@ jobs:
     steps:
       - name: Send message to Telegram
         run: |
-          curl "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.CHAT_ID }}&text=📊_Market_Update%0Aआज_NIFTY_और_BANKNIFTY_पर_नज़र_रखो%0ARisk_management_ज़रूरी_है"
-
+          curl -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
+          -d chat_id=${{ secrets.CHAT_ID }} \
+          --data-urlencode "text=📊 Market Update
+          आज NIFTY और BANKNIFTY पर नज़र रखो
+          Risk management ज़रूरी है"
