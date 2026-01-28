@@ -12,9 +12,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install Python libraries
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install libraries
         run: |
-          pip install yfinance
+          python -m pip install --upgrade pip
+          python -m pip install yfinance
 
       - name: Run Ultimate Brain and send to Telegram
         run: |
