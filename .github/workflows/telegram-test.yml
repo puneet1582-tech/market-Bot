@@ -9,6 +9,9 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Get NIFTY Price and Send to Telegram
         run: |
           NIFTY=$(curl -s "https://query1.finance.yahoo.com/v7/finance/quote?symbols=%5ENSEI" | jq '.quoteResponse.result[0].regularMarketPrice')
