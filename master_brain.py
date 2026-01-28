@@ -1,3 +1,4 @@
+import yfinance as yf
 from mode_brain import decide_mode, market_conditions
 from stock_selector import select_stocks
 from fundamental_brain import fundamental_data
@@ -31,19 +32,6 @@ else:
 
 print(f"- Overall Market Mood: {market_mood}")
 
-# ---------------- SECTOR SENSITIVITY ----------------
-sector_news_sensitivity = {
-    "IT": "High",
-    "BANKING": "High",
-    "FINANCIAL SERVICES": "High",
-    "FMCG": "Low",
-    "PHARMA": "Medium",
-    "ENERGY": "Medium",
-    "METALS": "High",
-    "AUTO": "Medium",
-    "INFRASTRUCTURE": "Medium"
-}
-
 # ---------------- STOCK SCORING ----------------
 def score_stock(data):
     score = 0
@@ -63,52 +51,82 @@ for stock in stocks:
 scored.sort(key=lambda x: x[1], reverse=True)
 top_25 = scored[:25]
 
-# ---------------- NEWS IMPACT LOGIC ----------------
-def news_impact(sector):
-    sensitivity = sector_news_sensitivity.get(sector, "Medium")
+# ---------------- TECHNICAL FUNCTIONS ----------------
+def get_trend(symbol):
+    try:
+        df = yf.Ticker(symbol + ".NS").history(period="20d")
+        close = df["Close"]
+        if close.iloc[-1] > close.mean():
+            return "Uptrend"
+        elif close.iloc[-1] < close.mean():
+            return "Downtrend"
+        else:
+            return "Sideways"
+    except:
+        return "Data not available"
 
-    if market_mood == "Negative" and sensitivity == "High":
-        return "Negative impact expected (news sensitive sector)"
-    elif market_mood == "Positive" and sensitivity == "High":
-        return "Positive impact possible (news sensitive sector)"
-    elif market_mood == "Negative":
-        return "Limited impact (defensive sector)"
-    else:
-        return "Neutral impact"
+def get_rsi(symbol):
+    try:
+        df = yf.Ticker(symbol + ".NS").history(period="20d")
+        delta = df["Close"].diff()
+        gain = delta.clip(lower=0)
+        loss = -delta.clip(upper=0)
+
+        avg_gain = gain.rolling(14).mean()
+        avg_loss = loss.rolling(14).mean()
+
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+
+        rsi_value = round(rsi.iloc[-1], 2)
+
+        if rsi_value > 70:
+            return f"{rsi_value} (Overbought)"
+        elif rsi_value < 30:
+            return f"{rsi_value} (Oversold)"
+        else:
+            return f"{rsi_value} (Neutral)"
+    except:
+        return "RSI not available"
 
 # ---------------- OUTPUT ----------------
 print("")
-print("TOP 25 Stocks – Detailed View:")
+print("TOP 25 Stocks – Fundamental + Technical View:")
 print("")
 
 i = 1
 for stock, score in top_25:
     data = fundamental_data.get(stock, {})
-    sector = data.get("sector", "NA")
+
+    trend = get_trend(stock)
+    rsi_status = get_rsi(stock)
 
     print("====================================")
     print(f"{i}. {stock}")
     print("------------------------------------")
-    print(f"Sector   : {sector}")
-    print(f"Sales    : {data.get('sales')}")
-    print(f"Profit   : {data.get('profit')}")
-    print(f"Debt     : {data.get('debt')}")
-    print(f"Risk     : {data.get('risk')}")
-    print(f"Score    : {score}")
+    print(f"Sector : {data.get('sector')}")
+    print(f"Sales  : {data.get('sales')}")
+    print(f"Profit : {data.get('profit')}")
+    print(f"Debt   : {data.get('debt')}")
+    print(f"Risk   : {data.get('risk')}")
+    print(f"Score  : {score}")
+    print("")
 
-    print("News Impact:")
-    print(f"- {news_impact(sector)}")
+    print("Technical Analysis:")
+    print(f"- Trend : {trend}")
+    print(f"- RSI   : {rsi_status}")
+    print("")
 
     print("Why selected:")
     if data.get("risk") == "LOW":
-        print("- Business risk comparatively low")
+        print("- Business risk low")
     if str(data.get("debt")).startswith("0"):
         print("- Company is debt free")
     if "Cr" in str(data.get("profit")):
-        print("- Company is consistently profitable")
+        print("- Company is profitable")
 
     print("")
     i += 1
 
 print("====================================")
-print("Note: News impact is derived from market mood and sector sensitivity.")
+print("Note: Trend and RSI are based on last 20 days price data.")
