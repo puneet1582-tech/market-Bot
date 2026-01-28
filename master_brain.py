@@ -39,7 +39,6 @@ for stock in stocks:
     print(f"   6) FII Holding: {data.get('fii_holding')}%")
     print(f"   7) Risk Level: {data.get('risk')}")
 
-    # WHY LOGIC (text based, no number comparison)
     reasons = []
     if data.get("risk") == "LOW":
         reasons.append("Low risk business")
@@ -50,6 +49,5 @@ for stock in stocks:
 
     reason_text = ", ".join(reasons)
     print(f"   8) क्यों चुनी गई: {reason_text}")
-
     print("")
     num += 1
