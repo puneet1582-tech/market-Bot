@@ -1,40 +1,49 @@
 from mode_brain import decide_mode, market_conditions
 from stock_selector import select_stocks
 from fundamental_brain import fundamental_data
-from explanation_brain import explain_mode, explain_stock
 
 mode = decide_mode(market_conditions)
-selected_stocks = select_stocks(mode)
+stocks = select_stocks(mode)
 
-print("🧠 ULTIMATE BRAIN REPORT")
-print("------------------------")
-
+print("🧠 ULTIMATE BRAIN DAILY REPORT")
+print("--------------------------------")
 print(f"आज का MODE: {mode}")
 print("")
 
-print("MODE के कारण:")
+print("Market की स्थिति:")
 if market_conditions["volatility"] == "HIGH":
-    print("- Market में volatility ज्यादा है")
+    print("1) Volatility ज्यादा है")
 if market_conditions["liquidity"] == "LOW":
-    print("- Liquidity कम है")
+    print("2) Liquidity कम है")
 if market_conditions["global_trend"] == "NEGATIVE":
-    print("- Global trend negative है")
+    print("3) Global trend negative है")
 
 print("")
-print("आज देखने लायक stocks:")
+print("चुनी गई कंपनियाँ और कारण:")
+print("")
 
-count = 1
-for stock in selected_stocks:
+num = 1
+for stock in stocks:
     data = fundamental_data.get(stock, {})
-    reasons = []
 
-    if data.get("risk") == "LOW":
-        reasons.append("Low risk")
-    if data.get("debt") == 0:
-        reasons.append("Debt free")
-    if data.get("profit", 0) > 30000:
-        reasons.append("Strong profit")
+    print(f"{num}. कंपनी का नाम: {stock}")
 
-    reason_text = ", ".join(reasons)
-    print(f"{count}) {stock} – {reason_text}")
-    count += 1
+    # Risk
+    print(f"   1) Risk Level: {data.get('risk')}")
+
+    # Debt
+    debt = data.get("debt", 0)
+    if debt == 0:
+        print("   2) Debt: 0 (Debt free)")
+    else:
+        print(f"   2) Debt: {debt}")
+
+    # Profit
+    profit = data.get("profit", 0)
+    if profit > 30000:
+        print(f"   3) Profit: Strong ({profit})")
+    else:
+        print(f"   3) Profit: Normal ({profit})")
+
+    print("")  # खाली लाइन हर कंपनी के बाद
+    num += 1
