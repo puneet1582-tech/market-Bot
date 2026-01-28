@@ -23,7 +23,7 @@ if market_conditions["global_trend"] == "NEGATIVE":
     count += 1
 
 print("")
-print("चुनी गई कंपनियाँ (Fundamental के साथ):")
+print("चुनी गई कंपनियाँ (Fundamental + कारण):")
 print("")
 
 num = 1
@@ -44,5 +44,18 @@ for stock in stocks:
     print(f"   5) Promoter Holding: {data.get('promoter_holding')}%")
     print(f"   6) FII Holding: {data.get('fii_holding')}%")
     print(f"   7) Risk Level: {data.get('risk')}")
+
+    # WHY LOGIC
+    reasons = []
+    if data.get("risk") == "LOW":
+        reasons.append("Low risk business")
+    if data.get("debt") == 0:
+        reasons.append("Debt free company")
+    if data.get("profit", 0) > 30000:
+        reasons.append("Strong profit")
+
+    reason_text = ", ".join(reasons)
+    print(f"   8) क्यों चुनी गई: {reason_text}")
+
     print("")
     num += 1
