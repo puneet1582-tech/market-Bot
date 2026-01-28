@@ -1,9 +1,9 @@
-name: Ultimate Brain Runner (Real Market Data)
+name: Ultimate Brain Runner
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "30 3 * * *"
-  workflow_dispatch:
 
 jobs:
   run-brain:
@@ -25,7 +25,6 @@ jobs:
       - name: Run Ultimate Brain and send to Telegram
         run: |
           OUTPUT=$(python master_brain.py)
-
           curl -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
           -d chat_id=${{ secrets.CHAT_ID }} \
           --data-urlencode "text=$OUTPUT"
