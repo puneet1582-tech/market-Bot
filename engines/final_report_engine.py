@@ -22,7 +22,8 @@ class FinalReportEngine:
         report["LIKELY_GAINERS"] = narrative_result["likely_gainers"]
         report["LIKELY_LOSERS"] = narrative_result["likely_losers"]
 
-        report["WHY_DECISION"] = decision_result["why"]
+        report["WHY_DECISION"] = decision_result.get("why", decision_result.get("reasons", "No reason"))
+
         report["EVIDENCE_INTERNET"] = narrative_result["evidence"]
 
         report["SUMMARY"] = (
