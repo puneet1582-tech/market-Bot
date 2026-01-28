@@ -1,4 +1,4 @@
-name: Telegram Test Bot
+name: Telegram NIFTY Bot
 
 on:
   schedule:
@@ -9,10 +9,12 @@ jobs:
   send-message:
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Telegram
+      - name: Get NIFTY Price and Send to Telegram
         run: |
+          NIFTY=$(curl -s "https://query1.finance.yahoo.com/v7/finance/quote?symbols=%5ENSEI" | jq '.quoteResponse.result[0].regularMarketPrice')
+
           curl -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
           -d chat_id=${{ secrets.CHAT_ID }} \
-          --data-urlencode "text=📊 Market Update
-          आज NIFTY और BANKNIFTY पर नज़र रखो
+          --data-urlencode "text=📊 NIFTY LIVE UPDATE
+          NIFTY Price: ₹$NIFTY
           Risk management ज़रूरी है"
