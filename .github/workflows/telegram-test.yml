@@ -12,4 +12,5 @@ jobs:
     steps:
       - name: Send message to Telegram
         run: |
-          curl "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.CHAT_ID }}&text=Hello_from_GitHub_Bot"
+          curl "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.CHAT_ID }}&text=📊_Market_Update%0Aआज_NIFTY_और_BANKNIFTY_पर_नज़र_रखो%0ARisk_management_ज़रूरी_है"
+
