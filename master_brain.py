@@ -6,10 +6,10 @@ from fundamental_brain import fundamental_data
 mode = decide_mode(market_conditions)
 stocks = select_stocks(mode)
 
-print("📊 Daily Market Analysis (Daily Change Tracker)")
+print("📊 Daily Market Analysis (Sector Rotation System)")
 print("")
 
-# ---------------- MODE SECTION ----------------
+# ---------------- MODE ----------------
 print("MODE DECISION:")
 print(f"आज का Active Mode: {mode}")
 print("")
@@ -44,66 +44,73 @@ for stock in stocks:
 scored.sort(key=lambda x: x[1], reverse=True)
 top_25 = scored[:25]
 
-# ---------------- TECHNICAL FUNCTIONS ----------------
-def get_trend(symbol):
-    try:
-        df = yf.Ticker(symbol + ".NS").history(period="20d")
-        close = df["Close"]
-        if close.iloc[-1] > close.mean():
-            return "Uptrend"
-        elif close.iloc[-1] < close.mean():
-            return "Downtrend"
-        else:
-            return "Sideways"
-    except:
-        return "Data not available"
+# ---------------- SECTOR ROTATION LOGIC ----------------
+sector_score = {}
+sector_count = {}
 
-def get_daily_change(symbol):
-    try:
-        df = yf.Ticker(symbol + ".NS").history(period="2d")
-        today = df["Close"].iloc[-1]
-        yesterday = df["Close"].iloc[-2]
-        change_pct = ((today - yesterday) / yesterday) * 100
-        return round(change_pct, 2)
-    except:
-        return "NA"
+for stock, score in top_25:
+    data = fundamental_data.get(stock, {})
+    sector = data.get("sector", "NA")
+
+    sector_score[sector] = sector_score.get(sector, 0) + score
+    sector_count[sector] = sector_count.get(sector, 0) + 1
+
+# average score per sector
+sector_avg = {}
+for sector in sector_score:
+    sector_avg[sector] = round(sector_score[sector] / sector_count[sector], 2)
+
+# classify sectors
+strong_sectors = []
+weak_sectors = []
+
+for sector, avg in sector_avg.items():
+    if avg >= 5:
+        strong_sectors.append(sector)
+    else:
+        weak_sectors.append(sector)
 
 # ---------------- OUTPUT ----------------
 print("")
-print("TOP 25 Stocks – With Daily Change:")
+print("SECTOR ROTATION SUMMARY:")
+print("")
+
+print("Strong Sectors Today:")
+if strong_sectors:
+    for s in strong_sectors:
+        print(f"- {s}")
+else:
+    print("- कोई sector खास strong नहीं दिख रहा")
+
+print("")
+print("Weak / Neutral Sectors Today:")
+if weak_sectors:
+    for s in weak_sectors:
+        print(f"- {s}")
+else:
+    print("- सभी sectors balanced हैं")
+
+# ---------------- COMPANY DETAILS ----------------
+print("")
+print("TOP 25 Stocks (Sector Wise View):")
 print("")
 
 i = 1
 for stock, score in top_25:
     data = fundamental_data.get(stock, {})
-    trend = get_trend(stock)
-    change = get_daily_change(stock)
+    sector = data.get("sector")
 
     print("====================================")
     print(f"{i}. {stock}")
     print("------------------------------------")
-    print(f"Sector : {data.get('sector')}")
+    print(f"Sector : {sector}")
     print(f"Sales  : {data.get('sales')}")
     print(f"Profit : {data.get('profit')}")
     print(f"Debt   : {data.get('debt')}")
     print(f"Risk   : {data.get('risk')}")
-    print(f"Trend  : {trend}")
-    print(f"Daily Change : {change}%")
-    print("")
-
-    print("Observation:")
-    if isinstance(change, float):
-        if change > 0:
-            print("- Stock आज ऊपर बंद हुआ है")
-        elif change < 0:
-            print("- Stock आज नीचे बंद हुआ है")
-        else:
-            print("- Stock में कोई खास बदलाव नहीं हुआ")
-    else:
-        print("- Daily data available नहीं है")
-
+    print(f"Score  : {score}")
     print("")
     i += 1
 
 print("====================================")
-print("Note: Daily Change = आज का close vs कल का close")
+print("Note: Sector strength is based on average stock score in Top 25.")
