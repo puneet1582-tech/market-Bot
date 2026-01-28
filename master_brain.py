@@ -10,6 +10,7 @@ print("")
 print(f"Market Mode: {mode}")
 print("")
 
+# ---------------- MARKET STATUS ----------------
 print("Market स्थिति:")
 if market_conditions["volatility"] == "HIGH":
     print("- Volatility ज्यादा है")
@@ -18,38 +19,32 @@ if market_conditions["liquidity"] == "LOW":
 if market_conditions["global_trend"] == "NEGATIVE":
     print("- Global trend कमजोर है")
 
-# -------- MARKET PSYCHOLOGY --------
+# ---------------- MARKET PSYCHOLOGY ----------------
 print("")
 print("Market Psychology:")
 if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
-    market_mood = "Fear (डर का माहौल)"
-    trend_strength = "Weak Trend"
-elif market_conditions["global_trend"] == "POSITIVE" and market_conditions["volatility"] == "LOW":
-    market_mood = "Confidence (भरोसे का माहौल)"
-    trend_strength = "Strong Trend"
+    market_mood = "Negative"
+elif market_conditions["global_trend"] == "POSITIVE":
+    market_mood = "Positive"
 else:
-    market_mood = "Neutral (ना डर, ना ज्यादा भरोसा)"
-    trend_strength = "Sideways / Mixed Trend"
+    market_mood = "Neutral"
 
-print(f"- Market Mood: {market_mood}")
-print(f"- Trend Strength: {trend_strength}")
+print(f"- Overall Market Mood: {market_mood}")
 
-# -------- SECTOR SUMMARY --------
-print("")
-print("Sector-wise Summary:")
-sector_count = {}
-for stock in stocks:
-    data = fundamental_data.get(stock, {})
-    sector = data.get("sector", "NA")
-    sector_count[sector] = sector_count.get(sector, 0) + 1
+# ---------------- SECTOR SENSITIVITY ----------------
+sector_news_sensitivity = {
+    "IT": "High",
+    "BANKING": "High",
+    "FINANCIAL SERVICES": "High",
+    "FMCG": "Low",
+    "PHARMA": "Medium",
+    "ENERGY": "Medium",
+    "METALS": "High",
+    "AUTO": "Medium",
+    "INFRASTRUCTURE": "Medium"
+}
 
-for sector, count in sector_count.items():
-    print(f"- {sector} sector से {count} कंपनी चुनी गई")
-
-# -------- STOCK RANKING --------
-print("")
-print("Stock Ranking (Best to Worst):")
-
+# ---------------- STOCK SCORING ----------------
 def score_stock(data):
     score = 0
     if data.get("risk") == "LOW":
@@ -60,62 +55,60 @@ def score_stock(data):
         score += 1
     return score
 
-scored_stocks = []
+scored = []
 for stock in stocks:
     data = fundamental_data.get(stock, {})
-    s = score_stock(data)
-    scored_stocks.append((stock, s))
+    scored.append((stock, score_stock(data)))
 
-# sort by score descending
-scored_stocks.sort(key=lambda x: x[1], reverse=True)
+scored.sort(key=lambda x: x[1], reverse=True)
+top_25 = scored[:25]
 
-# TAKE ONLY TOP 25
-top_25 = scored_stocks[:25]
+# ---------------- NEWS IMPACT LOGIC ----------------
+def news_impact(sector):
+    sensitivity = sector_news_sensitivity.get(sector, "Medium")
 
-rank = 1
+    if market_mood == "Negative" and sensitivity == "High":
+        return "Negative impact expected (news sensitive sector)"
+    elif market_mood == "Positive" and sensitivity == "High":
+        return "Positive impact possible (news sensitive sector)"
+    elif market_mood == "Negative":
+        return "Limited impact (defensive sector)"
+    else:
+        return "Neutral impact"
+
+# ---------------- OUTPUT ----------------
+print("")
+print("TOP 25 Stocks – Detailed View:")
+print("")
+
+i = 1
 for stock, score in top_25:
-    print(f"{rank}) {stock} (Score: {score})")
-    rank += 1
-
-# -------- COMPANY DETAILS (ONLY TOP 25) --------
-print("")
-print("नीचे TOP 25 कंपनियों का विवरण दिया गया है:")
-print("")
-
-company_no = 1
-for stock, _ in top_25:
     data = fundamental_data.get(stock, {})
+    sector = data.get("sector", "NA")
 
     print("====================================")
-    print(f"Company {company_no}: {stock}")
+    print(f"{i}. {stock}")
     print("------------------------------------")
-    print(f"Sector          : {data.get('sector')}")
-    print(f"Sales           : {data.get('sales')}")
-    print(f"Profit          : {data.get('profit')}")
-    print(f"Debt            : {data.get('debt')}")
-    print(f"Promoter Holding: {data.get('promoter_holding')}%")
-    print(f"FII Holding     : {data.get('fii_holding')}%")
-    print(f"Risk Level      : {data.get('risk')}")
-    print("")
+    print(f"Sector   : {sector}")
+    print(f"Sales    : {data.get('sales')}")
+    print(f"Profit   : {data.get('profit')}")
+    print(f"Debt     : {data.get('debt')}")
+    print(f"Risk     : {data.get('risk')}")
+    print(f"Score    : {score}")
 
-    print("चुनने का कारण:")
+    print("News Impact:")
+    print(f"- {news_impact(sector)}")
+
+    print("Why selected:")
     if data.get("risk") == "LOW":
-        print("- कंपनी का बिज़नेस कम जोखिम वाला है")
-    else:
-        print("- कंपनी का जोखिम मध्यम स्तर का है")
-
+        print("- Business risk comparatively low")
     if str(data.get("debt")).startswith("0"):
-        print("- कंपनी पर कर्ज नहीं है")
-    else:
-        print("- कंपनी पर कर्ज मौजूद है")
-
+        print("- Company is debt free")
     if "Cr" in str(data.get("profit")):
-        print("- कंपनी मुनाफे में चल रही है")
-    else:
-        print("- कंपनी का मुनाफा कमजोर है")
+        print("- Company is consistently profitable")
 
     print("")
-    company_no += 1
+    i += 1
 
 print("====================================")
-print("नोट: यह रिपोर्ट केवल जानकारी के लिए है।")
+print("Note: News impact is derived from market mood and sector sensitivity.")
