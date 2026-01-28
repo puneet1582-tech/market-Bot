@@ -1,42 +1,42 @@
-fundamental_data = {
-    "RELIANCE": {
-        "sector": "ENERGY",
-        "debt": 150000,
-        "sales": 900000,
-        "profit": 70000,
-        "promoter_holding": 50,
-        "fii_holding": 23,
-        "risk": "MEDIUM"
-    },
-    "TCS": {
-        "sector": "IT",
-        "debt": 0,
-        "sales": 250000,
-        "profit": 42000,
-        "promoter_holding": 72,
-        "fii_holding": 18,
-        "risk": "LOW"
-    },
-    "HDFCBANK": {
-        "sector": "BANKING",
-        "debt": 0,
-        "sales": 200000,
-        "profit": 60000,
-        "promoter_holding": 25,
-        "fii_holding": 35,
-        "risk": "LOW"
-    },
-    "ITC": {
-        "sector": "FMCG",
-        "debt": 0,
-        "sales": 70000,
-        "profit": 18000,
-        "promoter_holding": 0,
-        "fii_holding": 12,
-        "risk": "LOW"
-    }
-}
+import yfinance as yf
 
-print("FUNDAMENTAL DATA READY")
-for stock in fundamental_data:
-    print(stock, fundamental_data[stock])
+stocks = ["TCS.NS", "HDFCBANK.NS", "ITC.NS"]
+
+fundamental_data = {}
+
+for symbol in stocks:
+    stock = yf.Ticker(symbol)
+    info = stock.info
+
+    name = symbol.replace(".NS", "")
+
+    sector = info.get("sector", "NA")
+    sales = info.get("totalRevenue", 0)
+    profit = info.get("netIncomeToCommon", 0)
+    debt = info.get("totalDebt", 0)
+
+    promoter = info.get("heldPercentInsiders", 0)
+    fii = info.get("heldPercentInstitutions", 0)
+
+    # Risk logic from debt + profit
+    if debt == 0:
+        risk = "LOW"
+    elif debt > profit:
+        risk = "HIGH"
+    else:
+        risk = "MEDIUM"
+
+    fundamental_data[name] = {
+        "sector": sector,
+        "sales": sales,
+        "profit": profit,
+        "debt": debt,
+        "promoter_holding": round(promoter * 100, 2),
+        "fii_holding": round(fii * 100, 2),
+        "risk": risk
+    }
+
+# test print
+print("REAL FUNDAMENTAL DATA READY")
+for k, v in fundamental_data.items():
+    print(k, v)
