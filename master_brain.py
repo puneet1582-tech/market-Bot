@@ -7,7 +7,6 @@ stocks = select_stocks(mode)
 
 print("📊 Daily Market Analysis")
 print("")
-
 print(f"Market Mode: {mode}")
 print("")
 
@@ -18,6 +17,18 @@ if market_conditions["liquidity"] == "LOW":
     print("- Liquidity कम है")
 if market_conditions["global_trend"] == "NEGATIVE":
     print("- Global trend कमजोर है")
+
+print("")
+print("Sector-wise Summary:")
+sector_count = {}
+
+for stock in stocks:
+    data = fundamental_data.get(stock, {})
+    sector = data.get("sector", "NA")
+    sector_count[sector] = sector_count.get(sector, 0) + 1
+
+for sector, count in sector_count.items():
+    print(f"- {sector} sector से {count} कंपनी चुनी गई")
 
 print("")
 print("नीचे चुनी गई कंपनियों का विवरण दिया गया है:")
@@ -60,4 +71,3 @@ for stock in stocks:
 
 print("====================================")
 print("नोट: यह रिपोर्ट केवल जानकारी के लिए है।")
-
