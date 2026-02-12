@@ -1,0 +1,32 @@
+import pandas as pd
+import json
+from flask import Flask
+from telegram import Bot
+
+# Load config
+with open("config.json") as f:
+    cfg = json.load(f)
+
+TOKEN = cfg["telegram_token"]
+CHAT_ID = cfg["chat_id"]
+
+bot = Bot(token=TOKEN)
+
+# Load data
+try:
+    df = pd.read_csv("data/fundamentals.csv")
+    message = f"Bot Started\nRows loaded: {len(df)}"
+except Exception as e:
+    message = f"Bot started but data error: {e}"
+
+# Send telegram message
+bot.send_message(chat_id=CHAT_ID, text=message)
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Market Bot Running"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
