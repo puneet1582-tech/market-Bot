@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.65">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
+    span.s2 {font: 12.0px 'Kohinoor Devanagari'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;&lt;title&gt;Stock App&lt;/title&gt;&lt;style&gt;body{font-family:sans-serif;margin:20px;background:#f0f2f5}*{box-sizing:border-box}.box{max-width:500px;margin:auto;background:white;padding:30px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1)}h1{text-align:center;color:#333;font-size:28px;margin-bottom:30px}input{width:100%;padding:15px;font-size:18px;border:2px solid #ddd;border-radius:10px;margin-bottom:15px}button{width:100%;padding:15px;background:#28a745;color:white;font-size:18px;border:none;border-radius:10px;cursor:pointer}button:hover{background:#218838}.result{margin-top:20px;padding:20px;border-radius:10px;text-align:center;font-size:20px}.up{background:#d4edda;color:#155724;border:2px solid #c3e6cb}.down{background:#f8d7da;color:#721c24;border:2px solid #f5c6cb}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class="box"&gt;&lt;h1&gt;<span class="s1">📈</span> Stock Research&lt;/h1&gt;&lt;input id="stock" placeholder="RELIANCE <span class="s2">डालो</span>"&gt;&lt;button onclick="check()"&gt;<span class="s1">🔍</span> <span class="s2">चेक</span> <span class="s2">करो</span>&lt;/button&gt;&lt;div id="out"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script&gt;function check(){let s=document.getElementById("stock").value.toUpperCase();if(!s){alert("Stock name <span class="s2">डालो</span>!");return}document.getElementById("out").innerHTML="Loading...";setTimeout(()=&gt;{let p=2000+Math.floor(Math.random()*3000);let c=(Math.random()-0.5)*200;let cls=c&gt;0?"up":"down";document.getElementById("out").innerHTML=`&lt;div class="${cls}"&gt;&lt;h2&gt;${s}&lt;/h2&gt;&lt;p&gt;₹${p.toLocaleString()}&lt;/p&gt;&lt;p&gt;${c&gt;0?"<span class="s1">📈</span>":"<span class="s1">📉</span>"} ₹${Math.abs(c).toFixed(0)} (${(c/p*100).toFixed(1)}%)&lt;/p&gt;&lt;h3&gt;${c&gt;0?"<span class="s1">🟢</span> BUY":"<span class="s1">🔴</span> WAIT"}&lt;/h3&gt;&lt;/div&gt;`},1000)}&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</p>
+</body>
+</html>
