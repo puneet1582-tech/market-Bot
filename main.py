@@ -5,8 +5,8 @@ import requests
 from flask import Flask
 
 # ================= TELEGRAM CONFIG =================
-BOT_TOKEN = "PASTE_YOUR_BOT_TOKEN"
-CHAT_ID = "PASTE_YOUR_CHAT_ID"
+BOT_TOKEN = "8441405404:AAF9enU7kGeB6cZKnBPhVKHAb0qAndTI2cQ"
+CHAT_ID = "1428062136"
 
 def send_telegram_message(text):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
