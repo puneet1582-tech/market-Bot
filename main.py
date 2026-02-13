@@ -1,33 +1,46 @@
 from engines.final_report_engine import FinalReportEngine
 import time
 import threading
+import requests
 from flask import Flask
 
-# ---------- Web Server ----------
+# ================= TELEGRAM CONFIG =================
+BOT_TOKEN = "PASTE_YOUR_BOT_TOKEN"
+CHAT_ID = "PASTE_YOUR_CHAT_ID"
+
+def send_telegram_message(text):
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": CHAT_ID,
+        "text": text
+    }
+    requests.post(url, data=payload)
+
+# ================= WEB SERVER =================
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return "Market Bot Running"
 
-# ---------- Bot Engine ----------
+# ================= BOT ENGINE =================
 def run_bot():
-    engine = FinalReportEngine()
-    report = engine.generate_report("RELIANCE", "Energy")
-
-    with open("daily_report.txt", "w") as f:
-        for k, v in report.items():
-            f.write(f"{k} : {v}\n")
-
-    print("DAILY REPORT GENERATED -> daily_report.txt")
-
-    # keep running continuously
     while True:
-        time.sleep(60)
+        engine = FinalReportEngine()
+        report = engine.generate_report("RELIANCE", "Energy")
 
-# start bot in background thread
+        message = ""
+        for k, v in report.items():
+            message += f"{k} : {v}\n"
+
+        send_telegram_message(message)
+
+        print("REPORT SENT TO TELEGRAM")
+
+        # run once every 24 hours
+        time.sleep(86400)
+
 threading.Thread(target=run_bot).start()
 
-# start web server (required for Render free web service)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
