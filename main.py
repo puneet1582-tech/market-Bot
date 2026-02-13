@@ -4,8 +4,7 @@ import threading
 import requests
 from flask import Flask
 
-# ================= TELEGRAM CONFIG =================
-BOT_TOKEN = "8441405404:AAEz_wneK8H0I7QoVr4mXc62vR-NiNm_NVA"
+BOT_TOKEN = "8441405404:AAEppNGjlfWjR4xzWNqfWpt8e53pnmQOZj8"
 CHAT_ID = "1428062136"
 
 def send_telegram_message(text):
@@ -16,14 +15,12 @@ def send_telegram_message(text):
     }
     requests.post(url, data=payload)
 
-# ================= WEB SERVER =================
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return "Market Bot Running"
 
-# ================= BOT ENGINE =================
 def run_bot():
     while True:
         engine = FinalReportEngine()
@@ -34,10 +31,8 @@ def run_bot():
             message += f"{k} : {v}\n"
 
         send_telegram_message(message)
-
         print("REPORT SENT TO TELEGRAM")
 
-        # run once every 24 hours
         time.sleep(86400)
 
 threading.Thread(target=run_bot).start()
