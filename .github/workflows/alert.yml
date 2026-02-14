@@ -1,9 +1,9 @@
 name: Market Alert Bot
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
 
 jobs:
   run-bot:
@@ -20,22 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests pandas yfinance
+          pip install flask requests
 
       - name: Run alert engine
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: |
-          python3 main.py
-
-      - name: Send test telegram message
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: |
-          python3 - << 'EOF'
-          from engines.telegram_alert_engine import send_telegram_alert
-          send_telegram_alert("✅ CLOUD TEST: Telegram working")
-          print("Test message sent")
-          EOF
+        run: python3 main.py
