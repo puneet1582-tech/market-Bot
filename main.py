@@ -1,9 +1,10 @@
 from engines.final_report_engine import FinalReportEngine
-import time
 import threading
 import requests
+import time
 from flask import Flask
 
+# ================= TELEGRAM CONFIG =================
 BOT_TOKEN = "8441405404:AAEppNGjlfWjR4xzWNqfWpt8e53pnmQOZj8"
 CHAT_ID = "1428062136"
 
@@ -15,25 +16,43 @@ def send_telegram_message(text):
     }
     requests.post(url, data=payload)
 
+# ================= WEB SERVER =================
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Market Bot Running"
+    return "Market Intelligence Bot Running"
 
+# ================= OPPORTUNITY DETECTION =================
+def check_opportunity(report):
+    """
+    USER LOGIC PLACEHOLDER:
+    यहाँ तुम define करोगे कि कब पैसा कमाने का मौका है.
+    Example:
+    return report["signal"] == "BUY"
+    """
+    return False   # अभी default False
+
+# ================= BOT ENGINE =================
 def run_bot():
     while True:
-        engine = FinalReportEngine()
-        report = engine.generate_report("RELIANCE", "Energy")
+        try:
+            engine = FinalReportEngine()
+            report = engine.generate_report("RELIANCE", "Energy")
 
-        message = ""
-        for k, v in report.items():
-            message += f"{k} : {v}\n"
+            if check_opportunity(report):
+                message = "MARKET OPPORTUNITY ALERT\n\n"
+                for k, v in report.items():
+                    message += f"{k} : {v}\n"
 
-        send_telegram_message(message)
-        print("REPORT SENT TO TELEGRAM")
+                send_telegram_message(message)
+                print("ALERT SENT")
 
-        time.sleep(86400)
+        except Exception as e:
+            print("Error:", e)
+
+        # fast continuous monitoring (every 20 seconds)
+        time.sleep(20)
 
 threading.Thread(target=run_bot).start()
 
