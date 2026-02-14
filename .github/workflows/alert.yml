@@ -10,21 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      - name: Install required libraries
+      - name: Install dependencies
         run: |
-          pip install flask
-          pip install requests
-          pip install pandas
-          pip install numpy
-          pip install python-telegram-bot
+          pip install flask requests
 
-      - name: Run Market Alert Engine
-        run: python3 main.py
+      - name: Run alert
+        run: RUN_MODE=ALERT python3 main.py
