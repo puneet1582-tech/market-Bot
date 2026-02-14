@@ -1,35 +1,24 @@
+from flask import Flask
 import os
-import requests
 
-BOT_TOKEN = "8441405404:AAEppNGjlfWjR4xzWNqfWpt8e53pnmQOZj8"
-CHAT_ID = "1428062136"
+app = Flask(__name__)
 
-def send_telegram_message(text):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-    payload = {"chat_id": CHAT_ID, "text": text}
-    requests.post(url, data=payload)
+@app.route("/")
+def home():
+    return "Ultimate Brain Market Bot Running"
 
-def fetch_market_data():
+def safe_background_start():
     try:
-        url = "https://www.nseindia.com/api/market-data-pre-open?key=NIFTY"
-        headers = {"User-Agent": "Mozilla/5.0"}
-        r = requests.get(url, headers=headers)
-        data = r.json()
-
-        stocks = []
-        for item in data['data'][:5]:
-            symbol = item['metadata']['symbol']
-            price = item['metadata']['lastPrice']
-            stocks.append(f"{symbol}: {price}")
-
-        return "\n".join(stocks)
+        from brain_engine import start_brain
+        start_brain()
     except Exception as e:
-        return f"Data error: {e}"
-
-def run_market_alert():
-    market_data = fetch_market_data()
-    message = f"NSE Snapshot:\n{market_data}"
-    send_telegram_message(message)
+        print("Background engine error:", e)
 
 if __name__ == "__main__":
-    run_market_alert()
+    port = int(os.environ.get("PORT", 10000))
+    
+    # Start background system safely
+    safe_background_start()
+
+    # Start web server
+    app.run(host="0.0.0.0", port=port)
