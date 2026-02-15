@@ -5,6 +5,8 @@ import time
 
 app = Flask(__name__)
 
+INGESTION_INTERVAL_SECONDS = 300
+
 def run_engine():
     engine = brain_engine.BrainEngine()
     stocks = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS"]
@@ -12,7 +14,7 @@ def run_engine():
     while True:
         for s in stocks:
             print(engine.analyze_stock(s))
-        time.sleep(21600)
+        time.sleep(INGESTION_INTERVAL_SECONDS)
 
 @app.route("/")
 def home():
