@@ -11,7 +11,8 @@ def run_engine():
 
     while True:
         for s in stocks:
-            print(engine.analyze_stock(s))
+            result = engine.analyze_stock(s)
+            print("INGESTION:", result, flush=True)
         time.sleep(300)
 
 @app.route("/")
