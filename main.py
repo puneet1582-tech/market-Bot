@@ -9,7 +9,7 @@ INGESTION_INTERVAL_SECONDS = 300
 
 def run_engine():
     engine = brain_engine.BrainEngine()
-    stocks = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS"]
+    stocks = ["RELIANCE.NS","TCS.NS","HDFCBANK.NS"]
 
     while True:
         for s in stocks:
