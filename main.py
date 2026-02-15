@@ -7,17 +7,17 @@ app = Flask(__name__)
 
 def run_engine():
     engine = brain_engine.BrainEngine()
-    stocks = ['RELIANCE.NS','TCS.NS','HDFCBANK.NS']
+    stocks = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS"]
 
     while True:
         for s in stocks:
             print(engine.analyze_stock(s))
         time.sleep(21600)
 
-@app.route('/')
+@app.route("/")
 def home():
-    return 'Ultimate Brain Running'
+    return "Ultimate Brain Running"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     threading.Thread(target=run_engine).start()
-    app.run(host='0.0.0.0', port=10000)
+    app.run(host="0.0.0.0", port=10000)
