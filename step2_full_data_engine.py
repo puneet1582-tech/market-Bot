@@ -12,15 +12,12 @@ class FullDataEngine:
             "Accept-Encoding": "gzip, deflate, br"
         }
 
-        # NSE cookie initialization
+        # Initialize NSE cookies
         self.session.get("https://www.nseindia.com", headers=self.headers)
 
     def fetch_full_dataset(self, symbol):
 
-        symbol_clean = symbol.replace(".NS", "")
-
-        url = f"https://www.nseindia.com/api/quote-equity?symbol={symbol_clean}"
-
+        url = f"https://www.nseindia.com/api/quote-equity?symbol={symbol.replace('.NS','')}"
         r = self.session.get(url, headers=self.headers)
 
         if r.status_code != 200:
