@@ -1,12 +1,13 @@
-import time
-import datetime
-from step2_full_data_engine import start_step2_engine
+from step2_full_data_engine import FullDataEngine
 
-def start_brain():
-    print("Ultimate Brain Started")
+class BrainEngine:
+    def __init__(self):
+        self.data_engine = FullDataEngine()
 
-    start_step2_engine()
-
-    while True:
-        print("Brain running:", datetime.datetime.now())
-        time.sleep(60)
+    def analyze_stock(self, symbol):
+        data = self.data_engine.fetch_full_dataset(symbol)
+        return {
+            "symbol": data["symbol"],
+            "records_price": len(data["price_data"]),
+            "timestamp": data["timestamp"]
+        }

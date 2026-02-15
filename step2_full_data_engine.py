@@ -1,37 +1,14 @@
-import sqlite3
-import datetime
-import time
-from threading import Thread
+import yfinance as yf
+from datetime import datetime
 
-DB_NAME = "ultimate_brain_data.db"
+class FullDataEngine:
+    def __init__(self):
+        self.timestamp = datetime.now()
 
-def init_database():
-    conn = sqlite3.connect(DB_NAME)
-    cur = conn.cursor()
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS system_log(
-        message TEXT,
-        timestamp TEXT
-    )
-    """)
-    conn.commit()
-    conn.close()
-    print("Database initialized")
-
-def ingestion_loop():
-    while True:
-        conn = sqlite3.connect(DB_NAME)
-        cur = conn.cursor()
-        cur.execute(
-            "INSERT INTO system_log VALUES (?, ?)",
-            ("Step-2 ingestion running", str(datetime.datetime.now()))
-        )
-        conn.commit()
-        conn.close()
-        print("Step-2 ingestion running...")
-        time.sleep(3600)
-
-def start_step2_engine():
-    init_database()
-    Thread(target=ingestion_loop, daemon=True).start()
-    print("STEP-2 ENGINE ACTIVE")
+    def fetch_full_dataset(self, symbol):
+        ticker = yf.Ticker(symbol)
+        return {
+            "symbol": symbol,
+            "timestamp": str(self.timestamp),
+            "price_data": ticker.history(period="1y")
+        }
