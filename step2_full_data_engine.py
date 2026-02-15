@@ -10,14 +10,17 @@ class FullDataEngine:
         self.session.get("https://www.nseindia.com", headers=self.headers)
 
     def fetch_full_dataset(self, symbol):
-        base = symbol.replace(".NS","")
-        url = f"https://www.nseindia.com/api/quote-equity?symbol={base}"
+        url = f"https://www.nseindia.com/api/quote-equity?symbol={symbol.replace('.NS','')}"
         r = self.session.get(url, headers=self.headers)
         data = r.json()
 
+        price = data["priceInfo"]["lastPrice"]
+        volume = data["securityWiseDP"]["quantityTraded"]
+
         return {
-            "symbol": base,
-            "timestamp": str(self.timestamp),
-            "price": data["priceInfo"]["lastPrice"],
-            "volume": data["securityWiseDP"]["quantityTraded"]
+            "symbol": symbol,
+            "price": price,
+            "volume": volume,
+            "timestamp": str(self.timestamp)
         }
+
