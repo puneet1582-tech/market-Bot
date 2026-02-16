@@ -1,8 +1,8 @@
 import os
 import requests
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-CHAT_ID = os.getenv("CHAT_ID")
+BOT_TOKEN = os.getenv("8441405404:AAEppNGjlfWjR4xzWNqfWpt8e53pnmQOZj8")
+CHAT_ID = os.getenv("1428062136")
 
 def send_telegram_alert(message):
     if not BOT_TOKEN or not CHAT_ID:
