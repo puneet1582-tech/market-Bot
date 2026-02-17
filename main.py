@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Multi-Factor Opportunity Intelligence Integrated
+# Risk-Weighted Intelligence Pipeline
 # ================================
 
 from flask import Flask
@@ -9,7 +9,7 @@ import time
 
 import brain_engine
 from opportunity_engine import calculate_opportunity
-from opportunity_ranking_engine import rank_opportunities
+from risk_weighted_ranking_engine import risk_weighted_rank
 from sector_intelligence_engine import sector_strength
 from opportunity_report_engine import generate_report
 from decision_memory_engine import save_decision
@@ -52,23 +52,16 @@ def run_engine():
             mode_report = market_mode_engine.detect_mode(market_data)
 
             opportunity_list = []
-
-            sector_scores = {}
             capital_flow = detect_capital_flow()
 
-            # ---- Sector-wise Processing ----
             for sector, sector_stocks in sector_map.items():
-                sector_scores.setdefault(sector, 0)
-
                 for s in sector_stocks:
                     result = engine.analyze_stock(s)
 
                     opportunity = calculate_opportunity(
                         s,
                         result.get("price", 0),
-                        mode_report["mode"],
-                        sector_scores.get(sector, 0),
-                        capital_flow.get(sector, 0)
+                        mode_report["mode"]
                     )
 
                     opportunity["sector"] = sector
@@ -79,9 +72,10 @@ def run_engine():
 
             sector_leaders = detect_sector_leaders(opportunity_list)
 
-            ranked = rank_opportunities(opportunity_list)
-            report = generate_report(ranked, sector_scores)
+            # ---- Risk Weighted Ranking ----
+            ranked = risk_weighted_rank(opportunity_list)
 
+            report = generate_report(ranked, sector_scores)
             save_decision(report)
 
             for op in ranked[:5]:
@@ -105,8 +99,6 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("MULTI-FACTOR INTELLIGENCE CYCLE COMPLETE", flush=True)
-
             interval = get_cycle_interval()
             time.sleep(interval)
 
@@ -126,9 +118,6 @@ if __name__ == "__main__":
     ingestion_thread.daemon = True
     ingestion_thread.start()
 
-    try:
-        send_telegram_alert("MARKET BOT STARTED — MULTI-FACTOR INTELLIGENCE ACTIVE")
-    except Exception as e:
-        print("Telegram startup alert failed:", e)
+    send_telegram_alert("BOT STARTED — RISK WEIGHTED ENGINE ACTIVE")
 
     app.run(host="0.0.0.0", port=10000)
