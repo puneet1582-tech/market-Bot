@@ -1,15 +1,18 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Production Integrated Version
+# Full Integrated Intelligence Pipeline
 # ================================
-from sector_intelligence_engine import sector_strength
-from opportunity_ranking_engine import rank_opportunities
+
 from flask import Flask
 import threading
 import time
 
 import brain_engine
 from opportunity_engine import calculate_opportunity
+from opportunity_ranking_engine import rank_opportunities
+from sector_intelligence_engine import sector_strength
+from opportunity_report_engine import generate_report
+
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
 from engines.market_mode_engine import MarketModeEngine
@@ -17,7 +20,6 @@ from engines.market_mode_engine import MarketModeEngine
 app = Flask(__name__)
 
 
-# ---------------- ENGINE LOOP ----------------
 def run_engine():
     engine = brain_engine.BrainEngine()
     market_mode_engine = MarketModeEngine()
@@ -26,7 +28,6 @@ def run_engine():
 
     while True:
         try:
-            # ---- Market Mode Detection ----
             market_data = {
                 "fii_flow": 500,
                 "dii_flow": 200,
@@ -40,30 +41,28 @@ def run_engine():
 
             opportunity_list = []
 
-for s in stocks:
-    result = engine.analyze_stock(s)
-    print("INGESTION:", result, flush=True)
+            for s in stocks:
+                result = engine.analyze_stock(s)
+                print("INGESTION:", result, flush=True)
 
-    opportunity = calculate_opportunity(s, result.get("price", 0))
-    opportunity_list.append(opportunity)
-
-# ---- Sector Intelligence ----
-sector_scores = sector_strength(opportunity_list)
-print("SECTOR STRENGTH:", sector_scores, flush=True)
-# ---- Ranking ----
-ranked = rank_opportunities(opportunity_list)
-
-print("TOP OPPORTUNITIES:", ranked[:5], flush=True)
-
-for op in ranked[:5]:
-    process_opportunity(op["symbol"], op, mode_report["mode"])
-
-                # ---- Opportunity Intelligence ----
                 opportunity = calculate_opportunity(s, result.get("price", 0))
-                print("OPPORTUNITY:", opportunity, flush=True)
+                opportunity_list.append(opportunity)
 
-                # ---- Telegram / Trigger Engine ----
-                process_opportunity(s, opportunity, mode_report["mode"])
+            # ---- Sector Intelligence ----
+            sector_scores = sector_strength(opportunity_list)
+            print("SECTOR STRENGTH:", sector_scores, flush=True)
+
+            # ---- Ranking ----
+            ranked = rank_opportunities(opportunity_list)
+            print("TOP OPPORTUNITIES:", ranked[:5], flush=True)
+
+            # ---- Report ----
+            report = generate_report(ranked, sector_scores)
+            print("OPPORTUNITY REPORT:", report, flush=True)
+
+            # ---- Telegram Alerts ----
+            for op in ranked[:5]:
+                process_opportunity(op["symbol"], op, mode_report["mode"])
 
             time.sleep(300)
 
@@ -73,20 +72,18 @@ for op in ranked[:5]:
             time.sleep(60)
 
 
-# ---------------- WEB ROUTES ----------------
 @app.route("/")
 def home():
     return "Ultimate Brain Running"
 
 
-# ---------------- MAIN ----------------
 if __name__ == "__main__":
     ingestion_thread = threading.Thread(target=run_engine)
     ingestion_thread.daemon = True
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — OPPORTUNITY ENGINE LIVE")
+        send_telegram_alert("MARKET BOT STARTED — FULL INTELLIGENCE PIPELINE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
