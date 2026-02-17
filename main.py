@@ -247,3 +247,13 @@ try:
 except Exception as _dispatch_err:
     print("PHASE-4 DISPATCH ERROR:", _dispatch_err, flush=True)
 
+
+# ===============================
+# PHASE-4 ARCHIVE ACTIVATION
+# ===============================
+try:
+    from phase4_archive_activation import apply_archive_layer
+    dashboard = apply_archive_layer(dashboard)
+except Exception as _archive_err:
+    print("PHASE-4 ARCHIVE ERROR:", _archive_err, flush=True)
+
