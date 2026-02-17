@@ -217,3 +217,13 @@ try:
 except Exception as _phase3_err:
     print("PHASE-3 ACTIVATION ERROR:", _phase3_err, flush=True)
 
+
+# ===============================
+# PHASE-3 PORTFOLIO OPTIMIZATION ACTIVATION
+# ===============================
+try:
+    from phase3_portfolio_optimization_activation import apply_portfolio_optimization
+    dashboard = apply_portfolio_optimization(dashboard)
+except Exception as _opt_err:
+    print("PHASE-3 PORTFOLIO OPT ERROR:", _opt_err, flush=True)
+
