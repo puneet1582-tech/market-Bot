@@ -387,3 +387,13 @@ try:
 except Exception as _cd_err:
     print("PHASE-10 CAPITAL DEPLOYMENT ERROR:", _cd_err, flush=True)
 
+
+# ===============================
+# PHASE-11 MASTER BRAIN CONTROLLER
+# ===============================
+try:
+    from phase11_master_controller_activation import apply_master_controller
+    dashboard = apply_master_controller(dashboard)
+except Exception as _mb_err:
+    print("PHASE-11 MASTER CONTROLLER ERROR:", _mb_err, flush=True)
+
