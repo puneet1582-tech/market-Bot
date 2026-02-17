@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Intelligence Pipeline + Dashboard
+# Full Intelligence Pipeline + Dashboard + Daily Report
 # ================================
 
 from flask import Flask
@@ -17,6 +17,7 @@ from performance_tracker_engine import log_performance
 from performance_evaluation_engine import evaluate_performance
 from return_estimation_engine import estimate_returns
 from dashboard_output_engine import build_dashboard
+from daily_report_engine import generate_daily_report
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -67,7 +68,6 @@ def run_engine():
             perf_summary = evaluate_performance()
             return_summary = estimate_returns()
 
-            # ---- DASHBOARD BUILD ----
             dashboard = build_dashboard(
                 mode_report,
                 sector_scores,
@@ -76,7 +76,11 @@ def run_engine():
                 return_summary
             )
 
-            print("INTELLIGENCE DASHBOARD:", dashboard, flush=True)
+            # ---- DAILY REPORT ----
+            daily_report = generate_daily_report(dashboard)
+            send_telegram_alert(daily_report)
+
+            print("DAILY REPORT SENT", flush=True)
 
             time.sleep(300)
 
@@ -97,7 +101,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — DASHBOARD ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — DAILY REPORT ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
