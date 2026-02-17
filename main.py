@@ -257,3 +257,13 @@ try:
 except Exception as _archive_err:
     print("PHASE-4 ARCHIVE ERROR:", _archive_err, flush=True)
 
+
+# ===============================
+# PHASE-5 GLOBAL MARKET LINKAGE
+# ===============================
+try:
+    from phase5_linkage_activation import apply_global_linkage
+    dashboard = apply_global_linkage(dashboard)
+except Exception as _link_err:
+    print("PHASE-5 LINKAGE ERROR:", _link_err, flush=True)
+
