@@ -1,0 +1,176 @@
+[
+  {
+    "timestamp": "2026-02-17 18:49:37.573841",
+    "report": {
+      "timestamp": "2026-02-17 18:49:37.573831",
+      "top_opportunities": [
+        {
+          "symbol": "TCS.NS",
+          "price": 2719.8,
+          "score": 25.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:49:34.976302",
+          "sector": "IT",
+          "risk_adjusted_score": 22.5
+        },
+        {
+          "symbol": "LT.NS",
+          "price": 4275.8,
+          "score": 25.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:49:37.287060",
+          "sector": "INFRA",
+          "risk_adjusted_score": 22.5
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "price": 2312.9,
+          "score": 15.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:49:36.616809",
+          "sector": "FMCG",
+          "risk_adjusted_score": 13.5
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "price": 2021.6,
+          "score": 15.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:49:37.573228",
+          "sector": "TELECOM",
+          "risk_adjusted_score": 13.5
+        },
+        {
+          "symbol": "RELIANCE.NS",
+          "price": 1424.2,
+          "score": 8.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:49:34.642228",
+          "sector": "ENERGY",
+          "risk_adjusted_score": 8.0
+        }
+      ],
+      "sector_strength": {
+        "ENERGY": 8.0,
+        "IT": 25.0,
+        "BANKING": 8.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-17 18:55:26.652946",
+    "report": {
+      "timestamp": "2026-02-17 18:55:26.652936",
+      "top_opportunities": [
+        {
+          "symbol": "TCS.NS",
+          "price": 2719.8,
+          "score": 25.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:55:24.778946",
+          "sector": "IT",
+          "risk_adjusted_score": 22.5
+        },
+        {
+          "symbol": "LT.NS",
+          "price": 4275.8,
+          "score": 25.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:55:26.456052",
+          "sector": "INFRA",
+          "risk_adjusted_score": 22.5
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "price": 2312.9,
+          "score": 15.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:55:25.891916",
+          "sector": "FMCG",
+          "risk_adjusted_score": 13.5
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "price": 2021.6,
+          "score": 15.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:55:26.652494",
+          "sector": "TELECOM",
+          "risk_adjusted_score": 13.5
+        },
+        {
+          "symbol": "RELIANCE.NS",
+          "price": 1424.2,
+          "score": 8.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:55:24.519650",
+          "sector": "ENERGY",
+          "risk_adjusted_score": 8.0
+        }
+      ],
+      "sector_strength": {
+        "ENERGY": 8.0,
+        "IT": 25.0,
+        "BANKING": 8.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-17 18:59:26.088314",
+    "report": {
+      "timestamp": "2026-02-17 18:59:26.088303",
+      "top_opportunities": [
+        {
+          "symbol": "TCS.NS",
+          "price": 2719.8,
+          "score": 25.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:59:24.657184",
+          "sector": "IT",
+          "risk_adjusted_score": 22.5
+        },
+        {
+          "symbol": "LT.NS",
+          "price": 4275.8,
+          "score": 25.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:59:25.925225",
+          "sector": "INFRA",
+          "risk_adjusted_score": 22.5
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "price": 2312.9,
+          "score": 15.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:59:25.521986",
+          "sector": "FMCG",
+          "risk_adjusted_score": 13.5
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "price": 2021.6,
+          "score": 15.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:59:26.087627",
+          "sector": "TELECOM",
+          "risk_adjusted_score": 13.5
+        },
+        {
+          "symbol": "RELIANCE.NS",
+          "price": 1424.2,
+          "score": 8.0,
+          "mode": "DEFENSIVE",
+          "timestamp": "2026-02-17 18:59:24.471850",
+          "sector": "ENERGY",
+          "risk_adjusted_score": 8.0
+        }
+      ],
+      "sector_strength": {
+        "ENERGY": 8.0,
+        "IT": 25.0,
+        "BANKING": 8.0
+      }
+    }
+  }
+]
