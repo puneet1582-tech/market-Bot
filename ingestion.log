@@ -1,0 +1,8 @@
+2026-02-17 16:32:55,087 | INFO | NSE Institutional Ingestion Engine Started
+2026-02-17 16:32:55,382 | INFO | INGESTION {'symbol': 'RELIANCE.NS', 'price': 1424.2, 'volume': 0, 'timestamp': '2026-02-17 16:32:55.087848'}
+2026-02-17 16:32:55,603 | INFO | INGESTION {'symbol': 'TCS.NS', 'price': 2719.8, 'volume': 0, 'timestamp': '2026-02-17 16:32:55.087848'}
+2026-02-17 16:32:55,943 | INFO | INGESTION {'symbol': 'HDFCBANK.NS', 'price': 926.45, 'volume': 0, 'timestamp': '2026-02-17 16:32:55.087848'}
+2026-02-17 16:33:56,240 | INFO | INGESTION {'symbol': 'RELIANCE.NS', 'price': 1424.2, 'volume': 0, 'timestamp': '2026-02-17 16:33:55.944417'}
+2026-02-17 16:33:56,526 | INFO | INGESTION {'symbol': 'TCS.NS', 'price': 2719.8, 'volume': 0, 'timestamp': '2026-02-17 16:33:55.944417'}
+2026-02-17 16:33:56,827 | INFO | INGESTION {'symbol': 'HDFCBANK.NS', 'price': 926.45, 'volume': 0, 'timestamp': '2026-02-17 16:33:55.944417'}
+2026-02-17 16:34:10,873 | INFO | Engine stopped manually
