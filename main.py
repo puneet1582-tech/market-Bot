@@ -297,3 +297,13 @@ try:
 except Exception as _strategy_err:
     print("PHASE-6 STRATEGY ERROR:", _strategy_err, flush=True)
 
+
+# ===============================
+# PHASE-6 MULTI-CYCLE ALLOCATION ACTIVATION
+# ===============================
+try:
+    from phase6_multicycle_allocation_activation import apply_multicycle_allocation
+    dashboard = apply_multicycle_allocation(dashboard)
+except Exception as _mca_err:
+    print("PHASE-6 MULTICYCLE ALLOCATION ERROR:", _mca_err, flush=True)
+
