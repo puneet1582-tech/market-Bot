@@ -203,3 +203,17 @@ try:
 except Exception as _class_err:
     print("PHASE-2 CLASSIFICATION ERROR:", _class_err, flush=True)
 
+
+# ===============================
+# PHASE-3 ADAPTIVE + MEMORY ACTIVATION
+# ===============================
+try:
+    from phase3_adaptive_activation import apply_adaptive_learning
+    from phase3_memory_activation import apply_memory_layer
+
+    dashboard = apply_adaptive_learning(dashboard)
+    dashboard = apply_memory_layer(dashboard)
+
+except Exception as _phase3_err:
+    print("PHASE-3 ACTIVATION ERROR:", _phase3_err, flush=True)
+
