@@ -176,3 +176,20 @@ if __name__ == "__main__":
         print("Telegram startup alert failed:", e)
 
     app.run(host="0.0.0.0", port=10000)
+
+# ===============================
+# PHASE-2 FINAL ACTIVATION LAYER
+# ===============================
+try:
+    from phase2_pipeline_integration import apply_phase2_intelligence
+
+    dashboard = apply_phase2_intelligence(
+        dashboard,
+        conviction_ranked,
+        regime_prob.get("score", 50),
+        sector_scores,
+        market_data.get("volatility_index", 20)
+    )
+except Exception as _phase2_err:
+    print("PHASE-2 ACTIVATION ERROR:", _phase2_err, flush=True)
+
