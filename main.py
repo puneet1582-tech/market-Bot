@@ -227,3 +227,13 @@ try:
 except Exception as _opt_err:
     print("PHASE-3 PORTFOLIO OPT ERROR:", _opt_err, flush=True)
 
+
+# ===============================
+# PHASE-4 REPORTING ACTIVATION
+# ===============================
+try:
+    from phase4_reporting_activation import apply_reporting_layer
+    dashboard = apply_reporting_layer(dashboard)
+except Exception as _report_err:
+    print("PHASE-4 REPORTING ERROR:", _report_err, flush=True)
+
