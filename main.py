@@ -287,3 +287,13 @@ try:
 except Exception as _omap_err:
     print("PHASE-5 OPPORTUNITY MAP ERROR:", _omap_err, flush=True)
 
+
+# ===============================
+# PHASE-6 STRATEGIC DECISION ACTIVATION
+# ===============================
+try:
+    from phase6_strategy_activation import apply_strategy_layer
+    dashboard = apply_strategy_layer(dashboard)
+except Exception as _strategy_err:
+    print("PHASE-6 STRATEGY ERROR:", _strategy_err, flush=True)
+
