@@ -2,6 +2,7 @@
 # ULTIMATE BRAIN — MAIN ENGINE
 # Production Integrated Version
 # ================================
+from sector_intelligence_engine import sector_strength
 from opportunity_ranking_engine import rank_opportunities
 from flask import Flask
 import threading
@@ -46,6 +47,9 @@ for s in stocks:
     opportunity = calculate_opportunity(s, result.get("price", 0))
     opportunity_list.append(opportunity)
 
+# ---- Sector Intelligence ----
+sector_scores = sector_strength(opportunity_list)
+print("SECTOR STRENGTH:", sector_scores, flush=True)
 # ---- Ranking ----
 ranked = rank_opportunities(opportunity_list)
 
