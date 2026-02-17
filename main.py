@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Batch Scanner + Load Balancer Integrated
+# Dynamic Cycle Optimizer Integrated
 # ================================
 
 from flask import Flask
@@ -18,7 +18,6 @@ from performance_evaluation_engine import evaluate_performance
 from return_estimation_engine import estimate_returns
 from dashboard_output_engine import build_dashboard
 from daily_report_engine import generate_daily_report
-from schedule_controller_engine import get_cycle_interval
 from sector_universe_mapper import map_sector_universe
 from sector_rotation_engine import update_sector_rotation
 from sector_leadership_engine import detect_sector_leaders
@@ -26,6 +25,7 @@ from capital_flow_engine import detect_capital_flow
 from nse_universe_loader import load_nse_universe
 from scanner_batch_engine import create_batches
 from scanner_load_balancer import batch_pause
+from cycle_optimizer_engine import optimized_cycle_interval
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -56,7 +56,6 @@ def run_engine():
             opportunity_list = []
             capital_flow = detect_capital_flow()
 
-            # ---- Batch Processing with Load Balancer ----
             for batch in create_batches(stocks, batch_size=25):
                 for s in batch:
                     result = engine.analyze_stock(s)
@@ -102,9 +101,9 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("LOAD BALANCED NSE SCANNER CYCLE COMPLETE", flush=True)
+            print("DYNAMIC CYCLE OPTIMIZED SCANNER COMPLETE", flush=True)
 
-            interval = get_cycle_interval()
+            interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
 
         except Exception as e:
@@ -124,7 +123,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — LOAD BALANCED NSE SCANNER ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — DYNAMIC CYCLE OPTIMIZER ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
