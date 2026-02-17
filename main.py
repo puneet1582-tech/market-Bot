@@ -367,3 +367,13 @@ try:
 except Exception as _si_err:
     print("PHASE-9 SELF IMPROVEMENT ERROR:", _si_err, flush=True)
 
+
+# ===============================
+# PHASE-10 MARKET MODE CONTROLLER
+# ===============================
+try:
+    from phase10_market_mode_activation import apply_market_mode_controller
+    dashboard = apply_market_mode_controller(dashboard)
+except Exception as _mm_err:
+    print("PHASE-10 MARKET MODE ERROR:", _mm_err, flush=True)
+
