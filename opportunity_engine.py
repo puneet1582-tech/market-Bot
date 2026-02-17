@@ -1,23 +1,41 @@
-# OPPORTUNITY DETECTION ENGINE
-# Core Intelligence Layer (INVEST / TRADE / DEFENSIVE)
+# INSTITUTIONAL OPPORTUNITY ENGINE
+# Quant-style scoring foundation
 
 from datetime import datetime
 
 def calculate_opportunity(symbol, price):
-    """
-    Simple scoring framework (initial live integration layer)
-    Later will connect with fundamentals, sector, liquidity, news
-    """
+    score = 0
 
-    if price > 2000:
+    # ---- Price Strength ----
+    if price >= 2500:
+        score += 30
+    elif price >= 1500:
+        score += 20
+    elif price >= 500:
+        score += 10
+
+    # ---- Liquidity Proxy (temporary logic) ----
+    if price % 5 == 0:
+        score += 20
+    else:
+        score += 10
+
+    # ---- Trend Proxy ----
+    if price > 1000:
+        score += 20
+    else:
+        score += 10
+
+    # ---- Base Stability ----
+    score += 20
+
+    # ---- Mode Decision ----
+    if score >= 75:
         mode = "INVEST"
-        score = 80
-    elif price > 1000:
+    elif score >= 55:
         mode = "TRADE"
-        score = 65
     else:
         mode = "DEFENSIVE"
-        score = 45
 
     return {
         "symbol": symbol,
