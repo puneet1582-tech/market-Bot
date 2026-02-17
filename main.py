@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Watchlist Intelligence Integrated
+# Persistence Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -27,6 +27,7 @@ from scanner_batch_engine import create_batches
 from scanner_load_balancer import batch_pause
 from cycle_optimizer_engine import optimized_cycle_interval
 from opportunity_watchlist_engine import update_watchlist
+from opportunity_persistence_engine import detect_persistent_opportunities
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -81,8 +82,10 @@ def run_engine():
 
             save_decision(report)
 
-            # ---- Watchlist Update ----
             update_watchlist(ranked[:10])
+
+            # ---- Persistence Detection ----
+            persistent = detect_persistent_opportunities()
 
             for op in ranked[:5]:
                 process_opportunity(op["symbol"], op, mode_report["mode"])
@@ -101,11 +104,12 @@ def run_engine():
 
             dashboard["sector_leaders"] = sector_leaders
             dashboard["capital_flow"] = capital_flow
+            dashboard["persistent_stocks"] = persistent
 
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("WATCHLIST INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("PERSISTENCE INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -127,7 +131,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — WATCHLIST INTELLIGENCE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — PERSISTENCE INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
