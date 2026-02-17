@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Integrated Intelligence + Adaptive Scoring
+# Full Intelligence Pipeline + Dashboard
 # ================================
 
 from flask import Flask
@@ -16,6 +16,7 @@ from decision_memory_engine import save_decision
 from performance_tracker_engine import log_performance
 from performance_evaluation_engine import evaluate_performance
 from return_estimation_engine import estimate_returns
+from dashboard_output_engine import build_dashboard
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -41,27 +42,21 @@ def run_engine():
             }
 
             mode_report = market_mode_engine.detect_mode(market_data)
-            print("MARKET MODE:", mode_report, flush=True)
 
             opportunity_list = []
 
             for s in stocks:
                 result = engine.analyze_stock(s)
-                print("INGESTION:", result, flush=True)
-
                 opportunity = calculate_opportunity(
                     s,
                     result.get("price", 0),
                     mode_report["mode"]
                 )
-
                 opportunity_list.append(opportunity)
 
             sector_scores = sector_strength(opportunity_list)
             ranked = rank_opportunities(opportunity_list)
             report = generate_report(ranked, sector_scores)
-
-            print("OPPORTUNITY REPORT:", report, flush=True)
 
             save_decision(report)
 
@@ -72,8 +67,16 @@ def run_engine():
             perf_summary = evaluate_performance()
             return_summary = estimate_returns()
 
-            print("PERFORMANCE SUMMARY:", perf_summary, flush=True)
-            print("RETURN ESTIMATION:", return_summary, flush=True)
+            # ---- DASHBOARD BUILD ----
+            dashboard = build_dashboard(
+                mode_report,
+                sector_scores,
+                ranked,
+                perf_summary,
+                return_summary
+            )
+
+            print("INTELLIGENCE DASHBOARD:", dashboard, flush=True)
 
             time.sleep(300)
 
@@ -94,7 +97,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — ADAPTIVE PIPELINE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — DASHBOARD ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
