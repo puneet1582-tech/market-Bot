@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Decision Summary Integrated
+# Phase-1 Operational Intelligence System
 # ================================
 
 from flask import Flask
@@ -17,6 +17,7 @@ from performance_evaluation_engine import evaluate_performance
 from return_estimation_engine import estimate_returns
 from dashboard_output_engine import build_dashboard
 from daily_report_engine import generate_daily_report
+from final_report_formatter_engine import format_final_report
 from sector_universe_mapper import map_sector_universe
 from sector_rotation_engine import update_sector_rotation
 from sector_leadership_engine import detect_sector_leaders
@@ -85,12 +86,10 @@ def run_engine():
 
             sector_scores = sector_strength(opportunity_list)
             update_sector_rotation(sector_scores)
-
             sector_leaders = detect_sector_leaders(opportunity_list)
 
             ranked = risk_weighted_rank(opportunity_list)
             update_watchlist(ranked[:10])
-
             persistent = detect_persistent_opportunities()
 
             conviction_ranked = calculate_conviction_scores(
@@ -119,7 +118,6 @@ def run_engine():
             track_portfolio(adaptive_allocation)
             store_strategy_memory(final_mode_report["mode"], adaptive_allocation)
 
-            # ---- Decision Summary ----
             decision_summary = generate_decision_summary(conviction_ranked, adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
@@ -147,10 +145,11 @@ def run_engine():
             dashboard["regime_probability"] = regime_prob
             dashboard["decision_summary"] = decision_summary
 
-            daily_report = generate_daily_report(dashboard)
-            send_telegram_alert(daily_report)
+            # ---- Final Institutional Report ----
+            formatted_report = format_final_report(dashboard)
+            send_telegram_alert(formatted_report)
 
-            print("DECISION SUMMARY INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("PHASE-1 INSTITUTIONAL INTELLIGENCE SYSTEM OPERATIONAL", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -172,7 +171,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — DECISION SUMMARY ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — PHASE-1 OPERATIONAL")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
