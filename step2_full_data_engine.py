@@ -1,38 +1,52 @@
-# PRODUCTION NSE LIVE DATA INGESTION ENGINE
-# Stable, retry-enabled, continuous ingestion
+# =====================================================
+# INSTITUTIONAL-GRADE NSE INGESTION ENGINE (SCALABLE)
+# Reliable, Retry Logic, Validation, Logging
+# =====================================================
 
 from nsepython import nse_eq
 from datetime import datetime
-import time
 import logging
+import time
+import sys
 
 # ---------------- CONFIG ----------------
 SYMBOLS = ["RELIANCE", "TCS", "HDFCBANK"]
-FETCH_INTERVAL = 60          # seconds
-MAX_RETRY = 3                # retry attempts
+FETCH_INTERVAL = 60
+MAX_RETRY = 3
+RETRY_DELAY = 2
 # ----------------------------------------
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s"
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler("ingestion.log")
+    ]
 )
 
 def fetch_price(symbol):
     """
-    Fetch NSE price with retry logic
+    Fetch live NSE price safely with retries
     """
     for attempt in range(MAX_RETRY):
         try:
             data = nse_eq(symbol)
 
+            if "priceInfo" not in data:
+                raise Exception("priceInfo missing")
+
             price = float(data["priceInfo"]["lastPrice"])
-            volume = int(data["securityWiseDP"]["quantityTraded"])
+
+            volume = 0
+            if "securityWiseDP" in data and "quantityTraded" in data["securityWiseDP"]:
+                volume = int(data["securityWiseDP"]["quantityTraded"])
 
             return price, volume
 
         except Exception as e:
-            logging.warning(f"{symbol} retry {attempt+1}: {e}")
-            time.sleep(2)
+            logging.warning(f"{symbol} retry {attempt+1}/{MAX_RETRY}: {e}")
+            time.sleep(RETRY_DELAY)
 
     logging.error(f"{symbol} failed after retries")
     return 0, 0
@@ -42,10 +56,10 @@ def ingestion_cycle():
     """
     Continuous ingestion loop
     """
-    logging.info("NSE ingestion engine started")
+    logging.info("NSE Institutional Ingestion Engine Started")
 
     while True:
-        timestamp = datetime.now()
+        cycle_time = datetime.now()
 
         for symbol in SYMBOLS:
             price, volume = fetch_price(symbol)
@@ -54,7 +68,7 @@ def ingestion_cycle():
                 "symbol": f"{symbol}.NS",
                 "price": price,
                 "volume": volume,
-                "timestamp": str(timestamp)
+                "timestamp": str(cycle_time)
             }
 
             logging.info(f"INGESTION {record}")
@@ -63,4 +77,7 @@ def ingestion_cycle():
 
 
 if __name__ == "__main__":
-    ingestion_cycle()
+    try:
+        ingestion_cycle()
+    except KeyboardInterrupt:
+        logging.info("Engine stopped manually")
