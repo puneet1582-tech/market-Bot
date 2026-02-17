@@ -327,3 +327,13 @@ try:
 except Exception as _shield_err:
     print("PHASE-7 CRISIS SHIELD ERROR:", _shield_err, flush=True)
 
+
+# ===============================
+# PHASE-8 STRATEGY EVOLUTION
+# ===============================
+try:
+    from phase8_strategy_evolution_activation import apply_strategy_evolution
+    dashboard = apply_strategy_evolution(dashboard)
+except Exception as _evo_err:
+    print("PHASE-8 STRATEGY EVOLUTION ERROR:", _evo_err, flush=True)
+
