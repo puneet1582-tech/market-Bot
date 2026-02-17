@@ -337,3 +337,13 @@ try:
 except Exception as _evo_err:
     print("PHASE-8 STRATEGY EVOLUTION ERROR:", _evo_err, flush=True)
 
+
+# ===============================
+# PHASE-8 WEIGHT CALIBRATION
+# ===============================
+try:
+    from phase8_weight_calibration_activation import apply_weight_calibration
+    dashboard = apply_weight_calibration(dashboard)
+except Exception as _cal_err:
+    print("PHASE-8 WEIGHT CALIBRATION ERROR:", _cal_err, flush=True)
+
