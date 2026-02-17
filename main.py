@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Risk-Balanced Portfolio Integrated
+# Portfolio Lifecycle Tracking Integrated
 # ================================
 
 from flask import Flask
@@ -31,6 +31,7 @@ from opportunity_persistence_engine import detect_persistent_opportunities
 from conviction_score_engine import calculate_conviction_scores
 from portfolio_allocation_engine import generate_portfolio_allocation
 from portfolio_risk_balancer_engine import balance_portfolio
+from portfolio_lifecycle_engine import track_portfolio
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -92,9 +93,10 @@ def run_engine():
             )
 
             allocation = generate_portfolio_allocation(conviction_ranked)
-
-            # ---- Risk Balanced Allocation ----
             balanced_allocation = balance_portfolio(allocation, sector_map)
+
+            # ---- Portfolio Lifecycle Tracking ----
+            track_portfolio(balanced_allocation)
 
             save_decision(conviction_ranked[:10])
 
@@ -121,7 +123,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("RISK BALANCED PORTFOLIO CYCLE COMPLETE", flush=True)
+            print("PORTFOLIO LIFECYCLE TRACKING CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -143,7 +145,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — RISK BALANCED PORTFOLIO ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — PORTFOLIO LIFECYCLE TRACKING ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
