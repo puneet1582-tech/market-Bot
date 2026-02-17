@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Portfolio Lifecycle Tracking Integrated
+# Portfolio Attribution Integrated
 # ================================
 
 from flask import Flask
@@ -32,6 +32,7 @@ from conviction_score_engine import calculate_conviction_scores
 from portfolio_allocation_engine import generate_portfolio_allocation
 from portfolio_risk_balancer_engine import balance_portfolio
 from portfolio_lifecycle_engine import track_portfolio
+from portfolio_attribution_engine import calculate_portfolio_attribution
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -95,8 +96,10 @@ def run_engine():
             allocation = generate_portfolio_allocation(conviction_ranked)
             balanced_allocation = balance_portfolio(allocation, sector_map)
 
-            # ---- Portfolio Lifecycle Tracking ----
             track_portfolio(balanced_allocation)
+
+            # ---- Portfolio Attribution ----
+            attribution = calculate_portfolio_attribution()
 
             save_decision(conviction_ranked[:10])
 
@@ -119,11 +122,12 @@ def run_engine():
             dashboard["capital_flow"] = capital_flow
             dashboard["persistent_stocks"] = persistent
             dashboard["portfolio_allocation"] = balanced_allocation
+            dashboard["portfolio_attribution"] = attribution
 
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("PORTFOLIO LIFECYCLE TRACKING CYCLE COMPLETE", flush=True)
+            print("PORTFOLIO ATTRIBUTION CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -145,7 +149,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — PORTFOLIO LIFECYCLE TRACKING ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — PORTFOLIO ATTRIBUTION ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
