@@ -1,10 +1,9 @@
-# ADAPTIVE OPPORTUNITY ENGINE
-# Self-adjusting scoring foundation
+# REGIME ADAPTIVE OPPORTUNITY ENGINE
 
 from datetime import datetime
 from performance_evaluation_engine import evaluate_performance
 
-def calculate_opportunity(symbol, price):
+def calculate_opportunity(symbol, price, market_mode="TRADE"):
     score = 0
 
     # ---- Base price strength ----
@@ -29,6 +28,12 @@ def calculate_opportunity(symbol, price):
     if perf["invest_signals"] > perf["trade_signals"]:
         score += 5
     else:
+        score -= 5
+
+    # ---- Market regime adjustment ----
+    if market_mode == "INVEST":
+        score += 5
+    elif market_mode == "DEFENSIVE":
         score -= 5
 
     # ---- Final mode decision ----
