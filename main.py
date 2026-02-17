@@ -307,3 +307,13 @@ try:
 except Exception as _mca_err:
     print("PHASE-6 MULTICYCLE ALLOCATION ERROR:", _mca_err, flush=True)
 
+
+# ===============================
+# PHASE-7 RISK GOVERNANCE ACTIVATION
+# ===============================
+try:
+    from phase7_risk_governance_activation import apply_risk_governance
+    dashboard = apply_risk_governance(dashboard)
+except Exception as _risk_err:
+    print("PHASE-7 RISK GOVERNANCE ERROR:", _risk_err, flush=True)
+
