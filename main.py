@@ -377,3 +377,13 @@ try:
 except Exception as _mm_err:
     print("PHASE-10 MARKET MODE ERROR:", _mm_err, flush=True)
 
+
+# ===============================
+# PHASE-10 CAPITAL DEPLOYMENT ACTIVATION
+# ===============================
+try:
+    from phase10_capital_deployment_activation import apply_capital_deployment
+    dashboard = apply_capital_deployment(dashboard)
+except Exception as _cd_err:
+    print("PHASE-10 CAPITAL DEPLOYMENT ERROR:", _cd_err, flush=True)
+
