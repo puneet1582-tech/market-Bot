@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Intelligence Pipeline + Scheduled Execution
+# Full Intelligence Pipeline + Scalable Stock Universe
 # ================================
 
 from flask import Flask
@@ -19,6 +19,7 @@ from return_estimation_engine import estimate_returns
 from dashboard_output_engine import build_dashboard
 from daily_report_engine import generate_daily_report
 from schedule_controller_engine import get_cycle_interval
+from stock_universe_engine import get_stock_universe
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -31,10 +32,10 @@ def run_engine():
     engine = brain_engine.BrainEngine()
     market_mode_engine = MarketModeEngine()
 
-    stocks = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS"]
-
     while True:
         try:
+            stocks = get_stock_universe()
+
             market_data = {
                 "fii_flow": 500,
                 "dii_flow": 200,
@@ -82,7 +83,6 @@ def run_engine():
 
             print("INTELLIGENCE CYCLE COMPLETE", flush=True)
 
-            # ---- Schedule-aware sleep ----
             interval = get_cycle_interval()
             time.sleep(interval)
 
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — SCHEDULE CONTROLLER ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — STOCK UNIVERSE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
