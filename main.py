@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Intelligence Pipeline + Dashboard + Daily Report
+# Full Intelligence Pipeline + Scheduled Execution
 # ================================
 
 from flask import Flask
@@ -18,6 +18,7 @@ from performance_evaluation_engine import evaluate_performance
 from return_estimation_engine import estimate_returns
 from dashboard_output_engine import build_dashboard
 from daily_report_engine import generate_daily_report
+from schedule_controller_engine import get_cycle_interval
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -76,13 +77,14 @@ def run_engine():
                 return_summary
             )
 
-            # ---- DAILY REPORT ----
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("DAILY REPORT SENT", flush=True)
+            print("INTELLIGENCE CYCLE COMPLETE", flush=True)
 
-            time.sleep(300)
+            # ---- Schedule-aware sleep ----
+            interval = get_cycle_interval()
+            time.sleep(interval)
 
         except Exception as e:
             print("ENGINE ERROR:", e, flush=True)
@@ -101,7 +103,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — DAILY REPORT ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — SCHEDULE CONTROLLER ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
