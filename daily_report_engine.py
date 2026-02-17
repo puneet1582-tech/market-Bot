@@ -1,19 +1,23 @@
 # DAILY REPORT ENGINE
-# Generates structured daily intelligence report
+# Hindi report with English stock names
 
 from datetime import datetime
 
 def generate_daily_report(dashboard):
     try:
+        top_stocks = [op["symbol"] for op in dashboard["top_opportunities"]]
+
         report_text = (
-            f"DAILY MARKET INTELLIGENCE REPORT\n"
-            f"Date: {datetime.now()}\n\n"
-            f"Market Mode: {dashboard['market_mode']}\n"
-            f"Sector Strength: {dashboard['sector_strength']}\n"
-            f"Top Opportunities: {dashboard['top_opportunities']}\n"
-            f"Performance Summary: {dashboard['performance_summary']}\n"
-            f"Return Estimation: {dashboard['return_estimation']}\n"
+            f"दैनिक मार्केट इंटेलिजेंस रिपोर्ट\n"
+            f"तारीख: {datetime.now()}\n\n"
+            f"मार्केट मोड: {dashboard['market_mode']['mode']}\n"
+            f"मजबूत सेक्टर: {dashboard['sector_strength']}\n"
+            f"टॉप अवसर (Stocks): {', '.join(top_stocks)}\n"
+            f"परफॉर्मेंस सारांश: {dashboard['performance_summary']}\n"
+            f"रिटर्न अनुमान: {dashboard['return_estimation']}\n"
         )
+
         return report_text
+
     except Exception as e:
-        return f"Report generation error: {e}"
+        return f"Report error: {e}"
