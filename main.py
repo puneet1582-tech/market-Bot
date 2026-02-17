@@ -267,3 +267,13 @@ try:
 except Exception as _link_err:
     print("PHASE-5 LINKAGE ERROR:", _link_err, flush=True)
 
+
+# ===============================
+# PHASE-5 GLOBAL SIGNAL FUSION
+# ===============================
+try:
+    from phase5_signal_fusion_activation import apply_global_signal_fusion
+    dashboard = apply_global_signal_fusion(dashboard)
+except Exception as _fusion_err:
+    print("PHASE-5 FUSION ERROR:", _fusion_err, flush=True)
+
