@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Strategy Regime Switch Integrated
+# Signal Confidence Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -36,6 +36,7 @@ from allocation_learning_engine import allocation_learning_adjustment
 from strategy_memory_engine import store_strategy_memory
 from market_regime_engine import estimate_market_regime
 from strategy_regime_switch_engine import adjust_strategy_bias
+from signal_confidence_engine import calculate_signal_confidence
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -62,10 +63,7 @@ def run_engine():
             }
 
             base_mode = market_mode_engine.detect_mode(market_data)
-
             regime_prob = estimate_market_regime(market_data)
-
-            # ---- Strategy Switch ----
             final_mode_report = adjust_strategy_bias(base_mode, regime_prob)
 
             opportunity_list = []
@@ -101,6 +99,13 @@ def run_engine():
                 persistent
             )
 
+            # ---- Signal Confidence ----
+            conviction_ranked = calculate_signal_confidence(
+                conviction_ranked,
+                persistent,
+                regime_prob
+            )
+
             allocation = generate_portfolio_allocation(conviction_ranked)
             balanced_allocation = balance_portfolio(allocation, sector_map)
 
@@ -112,7 +117,6 @@ def run_engine():
             )
 
             track_portfolio(adaptive_allocation)
-
             store_strategy_memory(final_mode_report["mode"], adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
@@ -142,7 +146,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("REGIME SWITCH INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("SIGNAL CONFIDENCE INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -164,7 +168,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — REGIME SWITCH ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — SIGNAL CONFIDENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
