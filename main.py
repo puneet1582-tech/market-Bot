@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Regime Intelligence Integrated
+# Strategy Regime Switch Integrated
 # ================================
 
 from flask import Flask
@@ -35,6 +35,7 @@ from portfolio_attribution_engine import calculate_portfolio_attribution
 from allocation_learning_engine import allocation_learning_adjustment
 from strategy_memory_engine import store_strategy_memory
 from market_regime_engine import estimate_market_regime
+from strategy_regime_switch_engine import adjust_strategy_bias
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -60,10 +61,12 @@ def run_engine():
                 "index_returns": [0.3, 0.1, -0.2]
             }
 
-            mode_report = market_mode_engine.detect_mode(market_data)
+            base_mode = market_mode_engine.detect_mode(market_data)
 
-            # ---- Regime Probability ----
             regime_prob = estimate_market_regime(market_data)
+
+            # ---- Strategy Switch ----
+            final_mode_report = adjust_strategy_bias(base_mode, regime_prob)
 
             opportunity_list = []
             capital_flow = detect_capital_flow()
@@ -75,7 +78,7 @@ def run_engine():
                     opportunity = calculate_opportunity(
                         s,
                         result.get("price", 0),
-                        mode_report["mode"]
+                        final_mode_report["mode"]
                     )
                     opportunity_list.append(opportunity)
 
@@ -110,19 +113,19 @@ def run_engine():
 
             track_portfolio(adaptive_allocation)
 
-            store_strategy_memory(mode_report["mode"], adaptive_allocation)
+            store_strategy_memory(final_mode_report["mode"], adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
 
             for op in conviction_ranked[:5]:
-                process_opportunity(op["symbol"], op, mode_report["mode"])
+                process_opportunity(op["symbol"], op, final_mode_report["mode"])
                 log_performance(op["symbol"], op["mode"], op["price"])
 
             perf_summary = evaluate_performance()
             return_summary = estimate_returns()
 
             dashboard = build_dashboard(
-                mode_report,
+                final_mode_report,
                 sector_scores,
                 conviction_ranked,
                 perf_summary,
@@ -139,7 +142,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("REGIME INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("REGIME SWITCH INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -161,7 +164,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — REGIME INTELLIGENCE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — REGIME SWITCH ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
