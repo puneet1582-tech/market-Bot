@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Strategy Memory Intelligence Integrated
+# Regime Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -34,6 +34,7 @@ from portfolio_lifecycle_engine import track_portfolio
 from portfolio_attribution_engine import calculate_portfolio_attribution
 from allocation_learning_engine import allocation_learning_adjustment
 from strategy_memory_engine import store_strategy_memory
+from market_regime_engine import estimate_market_regime
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -60,6 +61,9 @@ def run_engine():
             }
 
             mode_report = market_mode_engine.detect_mode(market_data)
+
+            # ---- Regime Probability ----
+            regime_prob = estimate_market_regime(market_data)
 
             opportunity_list = []
             capital_flow = detect_capital_flow()
@@ -106,7 +110,6 @@ def run_engine():
 
             track_portfolio(adaptive_allocation)
 
-            # ---- Strategy Memory Store ----
             store_strategy_memory(mode_report["mode"], adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
@@ -131,11 +134,12 @@ def run_engine():
             dashboard["persistent_stocks"] = persistent
             dashboard["portfolio_allocation"] = adaptive_allocation
             dashboard["portfolio_attribution"] = attribution
+            dashboard["regime_probability"] = regime_prob
 
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("STRATEGY MEMORY INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("REGIME INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -157,7 +161,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — STRATEGY MEMORY ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — REGIME INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
