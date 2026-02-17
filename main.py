@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Integrated Intelligence + Memory + Performance + Evaluation
+# Full Integrated Intelligence + Memory + Performance + Return Estimation
 # ================================
 
 from flask import Flask
@@ -15,6 +15,7 @@ from opportunity_report_engine import generate_report
 from decision_memory_engine import save_decision
 from performance_tracker_engine import log_performance
 from performance_evaluation_engine import evaluate_performance
+from return_estimation_engine import estimate_returns
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -63,9 +64,12 @@ def run_engine():
                 process_opportunity(op["symbol"], op, mode_report["mode"])
                 log_performance(op["symbol"], op["mode"], op["price"])
 
-            # ---- PERFORMANCE EVALUATION ----
+            # ---- PERFORMANCE + RETURN ESTIMATION ----
             perf_summary = evaluate_performance()
+            return_summary = estimate_returns()
+
             print("PERFORMANCE SUMMARY:", perf_summary, flush=True)
+            print("RETURN ESTIMATION:", return_summary, flush=True)
 
             time.sleep(300)
 
@@ -86,7 +90,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — PERFORMANCE EVALUATION ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — RETURN ESTIMATION ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
