@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Dynamic Cycle Optimizer Integrated
+# Watchlist Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -26,6 +26,7 @@ from nse_universe_loader import load_nse_universe
 from scanner_batch_engine import create_batches
 from scanner_load_balancer import batch_pause
 from cycle_optimizer_engine import optimized_cycle_interval
+from opportunity_watchlist_engine import update_watchlist
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -80,6 +81,9 @@ def run_engine():
 
             save_decision(report)
 
+            # ---- Watchlist Update ----
+            update_watchlist(ranked[:10])
+
             for op in ranked[:5]:
                 process_opportunity(op["symbol"], op, mode_report["mode"])
                 log_performance(op["symbol"], op["mode"], op["price"])
@@ -101,7 +105,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("DYNAMIC CYCLE OPTIMIZED SCANNER COMPLETE", flush=True)
+            print("WATCHLIST INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -123,7 +127,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — DYNAMIC CYCLE OPTIMIZER ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — WATCHLIST INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
