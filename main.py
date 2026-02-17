@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Intelligence Pipeline + Scalable Stock Universe
+# Sector-Mapped Intelligence Processing
 # ================================
 
 from flask import Flask
@@ -20,6 +20,7 @@ from dashboard_output_engine import build_dashboard
 from daily_report_engine import generate_daily_report
 from schedule_controller_engine import get_cycle_interval
 from stock_universe_engine import get_stock_universe
+from sector_universe_mapper import map_sector_universe
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -35,6 +36,7 @@ def run_engine():
     while True:
         try:
             stocks = get_stock_universe()
+            sector_map = map_sector_universe(stocks)
 
             market_data = {
                 "fii_flow": 500,
@@ -48,14 +50,17 @@ def run_engine():
 
             opportunity_list = []
 
-            for s in stocks:
-                result = engine.analyze_stock(s)
-                opportunity = calculate_opportunity(
-                    s,
-                    result.get("price", 0),
-                    mode_report["mode"]
-                )
-                opportunity_list.append(opportunity)
+            # ---- Sector-wise Processing ----
+            for sector, sector_stocks in sector_map.items():
+                for s in sector_stocks:
+                    result = engine.analyze_stock(s)
+                    opportunity = calculate_opportunity(
+                        s,
+                        result.get("price", 0),
+                        mode_report["mode"]
+                    )
+                    opportunity["sector"] = sector
+                    opportunity_list.append(opportunity)
 
             sector_scores = sector_strength(opportunity_list)
             ranked = rank_opportunities(opportunity_list)
@@ -81,7 +86,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("SECTOR-MAPPED INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = get_cycle_interval()
             time.sleep(interval)
@@ -103,7 +108,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — STOCK UNIVERSE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — SECTOR INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
