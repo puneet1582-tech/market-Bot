@@ -317,3 +317,13 @@ try:
 except Exception as _risk_err:
     print("PHASE-7 RISK GOVERNANCE ERROR:", _risk_err, flush=True)
 
+
+# ===============================
+# PHASE-7 CRISIS CAPITAL SHIELD
+# ===============================
+try:
+    from phase7_crisis_shield_activation import apply_crisis_shield
+    dashboard = apply_crisis_shield(dashboard)
+except Exception as _shield_err:
+    print("PHASE-7 CRISIS SHIELD ERROR:", _shield_err, flush=True)
+
