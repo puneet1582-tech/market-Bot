@@ -237,3 +237,13 @@ try:
 except Exception as _report_err:
     print("PHASE-4 REPORTING ERROR:", _report_err, flush=True)
 
+
+# ===============================
+# PHASE-4 DISPATCH ACTIVATION
+# ===============================
+try:
+    from phase4_dispatch_activation import apply_dispatch_layer
+    dashboard = apply_dispatch_layer(dashboard)
+except Exception as _dispatch_err:
+    print("PHASE-4 DISPATCH ERROR:", _dispatch_err, flush=True)
+
