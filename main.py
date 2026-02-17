@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Full Integrated Intelligence + Memory + Performance + Return Estimation
+# Full Integrated Intelligence + Adaptive Scoring
 # ================================
 
 from flask import Flask
@@ -49,7 +49,12 @@ def run_engine():
                 result = engine.analyze_stock(s)
                 print("INGESTION:", result, flush=True)
 
-                opportunity = calculate_opportunity(s, result.get("price", 0))
+                opportunity = calculate_opportunity(
+                    s,
+                    result.get("price", 0),
+                    mode_report["mode"]
+                )
+
                 opportunity_list.append(opportunity)
 
             sector_scores = sector_strength(opportunity_list)
@@ -64,7 +69,6 @@ def run_engine():
                 process_opportunity(op["symbol"], op, mode_report["mode"])
                 log_performance(op["symbol"], op["mode"], op["price"])
 
-            # ---- PERFORMANCE + RETURN ESTIMATION ----
             perf_summary = evaluate_performance()
             return_summary = estimate_returns()
 
@@ -90,7 +94,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — RETURN ESTIMATION ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — ADAPTIVE PIPELINE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
