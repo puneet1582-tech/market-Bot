@@ -277,3 +277,13 @@ try:
 except Exception as _fusion_err:
     print("PHASE-5 FUSION ERROR:", _fusion_err, flush=True)
 
+
+# ===============================
+# PHASE-5 OPPORTUNITY MAP ACTIVATION
+# ===============================
+try:
+    from phase5_opportunity_map_activation import apply_opportunity_map
+    dashboard = apply_opportunity_map(dashboard)
+except Exception as _omap_err:
+    print("PHASE-5 OPPORTUNITY MAP ERROR:", _omap_err, flush=True)
+
