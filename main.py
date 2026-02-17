@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Adaptive Allocation Learning Integrated
+# Strategy Memory Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -11,7 +11,6 @@ import brain_engine
 from opportunity_engine import calculate_opportunity
 from risk_weighted_ranking_engine import risk_weighted_rank
 from sector_intelligence_engine import sector_strength
-from opportunity_report_engine import generate_report
 from decision_memory_engine import save_decision
 from performance_tracker_engine import log_performance
 from performance_evaluation_engine import evaluate_performance
@@ -34,6 +33,7 @@ from portfolio_risk_balancer_engine import balance_portfolio
 from portfolio_lifecycle_engine import track_portfolio
 from portfolio_attribution_engine import calculate_portfolio_attribution
 from allocation_learning_engine import allocation_learning_adjustment
+from strategy_memory_engine import store_strategy_memory
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -99,13 +99,15 @@ def run_engine():
 
             attribution = calculate_portfolio_attribution()
 
-            # ---- Adaptive Allocation Learning ----
             adaptive_allocation = allocation_learning_adjustment(
                 balanced_allocation,
                 attribution
             )
 
             track_portfolio(adaptive_allocation)
+
+            # ---- Strategy Memory Store ----
+            store_strategy_memory(mode_report["mode"], adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
 
@@ -133,7 +135,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("ADAPTIVE PORTFOLIO INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("STRATEGY MEMORY INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -155,7 +157,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — ADAPTIVE PORTFOLIO INTELLIGENCE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — STRATEGY MEMORY ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
