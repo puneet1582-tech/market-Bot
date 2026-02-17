@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Sector Leadership Intelligence Integrated
+# Capital Flow Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -23,6 +23,7 @@ from stock_universe_engine import get_stock_universe
 from sector_universe_mapper import map_sector_universe
 from sector_rotation_engine import update_sector_rotation
 from sector_leadership_engine import detect_sector_leaders
+from capital_flow_engine import detect_capital_flow
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -66,8 +67,8 @@ def run_engine():
             sector_scores = sector_strength(opportunity_list)
             update_sector_rotation(sector_scores)
 
-            # ---- Sector Leaders ----
             sector_leaders = detect_sector_leaders(opportunity_list)
+            capital_flow = detect_capital_flow()
 
             ranked = rank_opportunities(opportunity_list)
             report = generate_report(ranked, sector_scores)
@@ -90,11 +91,12 @@ def run_engine():
             )
 
             dashboard["sector_leaders"] = sector_leaders
+            dashboard["capital_flow"] = capital_flow
 
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("SECTOR LEADERSHIP INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("CAPITAL FLOW INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = get_cycle_interval()
             time.sleep(interval)
@@ -116,7 +118,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — SECTOR LEADERSHIP ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — CAPITAL FLOW INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
