@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# NSE Dynamic Universe Integrated
+# Batch Scanner Integrated
 # ================================
 
 from flask import Flask
@@ -24,6 +24,7 @@ from sector_rotation_engine import update_sector_rotation
 from sector_leadership_engine import detect_sector_leaders
 from capital_flow_engine import detect_capital_flow
 from nse_universe_loader import load_nse_universe
+from scanner_batch_engine import create_batches
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -54,8 +55,9 @@ def run_engine():
             opportunity_list = []
             capital_flow = detect_capital_flow()
 
-            for sector, sector_stocks in sector_map.items():
-                for s in sector_stocks:
+            # ---- Batch Processing ----
+            for batch in create_batches(stocks, batch_size=25):
+                for s in batch:
                     result = engine.analyze_stock(s)
 
                     opportunity = calculate_opportunity(
@@ -64,7 +66,6 @@ def run_engine():
                         mode_report["mode"]
                     )
 
-                    opportunity["sector"] = sector
                     opportunity_list.append(opportunity)
 
             sector_scores = sector_strength(opportunity_list)
@@ -98,7 +99,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("NSE UNIVERSE INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("BATCH NSE SCANNER CYCLE COMPLETE", flush=True)
 
             interval = get_cycle_interval()
             time.sleep(interval)
@@ -120,7 +121,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — NSE UNIVERSE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — FULL NSE SCANNER ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
