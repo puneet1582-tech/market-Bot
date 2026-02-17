@@ -1,83 +1,59 @@
-# =====================================================
-# INSTITUTIONAL-GRADE NSE INGESTION ENGINE (SCALABLE)
-# Reliable, Retry Logic, Validation, Logging
-# =====================================================
+"""
+INSTITUTIONAL GRADE LIVE PRICE INGESTION ENGINE
+Multi-source resilient live NSE price fetch
+"""
 
-from nsepython import nse_eq
 from datetime import datetime
-import logging
 import time
-import sys
 
-# ---------------- CONFIG ----------------
-SYMBOLS = ["RELIANCE", "TCS", "HDFCBANK"]
-FETCH_INTERVAL = 60
-MAX_RETRY = 3
-RETRY_DELAY = 2
-# ----------------------------------------
+def _fetch_from_yfinance(symbol):
+    try:
+        import yfinance as yf
+        ticker = yf.Ticker(symbol)
+        data = ticker.history(period="1d", interval="1m")
+        if not data.empty:
+            latest = data.iloc[-1]
+            return float(latest["Close"]), int(latest["Volume"])
+    except Exception:
+        pass
+    return None, None
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler("ingestion.log")
-    ]
-)
+
+def _fetch_from_nse(symbol):
+    try:
+        from nsepython import nse_eq
+        q = nse_eq(symbol.replace(".NS", ""))
+        return float(q["priceInfo"]["lastPrice"]), int(q["securityWiseDP"]["deliveryQuantity"])
+    except Exception:
+        pass
+    return None, None
+
 
 def fetch_price(symbol):
-    """
-    Fetch live NSE price safely with retries
-    """
-    for attempt in range(MAX_RETRY):
-        try:
-            data = nse_eq(symbol)
-
-            if "priceInfo" not in data:
-                raise Exception("priceInfo missing")
-
-            price = float(data["priceInfo"]["lastPrice"])
-
-            volume = 0
-            if "securityWiseDP" in data and "quantityTraded" in data["securityWiseDP"]:
-                volume = int(data["securityWiseDP"]["quantityTraded"])
-
-            return price, volume
-
-        except Exception as e:
-            logging.warning(f"{symbol} retry {attempt+1}/{MAX_RETRY}: {e}")
-            time.sleep(RETRY_DELAY)
-
-    logging.error(f"{symbol} failed after retries")
-    return 0, 0
-
-
-def ingestion_cycle():
-    """
-    Continuous ingestion loop
-    """
-    logging.info("NSE Institutional Ingestion Engine Started")
-
-    while True:
-        cycle_time = datetime.now()
-
-        for symbol in SYMBOLS:
-            price, volume = fetch_price(symbol)
-
-            record = {
-                "symbol": f"{symbol}.NS",
+    for _ in range(2):
+        price, volume = _fetch_from_yfinance(symbol)
+        if price:
+            return {
+                "symbol": symbol,
                 "price": price,
-                "volume": volume,
-                "timestamp": str(cycle_time)
+                "volume": volume or 0,
+                "timestamp": str(datetime.utcnow())
             }
 
-            logging.info(f"INGESTION {record}")
+        price, volume = _fetch_from_nse(symbol)
+        if price:
+            return {
+                "symbol": symbol,
+                "price": price,
+                "volume": volume or 0,
+                "timestamp": str(datetime.utcnow())
+            }
 
-        time.sleep(FETCH_INTERVAL)
+        time.sleep(1)
 
-
-if __name__ == "__main__":
-    try:
-        ingestion_cycle()
-    except KeyboardInterrupt:
-        logging.info("Engine stopped manually")
+    return {
+        "symbol": symbol,
+        "price": 0,
+        "volume": 0,
+        "timestamp": str(datetime.utcnow())
+    }
