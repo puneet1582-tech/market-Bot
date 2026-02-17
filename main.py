@@ -357,3 +357,13 @@ try:
 except Exception as _meta_err:
     print("PHASE-9 META FEEDBACK ERROR:", _meta_err, flush=True)
 
+
+# ===============================
+# PHASE-9 SELF IMPROVEMENT ACTIVATION
+# ===============================
+try:
+    from phase9_self_improvement_activation import apply_self_improvement
+    dashboard = apply_self_improvement(dashboard)
+except Exception as _si_err:
+    print("PHASE-9 SELF IMPROVEMENT ERROR:", _si_err, flush=True)
+
