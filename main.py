@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Portfolio Attribution Integrated
+# Adaptive Allocation Learning Integrated
 # ================================
 
 from flask import Flask
@@ -33,6 +33,7 @@ from portfolio_allocation_engine import generate_portfolio_allocation
 from portfolio_risk_balancer_engine import balance_portfolio
 from portfolio_lifecycle_engine import track_portfolio
 from portfolio_attribution_engine import calculate_portfolio_attribution
+from allocation_learning_engine import allocation_learning_adjustment
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -96,10 +97,15 @@ def run_engine():
             allocation = generate_portfolio_allocation(conviction_ranked)
             balanced_allocation = balance_portfolio(allocation, sector_map)
 
-            track_portfolio(balanced_allocation)
-
-            # ---- Portfolio Attribution ----
             attribution = calculate_portfolio_attribution()
+
+            # ---- Adaptive Allocation Learning ----
+            adaptive_allocation = allocation_learning_adjustment(
+                balanced_allocation,
+                attribution
+            )
+
+            track_portfolio(adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
 
@@ -121,13 +127,13 @@ def run_engine():
             dashboard["sector_leaders"] = sector_leaders
             dashboard["capital_flow"] = capital_flow
             dashboard["persistent_stocks"] = persistent
-            dashboard["portfolio_allocation"] = balanced_allocation
+            dashboard["portfolio_allocation"] = adaptive_allocation
             dashboard["portfolio_attribution"] = attribution
 
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("PORTFOLIO ATTRIBUTION CYCLE COMPLETE", flush=True)
+            print("ADAPTIVE PORTFOLIO INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -149,7 +155,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — PORTFOLIO ATTRIBUTION ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — ADAPTIVE PORTFOLIO INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
