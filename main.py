@@ -347,3 +347,13 @@ try:
 except Exception as _cal_err:
     print("PHASE-8 WEIGHT CALIBRATION ERROR:", _cal_err, flush=True)
 
+
+# ===============================
+# PHASE-9 META INTELLIGENCE FEEDBACK
+# ===============================
+try:
+    from phase9_meta_feedback_activation import apply_meta_feedback
+    dashboard = apply_meta_feedback(dashboard)
+except Exception as _meta_err:
+    print("PHASE-9 META FEEDBACK ERROR:", _meta_err, flush=True)
+
