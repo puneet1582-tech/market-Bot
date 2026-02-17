@@ -2,7 +2,7 @@
 # ULTIMATE BRAIN — MAIN ENGINE
 # Production Integrated Version
 # ================================
-
+from opportunity_ranking_engine import rank_opportunities
 from flask import Flask
 import threading
 import time
@@ -37,10 +37,22 @@ def run_engine():
             mode_report = market_mode_engine.detect_mode(market_data)
             print("MARKET MODE:", mode_report, flush=True)
 
-            # ---- Stock Loop ----
-            for s in stocks:
-                result = engine.analyze_stock(s)
-                print("INGESTION:", result, flush=True)
+            opportunity_list = []
+
+for s in stocks:
+    result = engine.analyze_stock(s)
+    print("INGESTION:", result, flush=True)
+
+    opportunity = calculate_opportunity(s, result.get("price", 0))
+    opportunity_list.append(opportunity)
+
+# ---- Ranking ----
+ranked = rank_opportunities(opportunity_list)
+
+print("TOP OPPORTUNITIES:", ranked[:5], flush=True)
+
+for op in ranked[:5]:
+    process_opportunity(op["symbol"], op, mode_report["mode"])
 
                 # ---- Opportunity Intelligence ----
                 opportunity = calculate_opportunity(s, result.get("price", 0))
