@@ -193,3 +193,13 @@ try:
 except Exception as _phase2_err:
     print("PHASE-2 ACTIVATION ERROR:", _phase2_err, flush=True)
 
+
+# ===============================
+# PHASE-2 CLASSIFICATION ACTIVATION
+# ===============================
+try:
+    from phase2_classification_activation import apply_classification
+    dashboard = apply_classification(dashboard)
+except Exception as _class_err:
+    print("PHASE-2 CLASSIFICATION ERROR:", _class_err, flush=True)
+
