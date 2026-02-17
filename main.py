@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Persistence Intelligence Integrated
+# Conviction Intelligence Integrated
 # ================================
 
 from flask import Flask
@@ -28,6 +28,7 @@ from scanner_load_balancer import batch_pause
 from cycle_optimizer_engine import optimized_cycle_interval
 from opportunity_watchlist_engine import update_watchlist
 from opportunity_persistence_engine import detect_persistent_opportunities
+from conviction_score_engine import calculate_conviction_scores
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -67,7 +68,6 @@ def run_engine():
                         result.get("price", 0),
                         mode_report["mode"]
                     )
-
                     opportunity_list.append(opportunity)
 
                 batch_pause(2)
@@ -78,16 +78,21 @@ def run_engine():
             sector_leaders = detect_sector_leaders(opportunity_list)
 
             ranked = risk_weighted_rank(opportunity_list)
-            report = generate_report(ranked, sector_scores)
-
-            save_decision(report)
-
             update_watchlist(ranked[:10])
 
-            # ---- Persistence Detection ----
             persistent = detect_persistent_opportunities()
 
-            for op in ranked[:5]:
+            # ---- Conviction Scores ----
+            conviction_ranked = calculate_conviction_scores(
+                ranked,
+                sector_scores,
+                capital_flow,
+                persistent
+            )
+
+            save_decision(conviction_ranked[:10])
+
+            for op in conviction_ranked[:5]:
                 process_opportunity(op["symbol"], op, mode_report["mode"])
                 log_performance(op["symbol"], op["mode"], op["price"])
 
@@ -97,7 +102,7 @@ def run_engine():
             dashboard = build_dashboard(
                 mode_report,
                 sector_scores,
-                ranked,
+                conviction_ranked,
                 perf_summary,
                 return_summary
             )
@@ -109,7 +114,7 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("PERSISTENCE INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("CONVICTION INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -131,7 +136,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — PERSISTENCE INTELLIGENCE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — CONVICTION INTELLIGENCE ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
