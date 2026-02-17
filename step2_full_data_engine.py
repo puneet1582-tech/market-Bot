@@ -1,47 +1,14 @@
-import requests
-from datetime import datetime
+from nsepython import nse_quote
 
-class FullDataEngine:
+def get_live_price(symbol):
+    try:
+        data = nse_quote(symbol)
 
-    def __init__(self):
-        self.timestamp = datetime.now()
-        self.session = requests.Session()
-        self.headers = {
-            "User-Agent": "Mozilla/5.0",
-            "Accept-Language": "en-US,en;q=0.9"
-        }
+        price = float(data["priceInfo"]["lastPrice"])
+        volume = int(data["securityWiseDP"]["quantityTraded"])
 
-        # NSE cookie initialization
-        self.session.get("https://www.nseindia.com", headers=self.headers)
+        return price, volume
 
-    def fetch_full_dataset(self, symbol):
-
-        url = f"https://www.nseindia.com/api/quote-equity?symbol={symbol.replace('.NS','')}"
-
-        try:
-            r = self.session.get(url, headers=self.headers, timeout=10)
-
-            if r.status_code != 200:
-                return {
-                    "symbol": symbol,
-                    "price": 0,
-                    "volume": 0,
-                    "timestamp": str(self.timestamp)
-                }
-
-            data = r.json()
-
-            return {
-                "symbol": symbol,
-                "price": data["priceInfo"]["lastPrice"],
-                "volume": data["securityWiseDP"]["quantityTraded"],
-                "timestamp": str(self.timestamp)
-            }
-
-        except:
-            return {
-                "symbol": symbol,
-                "price": 0,
-                "volume": 0,
-                "timestamp": str(self.timestamp)
-            }
+    except Exception as e:
+        print(f"ERROR FETCHING {symbol}: {e}")
+        return 0, 0
