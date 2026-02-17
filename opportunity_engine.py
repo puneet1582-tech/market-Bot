@@ -1,12 +1,13 @@
-# INSTITUTIONAL OPPORTUNITY ENGINE
-# Quant-style scoring foundation
+# ADAPTIVE OPPORTUNITY ENGINE
+# Self-adjusting scoring foundation
 
 from datetime import datetime
+from performance_evaluation_engine import evaluate_performance
 
 def calculate_opportunity(symbol, price):
     score = 0
 
-    # ---- Price Strength ----
+    # ---- Base price strength ----
     if price >= 2500:
         score += 30
     elif price >= 1500:
@@ -14,22 +15,23 @@ def calculate_opportunity(symbol, price):
     elif price >= 500:
         score += 10
 
-    # ---- Liquidity Proxy (temporary logic) ----
-    if price % 5 == 0:
+    # ---- Momentum proxy ----
+    if int(price) % 5 == 0:
         score += 20
     else:
         score += 10
 
-    # ---- Trend Proxy ----
-    if price > 1000:
-        score += 20
-    else:
-        score += 10
-
-    # ---- Base Stability ----
+    # ---- Stability ----
     score += 20
 
-    # ---- Mode Decision ----
+    # ---- Adaptive learning adjustment ----
+    perf = evaluate_performance()
+    if perf["invest_signals"] > perf["trade_signals"]:
+        score += 5
+    else:
+        score -= 5
+
+    # ---- Final mode decision ----
     if score >= 75:
         mode = "INVEST"
     elif score >= 55:
