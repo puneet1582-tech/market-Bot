@@ -1,0 +1,92 @@
+[
+  {
+    "timestamp": "2026-02-17 18:49:37.574152",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 18:49:37.574352",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 18:49:37.574702",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 18:49:37.574965",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 18:49:37.575239",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 18:55:26.653413",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 18:55:26.653753",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 18:55:26.654081",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 18:55:26.654407",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 18:55:26.654767",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 18:59:26.089540",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 18:59:26.090086",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 18:59:26.090695",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 18:59:26.091238",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 18:59:26.091800",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  }
+]
