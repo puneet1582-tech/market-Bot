@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Risk-Weighted Intelligence Pipeline
+# NSE Dynamic Universe Integrated
 # ================================
 
 from flask import Flask
@@ -19,11 +19,11 @@ from return_estimation_engine import estimate_returns
 from dashboard_output_engine import build_dashboard
 from daily_report_engine import generate_daily_report
 from schedule_controller_engine import get_cycle_interval
-from stock_universe_engine import get_stock_universe
 from sector_universe_mapper import map_sector_universe
 from sector_rotation_engine import update_sector_rotation
 from sector_leadership_engine import detect_sector_leaders
 from capital_flow_engine import detect_capital_flow
+from nse_universe_loader import load_nse_universe
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -38,7 +38,7 @@ def run_engine():
 
     while True:
         try:
-            stocks = get_stock_universe()
+            stocks = load_nse_universe()
             sector_map = map_sector_universe(stocks)
 
             market_data = {
@@ -72,10 +72,9 @@ def run_engine():
 
             sector_leaders = detect_sector_leaders(opportunity_list)
 
-            # ---- Risk Weighted Ranking ----
             ranked = risk_weighted_rank(opportunity_list)
-
             report = generate_report(ranked, sector_scores)
+
             save_decision(report)
 
             for op in ranked[:5]:
@@ -99,6 +98,8 @@ def run_engine():
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
+            print("NSE UNIVERSE INTELLIGENCE CYCLE COMPLETE", flush=True)
+
             interval = get_cycle_interval()
             time.sleep(interval)
 
@@ -118,6 +119,9 @@ if __name__ == "__main__":
     ingestion_thread.daemon = True
     ingestion_thread.start()
 
-    send_telegram_alert("BOT STARTED — RISK WEIGHTED ENGINE ACTIVE")
+    try:
+        send_telegram_alert("MARKET BOT STARTED — NSE UNIVERSE ACTIVE")
+    except Exception as e:
+        print("Telegram startup alert failed:", e)
 
     app.run(host="0.0.0.0", port=10000)
