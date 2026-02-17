@@ -1,6 +1,6 @@
 # ================================
 # ULTIMATE BRAIN — MAIN ENGINE
-# Signal Confidence Intelligence Integrated
+# Decision Summary Integrated
 # ================================
 
 from flask import Flask
@@ -37,6 +37,7 @@ from strategy_memory_engine import store_strategy_memory
 from market_regime_engine import estimate_market_regime
 from strategy_regime_switch_engine import adjust_strategy_bias
 from signal_confidence_engine import calculate_signal_confidence
+from decision_summary_engine import generate_decision_summary
 
 from engines.telegram_alert_engine import send_telegram_alert
 from engines.opportunity_trigger_engine import process_opportunity
@@ -99,7 +100,6 @@ def run_engine():
                 persistent
             )
 
-            # ---- Signal Confidence ----
             conviction_ranked = calculate_signal_confidence(
                 conviction_ranked,
                 persistent,
@@ -118,6 +118,9 @@ def run_engine():
 
             track_portfolio(adaptive_allocation)
             store_strategy_memory(final_mode_report["mode"], adaptive_allocation)
+
+            # ---- Decision Summary ----
+            decision_summary = generate_decision_summary(conviction_ranked, adaptive_allocation)
 
             save_decision(conviction_ranked[:10])
 
@@ -142,11 +145,12 @@ def run_engine():
             dashboard["portfolio_allocation"] = adaptive_allocation
             dashboard["portfolio_attribution"] = attribution
             dashboard["regime_probability"] = regime_prob
+            dashboard["decision_summary"] = decision_summary
 
             daily_report = generate_daily_report(dashboard)
             send_telegram_alert(daily_report)
 
-            print("SIGNAL CONFIDENCE INTELLIGENCE CYCLE COMPLETE", flush=True)
+            print("DECISION SUMMARY INTELLIGENCE CYCLE COMPLETE", flush=True)
 
             interval = optimized_cycle_interval(len(stocks))
             time.sleep(interval)
@@ -168,7 +172,7 @@ if __name__ == "__main__":
     ingestion_thread.start()
 
     try:
-        send_telegram_alert("MARKET BOT STARTED — SIGNAL CONFIDENCE ACTIVE")
+        send_telegram_alert("MARKET BOT STARTED — DECISION SUMMARY ACTIVE")
     except Exception as e:
         print("Telegram startup alert failed:", e)
 
