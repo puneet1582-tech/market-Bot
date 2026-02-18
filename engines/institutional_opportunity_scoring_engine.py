@@ -1,69 +1,55 @@
 """
-Ultimate Brain — Institutional Opportunity Scoring Engine
-Combines price momentum, liquidity, and fundamental growth scores
-to produce institutional opportunity ranking.
+INSTITUTIONAL OPPORTUNITY SCORING ENGINE
+Top-20 Daily Opportunity Detection Core
+Production-grade composite scoring layer
 """
 
 import pandas as pd
-import os
-from datetime import datetime
+import logging
 
-PRICE_DIR = "data/price_history"
-FUNDAMENTAL_FILE = "data/fundamental_growth_scores.csv"
-OUTPUT_FILE = "data/institutional_opportunity_scores.csv"
+logging.basicConfig(level=logging.INFO)
 
-
-def compute_price_score(df):
-    try:
-        if len(df) < 60:
-            return 0
-
-        recent = df["Close"].iloc[-1]
-        past = df["Close"].iloc[-60]
-
-        return ((recent - past) / max(abs(past), 1)) * 100
-    except Exception:
-        return 0
+UNIVERSE_FILE = "data/nse_live_universe.csv"
+PRICE_FILE = "data/price_history.csv"
+FUNDAMENTALS_FILE = "data/fundamentals_master.csv"
+OUTPUT_FILE = "data/top20_opportunities.csv"
 
 
-def run_scoring():
-    fundamentals = pd.read_csv(FUNDAMENTAL_FILE)
-    scores = []
+def load_data():
+    universe = pd.read_csv(UNIVERSE_FILE)
+    prices = pd.read_csv(PRICE_FILE)
+    fundamentals = pd.read_csv(FUNDAMENTALS_FILE)
+    return universe, prices, fundamentals
 
-    for f in os.listdir(PRICE_DIR):
-        if not f.endswith(".csv"):
-            continue
 
-        symbol = f.replace(".csv", "")
-        price_df = pd.read_csv(os.path.join(PRICE_DIR, f))
+def compute_scores(universe, prices, fundamentals):
 
-        price_score = compute_price_score(price_df)
+    df = universe.merge(fundamentals, on="symbol", how="left")
 
-        fund = fundamentals[fundamentals["symbol"] == symbol]
-        if fund.empty:
-            continue
+    # Example composite institutional score (expandable)
+    df["score"] = (
+        df["roe"].fillna(0) * 0.25 +
+        df["roce"].fillna(0) * 0.25 +
+        df["net_profit"].fillna(0) * 0.25 +
+        (1 / (df["debt"].replace(0, 1))) * 0.25
+    )
 
-        rev = fund.iloc[0]["revenue_growth_3y"]
-        prof = fund.iloc[0]["profit_growth_3y"]
+    df = df.sort_values("score", ascending=False)
+    return df.head(20)
 
-        total_score = (price_score * 0.4) + (rev * 0.3) + (prof * 0.3)
 
-        scores.append({
-            "symbol": symbol,
-            "price_momentum_score": round(price_score, 2),
-            "revenue_growth_3y": rev,
-            "profit_growth_3y": prof,
-            "institutional_score": round(total_score, 2),
-            "timestamp": str(datetime.utcnow())
-        })
+def run_institutional_scoring():
 
-    if scores:
-        pd.DataFrame(scores).sort_values(
-            by="institutional_score", ascending=False
-        ).to_csv(OUTPUT_FILE, index=False)
+    logging.info("Loading master datasets")
+    universe, prices, fundamentals = load_data()
 
-    return len(scores)
+    logging.info("Computing institutional composite scores")
+    top20 = compute_scores(universe, prices, fundamentals)
+
+    top20.to_csv(OUTPUT_FILE, index=False)
+
+    logging.info("TOP-20 OPPORTUNITY LIST GENERATED")
 
 
 if __name__ == "__main__":
-    print("Scored:", run_scoring())
+    run_institutional_scoring()
