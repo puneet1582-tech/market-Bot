@@ -88,5 +88,365 @@
     "symbol": "RELIANCE.NS",
     "decision_mode": "DEFENSIVE",
     "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:10:52.505239",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:10:52.505672",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:10:52.506068",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:10:52.506482",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:10:52.506877",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.781049",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.781481",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.781890",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.782308",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.782761",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.865377",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.865828",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.866258",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.866709",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.867154",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.937888",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.938368",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.938884",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.939354",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.939867",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.065131",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.065659",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.066168",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.066707",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.067229",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.991942",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.992525",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.993066",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.993611",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.994172",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.885230",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.885829",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.886374",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.886958",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.887537",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.833068",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.833682",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.834271",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.834879",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.835480",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.718540",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.719140",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.719793",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.720413",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.721052",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.931220",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.931988",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.932757",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.933494",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.934231",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.244024",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.245001",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.245980",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.247268",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.248529",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.254084",
+    "symbol": "TCS.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2719.8
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.254886",
+    "symbol": "LT.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 4275.8
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.255674",
+    "symbol": "HINDUNILVR.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2312.9
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.256581",
+    "symbol": "BHARTIARTL.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 2021.6
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.257373",
+    "symbol": "RELIANCE.NS",
+    "decision_mode": "DEFENSIVE",
+    "price": 1424.2
   }
 ]

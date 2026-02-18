@@ -22,5 +22,101 @@
       "IT": 25.0,
       "BANKING": 8.0
     }
+  },
+  {
+    "timestamp": "2026-02-17 22:10:52.502774",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.777815",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.861835",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.933782",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.060574",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.986810",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.879867",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.827285",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.712126",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.923581",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.229363",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.246526",
+    "sector_scores": {
+      "ENERGY": 8.0,
+      "IT": 25.0,
+      "BANKING": 8.0
+    }
   }
 ]
