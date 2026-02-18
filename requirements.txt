@@ -5,3 +5,4 @@ nsepython
 nsepython
 yfinance
 cachetools
+pandas
