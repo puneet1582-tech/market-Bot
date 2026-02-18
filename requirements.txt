@@ -8,3 +8,4 @@ cachetools
 pandas
 newsapi-python
 vaderSentiment
+concurrent-log-handler
