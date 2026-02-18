@@ -1,1 +1,1 @@
-worker: python3 production_autorun.py
+worker: python3 unified_intelligence_pipeline.py
