@@ -1,0 +1,7 @@
+services:
+  - type: cron
+    name: ultimate-brain-daily-run
+    schedule: "0 3 * * *"
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 daily_autoplay.py"
