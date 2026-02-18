@@ -1,130 +1,52 @@
-import yfinance as yf
-from mode_brain import decide_mode, market_conditions
-from stock_selector import select_stocks
-from fundamental_brain import fundamental_data
+"""
+MASTER BRAIN — CORE INTELLIGENCE ORCHESTRATOR
+Institutional Grade Central Execution Brain
+"""
 
-mode = decide_mode(market_conditions)
-stocks = select_stocks(mode)
+import logging
+from datetime import datetime
 
-print("📅 WEEKLY MARKET SUMMARY")
-print("")
+# Core Intelligence Engines
+from engines.global_intelligence_integration import run_global_intelligence
+from engines.intelligence_orchestrator_engine import run_intelligence_orchestrator
+from engines.unified_daily_decision_engine import run_unified_daily_decision
+from engines.master_brain_controller_engine import run_master_brain_controller
+from engines.autonomous_daily_runner import run_autonomous_daily_cycle
 
-# ---------------- MARKET MOOD ----------------
-print("Market Mood (इस हफ्ते):")
-if market_conditions["global_trend"] == "NEGATIVE" and market_conditions["volatility"] == "HIGH":
-    mood = "Weak / Fear"
-elif market_conditions["global_trend"] == "POSITIVE":
-    mood = "Positive / Confidence"
-else:
-    mood = "Neutral"
+logging.basicConfig(
+    filename="logs/master_brain.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
-print(f"- Overall Mood: {mood}")
-print(f"- Active Mode: {mode}")
+def run_master_brain():
 
-# ---------------- WEEKLY CHANGE (NIFTY) ----------------
-try:
-    nifty = yf.Ticker("^NSEI")
-    data = nifty.history(period="7d")
-    start = data["Close"].iloc[0]
-    end = data["Close"].iloc[-1]
-    weekly_change = round(((end - start) / start) * 100, 2)
-    print("")
-    print("NIFTY Weekly Performance:")
-    print(f"- Weekly Change: {weekly_change}%")
-except:
-    print("- Weekly index data not available")
+    logging.info("===================================================")
+    logging.info("MASTER BRAIN EXECUTION STARTED")
+    logging.info(f"Execution Time: {datetime.utcnow()} UTC")
 
-# ---------------- SECTOR SUMMARY ----------------
-print("")
-print("Sector Summary:")
-sector_count = {}
-for stock in stocks:
-    data = fundamental_data.get(stock, {})
-    sector = data.get("sector", "NA")
-    sector_count[sector] = sector_count.get(sector, 0) + 1
-
-for sector, count in sector_count.items():
-    print(f"- {sector}: {count} stocks")
-
-# ---------------- BUY SIGNAL COUNT ----------------
-def score_stock(data):
-    score = 0
-    if data.get("risk") == "LOW":
-        score += 3
-    if str(data.get("debt")).startswith("0"):
-        score += 2
-    if "Cr" in str(data.get("profit")):
-        score += 1
-    return score
-
-def get_trend(symbol):
     try:
-        df = yf.Ticker(symbol + ".NS").history(period="20d")
-        close = df["Close"]
-        if close.iloc[-1] > close.mean():
-            return "Uptrend"
-        elif close.iloc[-1] < close.mean():
-            return "Downtrend"
-        else:
-            return "Sideways"
-    except:
-        return "NA"
 
-def get_rsi(symbol):
-    try:
-        df = yf.Ticker(symbol + ".NS").history(period="20d")
-        delta = df["Close"].diff()
-        gain = delta.clip(lower=0)
-        loss = -delta.clip(upper=0)
+        logging.info("STEP 1: Global Intelligence Integration")
+        run_global_intelligence()
 
-        avg_gain = gain.rolling(14).mean()
-        avg_loss = loss.rolling(14).mean()
+        logging.info("STEP 2: Intelligence Orchestrator Execution")
+        run_intelligence_orchestrator()
 
-        rs = avg_gain / avg_loss
-        rsi = 100 - (100 / (1 + rs))
+        logging.info("STEP 3: Unified Daily Decision Engine")
+        run_unified_daily_decision()
 
-        val = round(rsi.iloc[-1], 2)
-        if val > 70:
-            return "Overbought"
-        elif val < 30:
-            return "Oversold"
-        else:
-            return "Neutral"
-    except:
-        return "NA"
+        logging.info("STEP 4: Master Brain Controller")
+        run_master_brain_controller()
 
-def decide_buy(data, trend, rsi_status):
-    if data.get("risk") == "LOW" and str(data.get("debt")).startswith("0") and trend == "Uptrend" and rsi_status == "Neutral":
-        return True
-    return False
+        logging.info("STEP 5: Autonomous Daily Execution Cycle")
+        run_autonomous_daily_cycle()
 
-buy_count = 0
-for stock in stocks:
-    data = fundamental_data.get(stock, {})
-    trend = get_trend(stock)
-    rsi_status = get_rsi(stock)
-    if decide_buy(data, trend, rsi_status):
-        buy_count += 1
+        logging.info("MASTER BRAIN EXECUTION COMPLETED SUCCESSFULLY")
 
-print("")
-print("Action Summary:")
-print(f"- Total BUY signals this week: {buy_count}")
+    except Exception as e:
+        logging.exception(f"MASTER BRAIN FAILURE: {str(e)}")
 
-# ---------------- TOP STOCKS ----------------
-print("")
-print("Top Strong Stocks (Fundamental based):")
-scored = []
-for stock in stocks:
-    data = fundamental_data.get(stock, {})
-    scored.append((stock, score_stock(data)))
 
-scored.sort(key=lambda x: x[1], reverse=True)
-top_5 = scored[:5]
-
-i = 1
-for stock, score in top_5:
-    print(f"{i}. {stock} (Score: {score})")
-    i += 1
-
-print("")
-print("Note: यह weekly summary केवल learning और analysis के लिए है।")
+if __name__ == "__main__":
+    run_master_brain()
