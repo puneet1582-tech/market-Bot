@@ -9,3 +9,4 @@ pandas
 newsapi-python
 vaderSentiment
 concurrent-log-handler
+numpy
