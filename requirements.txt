@@ -6,3 +6,5 @@ nsepython
 yfinance
 cachetools
 pandas
+newsapi-python
+vaderSentiment
