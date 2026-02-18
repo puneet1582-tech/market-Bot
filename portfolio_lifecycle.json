@@ -1,0 +1,542 @@
+[
+  {
+    "timestamp": "2026-02-17 22:10:52.503979",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 19.79
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 19.79
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.88
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.88
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 6.34
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 6.34
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 6.34
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 6.34
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 6.34
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 0.0
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:15:57.779343",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 21.87
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 21.87
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 13.12
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 13.12
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 7.0
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 7.0
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 7.0
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 7.0
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 7.0
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 0.0
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:21:02.863466",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.32
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:26:07.935780",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:31:13.062670",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:36:17.989219",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:41:22.882179",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:46:27.829880",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:51:32.714858",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 22:56:37.926303",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 23:01:43.237917",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-02-17 23:06:48.249725",
+    "portfolio": [
+      {
+        "symbol": "TCS.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "LT.NS",
+        "allocation_percent": 16.71
+      },
+      {
+        "symbol": "HINDUNILVR.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "BHARTIARTL.NS",
+        "allocation_percent": 11.93
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "INFY.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "SBIN.NS",
+        "allocation_percent": 8.59
+      },
+      {
+        "symbol": "ITC.NS",
+        "allocation_percent": 4.78
+      }
+    ]
+  }
+]

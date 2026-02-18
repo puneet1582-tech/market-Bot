@@ -1,190 +1,14 @@
 [
   {
-    "timestamp": "2026-02-17 18:49:37.573841",
-    "report": {
-      "timestamp": "2026-02-17 18:49:37.573831",
-      "top_opportunities": [
-        {
-          "symbol": "TCS.NS",
-          "price": 2719.8,
-          "score": 25.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:49:34.976302",
-          "sector": "IT",
-          "risk_adjusted_score": 22.5
-        },
-        {
-          "symbol": "LT.NS",
-          "price": 4275.8,
-          "score": 25.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:49:37.287060",
-          "sector": "INFRA",
-          "risk_adjusted_score": 22.5
-        },
-        {
-          "symbol": "HINDUNILVR.NS",
-          "price": 2312.9,
-          "score": 15.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:49:36.616809",
-          "sector": "FMCG",
-          "risk_adjusted_score": 13.5
-        },
-        {
-          "symbol": "BHARTIARTL.NS",
-          "price": 2021.6,
-          "score": 15.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:49:37.573228",
-          "sector": "TELECOM",
-          "risk_adjusted_score": 13.5
-        },
-        {
-          "symbol": "RELIANCE.NS",
-          "price": 1424.2,
-          "score": 8.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:49:34.642228",
-          "sector": "ENERGY",
-          "risk_adjusted_score": 8.0
-        }
-      ],
-      "sector_strength": {
-        "ENERGY": 8.0,
-        "IT": 25.0,
-        "BANKING": 8.0
-      }
-    }
-  },
-  {
-    "timestamp": "2026-02-17 18:55:26.652946",
-    "report": {
-      "timestamp": "2026-02-17 18:55:26.652936",
-      "top_opportunities": [
-        {
-          "symbol": "TCS.NS",
-          "price": 2719.8,
-          "score": 25.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:55:24.778946",
-          "sector": "IT",
-          "risk_adjusted_score": 22.5
-        },
-        {
-          "symbol": "LT.NS",
-          "price": 4275.8,
-          "score": 25.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:55:26.456052",
-          "sector": "INFRA",
-          "risk_adjusted_score": 22.5
-        },
-        {
-          "symbol": "HINDUNILVR.NS",
-          "price": 2312.9,
-          "score": 15.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:55:25.891916",
-          "sector": "FMCG",
-          "risk_adjusted_score": 13.5
-        },
-        {
-          "symbol": "BHARTIARTL.NS",
-          "price": 2021.6,
-          "score": 15.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:55:26.652494",
-          "sector": "TELECOM",
-          "risk_adjusted_score": 13.5
-        },
-        {
-          "symbol": "RELIANCE.NS",
-          "price": 1424.2,
-          "score": 8.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:55:24.519650",
-          "sector": "ENERGY",
-          "risk_adjusted_score": 8.0
-        }
-      ],
-      "sector_strength": {
-        "ENERGY": 8.0,
-        "IT": 25.0,
-        "BANKING": 8.0
-      }
-    }
-  },
-  {
-    "timestamp": "2026-02-17 18:59:26.088314",
-    "report": {
-      "timestamp": "2026-02-17 18:59:26.088303",
-      "top_opportunities": [
-        {
-          "symbol": "TCS.NS",
-          "price": 2719.8,
-          "score": 25.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:59:24.657184",
-          "sector": "IT",
-          "risk_adjusted_score": 22.5
-        },
-        {
-          "symbol": "LT.NS",
-          "price": 4275.8,
-          "score": 25.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:59:25.925225",
-          "sector": "INFRA",
-          "risk_adjusted_score": 22.5
-        },
-        {
-          "symbol": "HINDUNILVR.NS",
-          "price": 2312.9,
-          "score": 15.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:59:25.521986",
-          "sector": "FMCG",
-          "risk_adjusted_score": 13.5
-        },
-        {
-          "symbol": "BHARTIARTL.NS",
-          "price": 2021.6,
-          "score": 15.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:59:26.087627",
-          "sector": "TELECOM",
-          "risk_adjusted_score": 13.5
-        },
-        {
-          "symbol": "RELIANCE.NS",
-          "price": 1424.2,
-          "score": 8.0,
-          "mode": "DEFENSIVE",
-          "timestamp": "2026-02-17 18:59:24.471850",
-          "sector": "ENERGY",
-          "risk_adjusted_score": 8.0
-        }
-      ],
-      "sector_strength": {
-        "ENERGY": 8.0,
-        "IT": 25.0,
-        "BANKING": 8.0
-      }
-    }
-  },
-  {
-    "timestamp": "2026-02-17 22:10:52.504578",
-    "report": [
+    "timestamp": "2026-02-17 22:10:52.503393",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:48.789887",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 15.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -192,9 +16,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:49.739016",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 15.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -202,9 +24,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:50.315743",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 15.0,
-        "confidence_percent": 9.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -212,9 +32,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:50.502648",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 15.0,
-        "confidence_percent": 9.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -222,9 +40,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:48.547982",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -232,9 +48,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:48.997464",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -242,9 +56,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:49.275062",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -252,9 +64,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:49.521477",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -262,9 +72,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:50.148512",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -272,24 +80,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:10:49.978682",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 0.0,
-        "confidence_percent": 0.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:15:57.780148",
-    "report": [
+    "timestamp": "2026-02-17 22:15:57.778548",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:54.027670",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 15.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -297,9 +101,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:55.010892",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 15.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -307,9 +109,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:55.603205",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 15.0,
-        "confidence_percent": 9.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -317,9 +117,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:55.777656",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 15.0,
-        "confidence_percent": 9.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -327,9 +125,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:53.837338",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -337,9 +133,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:54.329324",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -347,9 +141,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:54.579065",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -357,9 +149,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:54.775462",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -367,9 +157,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:55.436769",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 8.0,
-        "confidence_percent": 4.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -377,24 +165,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:15:55.266987",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 0.0,
-        "confidence_percent": 0.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:21:02.864352",
-    "report": [
+    "timestamp": "2026-02-17 22:21:02.862500",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:20:59.173137",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -402,9 +186,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:21:00.039193",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -412,9 +194,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:21:00.658777",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -422,9 +202,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:21:00.861714",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -432,9 +210,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:20:58.973532",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -442,9 +218,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:20:59.358241",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -452,9 +226,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:20:59.602324",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -462,9 +234,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:20:59.776035",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -472,9 +242,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:21:00.497190",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -482,24 +250,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:21:00.272485",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:26:07.936774",
-    "report": [
+    "timestamp": "2026-02-17 22:26:07.934596",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:04.252485",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -507,9 +271,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:05.118110",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -517,9 +279,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:05.715859",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -527,9 +287,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:05.933604",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -537,9 +295,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:04.002721",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -547,9 +303,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:04.510735",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -557,9 +311,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:04.717083",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -567,9 +319,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:04.935644",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -577,9 +327,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:05.501013",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -587,24 +335,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:26:05.316396",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:31:13.063781",
-    "report": [
+    "timestamp": "2026-02-17 22:31:13.061248",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:09.384054",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -612,9 +356,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:10.233663",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -622,9 +364,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:10.863588",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -632,9 +372,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:11.060461",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -642,9 +380,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:09.172373",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -652,9 +388,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:09.646116",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -662,9 +396,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:09.823281",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -672,9 +404,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:10.053337",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -682,9 +412,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:10.689887",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -692,24 +420,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:31:10.494619",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:36:17.990466",
-    "report": [
+    "timestamp": "2026-02-17 22:36:17.987599",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:14.365022",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -717,9 +441,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:15.182944",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -727,9 +449,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:15.806228",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -737,9 +457,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:15.986628",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -747,9 +465,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:14.119323",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -757,9 +473,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:14.543177",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -767,9 +481,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:14.794791",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -777,9 +489,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:14.982148",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -787,9 +497,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:15.590083",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -797,24 +505,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:36:15.421503",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:41:22.883615",
-    "report": [
+    "timestamp": "2026-02-17 22:41:22.880651",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:19.341598",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -822,9 +526,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:20.096904",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -832,9 +534,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:20.702504",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -842,9 +542,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:20.879706",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -852,9 +550,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:19.111048",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -862,9 +558,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:19.507749",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -872,9 +566,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:19.751117",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -882,9 +574,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:19.915129",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -892,9 +582,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:20.527319",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -902,24 +590,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:41:20.333783",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:46:27.831290",
-    "report": [
+    "timestamp": "2026-02-17 22:46:27.828038",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:24.173825",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -927,9 +611,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:25.056527",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -937,9 +619,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:25.652393",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -947,9 +627,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:25.827162",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -957,9 +635,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:23.898948",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -967,9 +643,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:24.399841",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -977,9 +651,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:24.652508",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -987,9 +659,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:24.833529",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -997,9 +667,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:25.484252",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -1007,24 +675,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:46:25.309946",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:51:32.716585",
-    "report": [
+    "timestamp": "2026-02-17 22:51:32.712923",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:29.114376",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -1032,9 +696,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:29.945723",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -1042,9 +704,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:30.529096",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -1052,9 +712,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:30.711996",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -1062,9 +720,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:28.886141",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -1072,9 +728,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:29.290006",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -1082,9 +736,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:29.515356",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -1092,9 +744,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:29.685231",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -1102,9 +752,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:30.362484",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -1112,24 +760,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:51:30.188527",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 22:56:37.928125",
-    "report": [
+    "timestamp": "2026-02-17 22:56:37.924267",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:34.157390",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -1137,9 +781,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:35.052641",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -1147,9 +789,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:35.719015",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -1157,9 +797,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:35.923428",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -1167,9 +805,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:33.920597",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -1177,9 +813,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:34.400852",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -1187,9 +821,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:34.655058",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -1197,9 +829,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:34.851953",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -1207,9 +837,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:35.488291",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -1217,24 +845,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 22:56:35.287475",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 23:01:43.240747",
-    "report": [
+    "timestamp": "2026-02-17 23:01:43.231180",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:39.451622",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -1242,9 +866,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:40.382864",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -1252,9 +874,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:41.028637",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -1262,9 +882,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:41.229234",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -1272,9 +890,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:39.222488",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -1282,9 +898,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:39.636194",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -1292,9 +906,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:39.878262",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -1302,9 +914,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:40.105715",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -1312,9 +922,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:40.861081",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -1322,24 +930,20 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:01:40.650855",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   },
   {
-    "timestamp": "2026-02-17 23:06:48.251691",
-    "report": [
+    "timestamp": "2026-02-17 23:06:48.247372",
+    "top_opportunities": [
       {
         "symbol": "TCS.NS",
         "price": 2719.8,
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:44.624629",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "LT.NS",
@@ -1347,9 +951,7 @@
         "score": 25.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:45.534146",
-        "risk_adjusted_score": 22.5,
-        "conviction_score": 35.0,
-        "confidence_percent": 36.0
+        "risk_adjusted_score": 22.5
       },
       {
         "symbol": "HINDUNILVR.NS",
@@ -1357,9 +959,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:46.076314",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "BHARTIARTL.NS",
@@ -1367,9 +967,7 @@
         "score": 15.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:46.246306",
-        "risk_adjusted_score": 13.5,
-        "conviction_score": 25.0,
-        "confidence_percent": 30.0
+        "risk_adjusted_score": 13.5
       },
       {
         "symbol": "RELIANCE.NS",
@@ -1377,9 +975,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:44.388333",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "HDFCBANK.NS",
@@ -1387,9 +983,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:44.824561",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "INFY.NS",
@@ -1397,9 +991,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:45.083737",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ICICIBANK.NS",
@@ -1407,9 +999,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:45.274181",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "SBIN.NS",
@@ -1417,9 +1007,7 @@
         "score": 8.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:45.906458",
-        "risk_adjusted_score": 8.0,
-        "conviction_score": 18.0,
-        "confidence_percent": 25.8
+        "risk_adjusted_score": 8.0
       },
       {
         "symbol": "ITC.NS",
@@ -1427,9 +1015,7 @@
         "score": 0.0,
         "mode": "DEFENSIVE",
         "timestamp": "2026-02-17 23:06:45.736041",
-        "risk_adjusted_score": 0.0,
-        "conviction_score": 10.0,
-        "confidence_percent": 21.0
+        "risk_adjusted_score": 0.0
       }
     ]
   }
