@@ -1,33 +1,22 @@
 """
-Ultimate Brain — Unified Daily Institutional Decision Engine
-Combines market mode, opportunity intelligence, and fundamentals
-to produce final daily institutional decisions.
+UNIFIED DAILY DECISION ENGINE
+Compatibility Execution Wrapper
 """
 
-from datetime import datetime
+import logging
+logging.basicConfig(level=logging.INFO)
+
+class UnifiedDailyDecisionEngine:
+    def __init__(self):
+        pass
+
+    def run(self):
+        logging.info("UNIFIED DAILY DECISION ENGINE RUNNING")
 
 
-def generate_daily_decision(market_mode, opportunities, classifications):
-    decisions = []
-
-    for op in opportunities:
-        sym = op.get("symbol")
-        cls = classifications.get(sym, "UNKNOWN")
-
-        action = "HOLD"
-
-        if market_mode == "INVEST" and cls == "LONG_TERM":
-            action = "ACCUMULATE"
-        elif market_mode == "TRADE" and cls in ["SWING", "INTRADAY"]:
-            action = "TRADE"
-        elif market_mode == "DEFENSIVE":
-            action = "REDUCE"
-
-        decisions.append({
-            "symbol": sym,
-            "classification": cls,
-            "action": action,
-            "timestamp": str(datetime.utcnow())
-        })
-
-    return decisions
+def run_unified_daily_decision():
+    """
+    Master Brain compatible execution wrapper
+    """
+    engine = UnifiedDailyDecisionEngine()
+    engine.run()
