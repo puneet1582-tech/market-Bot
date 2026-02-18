@@ -40,6 +40,18 @@ for m in missing:
     print(f"  - {m}")
 
 print("\n------------------------------")
+print("ENGINE DIRECTORY CHECK")
+print("------------------------------")
+
+engine_dirs = ["data", "logs", "output"]
+
+for d in engine_dirs:
+    if os.path.isdir(d):
+        print(f"[OK] Directory exists: {d}")
+    else:
+        print(f"[CREATE NEEDED] Directory missing: {d}")
+
+print("\n------------------------------")
 print("NEXT CORE BUILD STATUS")
 print("------------------------------")
 
