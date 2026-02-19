@@ -1,7 +1,6 @@
 """
 NSE SECTOR INDEX HARVESTER ENGINE
 Institutional Layer-1 Sector Classification
-Fetches NSE Sectoral Index Constituents
 """
 
 import os
@@ -9,6 +8,7 @@ import requests
 import pandas as pd
 import logging
 from datetime import datetime
+from io import StringIO
 
 logging.basicConfig(level=logging.INFO)
 
@@ -20,7 +20,6 @@ SECTOR_INDEX_URLS = {
     "PHARMA": "https://archives.nseindia.com/content/indices/ind_niftypharmalist.csv",
     "AUTO": "https://archives.nseindia.com/content/indices/ind_niftyautolist.csv",
     "FMCG": "https://archives.nseindia.com/content/indices/ind_niftyfmcglist.csv",
-    "FINANCIAL_SERVICES": "https://archives.nseindia.com/content/indices/ind_niftyfinancialserviceslist.csv",
     "METAL": "https://archives.nseindia.com/content/indices/ind_niftymetallist.csv",
     "REALTY": "https://archives.nseindia.com/content/indices/ind_niftyrealtylist.csv",
     "MEDIA": "https://archives.nseindia.com/content/indices/ind_niftymedialist.csv",
@@ -43,15 +42,20 @@ def fetch_sector_index(sector, url):
         response = requests.get(url, headers=HEADERS, timeout=10)
         response.raise_for_status()
 
-        df = pd.read_csv(pd.compat.StringIO(response.text))
+        df = pd.read_csv(StringIO(response.text))
         df.columns = df.columns.str.strip()
 
-        if "Symbol" in df.columns:
-            symbols = df["Symbol"].tolist()
-        elif "SYMBOL" in df.columns:
-            symbols = df["SYMBOL"].tolist()
-        else:
+        symbol_column = None
+        for col in df.columns:
+            if col.upper() == "SYMBOL":
+                symbol_column = col
+                break
+
+        if symbol_column is None:
+            logging.warning(f"SYMBOL column not found for {sector}")
             return pd.DataFrame()
+
+        symbols = df[symbol_column].dropna().unique().tolist()
 
         result = pd.DataFrame({
             "symbol": symbols,
