@@ -1,7 +1,7 @@
 """
 INSTITUTIONAL TOP-20 OPPORTUNITY ENGINE
 Momentum + Sector Rotation Based
-Phase-2 Operational Core
+Phase-2 Operational Core (Strict Typed Safe)
 """
 
 import pandas as pd
@@ -35,17 +35,15 @@ def build_top20():
 
     momentum = compute_momentum(prices)
 
-    # Merge sector
     df = momentum.merge(sector_auth[["symbol","sector"]], on="symbol", how="left")
-
-    # Merge sector strength
     df = df.merge(sector_flow[["sector","price_change_pct"]], on="sector", how="left")
 
     df.rename(columns={"price_change_pct":"sector_strength"}, inplace=True)
 
-    df.fillna(0, inplace=True)
+    # Fill numeric columns only
+    df["sector_strength"] = df["sector_strength"].fillna(0)
+    df["momentum_score"] = df["momentum_score"].fillna(0)
 
-    # Composite Score
     df["composite_score"] = (
         0.6 * df["momentum_score"] +
         0.4 * df["sector_strength"]
@@ -55,9 +53,7 @@ def build_top20():
 
     df.sort_values(by="composite_score", ascending=False, inplace=True)
 
-    top20 = df.head(20)
-
-    return top20
+    return df.head(20)
 
 
 def run_institutional_top20_engine():
