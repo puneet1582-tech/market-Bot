@@ -108,7 +108,7 @@ def build_momentum_score(price_df):
 
     for symbol, df in grouped:
 
-        prices = df["close"].dropna().values
+        prices = df["price"].dropna().values
 
         if len(prices) < 2:
             continue
