@@ -9,6 +9,7 @@ from datetime import datetime
 # Core Intelligence Engines
 from engines.global_intelligence_integration import run_global_intelligence
 from engines.intelligence_orchestrator_engine import run_intelligence_orchestrator
+from engines.sector_money_flow_engine import run_sector_money_flow_engine
 from engines.unified_daily_decision_engine import run_unified_daily_decision
 from engines.master_brain_controller_engine import run_master_brain_controller
 from engines.autonomous_daily_runner import run_autonomous_daily_cycle
@@ -32,6 +33,8 @@ def run_master_brain():
     run_global_intelligence()
 
     logging.info("STEP 2: Intelligence Orchestrator Execution")
+    logging.info("STEP 3: Sector Money Flow Intelligence")
+    run_sector_money_flow_engine()
     run_intelligence_orchestrator()
 
     logging.info("STEP 3: Unified Daily Decision Engine")
