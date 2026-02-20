@@ -1,7 +1,7 @@
 """
 ULTIMATE BRAIN
-10-YEAR FUNDAMENTAL ENGINE
-Quarter-by-Quarter Institutional Analyzer
+STABLE FUNDAMENTAL ENGINE
+NO-CRASH MODE
 """
 
 import csv
@@ -24,36 +24,44 @@ class FundamentalEngine:
 
     def __init__(self):
         self.data = defaultdict(list)
+        self.errors = []
 
-    # -----------------------------------
-    # LOAD FUNDAMENTAL DATA
-    # -----------------------------------
     def load_data(self):
+
+        if not FUNDAMENTAL_PATH.exists():
+            return
 
         files = list(FUNDAMENTAL_PATH.glob("*.csv"))
         if not files:
-            raise RuntimeError("No fundamental CSV files found")
+            return
 
         for file in files:
-            with open(file, "r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
+            try:
+                with open(file, "r", encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
 
-                if reader.fieldnames != REQUIRED_COLUMNS:
-                    raise RuntimeError(
-                        f"Invalid fundamental schema in {file.name}"
-                    )
+                    if reader.fieldnames != REQUIRED_COLUMNS:
+                        self.errors.append(
+                            f"Schema mismatch skipped: {file.name}"
+                        )
+                        continue
 
-                for row in reader:
-                    self.data[row["symbol"]].append(row)
+                    for row in reader:
+                        self.data[row["symbol"]].append(row)
 
-    # -----------------------------------
-    # QUARTERLY ANALYSIS
-    # -----------------------------------
+            except Exception as e:
+                self.errors.append(
+                    f"File skipped due to error: {file.name} | {str(e)}"
+                )
+
     def analyze_symbol(self, symbol_data):
 
-        revenues = [float(x["revenue"]) for x in symbol_data]
-        profits = [float(x["net_profit"]) for x in symbol_data]
-        debts = [float(x["debt"]) for x in symbol_data]
+        try:
+            revenues = [float(x["revenue"]) for x in symbol_data]
+            profits = [float(x["net_profit"]) for x in symbol_data]
+            debts = [float(x["debt"]) for x in symbol_data]
+        except:
+            return "DATA_ERROR"
 
         revenue_growth = revenues[-1] - revenues[0]
         profit_growth = profits[-1] - profits[0]
@@ -70,19 +78,20 @@ class FundamentalEngine:
 
         return "AVOID"
 
-    # -----------------------------------
-    # RUN FULL ENGINE
-    # -----------------------------------
     def run(self):
 
         results = {}
 
+        self.load_data()
+
+        if not self.data:
+            return {"status": "NO_FUNDAMENTAL_DATA"}
+
         for symbol, records in self.data.items():
 
-            # Ensure chronological order
             records_sorted = sorted(records, key=lambda x: x["quarter"])
 
-            if len(records_sorted) < 8:
+            if len(records_sorted) < 4:
                 results[symbol] = "INSUFFICIENT_DATA"
                 continue
 
