@@ -1,8 +1,8 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-BREADTH + MOMENTUM + VOLATILITY REGIME ENGINE
-STRICT PIPELINE CONTROL
+STREAMING BREADTH + MOMENTUM REGIME ENGINE
+PRODUCTION READY
 """
 
 import csv
@@ -10,7 +10,7 @@ import traceback
 import statistics
 from pathlib import Path
 from datetime import datetime
-from collections import defaultdict
+from collections import defaultdict, deque
 from core.data_ingestion_engine import DataIngestionEngine
 from core.fundamental_engine import FundamentalEngine
 
@@ -21,20 +21,16 @@ PRICE_DATA_PATH = PROJECT_ROOT / "data" / "prices"
 class MasterBrain:
 
     def __init__(self):
-        self.market_data = []
-        self.symbol_snapshot = {}
         self.market_mode = "UNDEFINED"
         self.mode_score = {}
+        self.symbol_snapshot = {}
 
         self.ingestion = DataIngestionEngine()
         self.fundamental_engine = FundamentalEngine()
 
     # -------------------------
-    # ENV VALIDATION
+    # SAFE EXECUTION
     # -------------------------
-
-    def validate_environment(self):
-        self.ingestion.ensure_data_ready()
 
     def safe_execute(self, func, name):
         try:
@@ -44,66 +40,65 @@ class MasterBrain:
             raise RuntimeError(f"PIPELINE FAILURE in {name} -> {str(e)}")
 
     # -------------------------
-    # LOAD DATA
+    # ENV VALIDATION
     # -------------------------
 
-    def load_market_data(self):
-        files = list(PRICE_DATA_PATH.glob("*.csv"))
-        for file in files:
-            with open(file, "r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    self.market_data.append(row)
+    def validate_environment(self):
+        self.ingestion.ensure_data_ready()
 
     # -------------------------
-    # BREADTH + MOMENTUM ENGINE
+    # STREAMING REGIME ENGINE
     # -------------------------
 
     def detect_market_mode(self):
 
-        price_by_symbol = defaultdict(list)
-        price_by_date = defaultdict(dict)
+        symbol_buffers = defaultdict(lambda: deque(maxlen=21))
+        latest_prices = {}
+        prev_prices = {}
 
-        for row in self.market_data:
-            date = row["date"]
-            symbol = row["symbol"]
-            price = float(row["price"])
-            price_by_symbol[symbol].append((date, price))
-            price_by_date[date][symbol] = price
+        files = sorted(PRICE_DATA_PATH.glob("*.csv"))
+
+        for file in files:
+            with open(file, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    symbol = row["symbol"]
+                    date = row["date"]
+                    price = float(row["price"])
+
+                    symbol_buffers[symbol].append((date, price))
+
+                    # track last two prices for breadth
+                    if symbol not in latest_prices:
+                        latest_prices[symbol] = (date, price)
+                    else:
+                        if date > latest_prices[symbol][0]:
+                            prev_prices[symbol] = latest_prices[symbol]
+                            latest_prices[symbol] = (date, price)
 
         # ---- BREADTH ----
-        sorted_dates = sorted(price_by_date.keys())
-
-        if len(sorted_dates) < 21:
-            self.market_mode = "DEFENSIVE"
-            return self.market_mode
-
-        latest_date = sorted_dates[-1]
-        prev_date = sorted_dates[-2]
-
         advances = 0
         declines = 0
 
-        for symbol in price_by_date[latest_date]:
-            if symbol in price_by_date[prev_date]:
-                if price_by_date[latest_date][symbol] > price_by_date[prev_date][symbol]:
+        for symbol in latest_prices:
+            if symbol in prev_prices:
+                if latest_prices[symbol][1] > prev_prices[symbol][1]:
                     advances += 1
-                elif price_by_date[latest_date][symbol] < price_by_date[prev_date][symbol]:
+                elif latest_prices[symbol][1] < prev_prices[symbol][1]:
                     declines += 1
 
         total = advances + declines
         advance_ratio = advances / total if total else 0
 
-        # ---- MOMENTUM (20-day return) ----
+        # ---- MOMENTUM ----
         returns = []
 
-        for symbol, data in price_by_symbol.items():
-            data_sorted = sorted(data)
-            if len(data_sorted) >= 20:
-                last_price = data_sorted[-1][1]
-                prev_20_price = data_sorted[-20][1]
-                if prev_20_price > 0:
-                    ret = (last_price - prev_20_price) / prev_20_price
+        for symbol, buffer in symbol_buffers.items():
+            if len(buffer) == 21:
+                first_price = buffer[0][1]
+                last_price = buffer[-1][1]
+                if first_price > 0:
+                    ret = (last_price - first_price) / first_price
                     returns.append(ret)
 
         avg_return = statistics.mean(returns) if returns else 0
@@ -132,16 +127,21 @@ class MasterBrain:
     # -------------------------
 
     def run_price_snapshot(self):
-        for row in self.market_data:
-            symbol = row["symbol"]
-            date = row["date"]
-            price = float(row["price"])
+        files = sorted(PRICE_DATA_PATH.glob("*.csv"))
 
-            if symbol not in self.symbol_snapshot:
-                self.symbol_snapshot[symbol] = (date, price)
-            else:
-                if date > self.symbol_snapshot[symbol][0]:
-                    self.symbol_snapshot[symbol] = (date, price)
+        for file in files:
+            with open(file, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    symbol = row["symbol"]
+                    date = row["date"]
+                    price = float(row["price"])
+
+                    if symbol not in self.symbol_snapshot:
+                        self.symbol_snapshot[symbol] = (date, price)
+                    else:
+                        if date > self.symbol_snapshot[symbol][0]:
+                            self.symbol_snapshot[symbol] = (date, price)
 
         self.symbol_snapshot = {
             k: v[1] for k, v in self.symbol_snapshot.items()
@@ -162,8 +162,7 @@ class MasterBrain:
     def execute(self):
 
         self.safe_execute(self.validate_environment, "Environment Validation")
-        self.safe_execute(self.load_market_data, "Load Market Data")
-        self.safe_execute(self.detect_market_mode, "Regime Detection Engine")
+        self.safe_execute(self.detect_market_mode, "Streaming Regime Engine")
         self.safe_execute(self.run_price_snapshot, "Price Snapshot Engine")
 
         fundamental_results = self.safe_execute(
