@@ -28,5 +28,6 @@ def run():
     combined.to_csv(REPORT, index=False)
     print("Quarterly comparison report saved:", REPORT)
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run()

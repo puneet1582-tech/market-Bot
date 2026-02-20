@@ -100,6 +100,7 @@ class FinalDecisionEngine:
             "why": reasons
         }
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     fe = FinalDecisionEngine()
     print(fe.decide("RELIANCE"))

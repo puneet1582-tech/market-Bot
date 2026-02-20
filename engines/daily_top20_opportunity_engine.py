@@ -31,5 +31,6 @@ def generate_top20():
         }
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     print(generate_top20())

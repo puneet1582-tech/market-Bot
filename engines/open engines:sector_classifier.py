@@ -25,6 +25,7 @@ class SectorClassifier:
         self.stocks.to_csv(STOCKS_PATH, index=False)
         print("SECTOR CLASSIFICATION DONE")
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     sc = SectorClassifier()
     sc.classify()

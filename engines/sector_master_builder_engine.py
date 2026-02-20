@@ -79,5 +79,6 @@ def run_sector_master_builder():
     logging.info(f"SECTOR MASTER BUILT: {len(sector_master)} symbols")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_sector_master_builder()

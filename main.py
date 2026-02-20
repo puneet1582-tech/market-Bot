@@ -165,7 +165,8 @@ def home():
     return "Ultimate Brain Running"
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     ingestion_thread = threading.Thread(target=run_engine)
     ingestion_thread.daemon = True
     ingestion_thread.start()

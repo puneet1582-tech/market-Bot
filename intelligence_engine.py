@@ -46,5 +46,6 @@ def run():
 
     print("Top opportunity report saved:", REPORT_FILE)
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run()

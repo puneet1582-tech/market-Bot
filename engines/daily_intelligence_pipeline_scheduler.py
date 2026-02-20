@@ -30,7 +30,8 @@ def run_daily_cycle():
     print("=== DAILY INTELLIGENCE PIPELINE COMPLETED ===", datetime.utcnow())
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     while True:
         try:
             run_daily_cycle()

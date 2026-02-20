@@ -62,5 +62,6 @@ def run_engine():
     return len(rows)
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     print("Processed:", run_engine())

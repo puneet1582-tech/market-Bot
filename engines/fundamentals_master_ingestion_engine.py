@@ -61,5 +61,6 @@ def run_fundamental_ingestion():
     logging.info("FUNDAMENTAL MASTER INGESTION COMPLETED")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_fundamental_ingestion()

@@ -53,6 +53,7 @@ def home():
         stocks=report["STOCKS"]
     )
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     app.run(debug=True)
 

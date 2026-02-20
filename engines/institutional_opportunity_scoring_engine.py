@@ -51,5 +51,6 @@ def run_institutional_scoring():
     logging.info("TOP-20 OPPORTUNITY LIST GENERATED")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_institutional_scoring()

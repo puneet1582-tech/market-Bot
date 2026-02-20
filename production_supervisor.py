@@ -26,7 +26,8 @@ def run_engine(engine):
         time.sleep(5)
         run_engine(engine)
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     log("Supervisor started")
     while True:
         for engine in ENGINES:

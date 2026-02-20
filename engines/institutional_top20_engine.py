@@ -66,5 +66,6 @@ def run_institutional_top20_engine():
     logging.info("TOP-20 OPPORTUNITIES GENERATED")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_institutional_top20_engine()

@@ -50,5 +50,6 @@ def run_live_nse_universe_ingestion():
     download_nse_universe()
     clean_universe()
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_live_nse_universe_ingestion()

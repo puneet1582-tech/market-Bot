@@ -8,6 +8,7 @@ def home():
     output = subprocess.getoutput("python3 main.py")
     return f"<pre>{output}</pre>"
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     app.run(debug=True)
 
