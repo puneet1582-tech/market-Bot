@@ -1,0 +1,36 @@
+name: Daily NSE Update
+
+on:
+  schedule:
+    # 6:30 PM IST ≈ 13:00 UTC
+    - cron: '0 13 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  update-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install pandas requests tqdm
+
+      - name: Run Daily NSE Updater
+        run: |
+          python core/nse_daily_updater.py
+
+      - name: Commit Updated Data
+        run: |
+          git config --global user.name "auto-bot"
+          git config --global user.email "bot@market.ai"
+          git add data/prices/historical_prices.csv
+          git commit -m "Auto Daily Update" || echo "No changes"
+          git push
