@@ -1,8 +1,7 @@
 """
 ULTIMATE BRAIN
-INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-REGIME-AWARE TOP-20 OPPORTUNITY ENGINE
-CAPITAL DISCIPLINE ENABLED
+HYBRID FAMILY-MAN FRIENDLY OUTPUT
+REGIME-AWARE OPPORTUNITY ENGINE
 """
 
 import csv
@@ -43,7 +42,7 @@ class MasterBrain:
         self.ingestion.ensure_data_ready()
 
     # -------------------------
-    # REGIME + RETURN COLLECTION
+    # REGIME + RETURNS
     # -------------------------
 
     def detect_market_mode(self):
@@ -71,7 +70,7 @@ class MasterBrain:
                             prev_prices[symbol] = latest_prices[symbol]
                             latest_prices[symbol] = (date, price)
 
-        # ---- BREADTH ----
+        # Breadth
         advances = 0
         declines = 0
 
@@ -85,19 +84,18 @@ class MasterBrain:
         total = advances + declines
         advance_ratio = advances / total if total else 0
 
-        # ---- MOMENTUM RETURNS ----
+        # Momentum
         returns = {}
         for symbol, buffer in symbol_buffers.items():
             if len(buffer) == 21:
                 first_price = buffer[0][1]
                 last_price = buffer[-1][1]
                 if first_price > 0:
-                    ret = (last_price - first_price) / first_price
-                    returns[symbol] = ret
+                    returns[symbol] = (last_price - first_price) / first_price
 
         avg_return = statistics.mean(returns.values()) if returns else 0
 
-        # ---- MODE DECISION ----
+        # Mode Decision
         if advance_ratio >= 0.6 and avg_return > 0:
             self.market_mode = "INVEST"
         elif advance_ratio >= 0.4:
@@ -144,7 +142,6 @@ class MasterBrain:
             fundamental_label = fundamental_results.get(symbol, "AVOID")
             fundamental_weight = weight_map.get(fundamental_label, -2)
 
-            # INVEST mode filter
             if self.market_mode == "INVEST":
                 if fundamental_label not in ["LONG_TERM", "SWING"]:
                     continue
@@ -154,6 +151,35 @@ class MasterBrain:
 
         scored_sorted = sorted(scored, key=lambda x: x[1], reverse=True)
         self.top_opportunities = scored_sorted[:20]
+
+    # -------------------------
+    # HYBRID OUTPUT FORMAT
+    # -------------------------
+
+    def build_hybrid_output(self):
+
+        action_map = {
+            "INVEST": "Systematic buying allowed. Focus on quality stocks.",
+            "TRADE": "Short-term opportunities only. Manage risk tightly.",
+            "DEFENSIVE": "Capital protection mode. Avoid new exposure."
+        }
+
+        return {
+            "MARKET_SUMMARY": {
+                "mode": self.market_mode,
+                "reason": self.mode_score,
+                "action_guidance": action_map[self.market_mode]
+            },
+            "TOP_20": [
+                {
+                    "rank": i + 1,
+                    "symbol": sym,
+                    "score": score
+                }
+                for i, (sym, score) in enumerate(self.top_opportunities)
+            ],
+            "generated_at": datetime.utcnow().isoformat()
+        }
 
     # -------------------------
     # MASTER EXECUTION
@@ -175,12 +201,7 @@ class MasterBrain:
 
         self.build_top_opportunities(returns, fundamental_results)
 
-        return {
-            "timestamp": datetime.utcnow().isoformat(),
-            "market_mode": self.market_mode,
-            "mode_score": self.mode_score,
-            "top_20_opportunities": self.top_opportunities
-        }
+        return self.build_hybrid_output()
 
 
 if __name__ == "__main__":
