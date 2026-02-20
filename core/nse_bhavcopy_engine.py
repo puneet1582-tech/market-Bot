@@ -1,7 +1,8 @@
 """
 ULTIMATE BRAIN
 NSE OFFICIAL BHAVCOPY ENGINE
-Deterministic Historical Builder
+10-YEAR FULL BUILD
+Institutional Deterministic Mode
 """
 
 import requests
@@ -25,7 +26,7 @@ HEADERS = {
     "Accept-Language": "en-US,en;q=0.9"
 }
 
-START_DATE = datetime.utcnow() - timedelta(days=365*2)   # 2 years initial test
+START_DATE = datetime.utcnow() - timedelta(days=365*10)
 END_DATE = datetime.utcnow()
 
 
@@ -64,12 +65,15 @@ class NSEBhavcopyEngine:
         universe = self.load_universe()
         all_rows = []
 
+        total_days = (END_DATE - START_DATE).days
         current_date = START_DATE
 
-        for _ in tqdm(range((END_DATE - START_DATE).days)):
+        for _ in tqdm(range(total_days)):
+
             df = self.download_bhavcopy(current_date)
 
             if df is not None and "SYMBOL" in df.columns:
+
                 df = df[df["SYMBOL"].isin(universe)]
 
                 for _, row in df.iterrows():
@@ -93,4 +97,4 @@ class NSEBhavcopyEngine:
 if __name__ == "__main__":
     engine = NSEBhavcopyEngine()
     count = engine.run()
-    print(f"Bhavcopy Historical Stored | Rows: {count}")
+    print(f"10-Year Bhavcopy Stored | Rows: {count}")
