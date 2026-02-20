@@ -1,8 +1,8 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-STREAMING REGIME ENGINE + DATA CONTINUITY VALIDATION
-PRODUCTION HARDENED
+SMART DATA ALIGNMENT + STREAMING REGIME ENGINE
+PRODUCTION STABLE
 """
 
 import csv
@@ -56,7 +56,7 @@ class MasterBrain:
         symbol_buffers = defaultdict(lambda: deque(maxlen=21))
         latest_prices = {}
         prev_prices = {}
-        all_dates = set()
+        date_set = set()
 
         files = sorted(PRICE_DATA_PATH.glob("*.csv"))
 
@@ -68,7 +68,7 @@ class MasterBrain:
                     date = row["date"]
                     price = float(row["price"])
 
-                    all_dates.add(date)
+                    date_set.add(date)
                     symbol_buffers[symbol].append((date, price))
 
                     if symbol not in latest_prices:
@@ -78,17 +78,22 @@ class MasterBrain:
                             prev_prices[symbol] = latest_prices[symbol]
                             latest_prices[symbol] = (date, price)
 
-        # ---- DATA CONTINUITY CHECK ----
-        sorted_dates = sorted(all_dates)
-        if len(sorted_dates) >= 2:
+        # ---- SMART CONTINUITY CHECK ----
+        sorted_dates = sorted(date_set)
+
+        if len(sorted_dates) < 2:
+            self.data_gap_flag = True
+        else:
+            # Only check internal gap between last two available trading days
             latest_date = datetime.strptime(sorted_dates[-1], "%Y-%m-%d")
             prev_date = datetime.strptime(sorted_dates[-2], "%Y-%m-%d")
-            gap = (latest_date - prev_date).days
+            gap_days = (latest_date - prev_date).days
 
-            if gap > 7:
+            # Allow weekend gap (max 4 days)
+            if gap_days > 4:
                 self.data_gap_flag = True
-        else:
-            self.data_gap_flag = True
+            else:
+                self.data_gap_flag = False
 
         # ---- BREADTH ----
         advances = 0
