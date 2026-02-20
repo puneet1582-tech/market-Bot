@@ -1,8 +1,8 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-STREAMING BREADTH + MOMENTUM REGIME ENGINE
-PRODUCTION READY
+STREAMING REGIME ENGINE + DATA CONTINUITY VALIDATION
+PRODUCTION HARDENED
 """
 
 import csv
@@ -24,6 +24,7 @@ class MasterBrain:
         self.market_mode = "UNDEFINED"
         self.mode_score = {}
         self.symbol_snapshot = {}
+        self.data_gap_flag = False
 
         self.ingestion = DataIngestionEngine()
         self.fundamental_engine = FundamentalEngine()
@@ -55,6 +56,7 @@ class MasterBrain:
         symbol_buffers = defaultdict(lambda: deque(maxlen=21))
         latest_prices = {}
         prev_prices = {}
+        all_dates = set()
 
         files = sorted(PRICE_DATA_PATH.glob("*.csv"))
 
@@ -66,15 +68,27 @@ class MasterBrain:
                     date = row["date"]
                     price = float(row["price"])
 
+                    all_dates.add(date)
                     symbol_buffers[symbol].append((date, price))
 
-                    # track last two prices for breadth
                     if symbol not in latest_prices:
                         latest_prices[symbol] = (date, price)
                     else:
                         if date > latest_prices[symbol][0]:
                             prev_prices[symbol] = latest_prices[symbol]
                             latest_prices[symbol] = (date, price)
+
+        # ---- DATA CONTINUITY CHECK ----
+        sorted_dates = sorted(all_dates)
+        if len(sorted_dates) >= 2:
+            latest_date = datetime.strptime(sorted_dates[-1], "%Y-%m-%d")
+            prev_date = datetime.strptime(sorted_dates[-2], "%Y-%m-%d")
+            gap = (latest_date - prev_date).days
+
+            if gap > 7:
+                self.data_gap_flag = True
+        else:
+            self.data_gap_flag = True
 
         # ---- BREADTH ----
         advances = 0
@@ -105,7 +119,9 @@ class MasterBrain:
         volatility = statistics.pstdev(returns) if len(returns) > 1 else 0
 
         # ---- MODE DECISION ----
-        if advance_ratio >= 0.6 and avg_return > 0:
+        if self.data_gap_flag:
+            self.market_mode = "DEFENSIVE"
+        elif advance_ratio >= 0.6 and avg_return > 0:
             self.market_mode = "INVEST"
         elif advance_ratio >= 0.4:
             self.market_mode = "TRADE"
@@ -116,6 +132,7 @@ class MasterBrain:
             "advance_ratio": round(advance_ratio, 4),
             "average_20d_return": round(avg_return, 4),
             "volatility_proxy": round(volatility, 4),
+            "data_gap_flag": self.data_gap_flag,
             "advances": advances,
             "declines": declines
         }
@@ -162,7 +179,7 @@ class MasterBrain:
     def execute(self):
 
         self.safe_execute(self.validate_environment, "Environment Validation")
-        self.safe_execute(self.detect_market_mode, "Streaming Regime Engine")
+        self.safe_execute(self.detect_market_mode, "Regime Engine")
         self.safe_execute(self.run_price_snapshot, "Price Snapshot Engine")
 
         fundamental_results = self.safe_execute(
