@@ -1,12 +1,13 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-REAL PRICE BREADTH MODE ENGINE ACTIVE
+BREADTH + MOMENTUM + VOLATILITY REGIME ENGINE
 STRICT PIPELINE CONTROL
 """
 
 import csv
 import traceback
+import statistics
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -55,6 +56,78 @@ class MasterBrain:
                     self.market_data.append(row)
 
     # -------------------------
+    # BREADTH + MOMENTUM ENGINE
+    # -------------------------
+
+    def detect_market_mode(self):
+
+        price_by_symbol = defaultdict(list)
+        price_by_date = defaultdict(dict)
+
+        for row in self.market_data:
+            date = row["date"]
+            symbol = row["symbol"]
+            price = float(row["price"])
+            price_by_symbol[symbol].append((date, price))
+            price_by_date[date][symbol] = price
+
+        # ---- BREADTH ----
+        sorted_dates = sorted(price_by_date.keys())
+
+        if len(sorted_dates) < 21:
+            self.market_mode = "DEFENSIVE"
+            return self.market_mode
+
+        latest_date = sorted_dates[-1]
+        prev_date = sorted_dates[-2]
+
+        advances = 0
+        declines = 0
+
+        for symbol in price_by_date[latest_date]:
+            if symbol in price_by_date[prev_date]:
+                if price_by_date[latest_date][symbol] > price_by_date[prev_date][symbol]:
+                    advances += 1
+                elif price_by_date[latest_date][symbol] < price_by_date[prev_date][symbol]:
+                    declines += 1
+
+        total = advances + declines
+        advance_ratio = advances / total if total else 0
+
+        # ---- MOMENTUM (20-day return) ----
+        returns = []
+
+        for symbol, data in price_by_symbol.items():
+            data_sorted = sorted(data)
+            if len(data_sorted) >= 20:
+                last_price = data_sorted[-1][1]
+                prev_20_price = data_sorted[-20][1]
+                if prev_20_price > 0:
+                    ret = (last_price - prev_20_price) / prev_20_price
+                    returns.append(ret)
+
+        avg_return = statistics.mean(returns) if returns else 0
+        volatility = statistics.pstdev(returns) if len(returns) > 1 else 0
+
+        # ---- MODE DECISION ----
+        if advance_ratio >= 0.6 and avg_return > 0:
+            self.market_mode = "INVEST"
+        elif advance_ratio >= 0.4:
+            self.market_mode = "TRADE"
+        else:
+            self.market_mode = "DEFENSIVE"
+
+        self.mode_score = {
+            "advance_ratio": round(advance_ratio, 4),
+            "average_20d_return": round(avg_return, 4),
+            "volatility_proxy": round(volatility, 4),
+            "advances": advances,
+            "declines": declines
+        }
+
+        return self.market_mode
+
+    # -------------------------
     # PRICE SNAPSHOT
     # -------------------------
 
@@ -75,65 +148,6 @@ class MasterBrain:
         }
 
     # -------------------------
-    # REAL BREADTH ENGINE
-    # -------------------------
-
-    def detect_market_mode(self):
-
-        price_by_date = defaultdict(dict)
-
-        for row in self.market_data:
-            date = row["date"]
-            symbol = row["symbol"]
-            price = float(row["price"])
-            price_by_date[date][symbol] = price
-
-        sorted_dates = sorted(price_by_date.keys())
-
-        if len(sorted_dates) < 2:
-            self.market_mode = "DEFENSIVE"
-            return self.market_mode
-
-        latest_date = sorted_dates[-1]
-        prev_date = sorted_dates[-2]
-
-        latest_prices = price_by_date[latest_date]
-        prev_prices = price_by_date[prev_date]
-
-        advances = 0
-        declines = 0
-
-        for symbol in latest_prices:
-            if symbol in prev_prices:
-                if latest_prices[symbol] > prev_prices[symbol]:
-                    advances += 1
-                elif latest_prices[symbol] < prev_prices[symbol]:
-                    declines += 1
-
-        total = advances + declines
-
-        if total == 0:
-            self.market_mode = "DEFENSIVE"
-            return self.market_mode
-
-        advance_ratio = advances / total
-
-        self.mode_score = {
-            "advance_ratio": round(advance_ratio, 4),
-            "advances": advances,
-            "declines": declines
-        }
-
-        if advance_ratio >= 0.65:
-            self.market_mode = "INVEST"
-        elif advance_ratio >= 0.45:
-            self.market_mode = "TRADE"
-        else:
-            self.market_mode = "DEFENSIVE"
-
-        return self.market_mode
-
-    # -------------------------
     # FUNDAMENTAL ENGINE
     # -------------------------
 
@@ -149,7 +163,7 @@ class MasterBrain:
 
         self.safe_execute(self.validate_environment, "Environment Validation")
         self.safe_execute(self.load_market_data, "Load Market Data")
-        self.safe_execute(self.detect_market_mode, "Market Breadth Mode Detection")
+        self.safe_execute(self.detect_market_mode, "Regime Detection Engine")
         self.safe_execute(self.run_price_snapshot, "Price Snapshot Engine")
 
         fundamental_results = self.safe_execute(
