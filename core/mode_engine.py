@@ -4,6 +4,13 @@ MODE CLASSIFICATION ENGINE
 INVEST / TRADE / DEFENSIVE
 """
 
+import sys
+from pathlib import Path
+
+# Ensure project root in path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.append(str(PROJECT_ROOT))
+
 from core.price_structure_engine import PriceStructureEngine
 
 
@@ -32,7 +39,6 @@ class ModeEngine:
     def run(self):
 
         structure_output = self.structure_engine.run()
-
         mode_results = {}
 
         for symbol, metrics in structure_output.items():
