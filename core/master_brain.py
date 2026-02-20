@@ -1,15 +1,17 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR
-PHASE-A HARDENED CORE
+PHASE-A REAL ENGINE WIRING
 """
 
-import sys
+import csv
 import traceback
 from pathlib import Path
 from datetime import datetime
+from collections import defaultdict
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DATA_PATH = PROJECT_ROOT / "data"
 
 class ExecutionState:
     INITIALIZED = "INITIALIZED"
@@ -23,17 +25,21 @@ class MasterBrain:
 
     def __init__(self):
         self.state = ExecutionState.INITIALIZED
-        self.start_time = datetime.utcnow()
         self.pipeline_log = []
+        self.market_data = []
 
     # ------------------------------
-    # SYSTEM VALIDATION GATE
+    # ENVIRONMENT VALIDATION
     # ------------------------------
     def validate_environment(self):
+
         required_files = ["run.py", "brain_control.py"]
         for file in required_files:
             if not (PROJECT_ROOT / file).exists():
-                raise RuntimeError(f"CRITICAL: Missing required file -> {file}")
+                raise RuntimeError(f"CRITICAL FILE MISSING: {file}")
+
+        if not DATA_PATH.exists():
+            raise RuntimeError("CRITICAL: data/ folder missing")
 
         self.state = ExecutionState.VALIDATED
         self.pipeline_log.append("Environment validated")
@@ -49,35 +55,75 @@ class MasterBrain:
             return result
         except Exception as e:
             self.state = ExecutionState.FAILED
-            error_msg = f"FAILED: {name} | {str(e)}"
-            self.pipeline_log.append(error_msg)
             traceback.print_exc()
-            raise RuntimeError(error_msg)
+            raise RuntimeError(f"PIPELINE FAILURE in {name} -> {str(e)}")
 
     # ------------------------------
-    # PIPELINE PLACEHOLDER (ENGINE HOOKS)
+    # LOAD PRICE DATA (LONG FORMAT)
     # ------------------------------
     def load_market_data(self):
-        # Real integration will connect Step-2 ingestion engine
-        return "Market Data Loaded"
 
+        files = list(DATA_PATH.glob("*.csv"))
+        if not files:
+            raise RuntimeError("No CSV files found in data/")
+
+        for file in files:
+            with open(file, "r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                if reader.fieldnames != ["date", "symbol", "price"]:
+                    raise RuntimeError(f"Invalid schema in {file.name}")
+
+                for row in reader:
+                    self.market_data.append(row)
+
+        if not self.market_data:
+            raise RuntimeError("Market data empty after load")
+
+        return f"{len(self.market_data)} rows loaded"
+
+    # ------------------------------
+    # BASIC INSTITUTIONAL AGGREGATION
+    # ------------------------------
     def run_intelligence_layer(self):
-        # Will later connect fundamentals + sector + news engines
-        return "Intelligence Layer Executed"
 
+        symbol_latest_price = {}
+
+        for row in self.market_data:
+            symbol = row["symbol"]
+            date = row["date"]
+            price = float(row["price"])
+
+            if symbol not in symbol_latest_price:
+                symbol_latest_price[symbol] = (date, price)
+            else:
+                if date > symbol_latest_price[symbol][0]:
+                    symbol_latest_price[symbol] = (date, price)
+
+        self.symbol_snapshot = {
+            k: v[1] for k, v in symbol_latest_price.items()
+        }
+
+        return f"{len(self.symbol_snapshot)} symbols processed"
+
+    # ------------------------------
+    # STRUCTURED INSTITUTIONAL OUTPUT
+    # ------------------------------
     def build_structured_output(self):
+
         return {
             "timestamp": datetime.utcnow().isoformat(),
-            "mode": "INSTITUTIONAL_PIPELINE_ACTIVE",
-            "status": "PIPELINE_OK"
+            "total_rows_loaded": len(self.market_data),
+            "total_symbols": len(self.symbol_snapshot),
+            "pipeline_status": "INSTITUTIONAL_PIPELINE_ACTIVE"
         }
 
     # ------------------------------
     # MAIN EXECUTION FLOW
     # ------------------------------
     def execute(self):
+
         if self.state != ExecutionState.VALIDATED:
-            raise RuntimeError("System not validated before execution")
+            raise RuntimeError("System not validated")
 
         self.state = ExecutionState.RUNNING
 
@@ -95,14 +141,8 @@ class MasterBrain:
         return output
 
 
-# -------------------------------------------------
-# ENTRY LOCK (NO EXTRA __main__ ALLOWED ANYWHERE)
-# -------------------------------------------------
 if __name__ == "__main__":
     brain = MasterBrain()
     brain.validate_environment()
     result = brain.execute()
-
-    print("\n=========== MASTER BRAIN EXECUTION ===========")
     print(result)
-    print("==============================================")
