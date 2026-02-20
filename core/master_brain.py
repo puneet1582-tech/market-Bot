@@ -1,7 +1,7 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-PRICE + FUNDAMENTAL + MODE READY ARCHITECTURE
+HYBRID MODE READY ARCHITECTURE
 STRICT PIPELINE CONTROL
 """
 
@@ -22,6 +22,14 @@ class MasterBrain:
         self.market_data = []
         self.symbol_snapshot = {}
         self.market_mode = "UNDEFINED"
+
+        # Future Scoring Buckets
+        self.mode_score = {
+            "liquidity": 0,
+            "volatility": 0,
+            "breadth": 0,
+            "news": 0
+        }
 
         self.ingestion = DataIngestionEngine()
         self.fundamental_engine = FundamentalEngine()
@@ -45,15 +53,37 @@ class MasterBrain:
             raise RuntimeError(f"PIPELINE FAILURE in {name} -> {str(e)}")
 
     # -------------------------------------------------
-    # PHASE 2: MARKET MODE DETECTION (PLACEHOLDER)
+    # PHASE 2: HYBRID MODE DETECTION FRAMEWORK
     # -------------------------------------------------
 
+    def evaluate_liquidity(self):
+        return 0  # placeholder
+
+    def evaluate_volatility(self):
+        return 0  # placeholder
+
+    def evaluate_breadth(self):
+        return 0  # placeholder
+
+    def evaluate_news_sentiment(self):
+        return 0  # placeholder
+
     def detect_market_mode(self):
-        """
-        Future: Liquidity + Volatility + Narrative Based Mode Detection
-        INVEST / TRADE / DEFENSIVE
-        """
-        self.market_mode = "UNDEFINED"
+
+        self.mode_score["liquidity"] = self.evaluate_liquidity()
+        self.mode_score["volatility"] = self.evaluate_volatility()
+        self.mode_score["breadth"] = self.evaluate_breadth()
+        self.mode_score["news"] = self.evaluate_news_sentiment()
+
+        total_score = sum(self.mode_score.values())
+
+        if total_score >= 3:
+            self.market_mode = "INVEST"
+        elif total_score == 2:
+            self.market_mode = "TRADE"
+        else:
+            self.market_mode = "DEFENSIVE"
+
         return self.market_mode
 
     # -------------------------------------------------
@@ -103,19 +133,11 @@ class MasterBrain:
 
     def execute(self):
 
-        # Phase 1
         self.safe_execute(self.validate_environment, "Environment Validation")
-
-        # Phase 2
         self.safe_execute(self.detect_market_mode, "Market Mode Detection")
-
-        # Phase 3
         self.safe_execute(self.load_market_data, "Load Market Data")
-
-        # Phase 4
         self.safe_execute(self.run_price_snapshot, "Price Snapshot Engine")
 
-        # Phase 5
         fundamental_results = self.safe_execute(
             self.run_fundamental_engine,
             "Fundamental Engine"
@@ -124,6 +146,7 @@ class MasterBrain:
         return {
             "timestamp": datetime.utcnow().isoformat(),
             "market_mode": self.market_mode,
+            "mode_score": self.mode_score,
             "symbols_processed": len(self.symbol_snapshot),
             "fundamental_analysis": fundamental_results
         }
