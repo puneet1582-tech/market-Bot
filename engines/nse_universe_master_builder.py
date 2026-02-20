@@ -27,5 +27,6 @@ def download_universe():
     }
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     print(download_universe())

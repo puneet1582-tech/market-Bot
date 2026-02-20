@@ -174,5 +174,6 @@ def run_institutional_v2():
     logging.info("TOP-20 V2 BUILT SUCCESSFULLY")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_institutional_v2()

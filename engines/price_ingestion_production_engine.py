@@ -85,5 +85,6 @@ def run_price_ingestion_production():
     logging.info(f"PRICE INGESTION COMPLETED: {len(final_df)} rows written")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_price_ingestion_production()

@@ -101,5 +101,6 @@ def run_fundamental_10y_pilot():
     logging.info("10Y FUNDAMENTAL PILOT COMPLETED")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_fundamental_10y_pilot()

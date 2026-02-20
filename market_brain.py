@@ -63,7 +63,8 @@ def generate_report():
 
     return report
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     rep = generate_report()
     print("MARKET MODE:", rep["MODE"])
     print("STOCK ANALYSIS:\n")

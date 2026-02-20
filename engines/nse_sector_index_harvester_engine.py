@@ -96,5 +96,6 @@ def run_sector_index_harvester():
     logging.info(f"Sector base built. Total classified symbols: {len(final_df)}")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_sector_index_harvester()

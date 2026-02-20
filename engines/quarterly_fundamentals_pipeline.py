@@ -53,5 +53,6 @@ def run_pipeline():
     }
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     print(run_pipeline())

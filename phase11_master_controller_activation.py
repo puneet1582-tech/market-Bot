@@ -29,5 +29,6 @@ def run_full_system():
         logging.exception(f"CENTRAL EXECUTION FAILURE: {str(e)}")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_full_system()

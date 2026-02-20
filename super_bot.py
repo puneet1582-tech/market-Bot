@@ -155,5 +155,6 @@ def home():
         global_data=brain["global_data"]
     )
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     app.run(debug=True)

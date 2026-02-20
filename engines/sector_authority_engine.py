@@ -53,5 +53,6 @@ def run_sector_authority_engine():
     logging.info(f"FINAL SECTOR AUTHORITY BUILT. Total symbols: {len(final_df)}")
 
 
-if __name__ == "__main__":
+# DISABLED ENTRY POINT
+# # DISABLED ENTRY POINT
     run_sector_authority_engine()
