@@ -1,14 +1,12 @@
 """
 ULTIMATE BRAIN
-HISTORICAL PRICE INGESTION ENGINE
-Yahoo Finance Based
+STABLE HISTORICAL PRICE ENGINE
+Yahoo Finance via yfinance
 10-Year Daily Data
-Long Format: date,symbol,price
 """
 
-import csv
-import requests
-import time
+import pandas as pd
+import yfinance as yf
 from pathlib import Path
 from datetime import datetime
 
@@ -19,8 +17,6 @@ PRICE_PATH = PROJECT_ROOT / "data" / "prices"
 START_DATE = "2014-01-01"
 END_DATE = datetime.utcnow().strftime("%Y-%m-%d")
 
-def date_to_unix(date_str):
-    return int(datetime.strptime(date_str, "%Y-%m-%d").timestamp())
 
 class HistoricalPriceEngine:
 
@@ -32,66 +28,57 @@ class HistoricalPriceEngine:
         if not UNIVERSE_FILE.exists():
             raise RuntimeError("Universe file missing")
 
-        symbols = []
-        with open(UNIVERSE_FILE, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                symbols.append(row["symbol"].strip())
+        df = pd.read_csv(UNIVERSE_FILE)
+
+        if "symbol" not in df.columns:
+            raise RuntimeError("Universe schema invalid")
+
+        symbols = df["symbol"].dropna().unique().tolist()
 
         if not symbols:
             raise RuntimeError("Universe empty")
 
-        return symbols[:50]  # limit first 50 for stability (expand later)
-
-    def fetch_symbol_data(self, symbol):
-        period1 = date_to_unix(START_DATE)
-        period2 = date_to_unix(END_DATE)
-
-        url = f"https://query1.finance.yahoo.com/v7/finance/download/{symbol}.NS?period1={period1}&period2={period2}&interval=1d&events=history"
-
-        response = requests.get(url, timeout=15)
-
-        if response.status_code != 200:
-            return []
-
-        lines = response.text.splitlines()
-        reader = csv.DictReader(lines)
-
-        rows = []
-
-        for row in reader:
-            if row["Close"] and row["Date"]:
-                rows.append({
-                    "date": row["Date"],
-                    "symbol": symbol,
-                    "price": row["Close"]
-                })
-
-        return rows
+        return symbols[:50]  # initial controlled batch
 
     def run(self):
 
         symbols = self.load_universe()
-
-        all_rows = []
+        all_data = []
 
         for symbol in symbols:
+            ticker = f"{symbol}.NS"
+
             try:
-                data = self.fetch_symbol_data(symbol)
-                all_rows.extend(data)
-                time.sleep(0.5)
+                df = yf.download(
+                    ticker,
+                    start=START_DATE,
+                    end=END_DATE,
+                    progress=False,
+                    auto_adjust=True
+                )
+
+                if df.empty:
+                    continue
+
+                df = df.reset_index()
+
+                for _, row in df.iterrows():
+                    all_data.append({
+                        "date": row["Date"].strftime("%Y-%m-%d"),
+                        "symbol": symbol,
+                        "price": float(row["Close"])
+                    })
+
             except:
                 continue
 
-        if not all_rows:
+        if not all_data:
             raise RuntimeError("No historical data fetched")
 
-        with open(self.output_file, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["date", "symbol", "price"])
-            writer.writeheader()
-            writer.writerows(all_rows)
+        out_df = pd.DataFrame(all_data)
+        out_df.to_csv(self.output_file, index=False)
 
-        return len(all_rows)
+        return len(all_data)
 
 
 if __name__ == "__main__":
