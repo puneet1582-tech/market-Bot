@@ -52,10 +52,10 @@ class PriceStructureEngine:
 
             data = data.sort_values("date")
 
-            # Quarterly aggregation (last close of quarter)
+            # UPDATED: Use QE (Quarter End)
             quarterly = (
                 data.set_index("date")
-                .resample("Q")["price"]
+                .resample("QE")["price"]
                 .last()
                 .dropna()
             )
