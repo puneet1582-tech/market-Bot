@@ -1,8 +1,8 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-SMART DATA ALIGNMENT + STREAMING REGIME ENGINE
-PRODUCTION STABLE
+REGIME + RELATIVE STRENGTH + TOP-20 OPPORTUNITY ENGINE
+PRODUCTION READY
 """
 
 import csv
@@ -25,6 +25,7 @@ class MasterBrain:
         self.mode_score = {}
         self.symbol_snapshot = {}
         self.data_gap_flag = False
+        self.top_opportunities = []
 
         self.ingestion = DataIngestionEngine()
         self.fundamental_engine = FundamentalEngine()
@@ -40,15 +41,11 @@ class MasterBrain:
             traceback.print_exc()
             raise RuntimeError(f"PIPELINE FAILURE in {name} -> {str(e)}")
 
-    # -------------------------
-    # ENV VALIDATION
-    # -------------------------
-
     def validate_environment(self):
         self.ingestion.ensure_data_ready()
 
     # -------------------------
-    # STREAMING REGIME ENGINE
+    # STREAMING REGIME + RETURN COLLECTION
     # -------------------------
 
     def detect_market_mode(self):
@@ -78,23 +75,6 @@ class MasterBrain:
                             prev_prices[symbol] = latest_prices[symbol]
                             latest_prices[symbol] = (date, price)
 
-        # ---- SMART CONTINUITY CHECK ----
-        sorted_dates = sorted(date_set)
-
-        if len(sorted_dates) < 2:
-            self.data_gap_flag = True
-        else:
-            # Only check internal gap between last two available trading days
-            latest_date = datetime.strptime(sorted_dates[-1], "%Y-%m-%d")
-            prev_date = datetime.strptime(sorted_dates[-2], "%Y-%m-%d")
-            gap_days = (latest_date - prev_date).days
-
-            # Allow weekend gap (max 4 days)
-            if gap_days > 4:
-                self.data_gap_flag = True
-            else:
-                self.data_gap_flag = False
-
         # ---- BREADTH ----
         advances = 0
         declines = 0
@@ -109,24 +89,21 @@ class MasterBrain:
         total = advances + declines
         advance_ratio = advances / total if total else 0
 
-        # ---- MOMENTUM ----
-        returns = []
-
+        # ---- MOMENTUM RETURNS ----
+        returns = {}
         for symbol, buffer in symbol_buffers.items():
             if len(buffer) == 21:
                 first_price = buffer[0][1]
                 last_price = buffer[-1][1]
                 if first_price > 0:
                     ret = (last_price - first_price) / first_price
-                    returns.append(ret)
+                    returns[symbol] = ret
 
-        avg_return = statistics.mean(returns) if returns else 0
-        volatility = statistics.pstdev(returns) if len(returns) > 1 else 0
+        avg_return = statistics.mean(returns.values()) if returns else 0
+        volatility = statistics.pstdev(returns.values()) if len(returns) > 1 else 0
 
         # ---- MODE DECISION ----
-        if self.data_gap_flag:
-            self.market_mode = "DEFENSIVE"
-        elif advance_ratio >= 0.6 and avg_return > 0:
+        if advance_ratio >= 0.6 and avg_return > 0:
             self.market_mode = "INVEST"
         elif advance_ratio >= 0.4:
             self.market_mode = "TRADE"
@@ -137,44 +114,51 @@ class MasterBrain:
             "advance_ratio": round(advance_ratio, 4),
             "average_20d_return": round(avg_return, 4),
             "volatility_proxy": round(volatility, 4),
-            "data_gap_flag": self.data_gap_flag,
             "advances": advances,
             "declines": declines
         }
 
-        return self.market_mode
+        return returns
 
     # -------------------------
-    # PRICE SNAPSHOT
+    # OPPORTUNITY ENGINE
     # -------------------------
 
-    def run_price_snapshot(self):
-        files = sorted(PRICE_DATA_PATH.glob("*.csv"))
+    def build_top_opportunities(self, returns, fundamental_results):
 
-        for file in files:
-            with open(file, "r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    symbol = row["symbol"]
-                    date = row["date"]
-                    price = float(row["price"])
-
-                    if symbol not in self.symbol_snapshot:
-                        self.symbol_snapshot[symbol] = (date, price)
-                    else:
-                        if date > self.symbol_snapshot[symbol][0]:
-                            self.symbol_snapshot[symbol] = (date, price)
-
-        self.symbol_snapshot = {
-            k: v[1] for k, v in self.symbol_snapshot.items()
+        weight_map = {
+            "LONG_TERM": 3,
+            "SWING": 2,
+            "WEAK": -1,
+            "AVOID": -2
         }
+
+        scored = []
+
+        sorted_returns = sorted(
+            returns.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+
+        for rank, (symbol, ret) in enumerate(sorted_returns, start=1):
+
+            fundamental_label = fundamental_results.get(symbol, "AVOID")
+            fundamental_weight = weight_map.get(fundamental_label, -2)
+
+            composite_score = (len(sorted_returns) - rank) + fundamental_weight
+
+            scored.append((symbol, composite_score))
+
+        scored_sorted = sorted(scored, key=lambda x: x[1], reverse=True)
+
+        self.top_opportunities = scored_sorted[:20]
 
     # -------------------------
     # FUNDAMENTAL ENGINE
     # -------------------------
 
     def run_fundamental_engine(self):
-        self.fundamental_engine.load_data()
         return self.fundamental_engine.run()
 
     # -------------------------
@@ -184,20 +168,24 @@ class MasterBrain:
     def execute(self):
 
         self.safe_execute(self.validate_environment, "Environment Validation")
-        self.safe_execute(self.detect_market_mode, "Regime Engine")
-        self.safe_execute(self.run_price_snapshot, "Price Snapshot Engine")
+
+        returns = self.safe_execute(
+            self.detect_market_mode,
+            "Regime Engine"
+        )
 
         fundamental_results = self.safe_execute(
             self.run_fundamental_engine,
             "Fundamental Engine"
         )
 
+        self.build_top_opportunities(returns, fundamental_results)
+
         return {
             "timestamp": datetime.utcnow().isoformat(),
             "market_mode": self.market_mode,
             "mode_score": self.mode_score,
-            "symbols_processed": len(self.symbol_snapshot),
-            "fundamental_analysis": fundamental_results
+            "top_20_opportunities": self.top_opportunities
         }
 
 
