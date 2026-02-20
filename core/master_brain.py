@@ -1,8 +1,8 @@
 """
 ULTIMATE BRAIN
 INSTITUTIONAL MASTER ORCHESTRATOR (STEP-M)
-REGIME + RELATIVE STRENGTH + TOP-20 OPPORTUNITY ENGINE
-PRODUCTION READY
+REGIME-AWARE TOP-20 OPPORTUNITY ENGINE
+CAPITAL DISCIPLINE ENABLED
 """
 
 import csv
@@ -23,8 +23,6 @@ class MasterBrain:
     def __init__(self):
         self.market_mode = "UNDEFINED"
         self.mode_score = {}
-        self.symbol_snapshot = {}
-        self.data_gap_flag = False
         self.top_opportunities = []
 
         self.ingestion = DataIngestionEngine()
@@ -45,7 +43,7 @@ class MasterBrain:
         self.ingestion.ensure_data_ready()
 
     # -------------------------
-    # STREAMING REGIME + RETURN COLLECTION
+    # REGIME + RETURN COLLECTION
     # -------------------------
 
     def detect_market_mode(self):
@@ -53,7 +51,6 @@ class MasterBrain:
         symbol_buffers = defaultdict(lambda: deque(maxlen=21))
         latest_prices = {}
         prev_prices = {}
-        date_set = set()
 
         files = sorted(PRICE_DATA_PATH.glob("*.csv"))
 
@@ -65,7 +62,6 @@ class MasterBrain:
                     date = row["date"]
                     price = float(row["price"])
 
-                    date_set.add(date)
                     symbol_buffers[symbol].append((date, price))
 
                     if symbol not in latest_prices:
@@ -100,7 +96,6 @@ class MasterBrain:
                     returns[symbol] = ret
 
         avg_return = statistics.mean(returns.values()) if returns else 0
-        volatility = statistics.pstdev(returns.values()) if len(returns) > 1 else 0
 
         # ---- MODE DECISION ----
         if advance_ratio >= 0.6 and avg_return > 0:
@@ -113,7 +108,6 @@ class MasterBrain:
         self.mode_score = {
             "advance_ratio": round(advance_ratio, 4),
             "average_20d_return": round(avg_return, 4),
-            "volatility_proxy": round(volatility, 4),
             "advances": advances,
             "declines": declines
         }
@@ -125,6 +119,10 @@ class MasterBrain:
     # -------------------------
 
     def build_top_opportunities(self, returns, fundamental_results):
+
+        if self.market_mode == "DEFENSIVE":
+            self.top_opportunities = []
+            return
 
         weight_map = {
             "LONG_TERM": 3,
@@ -146,20 +144,16 @@ class MasterBrain:
             fundamental_label = fundamental_results.get(symbol, "AVOID")
             fundamental_weight = weight_map.get(fundamental_label, -2)
 
-            composite_score = (len(sorted_returns) - rank) + fundamental_weight
+            # INVEST mode filter
+            if self.market_mode == "INVEST":
+                if fundamental_label not in ["LONG_TERM", "SWING"]:
+                    continue
 
+            composite_score = (len(sorted_returns) - rank) + fundamental_weight
             scored.append((symbol, composite_score))
 
         scored_sorted = sorted(scored, key=lambda x: x[1], reverse=True)
-
         self.top_opportunities = scored_sorted[:20]
-
-    # -------------------------
-    # FUNDAMENTAL ENGINE
-    # -------------------------
-
-    def run_fundamental_engine(self):
-        return self.fundamental_engine.run()
 
     # -------------------------
     # MASTER EXECUTION
@@ -175,7 +169,7 @@ class MasterBrain:
         )
 
         fundamental_results = self.safe_execute(
-            self.run_fundamental_engine,
+            self.fundamental_engine.run,
             "Fundamental Engine"
         )
 
