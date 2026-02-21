@@ -9,7 +9,6 @@ from datetime import datetime
 from telegram import Bot
 from dotenv import load_dotenv
 
-# Load environment
 load_dotenv("telegram_config.env")
 
 INPUT_FILE = "data/top20_institutional_opportunities.csv"
@@ -33,8 +32,13 @@ def send_top20():
 
     for i, row in df.head(20).iterrows():
         symbol = row.get("symbol", "NA")
-        score = row.get("institutional_score", "NA")
-        message += f"{i+1}. {symbol} — Score: {score}\n"
+
+        # FIX: use composite_score if institutional_score missing
+        score = row.get("institutional_score")
+        if score is None:
+            score = row.get("composite_score", "NA")
+
+        message += f"{i+1}. {symbol} — Score: {round(float(score), 2) if score != 'NA' else 'NA'}\n"
 
     bot = Bot(token=TELEGRAM_TOKEN)
     bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
