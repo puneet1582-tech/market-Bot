@@ -8,7 +8,8 @@ from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 
-PRICE_FILE = "data/nse_price_history.csv"
+# FIXED: aligned to existing clean price file
+PRICE_FILE = "data/nse_price_history_clean.csv"
 SECTOR_FILE = "data/sector_final_authority.csv"
 OUTPUT_FILE = "data/sector_money_flow.csv"
 
