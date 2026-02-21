@@ -1,10 +1,11 @@
 """
-ULTIMATE BRAIN
-HYBRID FAMILY-MAN FRIENDLY OUTPUT
-REGIME-AWARE OPPORTUNITY ENGINE
+ULTIMATE BRAIN v2
+INSTITUTIONAL PROBABILISTIC ENGINE
+STABLE ARCHITECTURE — ENHANCED INTELLIGENCE CORE
 """
 
 import csv
+import math
 import traceback
 import statistics
 from pathlib import Path
@@ -12,6 +13,7 @@ from datetime import datetime
 from collections import defaultdict, deque
 from core.data_ingestion_engine import DataIngestionEngine
 from core.fundamental_engine import FundamentalEngine
+
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 PRICE_DATA_PATH = PROJECT_ROOT / "data" / "prices"
@@ -21,15 +23,14 @@ class MasterBrain:
 
     def __init__(self):
         self.market_mode = "UNDEFINED"
+        self.mode_probabilities = {}
+        self.regime_confidence = 0
+        self.signal_agreement = 0
         self.mode_score = {}
         self.top_opportunities = []
 
         self.ingestion = DataIngestionEngine()
         self.fundamental_engine = FundamentalEngine()
-
-    # -------------------------
-    # SAFE EXECUTION
-    # -------------------------
 
     def safe_execute(self, func, name):
         try:
@@ -41,11 +42,7 @@ class MasterBrain:
     def validate_environment(self):
         self.ingestion.ensure_data_ready()
 
-    # -------------------------
-    # REGIME + RETURNS
-    # -------------------------
-
-    def detect_market_mode(self):
+    def load_price_data(self):
 
         symbol_buffers = defaultdict(lambda: deque(maxlen=21))
         latest_prices = {}
@@ -70,120 +67,125 @@ class MasterBrain:
                             prev_prices[symbol] = latest_prices[symbol]
                             latest_prices[symbol] = (date, price)
 
-        # Breadth
-        advances = 0
-        declines = 0
+        return symbol_buffers, latest_prices, prev_prices
 
-        for symbol in latest_prices:
-            if symbol in prev_prices:
-                if latest_prices[symbol][1] > prev_prices[symbol][1]:
+    def detect_market_mode(self):
+
+        buffers, latest, prev = self.load_price_data()
+
+        advances, declines = 0, 0
+        returns = {}
+
+        for symbol in latest:
+            if symbol in prev:
+                if latest[symbol][1] > prev[symbol][1]:
                     advances += 1
-                elif latest_prices[symbol][1] < prev_prices[symbol][1]:
+                elif latest[symbol][1] < prev[symbol][1]:
                     declines += 1
 
         total = advances + declines
         advance_ratio = advances / total if total else 0
 
-        # Momentum
-        returns = {}
-        for symbol, buffer in symbol_buffers.items():
+        for symbol, buffer in buffers.items():
             if len(buffer) == 21:
-                first_price = buffer[0][1]
-                last_price = buffer[-1][1]
-                if first_price > 0:
-                    returns[symbol] = (last_price - first_price) / first_price
+                first = buffer[0][1]
+                last = buffer[-1][1]
+                if first > 0:
+                    returns[symbol] = (last - first) / first
 
-        avg_return = statistics.mean(returns.values()) if returns else 0
-
-        # Mode Decision
-        if advance_ratio >= 0.6 and avg_return > 0:
-            self.market_mode = "INVEST"
-        elif advance_ratio >= 0.4:
-            self.market_mode = "TRADE"
-        else:
+        if not returns:
             self.market_mode = "DEFENSIVE"
+            return {}
+
+        mean_ret = statistics.mean(returns.values())
+        std_ret = statistics.stdev(returns.values()) if len(returns) > 1 else 0.0001
+        dispersion = std_ret
+
+        regime_strength = (mean_ret / (std_ret + 1e-6))
+
+        invest_prob = max(0, min(1, (advance_ratio * 0.6) + (regime_strength * 0.2)))
+        trade_prob = max(0, 1 - abs(invest_prob - 0.5) * 2)
+        defensive_prob = max(0, 1 - invest_prob - trade_prob)
+
+        total_prob = invest_prob + trade_prob + defensive_prob
+        invest_prob /= total_prob
+        trade_prob /= total_prob
+        defensive_prob /= total_prob
+
+        probs = {
+            "INVEST": round(invest_prob, 4),
+            "TRADE": round(trade_prob, 4),
+            "DEFENSIVE": round(defensive_prob, 4)
+        }
+
+        self.mode_probabilities = probs
+        self.market_mode = max(probs, key=probs.get)
+
+        breadth_strength = abs(advance_ratio - 0.5) * 2
+        dispersion_factor = 1 - min(1, dispersion)
+        confidence = (breadth_strength * 0.6 + dispersion_factor * 0.4) * 100
+
+        self.regime_confidence = round(confidence, 2)
 
         self.mode_score = {
             "advance_ratio": round(advance_ratio, 4),
-            "average_20d_return": round(avg_return, 4),
-            "advances": advances,
-            "declines": declines
+            "mean_return": round(mean_ret, 4),
+            "dispersion": round(dispersion, 4)
         }
 
         return returns
 
-    # -------------------------
-    # OPPORTUNITY ENGINE
-    # -------------------------
+    def compute_composite_scores(self, returns, fundamental_results):
 
-    def build_top_opportunities(self, returns, fundamental_results):
+        if not returns:
+            return []
 
-        if self.market_mode == "DEFENSIVE":
-            self.top_opportunities = []
-            return
+        mean_ret = statistics.mean(returns.values())
+        std_ret = statistics.stdev(returns.values()) if len(returns) > 1 else 0.0001
 
         weight_map = {
-            "LONG_TERM": 3,
-            "SWING": 2,
-            "WEAK": -1,
-            "AVOID": -2
+            "LONG_TERM": 1.0,
+            "SWING": 0.7,
+            "WEAK": -0.3,
+            "AVOID": -0.7
         }
 
         scored = []
 
-        sorted_returns = sorted(
-            returns.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
+        for symbol, ret in returns.items():
 
-        for rank, (symbol, ret) in enumerate(sorted_returns, start=1):
+            z_momentum = (ret - mean_ret) / (std_ret + 1e-6)
 
             fundamental_label = fundamental_results.get(symbol, "AVOID")
-            fundamental_weight = weight_map.get(fundamental_label, -2)
+            fundamental_score = weight_map.get(fundamental_label, -0.7)
 
-            if self.market_mode == "INVEST":
-                if fundamental_label not in ["LONG_TERM", "SWING"]:
-                    continue
+            regime_alignment = 1 if (
+                self.market_mode == "INVEST" and fundamental_label in ["LONG_TERM", "SWING"]
+            ) else 0.5
 
-            composite_score = (len(sorted_returns) - rank) + fundamental_weight
-            scored.append((symbol, composite_score))
+            composite = (
+                0.40 * z_momentum +
+                0.30 * fundamental_score +
+                0.15 * regime_alignment +
+                0.15 * self.mode_probabilities.get(self.market_mode, 0)
+            )
 
-        scored_sorted = sorted(scored, key=lambda x: x[1], reverse=True)
-        self.top_opportunities = scored_sorted[:20]
+            scored.append((symbol, composite))
 
-    # -------------------------
-    # HYBRID OUTPUT FORMAT
-    # -------------------------
+        return sorted(scored, key=lambda x: x[1], reverse=True)
 
-    def build_hybrid_output(self):
+    def compute_signal_agreement(self, scored):
 
-        action_map = {
-            "INVEST": "Systematic buying allowed. Focus on quality stocks.",
-            "TRADE": "Short-term opportunities only. Manage risk tightly.",
-            "DEFENSIVE": "Capital protection mode. Avoid new exposure."
-        }
+        if not scored:
+            return 0
 
-        return {
-            "MARKET_SUMMARY": {
-                "mode": self.market_mode,
-                "reason": self.mode_score,
-                "action_guidance": action_map[self.market_mode]
-            },
-            "TOP_20": [
-                {
-                    "rank": i + 1,
-                    "symbol": sym,
-                    "score": score
-                }
-                for i, (sym, score) in enumerate(self.top_opportunities)
-            ],
-            "generated_at": datetime.utcnow().isoformat()
-        }
+        top_scores = [s[1] for s in scored[:20]]
+        if len(top_scores) < 2:
+            return 50
 
-    # -------------------------
-    # MASTER EXECUTION
-    # -------------------------
+        std_top = statistics.stdev(top_scores)
+        agreement = max(0, 100 - std_top * 50)
+        return round(min(100, agreement), 2)
 
     def execute(self):
 
@@ -191,7 +193,7 @@ class MasterBrain:
 
         returns = self.safe_execute(
             self.detect_market_mode,
-            "Regime Engine"
+            "Regime Engine v2"
         )
 
         fundamental_results = self.safe_execute(
@@ -199,13 +201,39 @@ class MasterBrain:
             "Fundamental Engine"
         )
 
-        self.build_top_opportunities(returns, fundamental_results)
+        scored = self.compute_composite_scores(returns, fundamental_results)
 
-        return self.build_hybrid_output()
+        self.signal_agreement = self.compute_signal_agreement(scored)
+
+        if self.market_mode != "DEFENSIVE":
+            self.top_opportunities = scored[:20]
+        else:
+            self.top_opportunities = []
+
+        return self.build_output()
+
+    def build_output(self):
+
+        return {
+            "MARKET_SUMMARY": {
+                "mode": self.market_mode,
+                "probabilities": self.mode_probabilities,
+                "confidence": self.regime_confidence,
+                "signal_agreement": self.signal_agreement,
+                "metrics": self.mode_score
+            },
+            "TOP_20": [
+                {
+                    "rank": i + 1,
+                    "symbol": sym,
+                    "composite_score": round(score, 4)
+                }
+                for i, (sym, score) in enumerate(self.top_opportunities)
+            ],
+            "generated_at": datetime.utcnow().isoformat()
+        }
 
 
 if __name__ == "__main__":
     brain = MasterBrain()
-    result = brain.execute()
-    print(result)
-
+    print(brain.execute())
