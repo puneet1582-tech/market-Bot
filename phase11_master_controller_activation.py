@@ -5,8 +5,6 @@ Single Command Institutional Execution Controller
 
 import logging
 from datetime import datetime
-
-# Core Master Brain
 from master_brain import run_master_brain
 
 logging.basicConfig(
@@ -28,7 +26,5 @@ def run_full_system():
     except Exception as e:
         logging.exception(f"CENTRAL EXECUTION FAILURE: {str(e)}")
 
-
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
+if __name__ == "__main__":
     run_full_system()
