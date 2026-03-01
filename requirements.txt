@@ -1,12 +1,2 @@
-flask
 requests
-python-telegram-bot
-nsepython
-nsepython
-yfinance
-cachetools
-pandas
-newsapi-python
-vaderSentiment
-concurrent-log-handler
-numpy
+feedparser
