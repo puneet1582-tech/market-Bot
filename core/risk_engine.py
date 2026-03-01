@@ -82,7 +82,7 @@ class RiskEngine:
         return final_output
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = RiskEngine()
     result = engine.run()
     print("RISK ENGINE COMPLETED")

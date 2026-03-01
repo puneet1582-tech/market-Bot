@@ -64,7 +64,7 @@ def generate_report():
     return report
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     rep = generate_report()
     print("MARKET MODE:", rep["MODE"])
     print("STOCK ANALYSIS:\n")

@@ -1,6 +1,6 @@
 import requests
 
-API_KEY = "4c95d9dfaef14ba49fd3e5cd19b5efb7"
+api_key = os.getenv("API_KEY")
 
 def fetch_live_news():
     url = f"https://newsapi.org/v2/top-headlines?language=en&apiKey={API_KEY}"

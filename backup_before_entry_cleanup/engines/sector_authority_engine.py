@@ -54,5 +54,5 @@ def run_sector_authority_engine():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_sector_authority_engine()

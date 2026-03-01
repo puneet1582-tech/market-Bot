@@ -31,7 +31,7 @@ def run_daily_cycle():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     while True:
         try:
             run_daily_cycle()

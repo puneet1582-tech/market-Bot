@@ -29,5 +29,5 @@ def run():
     print("Quarterly comparison report saved:", REPORT)
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run()

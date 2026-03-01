@@ -32,5 +32,5 @@ def generate_top20():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     print(generate_top20())

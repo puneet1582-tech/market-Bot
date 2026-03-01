@@ -58,7 +58,7 @@ class NSEUniverseEngine:
         return len(symbols)
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = NSEUniverseEngine()
     count = engine.fetch_universe()
     print(f"NSE Universe Updated | Total Symbols: {count}")

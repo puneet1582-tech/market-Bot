@@ -97,5 +97,5 @@ def main():
     print("\n===== DEEP AUDIT COMPLETE =====\n")
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     main()

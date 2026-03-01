@@ -62,5 +62,5 @@ def run_fundamental_ingestion():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_fundamental_ingestion()

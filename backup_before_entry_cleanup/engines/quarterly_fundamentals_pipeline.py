@@ -54,5 +54,5 @@ def run_pipeline():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     print(run_pipeline())

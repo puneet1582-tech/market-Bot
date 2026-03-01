@@ -1,0 +1,11 @@
+{
+    "timestamp": "2026-03-01 20:13:06.650108",
+    "price_fetch": false,
+    "index_fetch": false,
+    "commodity_fetch": false,
+    "nse_fetch": false,
+    "multi_symbol_batch": false,
+    "telegram_live": false,
+    "intelligence_trigger": false,
+    "system_status": "LIVE DATA ENGINE FAILED"
+}
