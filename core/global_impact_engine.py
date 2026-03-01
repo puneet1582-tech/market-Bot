@@ -58,7 +58,7 @@ class GlobalImpactEngine:
         return final_impact
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = GlobalImpactEngine()
     result = engine.run()
     print("Global Impact Engine Completed")

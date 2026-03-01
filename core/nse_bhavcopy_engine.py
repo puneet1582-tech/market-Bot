@@ -94,7 +94,7 @@ class NSEBhavcopyEngine:
         return len(all_rows)
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = NSEBhavcopyEngine()
     count = engine.run()
     print(f"10-Year Bhavcopy Stored | Rows: {count}")

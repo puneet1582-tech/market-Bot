@@ -54,5 +54,5 @@ def run_price_ingestion():
     logging.info("PRICE HISTORY INGESTION COMPLETED")
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_price_ingestion()

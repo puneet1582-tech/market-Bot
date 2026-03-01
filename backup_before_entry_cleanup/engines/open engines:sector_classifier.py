@@ -26,6 +26,6 @@ class SectorClassifier:
         print("SECTOR CLASSIFICATION DONE")
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     sc = SectorClassifier()
     sc.classify()

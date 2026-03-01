@@ -47,7 +47,7 @@ class ModeEngine:
         return mode_results
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = ModeEngine()
     output = engine.run()
     print("Mode Engine Completed")

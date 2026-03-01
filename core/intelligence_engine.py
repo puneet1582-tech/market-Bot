@@ -61,7 +61,7 @@ class IntelligenceEngine:
         return final_output
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = IntelligenceEngine()
     result = engine.run()
     print("Combined Intelligence Engine Completed")

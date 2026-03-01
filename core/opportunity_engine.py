@@ -62,7 +62,7 @@ class OpportunityEngine:
         }
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = OpportunityEngine()
     result = engine.run()
     print("Top Opportunity Engine Completed")

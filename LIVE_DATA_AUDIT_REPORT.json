@@ -1,0 +1,22 @@
+{
+    "timestamp": "2026-03-01 19:59:15.725644",
+    "internet_connectivity": true,
+    "yahoo_price_test": false,
+    "global_index_test": false,
+    "commodity_test": false,
+    "news_sources_reachable": false,
+    "nse_reachable": false,
+    "telegram_test": false,
+    "price_schema_valid": true,
+    "data_files_found": true,
+    "system_health_score": 52,
+    "missing_capabilities": [
+        "yahoo_price_test",
+        "global_index_test",
+        "commodity_test",
+        "news_sources_reachable",
+        "nse_reachable",
+        "telegram_test"
+    ],
+    "next_action_required": "CORE LIVE INFRASTRUCTURE BROKEN"
+}

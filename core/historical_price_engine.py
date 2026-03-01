@@ -81,7 +81,7 @@ class HistoricalPriceEngine:
         return len(all_data)
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = HistoricalPriceEngine()
     count = engine.run()
     print(f"Historical Data Stored | Rows: {count}")

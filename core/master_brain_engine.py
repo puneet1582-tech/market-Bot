@@ -35,7 +35,7 @@ class MasterBrainEngine:
         return final_report
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = MasterBrainEngine()
     result = engine.run()
     print("MASTER BRAIN REPORT GENERATED")

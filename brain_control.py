@@ -128,7 +128,7 @@ def run_full_check():
 
     health_summary(core_score, core_total, price_ok, sector_ok, entry_count)
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     if "--full-check" in sys.argv:
         run_full_check()
     else:

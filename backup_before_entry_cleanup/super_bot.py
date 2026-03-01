@@ -156,5 +156,5 @@ def home():
     )
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     app.run(debug=True)

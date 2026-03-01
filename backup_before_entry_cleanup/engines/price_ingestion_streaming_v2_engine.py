@@ -103,5 +103,5 @@ def run_price_ingestion_streaming_v2():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_price_ingestion_streaming_v2()

@@ -73,7 +73,7 @@ class SectorEngine:
         return sector_summary
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     engine = SectorEngine()
     result = engine.run()
     print("Sector Intelligence Engine Completed")

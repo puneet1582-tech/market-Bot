@@ -67,5 +67,5 @@ def run_institutional_top20_engine():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_institutional_top20_engine()

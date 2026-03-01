@@ -1,6 +1,6 @@
 """
-ULTIMATE BRAIN v2.1
-INSTITUTIONAL ENGINE — TELEGRAM COMPATIBLE
+ULTIMATE BRAIN v3.0
+INSTITUTIONAL ENGINE — 10Y FUNDAMENTAL INTEGRATED
 """
 
 import csv
@@ -9,24 +9,31 @@ import statistics
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict, deque
+
 from core.data_ingestion_engine import DataIngestionEngine
 from core.fundamental_engine import FundamentalEngine
+from core.fundamental_10y_engine import Fundamental10YEngine
+
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 PRICE_DATA_PATH = PROJECT_ROOT / "data" / "prices"
 
+
 class MasterBrain:
 
     def __init__(self):
+
         self.market_mode = "UNDEFINED"
         self.mode_probabilities = {}
         self.regime_confidence = 0
-        self.signal_agreement = 0
         self.mode_score = {}
         self.top_opportunities = []
 
         self.ingestion = DataIngestionEngine()
         self.fundamental_engine = FundamentalEngine()
+        self.fundamental_10y_engine = Fundamental10YEngine()
+
+    # ---------------- SAFETY ---------------- #
 
     def safe_execute(self, func, name):
         try:
@@ -37,6 +44,8 @@ class MasterBrain:
 
     def validate_environment(self):
         self.ingestion.ensure_data_ready()
+
+    # ---------------- PRICE ENGINE ---------------- #
 
     def load_price_data(self):
 
@@ -64,6 +73,8 @@ class MasterBrain:
                             latest_prices[symbol] = (date, price)
 
         return symbol_buffers, latest_prices, prev_prices
+
+    # ---------------- MARKET MODE ---------------- #
 
     def detect_market_mode(self):
 
@@ -125,7 +136,9 @@ class MasterBrain:
 
         return returns
 
-    def compute_composite_scores(self, returns, fundamental_results):
+    # ---------------- COMPOSITE ENGINE ---------------- #
+
+    def compute_composite_scores(self, returns, fundamental_labels, fundamental_10y_scores):
 
         if not returns:
             return []
@@ -133,7 +146,7 @@ class MasterBrain:
         mean_ret = statistics.mean(returns.values())
         std_ret = statistics.stdev(returns.values()) if len(returns) > 1 else 0.0001
 
-        weight_map = {
+        label_weight_map = {
             "LONG_TERM": 1.0,
             "SWING": 0.7,
             "WEAK": -0.3,
@@ -145,20 +158,23 @@ class MasterBrain:
         for symbol, ret in returns.items():
 
             z = (ret - mean_ret) / (std_ret + 1e-6)
-            z = max(-3, min(3, z))  # cap extreme
+            z = max(-3, min(3, z))
 
-            fundamental_label = fundamental_results.get(symbol, "AVOID")
-            fundamental_score = weight_map.get(fundamental_label, -0.7)
+            label_score = label_weight_map.get(fundamental_labels.get(symbol, "AVOID"), -0.7)
+            ten_y_score = fundamental_10y_scores.get(symbol, 0)
 
             composite = (
-                0.5 * z +
-                0.3 * fundamental_score +
-                0.2 * self.mode_probabilities.get(self.market_mode, 0)
+                0.4 * z +
+                0.2 * label_score +
+                0.2 * self.mode_probabilities.get(self.market_mode, 0) +
+                0.2 * ten_y_score
             )
 
             scored.append((symbol, composite))
 
         return sorted(scored, key=lambda x: x[1], reverse=True)
+
+    # ---------------- EXECUTION ---------------- #
 
     def execute(self):
 
@@ -169,12 +185,21 @@ class MasterBrain:
             "Regime Engine"
         )
 
-        fundamental_results = self.safe_execute(
+        fundamental_labels = self.safe_execute(
             self.fundamental_engine.run,
-            "Fundamental Engine"
+            "Fundamental Label Engine"
         )
 
-        scored = self.compute_composite_scores(returns, fundamental_results)
+        fundamental_10y_scores = self.safe_execute(
+            self.fundamental_10y_engine.run,
+            "10Y Fundamental Engine"
+        )
+
+        scored = self.compute_composite_scores(
+            returns,
+            fundamental_labels,
+            fundamental_10y_scores
+        )
 
         if self.market_mode != "DEFENSIVE":
             self.top_opportunities = scored[:20]
@@ -182,6 +207,8 @@ class MasterBrain:
             self.top_opportunities = []
 
         return self.build_output()
+
+    # ---------------- OUTPUT ---------------- #
 
     def build_output(self):
 
@@ -196,14 +223,10 @@ class MasterBrain:
                 {
                     "rank": i + 1,
                     "symbol": sym,
-                    "score": round(score, 4),             # telegram compatible
-                    "composite_score": round(score, 4)    # institutional key
+                    "score": round(score, 4),
+                    "composite_score": round(score, 4)
                 }
                 for i, (sym, score) in enumerate(self.top_opportunities)
             ],
             "generated_at": datetime.utcnow().isoformat()
         }
-
-if __name__ == "__main__":
-    brain = MasterBrain()
-    print(brain.execute())

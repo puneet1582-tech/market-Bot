@@ -80,5 +80,5 @@ def run_sector_master_builder():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_sector_master_builder()

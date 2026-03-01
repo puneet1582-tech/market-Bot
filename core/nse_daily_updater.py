@@ -93,7 +93,7 @@ class NSEIncrementalUpdater:
         return f"Added rows: {len(new_rows)}"
 
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     updater = NSEIncrementalUpdater()
     result = updater.run()
     print(result)

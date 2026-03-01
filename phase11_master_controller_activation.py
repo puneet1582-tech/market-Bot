@@ -26,5 +26,5 @@ def run_full_system():
     except Exception as e:
         logging.exception(f"CENTRAL EXECUTION FAILURE: {str(e)}")
 
-if __name__ == "__main__":
+# HARDENED: disabled main entry
     run_full_system()

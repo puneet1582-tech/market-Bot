@@ -51,5 +51,5 @@ def run_live_nse_universe_ingestion():
     clean_universe()
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_live_nse_universe_ingestion()

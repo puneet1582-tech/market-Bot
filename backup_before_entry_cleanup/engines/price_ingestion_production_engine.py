@@ -86,5 +86,5 @@ def run_price_ingestion_production():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     run_price_ingestion_production()

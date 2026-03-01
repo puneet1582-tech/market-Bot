@@ -166,7 +166,7 @@ def home():
 
 
 # DISABLED ENTRY POINT
-# if __name__ == "__main__":
+# # DISABLED BY INSTITUTIONAL LOCK
     ingestion_thread = threading.Thread(target=run_engine)
     ingestion_thread.daemon = True
     ingestion_thread.start()
