@@ -1,7 +1,6 @@
 from real_intelligence_layer.master_intelligence_engine import MasterIntelligenceEngine
 import pandas as pd
 
-# Dummy structured test data
 company_data = {
     "financials": pd.DataFrame({
         "revenue": [100, 120, 150],
@@ -29,11 +28,24 @@ company_data = {
         "geopolitical_risk": "Moderate"
     },
     "liquidity": "High",
-    "volatility": "Low"
+    "volatility": "Low",
+
+    # NEW GLOBAL EVENT TEST DATA
+    "event_type": "War",
+    "sector_profile": {
+        "event_sensitivity": {
+            "War": -18,
+            "Oil Spike": -12,
+            "Dollar Surge": 5
+        }
+    },
+    "company_profile": {
+        "exposure_weight": 0.6
+    }
 }
 
 engine = MasterIntelligenceEngine()
 report = engine.run_full_analysis(company_data)
 
-print("\n===== REAL INTELLIGENCE REPORT =====")
+print("\n===== REAL INTELLIGENCE REPORT WITH GLOBAL IMPACT =====")
 print(report)
