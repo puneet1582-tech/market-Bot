@@ -1,6 +1,7 @@
 import time
-import brain_engine
 from flask import Flask
+import brain_engine
+import threading
 
 app = Flask(__name__)
 
@@ -8,17 +9,21 @@ app = Flask(__name__)
 def home():
     return "Ultimate Brain Live Engine Running"
 
-def background_loop():
+def engine_runner():
     while True:
+        print("ENGINE CYCLE START")
         try:
             brain_engine.run()
         except Exception as e:
             print("ENGINE ERROR:", e)
-        time.sleep(300)  # 5 minute interval
+        print("ENGINE CYCLE END")
+        time.sleep(60)  # 1 minute test interval
+
+def start_engine():
+    t = threading.Thread(target=engine_runner)
+    t.daemon = False
+    t.start()
 
 if __name__ == "__main__":
-    import threading
-    t = threading.Thread(target=background_loop)
-    t.daemon = True
-    t.start()
+    start_engine()
     app.run(host="0.0.0.0", port=10000)
