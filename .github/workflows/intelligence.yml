@@ -1,0 +1,33 @@
+name: Market Intelligence Runner
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: pip install requests feedparser
+
+      - name: Run Intelligence Engine
+        run: python intelligence_runner.py
+
+      - name: Commit Updated Data
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add live_data.json
+          git commit -m "Auto Update Market Intelligence" || echo "No changes"
+          git push
