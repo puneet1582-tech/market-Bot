@@ -1,40 +1,43 @@
-import requests
 import time
+import requests
 from flask import Flask
 
 app = Flask(__name__)
 
-HEADERS = {"User-Agent": "Mozilla/5.0"}
-
-def fetch_price(symbol):
+def fetch_stooq(symbol):
     try:
-        url = f"https://query1.finance.yahoo.com/v7/finance/quote?symbols={symbol}"
-        r = requests.get(url, headers=HEADERS, timeout=10)
-        data = r.json()
-        result = data.get("quoteResponse", {}).get("result", [])
-        if result:
-            return result[0].get("regularMarketPrice")
-        return None
+        url = f"https://stooq.com/q/l/?s={symbol}&f=sd2t2ohlcv&h&e=csv"
+        r = requests.get(url, timeout=5)
+        if r.status_code != 200:
+            print("HTTP ERROR:", r.status_code)
+            return None
+        lines = r.text.split("\n")
+        if len(lines) < 2:
+            print("EMPTY CSV")
+            return None
+        parts = lines[1].split(",")
+        if len(parts) < 7:
+            print("INVALID CSV")
+            return None
+        return parts[6]  # close price
     except Exception as e:
-        print("PRICE ERROR:", e)
+        print("FETCH ERROR:", e)
         return None
 
 def engine_loop():
     while True:
         print("===== ENGINE TICK =====")
-        oil = fetch_price("CL=F")
-        spx = fetch_price("^GSPC")
-        reliance = fetch_price("RELIANCE.NS")
-
+        oil = fetch_stooq("cl.f")
+        spx = fetch_stooq("^spx")
+        reliance = fetch_stooq("reliance.ns")
         print("OIL:", oil)
         print("SPX:", spx)
         print("RELIANCE:", reliance)
-
-        time.sleep(60)
+        time.sleep(120)
 
 @app.route("/")
 def home():
-    return "LEAN INTELLIGENCE ENGINE RUNNING"
+    return "LEAN ENGINE RUNNING - STOOQ MODE"
 
 if __name__ == "__main__":
     import threading
