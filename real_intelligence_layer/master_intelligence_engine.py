@@ -3,6 +3,7 @@ from .institutional_behavior_engine import InstitutionalBehaviorEngine
 from .sector_intelligence_engine import SectorIntelligenceEngine
 from .global_macro_mapping_engine import GlobalMacroMappingEngine
 from .market_mode_engine import MarketModeEngine
+from .global_impact_engine import GlobalImpactEngine
 
 class MasterIntelligenceEngine:
 
@@ -12,6 +13,7 @@ class MasterIntelligenceEngine:
         self.sector = SectorIntelligenceEngine()
         self.macro = GlobalMacroMappingEngine()
         self.market = MarketModeEngine()
+        self.impact = GlobalImpactEngine()
 
     def run_full_analysis(self, company_data):
         report = {}
@@ -24,5 +26,12 @@ class MasterIntelligenceEngine:
             company_data.get("liquidity"),
             company_data.get("volatility")
         )
+
+        if "event_type" in company_data:
+            report["global_event_impact"] = self.impact.analyze_event(
+                company_data.get("event_type"),
+                company_data.get("sector_profile", {}),
+                company_data.get("company_profile", {})
+            )
 
         return report
