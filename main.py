@@ -1,29 +1,43 @@
+import requests
 import time
 from flask import Flask
-import brain_engine
-import threading
 
 app = Flask(__name__)
 
+HEADERS = {"User-Agent": "Mozilla/5.0"}
+
+def fetch_price(symbol):
+    try:
+        url = f"https://query1.finance.yahoo.com/v7/finance/quote?symbols={symbol}"
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        data = r.json()
+        result = data.get("quoteResponse", {}).get("result", [])
+        if result:
+            return result[0].get("regularMarketPrice")
+        return None
+    except Exception as e:
+        print("PRICE ERROR:", e)
+        return None
+
+def engine_loop():
+    while True:
+        print("===== ENGINE TICK =====")
+        oil = fetch_price("CL=F")
+        spx = fetch_price("^GSPC")
+        reliance = fetch_price("RELIANCE.NS")
+
+        print("OIL:", oil)
+        print("SPX:", spx)
+        print("RELIANCE:", reliance)
+
+        time.sleep(60)
+
 @app.route("/")
 def home():
-    return "Ultimate Brain Live Engine Running"
-
-def engine_runner():
-    while True:
-        print("ENGINE CYCLE START")
-        try:
-            brain_engine.run()
-        except Exception as e:
-            print("ENGINE ERROR:", e)
-        print("ENGINE CYCLE END")
-        time.sleep(60)  # 1 minute test interval
-
-def start_engine():
-    t = threading.Thread(target=engine_runner)
-    t.daemon = False
-    t.start()
+    return "LEAN INTELLIGENCE ENGINE RUNNING"
 
 if __name__ == "__main__":
-    start_engine()
+    import threading
+    t = threading.Thread(target=engine_loop)
+    t.start()
     app.run(host="0.0.0.0", port=10000)
