@@ -1,5 +1,3 @@
-import csv
-
 class GlobalEventEngine:
 
     def __init__(self):
@@ -8,9 +6,16 @@ class GlobalEventEngine:
         self.event_sector_impact = {
             "WAR": {
                 "DEFENSE": 15,
-                "OIL": 10,
-                "AVIATION": -12,
-                "BANKING": 0
+                "ENERGY": 12,
+                "OIL": 12,
+                "METALS": 8,
+                "IT": -5,
+                "BANK": -3,
+                "BANKING": -3,
+                "AVIATION": -15,
+                "REALTY": -7,
+                "AUTO": -6,
+                "SMALL_CAP": -4
             }
         }
 
