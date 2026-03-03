@@ -6,53 +6,54 @@ class IntelligenceNarrative:
 
     def __init__(self):
         self.brain = MasterBrain()
-        self.event_engine = GlobalEventEngine()
+        self.global_engine = GlobalEventEngine()
+        self.sector_map = self.load_sector_map()
 
-    def run(self):
-        raw_output = self.brain.execute()
-        return self.build_readable_output(raw_output)
-
-    def get_sector(self, symbol):
-
+    def load_sector_map(self):
+        mapping = {}
         try:
             with open("data/sector/sector_mapping.csv", newline='', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    if row["symbol"] == symbol:
-                        return row["sector"]
+                    mapping[row["symbol"].strip().upper()] = row["sector"].strip().upper()
         except:
             pass
+        return mapping
 
-        return "UNKNOWN"
+    def classify_sector(self, symbol):
+        return self.sector_map.get(symbol, "SMALL_CAP")
 
-    def build_readable_output(self, raw):
+    def build_war_impact_text(self, sector):
+        impact = self.global_engine.get_sector_impact(sector)
+
+        if impact > 0:
+            return f"युद्ध की स्थिति में यह सेक्टर लगभग +{impact}% तक लाभ पा सकता है।"
+        elif impact < 0:
+            return f"युद्ध की स्थिति में यह सेक्टर लगभग {impact}% तक प्रभावित हो सकता है।"
+        else:
+            return "युद्ध का इस सेक्टर पर सीमित या तटस्थ प्रभाव।"
+
+    def run(self):
+        raw = self.brain.execute()
 
         report = {}
         report["MARKET_MODE"] = raw["MARKET_SUMMARY"]["mode"]
-        report["GLOBAL_EVENT"] = "WAR"
+        report["GLOBAL_EVENT"] = self.global_engine.current_event
 
-        readable_stocks = []
+        enriched = []
 
         for stock in raw["TOP_20"]:
 
             symbol = stock["symbol"]
-            sector = self.get_sector(symbol)
-            impact = self.event_engine.get_sector_impact(sector)
+            sector = self.classify_sector(symbol)
 
-            if impact > 0:
-                impact_view = f"इस सेक्टर पर युद्ध का सकारात्मक असर (+{impact}%) संभव।"
-            elif impact < 0:
-                impact_view = f"इस सेक्टर पर युद्ध का नकारात्मक असर ({impact}%) संभव।"
-            else:
-                impact_view = "इस सेक्टर पर युद्ध का सीमित या तटस्थ असर।"
-
-            readable_stocks.append({
+            enriched.append({
                 "symbol": symbol,
                 "sector": sector,
-                "global_impact": impact_view
+                "war_impact_view": self.build_war_impact_text(sector)
             })
 
-        report["TOP_STOCK_INTELLIGENCE"] = readable_stocks
+        report["TOP_STOCK_INTELLIGENCE"] = enriched
 
         return report
 
