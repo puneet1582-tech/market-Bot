@@ -23,21 +23,39 @@ class IntelligenceNarrative:
     def classify_sector(self, symbol):
         return self.sector_map.get(symbol, "SMALL_CAP")
 
-    def build_war_impact_text(self, sector):
-        impact = self.global_engine.get_sector_impact(sector)
+    def war_impact_percent(self, sector):
+        return self.global_engine.get_sector_impact(sector)
 
-        if impact > 0:
-            return f"युद्ध की स्थिति में यह सेक्टर लगभग +{impact}% तक लाभ पा सकता है।"
-        elif impact < 0:
-            return f"युद्ध की स्थिति में यह सेक्टर लगभग {impact}% तक प्रभावित हो सकता है।"
+    def multibagger_logic(self, sector, impact):
+        if impact > 8:
+            return "संरचनात्मक कम्पाउंडर संभावित"
+        elif impact >= 0:
+            return "उभरता हुआ मजबूत स्टॉक"
         else:
-            return "युद्ध का इस सेक्टर पर सीमित या तटस्थ प्रभाव।"
+            return "लंबी अवधि के लिए उपयुक्त नहीं"
+
+    def swing_logic(self, market_mode, impact):
+        if market_mode == "TRADE" and impact >= 0:
+            return "स्विंग ट्रेड के लिए उपयुक्त"
+        elif market_mode == "TRADE":
+            return "स्विंग में सावधानी"
+        else:
+            return "स्विंग के लिए उपयुक्त नहीं"
+
+    def final_label(self, multi, swing):
+        if "कम्पाउंडर" in multi:
+            return "LONG TERM WEALTH CREATION"
+        elif "स्विंग ट्रेड के लिए उपयुक्त" in swing:
+            return "SHORT TERM OPPORTUNITY"
+        else:
+            return "HIGH RISK / AVOID"
 
     def run(self):
         raw = self.brain.execute()
+        market_mode = raw["MARKET_SUMMARY"]["mode"]
 
         report = {}
-        report["MARKET_MODE"] = raw["MARKET_SUMMARY"]["mode"]
+        report["MARKET_MODE"] = market_mode
         report["GLOBAL_EVENT"] = self.global_engine.current_event
 
         enriched = []
@@ -46,11 +64,19 @@ class IntelligenceNarrative:
 
             symbol = stock["symbol"]
             sector = self.classify_sector(symbol)
+            impact = self.war_impact_percent(sector)
+
+            multi = self.multibagger_logic(sector, impact)
+            swing = self.swing_logic(market_mode, impact)
+            final = self.final_label(multi, swing)
 
             enriched.append({
                 "symbol": symbol,
                 "sector": sector,
-                "war_impact_view": self.build_war_impact_text(sector)
+                "war_impact_percent": impact,
+                "multibagger_view": multi,
+                "swing_view": swing,
+                "final_label": final
             })
 
         report["TOP_STOCK_INTELLIGENCE"] = enriched
