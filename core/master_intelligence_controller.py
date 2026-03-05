@@ -29,5 +29,5 @@ def run_full_intelligence():
     print("\nPIPELINE COMPLETE\n")
 
 
-if __name__ == "__main__":
+# disabled_entry_point
     run_full_intelligence()

@@ -49,5 +49,5 @@ def detect_multibaggers():
     print("Saved:", OUT_FILE)
 
 
-if __name__ == "__main__":
+# disabled_entry_point
     detect_multibaggers()
