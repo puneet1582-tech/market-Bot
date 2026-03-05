@@ -4,6 +4,7 @@ import os
 DATA_FILE = "data/annual_10y/annual_fundamentals_10y.csv"
 OUT_FILE = "data/business_evolution_10y.csv"
 
+
 def build_business_evolution():
 
     if not os.path.exists(DATA_FILE):
@@ -31,15 +32,11 @@ def build_business_evolution():
         debt_start = group["debt"].iloc[0]
         debt_end = group["debt"].iloc[-1]
 
-        rev_growth = (rev_end - rev_start) if rev_start != 0 else 0
-        profit_growth = (profit_end - profit_start) if profit_start != 0 else 0
-        debt_change = (debt_end - debt_start)
-
         results.append({
             "symbol": symbol,
-            "revenue_growth": rev_growth,
-            "profit_growth": profit_growth,
-            "debt_change": debt_change,
+            "revenue_growth": rev_end - rev_start,
+            "profit_growth": profit_end - profit_start,
+            "debt_change": debt_end - debt_start,
             "years_analyzed": len(group)
         })
 
@@ -51,6 +48,3 @@ def build_business_evolution():
     print("Companies analyzed:", len(out))
     print("Saved:", OUT_FILE)
 
-
-# disabled_entry_point
-    build_business_evolution()
