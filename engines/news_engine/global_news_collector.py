@@ -1,6 +1,6 @@
 import json
 import feedparser
-from datetime import datetime
+from datetime import datetime, UTC
 
 RSS_FEEDS = [
     "https://www.reuters.com/rssFeed/worldNews",
@@ -21,7 +21,7 @@ def collect_news():
                 "headline": entry.title,
                 "link": entry.link,
                 "source": url,
-                "timestamp": str(datetime.utcnow())
+                "timestamp": str(datetime.now(UTC))
             }
 
             news_list.append(news)
