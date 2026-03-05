@@ -14,5 +14,5 @@ def run():
             "timestamp": str(datetime.utcnow())
         })
 
-if __name__ == "__main__":
+# disabled_entry_point
     run()
