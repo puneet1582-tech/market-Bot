@@ -36,17 +36,21 @@ def build_fundamental_core():
         a["source"] = "annual"
         frames.append(a)
 
+    if len(frames) == 0:
+        print("No fundamental data found.")
+        return
+
     core = pd.concat(frames, ignore_index=True)
 
-    # add promoter data
+    # merge promoter data
     if not p.empty and "symbol" in p.columns:
         core = core.merge(p, on="symbol", how="left")
 
-    # add sector mapping
-    if not s.empty:
+    # merge sector
+    if not s.empty and "symbol" in s.columns:
         core = core.merge(s[["symbol","sector"]], on="symbol", how="left")
 
-    # add fii/dii by sector
+    # merge fii/dii by sector
     if not f.empty and "sector" in f.columns:
         core = core.merge(f, on="sector", how="left")
 
@@ -55,7 +59,3 @@ def build_fundamental_core():
     print("FUNDAMENTAL CORE DATASET BUILT")
     print("Rows:", len(core))
     print("Saved:", OUT_FILE)
-
-
-# disabled_entry_point
-    build_fundamental_core()
