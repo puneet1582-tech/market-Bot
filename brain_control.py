@@ -133,3 +133,9 @@ def run_full_check():
         run_full_check()
     else:
         print("Use: python brain_control.py --full-check")
+
+if __name__ == "__main__":
+    if "--full-check" in sys.argv:
+        run_full_check()
+    else:
+        run_full_check()
