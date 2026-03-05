@@ -8,6 +8,13 @@ def main():
 
     print(result)
 
+# TELEGRAM REPORT
+
+from engines.alert_engine.telegram_alert import send_market_report
+
+send_market_report(result)
+
+
     try:
         from engines.alert_engine.telegram_alert import send_market_report
         send_market_report(result)

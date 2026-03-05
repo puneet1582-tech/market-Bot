@@ -1,44 +1,54 @@
-import requests
-import json
 import os
+import requests
+import logging
+from datetime import datetime, timezone
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-def send_alert(message):
+logging.basicConfig(level=logging.INFO)
 
-    if not BOT_TOKEN or not CHAT_ID:
-        return
+class TelegramAlertEngine:
 
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    def __init__(self):
+        if not BOT_TOKEN or not CHAT_ID:
+            raise RuntimeError("Telegram credentials not set")
 
-    payload = {
-        "chat_id": CHAT_ID,
-        "text": message,
-        "parse_mode": "Markdown"
-    }
+        self.url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-    try:
-        requests.post(url, json=payload, timeout=10)
-    except:
-        pass
+    def send(self, text):
+
+        payload = {
+            "chat_id": CHAT_ID,
+            "text": text,
+            "parse_mode": "Markdown"
+        }
+
+        r = requests.post(self.url, json=payload, timeout=10)
+
+        if r.status_code != 200:
+            raise RuntimeError(f"Telegram API error {r.text}")
+
+    def send_market_report(self, result):
+
+        mode = result.get("MARKET_SUMMARY", {}).get("mode", "UNKNOWN")
+        top = result.get("TOP_20", [])[:10]
+
+        msg = f"*Ultimate Brain Report*\n"
+        msg += f"Time: {datetime.now(timezone.utc)}\n\n"
+        msg += f"*Market Mode:* {mode}\n\n"
+        msg += "*Top Opportunities*\n"
+
+        for i,s in enumerate(top,1):
+            msg += f"{i}. {s['symbol']}  ({round(s.get('score',0),3)})\n"
+
+        self.send(msg)
 
 
 def send_market_report(result):
 
     try:
-        mode = result["MARKET_SUMMARY"]["mode"]
-        top = result["TOP_20"][:10]
-    except:
-        return
-
-    msg = "*Ultimate Brain Report*\n\n"
-    msg += f"Market Mode: *{mode}*\n\n"
-    msg += "Top Opportunities:\n"
-
-    rank = 1
-    for s in top:
-        msg += f"{rank}. {s['symbol']} ({round(s['score'],3)})\n"
-        rank += 1
-
-    send_alert(msg)
+        engine = TelegramAlertEngine()
+        engine.send_market_report(result)
+    except Exception as e:
+        logging.error(f"Telegram error: {e}")
