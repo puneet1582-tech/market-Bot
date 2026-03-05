@@ -37,5 +37,5 @@ def build_sector_strength():
     print("Saved:", OUT_FILE)
 
 
-if __name__ == "__main__":
+# disabled_entry_point
     build_sector_strength()

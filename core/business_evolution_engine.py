@@ -52,5 +52,5 @@ def build_business_evolution():
     print("Saved:", OUT_FILE)
 
 
-if __name__ == "__main__":
+# disabled_entry_point
     build_business_evolution()
