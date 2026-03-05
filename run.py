@@ -62,3 +62,11 @@ try:
 except Exception as e:
     print("telegram alert error:", e)
 
+
+# TELEGRAM ALERT
+try:
+    from engines.alert_engine.telegram_alert import send_market_report
+    send_market_report(result)
+except Exception as e:
+    print("telegram error:", e)
+
