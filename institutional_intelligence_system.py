@@ -146,7 +146,7 @@ class InstitutionalIntelligence:
 # EXECUTE
 # ==========================================================
 
-if __name__ == "__main__":
+# disabled_entry_point
     system = InstitutionalIntelligence()
     output = system.run()
     print(output)

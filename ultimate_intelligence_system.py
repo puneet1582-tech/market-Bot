@@ -170,7 +170,7 @@ class UltimateIntelligence:
 # EXECUTE
 # ==========================================================
 
-if __name__ == "__main__":
+# disabled_entry_point
 
     system = UltimateIntelligence()
 

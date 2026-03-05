@@ -113,5 +113,5 @@ def run_engine():
     print("LIVE ENGINE RUN COMPLETE")
     print(json.dumps(report, indent=2))
 
-if __name__ == "__main__":
+# disabled_entry_point
     run_engine()
