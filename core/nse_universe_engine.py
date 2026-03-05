@@ -1,64 +1,66 @@
-"""
-ULTIMATE BRAIN
-NSE UNIVERSE INGESTION ENGINE
-Deterministic + Production Safe
-"""
-
-import csv
 import requests
-from pathlib import Path
-from datetime import datetime
+import pandas as pd
+import time
+import os
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-UNIVERSE_PATH = PROJECT_ROOT / "data" / "universe"
+URL = "https://archives.nseindia.com/content/equities/EQUITY_L.csv"
+OUT_FILE = "data/nse_universe_full.csv"
 
-NSE_UNIVERSE_URL = "https://archives.nseindia.com/content/equities/EQUITY_L.csv"
+HEADERS = {
+    "User-Agent": "Mozilla/5.0",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Connection": "keep-alive"
+}
 
-class NSEUniverseEngine:
+def download_with_retry(url, retries=5):
 
-    def __init__(self):
-        UNIVERSE_PATH.mkdir(parents=True, exist_ok=True)
-        self.output_file = UNIVERSE_PATH / "nse_universe.csv"
+    for i in range(retries):
 
-    def fetch_universe(self):
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=15)
 
-        headers = {
-            "User-Agent": "Mozilla/5.0"
-        }
+            if r.status_code == 200:
+                return r.content
 
-        response = requests.get(NSE_UNIVERSE_URL, headers=headers, timeout=10)
+        except Exception as e:
+            print("Download attempt failed:", i+1)
 
-        if response.status_code != 200:
-            raise RuntimeError(f"NSE fetch failed: {response.status_code}")
+        time.sleep(2)
 
-        lines = response.text.splitlines()
-        reader = csv.DictReader(lines)
-
-        required_columns = ["SYMBOL"]
-
-        if not all(col in reader.fieldnames for col in required_columns):
-            raise RuntimeError("Unexpected NSE universe schema")
-
-        symbols = []
-
-        for row in reader:
-            symbol = row["SYMBOL"].strip()
-            if symbol and symbol.isalpha():
-                symbols.append(symbol)
-
-        if not symbols:
-            raise RuntimeError("No symbols extracted from NSE file")
-
-        with open(self.output_file, "w", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow(["symbol"])
-            for s in sorted(set(symbols)):
-                writer.writerow([s])
-
-        return len(symbols)
+    return None
 
 
-# HARDENED: disabled main entry
-    engine = NSEUniverseEngine()
-    count = engine.fetch_universe()
-    print(f"NSE Universe Updated | Total Symbols: {count}")
+def build_nse_universe():
+
+    print("DOWNLOADING NSE STOCK UNIVERSE...")
+
+    content = download_with_retry(URL)
+
+    if content is None:
+        print("Failed to download NSE universe.")
+        return
+
+    from io import StringIO
+
+    df = pd.read_csv(StringIO(content.decode()))
+
+    if "SYMBOL" not in df.columns:
+        print("Invalid NSE schema.")
+        return
+
+    df = df.rename(columns={"SYMBOL": "symbol"})
+
+    df = df[["symbol"]]
+
+    df = df.drop_duplicates()
+
+    df = df.sort_values("symbol")
+
+    os.makedirs("data", exist_ok=True)
+
+    df.to_csv(OUT_FILE, index=False)
+
+    print("NSE UNIVERSE ENGINE COMPLETE")
+    print("Total stocks:", len(df))
+    print("Saved:", OUT_FILE)
+
