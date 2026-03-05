@@ -84,7 +84,7 @@ def build_company_data(symbol):
 
     return company_data
 
-if __name__ == "__main__":
+# disabled_entry_point
     engine = MasterIntelligenceEngine()
     data = build_company_data(SYMBOL)
     report = engine.run_full_analysis(data)

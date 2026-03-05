@@ -84,7 +84,7 @@ class IntelligenceNarrative:
         return report
 
 
-if __name__ == "__main__":
+# disabled_entry_point
     runner = IntelligenceNarrative()
     result = runner.run()
     print(result)

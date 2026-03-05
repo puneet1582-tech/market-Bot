@@ -14,6 +14,6 @@ def main():
     return result
 
 
-if __name__ == "__main__":
+# disabled_entry_point
     output = main()
     print(output)

@@ -39,7 +39,7 @@ def engine_loop():
 def home():
     return "LEAN ENGINE RUNNING - STOOQ MODE"
 
-if __name__ == "__main__":
+# disabled_entry_point
     import threading
     t = threading.Thread(target=engine_loop)
     t.start()
