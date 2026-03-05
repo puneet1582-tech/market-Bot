@@ -1,3 +1,4 @@
+from core.system_logger import log
 from core.master_intelligence_controller import MasterIntelligenceController
 from engines.alert_engine.telegram_alert import send_market_report
 
@@ -6,6 +7,8 @@ def main():
     brain = MasterIntelligenceController()
 
     result = brain.execute()
+log("Brain execution completed")
+
 
     print(result)
 
