@@ -11,6 +11,19 @@ def main():
     brain = MasterBrain()
     brain.validate_environment()
     result = brain.execute()
+
+# TELEGRAM ALERT
+
+try:
+
+    from engines.alert_engine.telegram_alert import send_market_report
+
+    send_market_report(result)
+
+except Exception as e:
+
+    print("telegram error:", e)
+
     return result
 
 
