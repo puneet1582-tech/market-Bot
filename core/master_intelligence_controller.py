@@ -1,3 +1,4 @@
+from core.opportunity_detection_engine import detect_opportunities
 import sys
 import os
 
@@ -30,6 +31,9 @@ def run_full_intelligence():
 
     print("\nRUNNING: Multibagger Detection Engine")
     detect_multibaggers()
+
+    print("\nRUNNING: Opportunity Detection Engine")
+    detect_opportunities()
 
     print("\nPIPELINE COMPLETE\n")
 
