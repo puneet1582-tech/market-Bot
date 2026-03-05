@@ -1,8 +1,15 @@
-from real_fundamental_engine import build_fundamental_core
-from business_evolution_engine import build_business_evolution
-from fii_dii_trend_engine import build_institutional_trend
-from sector_money_flow_engine import build_sector_strength
-from multibagger_detection_engine import detect_multibaggers
+import sys
+import os
+
+# ensure project root path
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
+
+from core.real_fundamental_engine import build_fundamental_core
+from core.business_evolution_engine import build_business_evolution
+from core.fii_dii_trend_engine import build_institutional_trend
+from core.sector_money_flow_engine import build_sector_strength
+from core.multibagger_detection_engine import detect_multibaggers
 
 
 def run_full_intelligence():
@@ -25,3 +32,4 @@ def run_full_intelligence():
     detect_multibaggers()
 
     print("\nPIPELINE COMPLETE\n")
+
