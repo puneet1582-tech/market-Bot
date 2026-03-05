@@ -1,6 +1,7 @@
 import json
 
 def news_stock_signals():
+
     try:
         with open("data/news/stock_impact.json") as f:
             data = json.load(f)
@@ -10,7 +11,8 @@ def news_stock_signals():
     signals = {}
 
     for item in data:
-        for s in item.get("stocks", []):
-            signals[s] = signals.get(s, 0) + 1
+        stocks = item.get("stocks", [])
+        for s in stocks:
+            signals[s] = signals.get(s,0) + 1
 
     return signals
