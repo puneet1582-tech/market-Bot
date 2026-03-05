@@ -1,3 +1,4 @@
+from core.nse_universe_engine import build_nse_universe
 from core.opportunity_detection_engine import detect_opportunities
 import sys
 import os
@@ -16,6 +17,9 @@ from core.multibagger_detection_engine import detect_multibaggers
 def run_full_intelligence():
 
     print("\nULTIMATE BRAIN — MASTER INTELLIGENCE PIPELINE\n")
+    print("RUNNING: NSE Universe Engine")
+    build_nse_universe()
+
 
     print("RUNNING: Fundamental Engine")
     build_fundamental_core()
