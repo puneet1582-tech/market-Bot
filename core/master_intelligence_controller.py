@@ -1,3 +1,4 @@
+from core.nse_price_engine import build_price_dataset
 from core.nse_universe_engine import build_nse_universe
 from core.opportunity_detection_engine import detect_opportunities
 import sys
@@ -18,6 +19,9 @@ def run_full_intelligence():
 
     print("\nULTIMATE BRAIN — MASTER INTELLIGENCE PIPELINE\n")
     print("RUNNING: NSE Universe Engine")
+    print("RUNNING: NSE Price Engine")
+    build_price_dataset()
+
     build_nse_universe()
 
 
