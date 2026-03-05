@@ -1,5 +1,5 @@
-sector,fii,dii,net_flow,smart_money_signal,sector_strength,sector_rank
-Energy,1200,-300,900,ACCUMULATION,900,1
-Micro,-200,-50,-250,DISTRIBUTION,-250,2
-IT,-500,200,-300,DISTRIBUTION,-300,3
-Finance,-800,100,-700,DISTRIBUTION,-700,4
+sector,fii,dii,institutional_strength
+Energy,1200,-300,900
+Micro,-200,-50,-250
+IT,-500,200,-300
+Finance,-800,100,-700
