@@ -139,3 +139,22 @@ if __name__ == "__main__":
         run_full_check()
     else:
         run_full_check()
+
+import subprocess
+
+def run_master_pipeline():
+
+    print("\nRUNNING MASTER INTELLIGENCE PIPELINE\n")
+
+    subprocess.run(["python3","core/master_intelligence_controller.py"])
+
+
+if __name__ == "__main__":
+
+    if "--full-check" in sys.argv:
+        run_full_check()
+
+    else:
+        run_full_check()
+        run_master_pipeline()
+
