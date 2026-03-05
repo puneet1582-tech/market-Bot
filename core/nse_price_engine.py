@@ -6,62 +6,69 @@ from datetime import datetime
 
 OUT_FILE = "data/nse_price_history_clean.csv"
 
-URL = "https://archives.nseindia.com/content/historical/EQUITIES/bhavcopy/pr/PR.csv"
+BHAVCOPY_URL = "https://archives.nseindia.com/products/content/sec_bhavdata_full.csv"
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0",
     "Accept": "*/*",
-    "Connection": "keep-alive"
+    "Connection": "keep-alive",
+    "Referer": "https://www.nseindia.com"
 }
-
-def download_retry(url, retries=5):
-    for i in range(retries):
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=20)
-            if r.status_code == 200:
-                return r.content
-        except Exception:
-            print("Retry:", i+1)
-        time.sleep(2)
-    return None
 
 
 def build_price_dataset():
 
     print("DOWNLOADING NSE PRICE DATA...")
 
-    content = download_retry(URL)
+    session = requests.Session()
 
-    if content is None:
-        print("Price download failed.")
-        return
+    try:
+        session.get("https://www.nseindia.com", headers=HEADERS, timeout=10)
+    except:
+        pass
 
-    from io import StringIO
-    df = pd.read_csv(StringIO(content.decode()))
+    for attempt in range(5):
 
-    # schema detection
-    cols = [c.upper() for c in df.columns]
+        try:
 
-    if "SYMBOL" not in cols:
-        print("Invalid price schema.")
-        return
+            r = session.get(BHAVCOPY_URL, headers=HEADERS, timeout=20)
 
-    df.columns = cols
+            if r.status_code == 200:
 
-    price_df = pd.DataFrame()
+                from io import StringIO
 
-    price_df["symbol"] = df["SYMBOL"]
-    price_df["price"] = df["CLOSE"] if "CLOSE" in df.columns else df["LAST"]
-    price_df["date"] = datetime.now().strftime("%Y-%m-%d")
+                df = pd.read_csv(StringIO(r.text))
 
-    price_df = price_df.drop_duplicates()
-    price_df = price_df.sort_values("symbol")
+                cols = [c.strip().upper() for c in df.columns]
 
-    os.makedirs("data", exist_ok=True)
+                df.columns = cols
 
-    price_df.to_csv(OUT_FILE, index=False)
+                if "SYMBOL" not in df.columns:
+                    print("Invalid schema")
+                    return
 
-    print("NSE PRICE ENGINE COMPLETE")
-    print("Rows:", len(price_df))
-    print("Saved:", OUT_FILE)
+                price_df = pd.DataFrame()
+
+                price_df["symbol"] = df["SYMBOL"]
+                price_df["price"] = df["CLOSE_PRICE"]
+                price_df["date"] = datetime.now().strftime("%Y-%m-%d")
+
+                price_df = price_df.drop_duplicates()
+
+                os.makedirs("data", exist_ok=True)
+
+                price_df.to_csv(OUT_FILE, index=False)
+
+                print("NSE PRICE ENGINE COMPLETE")
+                print("Rows:", len(price_df))
+                print("Saved:", OUT_FILE)
+
+                return
+
+        except Exception:
+            pass
+
+        time.sleep(2)
+
+    print("Price download failed.")
 
