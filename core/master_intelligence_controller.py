@@ -1,33 +1,28 @@
-import os
-import subprocess
-
-ENGINES = [
-    "core/real_fundamental_engine.py",
-    "core/business_evolution_engine.py",
-    "core/fii_dii_trend_engine.py",
-    "core/sector_money_flow_engine.py",
-    "core/multibagger_detection_engine.py"
-]
-
-def run_engine(engine):
-
-    if not os.path.exists(engine):
-        print("Missing:", engine)
-        return
-
-    print("\nRUNNING:", engine)
-    subprocess.run(["python3", engine])
+from core.real_fundamental_engine import build_fundamental_core
+from core.business_evolution_engine import build_business_evolution
+from core.fii_dii_trend_engine import build_institutional_trend
+from core.sector_money_flow_engine import build_sector_strength
+from core.multibagger_detection_engine import detect_multibaggers
 
 
 def run_full_intelligence():
 
     print("\nULTIMATE BRAIN — MASTER INTELLIGENCE PIPELINE\n")
 
-    for engine in ENGINES:
-        run_engine(engine)
+    print("RUNNING: Fundamental Engine")
+    build_fundamental_core()
+
+    print("\nRUNNING: Business Evolution Engine")
+    build_business_evolution()
+
+    print("\nRUNNING: FII/DII Trend Engine")
+    build_institutional_trend()
+
+    print("\nRUNNING: Sector Money Flow Engine")
+    build_sector_strength()
+
+    print("\nRUNNING: Multibagger Detection Engine")
+    detect_multibaggers()
 
     print("\nPIPELINE COMPLETE\n")
 
-
-# disabled_entry_point
-    run_full_intelligence()
