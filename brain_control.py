@@ -158,3 +158,31 @@ if __name__ == "__main__":
         run_full_check()
         run_master_pipeline()
 
+
+# MASTER PIPELINE IMPORT
+try:
+    from core.master_intelligence_controller import run_full_intelligence
+except:
+    run_full_intelligence = None
+
+
+def run_master_pipeline():
+
+    if run_full_intelligence is None:
+        print("Master pipeline import failed.")
+        return
+
+    print("\nRUNNING MASTER INTELLIGENCE PIPELINE\n")
+
+    run_full_intelligence()
+
+
+if __name__ == "__main__":
+
+    if "--full-check" in sys.argv:
+        run_full_check()
+
+    else:
+        run_full_check()
+        run_master_pipeline()
+
