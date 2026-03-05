@@ -3,7 +3,7 @@
     "headline": "Berkshire Hathaway begins repurchasing shares, CEO Greg Abel buys $15 million in stock",
     "link": "https://www.cnbc.com/2026/03/05/berkshire-hathaway-begins-repurchasing-shares-ceo-greg-abel-buys-15-million-in-stock-.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318814+00:00",
+    "timestamp": "2026-03-05 15:32:38.670128+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -14,7 +14,7 @@
     "headline": "U.S. crude oil touches highest level since June 2025 after Iran says it attacked a tanker",
     "link": "https://www.cnbc.com/2026/03/05/crude-oil-prices-today-iran-war.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318830+00:00",
+    "timestamp": "2026-03-05 15:32:38.670144+00:00",
     "macro_event": "OIL",
     "sectors": [
       "OIL_GAS",
@@ -22,8 +22,8 @@
       "AIRLINES"
     ],
     "stocks": [
-      "ONGC",
       "RELIANCE",
+      "ONGC",
       "OIL"
     ]
   },
@@ -31,26 +31,26 @@
     "headline": "Iran war threatens $11.7 trillion global travel industry as passengers get caught in crossfire",
     "link": "https://www.cnbc.com/2026/03/05/iran-war-travel-flights-cruise-hotels.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318834+00:00",
+    "timestamp": "2026-03-05 15:32:38.670149+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "Epstein files: DOJ plans to release new batch of documents 'fairly soon,' MS NOW reports",
     "link": "https://www.cnbc.com/2026/03/05/epstein-doj-bondi-trump.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318838+00:00",
+    "timestamp": "2026-03-05 15:32:38.670152+00:00",
     "macro_event": "TECH_POLICY",
     "sectors": [
       "IT",
@@ -58,35 +58,16 @@
     ],
     "stocks": [
       "TCS",
+      "HCLTECH",
       "WIPRO",
-      "INFY",
-      "HCLTECH"
-    ]
-  },
-  {
-    "headline": "Why Iran war oil price shock won't stop Fed pick Kevin Warsh from cutting interest rates",
-    "link": "https://www.cnbc.com/2026/03/05/iran-oil-fed-kevin-warsh.html",
-    "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318841+00:00",
-    "macro_event": "GEOPOLITICS",
-    "sectors": [
-      "DEFENCE",
-      "METALS"
-    ],
-    "stocks": [
-      "TATASTEEL",
-      "HAL",
-      "BEL",
-      "HINDALCO",
-      "BDL",
-      "JSWSTEEL"
+      "INFY"
     ]
   },
   {
     "headline": "Sen. Merkley proposes prediction market ban for government officials after Maduro, Iran bets",
     "link": "https://www.cnbc.com/2026/03/05/prediction-markets-merkley-ban-iran.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318844+00:00",
+    "timestamp": "2026-03-05 15:32:38.670155+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -97,45 +78,45 @@
     "headline": "Spain rejects White House claim it agreed to cooperate with U.S. forces amid Iran war",
     "link": "https://www.cnbc.com/2026/03/05/iran-war-us-spain-trump-sanchez-defense-trade-eu.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318847+00:00",
+    "timestamp": "2026-03-05 15:32:38.670158+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "Is Cuba next? What the fallout from the Iran war means for Havana",
     "link": "https://www.cnbc.com/2026/03/05/cuba-crisis-iran-war-trump-rubio-talks-venezuela-oil.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318849+00:00",
+    "timestamp": "2026-03-05 15:32:38.670161+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "Iran's Shahed drone: How 'the poor man\u2019s cruise missile\u2019 is shaping Tehran\u2019s retaliation",
     "link": "https://www.cnbc.com/2026/03/05/iran-shahed-136-drone-cost-air-defense-gulf-war-us-israel-gulf-scorpion-strike-centcom.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318852+00:00",
+    "timestamp": "2026-03-05 15:32:38.670163+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -143,10 +124,29 @@
     "stocks": []
   },
   {
+    "headline": "Why Iran war oil price shock won't stop Fed pick Kevin Warsh from cutting interest rates",
+    "link": "https://www.cnbc.com/2026/03/05/iran-oil-fed-kevin-warsh.html",
+    "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "timestamp": "2026-03-05 15:32:38.670167+00:00",
+    "macro_event": "GEOPOLITICS",
+    "sectors": [
+      "DEFENCE",
+      "METALS"
+    ],
+    "stocks": [
+      "BEL",
+      "HAL",
+      "HINDALCO",
+      "BDL",
+      "JSWSTEEL",
+      "TATASTEEL"
+    ]
+  },
+  {
     "headline": "The wealthy once rushed to Dubai. Now they're scrambling to leave",
     "link": "https://www.cnbc.com/2026/03/05/iran-war-dubai-rich.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318855+00:00",
+    "timestamp": "2026-03-05 15:32:38.670170+00:00",
     "macro_event": "TECH_POLICY",
     "sectors": [
       "IT",
@@ -154,35 +154,35 @@
     ],
     "stocks": [
       "TCS",
+      "HCLTECH",
       "WIPRO",
-      "INFY",
-      "HCLTECH"
+      "INFY"
     ]
   },
   {
     "headline": "Lawmakers to introduce bill strengthening federal anti-poverty program: It's 'a critical lifeline,' Warren says",
     "link": "https://www.cnbc.com/2026/03/05/supplemental-security-income-ssi-bill.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318858+00:00",
+    "timestamp": "2026-03-05 15:32:38.670173+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "Victoria\u2019s Secret posts longest sales growth streak in four years as shoppers return to Pink brand",
     "link": "https://www.cnbc.com/2026/03/05/victorias-secret-vsco-earnings-q4-2025.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318861+00:00",
+    "timestamp": "2026-03-05 15:32:38.670176+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -193,7 +193,7 @@
     "headline": "Elon Musk says Grok can help with your taxes. What experts say about using AI for tax prep",
     "link": "https://www.cnbc.com/2026/03/05/ai-elon-musk-grok-taxes.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318864+00:00",
+    "timestamp": "2026-03-05 15:32:38.670178+00:00",
     "macro_event": "TECH_POLICY",
     "sectors": [
       "IT",
@@ -201,16 +201,16 @@
     ],
     "stocks": [
       "TCS",
+      "HCLTECH",
       "WIPRO",
-      "INFY",
-      "HCLTECH"
+      "INFY"
     ]
   },
   {
     "headline": "5 unresolved questions hanging over the Anthropic\u2013Pentagon fracas: 'It's all very puzzling'",
     "link": "https://www.cnbc.com/2026/03/05/5-big-questions-anthropic-pentagon-ai-war.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318867+00:00",
+    "timestamp": "2026-03-05 15:32:38.670181+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -221,26 +221,26 @@
     "headline": "The U.S. insists the Iran conflict won't be a 'forever war.' Experts beg to differ",
     "link": "https://www.cnbc.com/2026/03/05/iran-conflict-duration-middle-east-regional-war-experts.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318870+00:00",
+    "timestamp": "2026-03-05 15:32:38.670184+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
-    "headline": "Eli Lilly launches program to help boost employer coverage of obesity drugs in U.S.",
-    "link": "https://www.cnbc.com/2026/03/05/eli-lilly-launches-program-to-boost-employer-coverage-of-obesity-drugs.html",
+    "headline": "Jim Cramer's top 10 things to watch in the stock market Thursday",
+    "link": "https://www.cnbc.com/2026/03/05/jim-cramers-top-10-things-to-watch-in-the-stock-market-thursday.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318873+00:00",
+    "timestamp": "2026-03-05 15:32:38.670187+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -248,10 +248,10 @@
     "stocks": []
   },
   {
-    "headline": "Jim Cramer's top 10 things to watch in the stock market Thursday",
-    "link": "https://www.cnbc.com/2026/03/05/jim-cramers-top-10-things-to-watch-in-the-stock-market-thursday.html",
+    "headline": "Eli Lilly launches program to help boost employer coverage of obesity drugs in U.S.",
+    "link": "https://www.cnbc.com/2026/03/05/eli-lilly-launches-program-to-boost-employer-coverage-of-obesity-drugs.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318876+00:00",
+    "timestamp": "2026-03-05 15:32:38.670190+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -262,7 +262,7 @@
     "headline": "Family offices double down on AI investments as startup fundraising breaks record in February",
     "link": "https://www.cnbc.com/2026/03/05/family-offices-ai-investments.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318879+00:00",
+    "timestamp": "2026-03-05 15:32:38.670193+00:00",
     "macro_event": "TECH_POLICY",
     "sectors": [
       "IT",
@@ -270,16 +270,16 @@
     ],
     "stocks": [
       "TCS",
+      "HCLTECH",
       "WIPRO",
-      "INFY",
-      "HCLTECH"
+      "INFY"
     ]
   },
   {
     "headline": "Defense experts back Anthropic in letter to Congress, slam DOD for setting 'dangerous precedent'",
     "link": "https://www.cnbc.com/2026/03/05/defense-experts-defend-anthropic-to-congress-slams-pentagons-move.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318882+00:00",
+    "timestamp": "2026-03-05 15:32:38.670196+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -290,26 +290,26 @@
     "headline": "Iran war and stocks: Why Global X says 'it might be time to double down' on emerging markets",
     "link": "https://www.cnbc.com/2026/03/05/iran-war-and-stocks-global-x-says-double-down-on-emerging-markets.html",
     "source": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "timestamp": "2026-03-05 15:24:33.318885+00:00",
+    "timestamp": "2026-03-05 15:32:38.670199+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "South East Water faces \u00a322m fine for supply failures",
     "link": "https://www.bbc.com/news/articles/c3v77yzn5gxo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855371+00:00",
+    "timestamp": "2026-03-05 15:32:39.265776+00:00",
     "macro_event": "TECH_POLICY",
     "sectors": [
       "IT",
@@ -317,16 +317,16 @@
     ],
     "stocks": [
       "TCS",
+      "HCLTECH",
       "WIPRO",
-      "INFY",
-      "HCLTECH"
+      "INFY"
     ]
   },
   {
     "headline": "China sets lowest economic growth target since 1991",
     "link": "https://www.bbc.com/news/articles/cqxddwl93qjo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855385+00:00",
+    "timestamp": "2026-03-05 15:32:39.265790+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -337,7 +337,7 @@
     "headline": "Are UK interest rates still expected to fall soon?",
     "link": "https://www.bbc.com/news/articles/c3dky111m40o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855389+00:00",
+    "timestamp": "2026-03-05 15:32:39.265793+00:00",
     "macro_event": "INTEREST_RATE",
     "sectors": [
       "BANK",
@@ -354,7 +354,7 @@
     "headline": "Will petrol and diesel prices go up now?",
     "link": "https://www.bbc.com/news/articles/c20zgjzz0e4o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855392+00:00",
+    "timestamp": "2026-03-05 15:32:39.265797+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -365,26 +365,26 @@
     "headline": "Stock markets and oil prices still volatile over fears Iran war may drag on",
     "link": "https://www.bbc.com/news/articles/cwy884ekn0jo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855395+00:00",
+    "timestamp": "2026-03-05 15:32:39.265800+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "We have more privacy controls yet less privacy than ever",
     "link": "https://www.bbc.com/news/articles/c4gj39zk1k0o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855398+00:00",
+    "timestamp": "2026-03-05 15:32:39.265803+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -395,7 +395,7 @@
     "headline": "Musk tells jury 'people read too much' into his posts",
     "link": "https://www.bbc.com/news/articles/c7433dz4ykwo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855402+00:00",
+    "timestamp": "2026-03-05 15:32:39.265806+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -406,7 +406,7 @@
     "headline": "Higher tariffs likely this week, says US Treasury",
     "link": "https://www.bbc.com/news/articles/cjwzzq70qgvo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855405+00:00",
+    "timestamp": "2026-03-05 15:32:39.265809+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -417,7 +417,7 @@
     "headline": "Father claims Google's AI product fuelled son's delusional spiral",
     "link": "https://www.bbc.com/news/articles/czx44p99457o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855408+00:00",
+    "timestamp": "2026-03-05 15:32:39.265812+00:00",
     "macro_event": "TECH_POLICY",
     "sectors": [
       "IT",
@@ -425,35 +425,35 @@
     ],
     "stocks": [
       "TCS",
+      "HCLTECH",
       "WIPRO",
-      "INFY",
-      "HCLTECH"
+      "INFY"
     ]
   },
   {
     "headline": "Remote work, offices shut: Tech giants scramble to respond as Iran war escalates",
     "link": "https://www.bbc.com/news/articles/c99jjr7d40yo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855410+00:00",
+    "timestamp": "2026-03-05 15:32:39.265814+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "Use our tax calculator to see how Spring Statement forecasts may affect you",
     "link": "https://www.bbc.com/news/articles/c99k7djlklyo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855413+00:00",
+    "timestamp": "2026-03-05 15:32:39.265817+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -464,7 +464,7 @@
     "headline": "Brewdog founder admits 'many mistakes' as hundreds lose jobs in sale",
     "link": "https://www.bbc.com/news/articles/cze00ddyw27o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855416+00:00",
+    "timestamp": "2026-03-05 15:32:39.265820+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -475,7 +475,7 @@
     "headline": "What are my rights if my flight is cancelled or delayed?",
     "link": "https://www.bbc.com/news/articles/c9qxnyengdjo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855419+00:00",
+    "timestamp": "2026-03-05 15:32:39.265823+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -486,7 +486,7 @@
     "headline": "Trump says US Navy will protect ships in Middle East 'if necessary'",
     "link": "https://www.bbc.com/news/articles/c20zg54g5vvo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855422+00:00",
+    "timestamp": "2026-03-05 15:32:39.265826+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -497,7 +497,7 @@
     "headline": "What Spring Statement forecasts could mean for your money",
     "link": "https://www.bbc.com/news/articles/cn0ekek5l87o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855425+00:00",
+    "timestamp": "2026-03-05 15:32:39.265828+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -508,7 +508,7 @@
     "headline": "No new tax rises in Spring Statement, but don't be fooled - tax bills are still rising",
     "link": "https://www.bbc.com/news/articles/cj6dwg4deewo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855428+00:00",
+    "timestamp": "2026-03-05 15:32:39.265831+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -519,26 +519,26 @@
     "headline": "Trump threatens to halt trade with Spain over military base access",
     "link": "https://www.bbc.com/news/articles/c8r1mzd8vygo?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855430+00:00",
+    "timestamp": "2026-03-05 15:32:39.265834+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   },
   {
     "headline": "Gas and oil prices soar and shares tumble on fears conflict could escalate",
     "link": "https://www.bbc.com/news/articles/cr5lz0vgy52o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855433+00:00",
+    "timestamp": "2026-03-05 15:32:39.265837+00:00",
     "macro_event": "OIL",
     "sectors": [
       "OIL_GAS",
@@ -546,8 +546,8 @@
       "AIRLINES"
     ],
     "stocks": [
-      "ONGC",
       "RELIANCE",
+      "ONGC",
       "OIL"
     ]
   },
@@ -555,7 +555,7 @@
     "headline": "'I make between \u00a3800 and \u00a32,000 a month on zero-hours contracts. There's no consistency'",
     "link": "https://www.bbc.com/news/articles/c20lz7rkqv4o?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855436+00:00",
+    "timestamp": "2026-03-05 15:32:39.265839+00:00",
     "macro_event": "OTHER",
     "sectors": [
       "GENERAL"
@@ -566,19 +566,19 @@
     "headline": "OpenAI changes deal with US military after backlash",
     "link": "https://www.bbc.com/news/articles/c3rz1nd0egro?at_medium=RSS&at_campaign=rss",
     "source": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "timestamp": "2026-03-05 15:24:33.855439+00:00",
+    "timestamp": "2026-03-05 15:32:39.265842+00:00",
     "macro_event": "GEOPOLITICS",
     "sectors": [
       "DEFENCE",
       "METALS"
     ],
     "stocks": [
-      "TATASTEEL",
-      "HAL",
       "BEL",
+      "HAL",
       "HINDALCO",
       "BDL",
-      "JSWSTEEL"
+      "JSWSTEEL",
+      "TATASTEEL"
     ]
   }
 ]
