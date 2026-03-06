@@ -13,31 +13,54 @@ def load_csv(name):
             return pd.DataFrame()
     return pd.DataFrame()
 
+def find_column(df, options):
+    for c in options:
+        if c in df.columns:
+            return c
+    return None
+
 def market_mode():
-    try:
-        vol = load_csv("nifty_volatility.csv")
-        if len(vol)==0:
-            return "NORMAL"
-        v = vol.iloc[-1].to_dict()
-        if float(list(v.values())[1]) > 20:
-            return "TRADE"
-        return "INVEST"
-    except:
+    vol = load_csv("nifty_volatility.csv")
+    if len(vol)==0:
         return "NORMAL"
+
+    col = find_column(vol,["volatility","value","vix"])
+
+    if col is None:
+        return "NORMAL"
+
+    v = float(vol.iloc[-1][col])
+
+    if v>20:
+        return "TRADE"
+
+    return "INVEST"
 
 def fundamental_check(symbol):
 
     q = load_csv("quarterly_fundamentals_clean.csv")
+
     if len(q)==0:
         return "DATA_MISSING"
 
-    df = q[q["symbol"]==symbol]
+    sym_col = find_column(q,["symbol","ticker","stock"])
 
-    if len(df) < 4:
+    if sym_col is None:
+        return "DATA_MISSING"
+
+    df = q[q[sym_col]==symbol]
+
+    if len(df)<4:
         return "WEAK"
 
-    rev_growth = df["revenue"].pct_change().mean()
-    profit_growth = df["net_profit"].pct_change().mean()
+    rev_col = find_column(df,["revenue","sales"])
+    prof_col = find_column(df,["net_profit","profit"])
+
+    if rev_col is None or prof_col is None:
+        return "AVERAGE"
+
+    rev_growth = df[rev_col].pct_change().mean()
+    profit_growth = df[prof_col].pct_change().mean()
 
     if rev_growth>0 and profit_growth>0:
         return "STRONG"
@@ -51,12 +74,18 @@ def institutional_check(symbol):
     if len(inst)==0:
         return "UNKNOWN"
 
-    df = inst[inst["symbol"]==symbol]
+    sym_col = find_column(inst,["symbol","stock","ticker"])
+    flow_col = find_column(inst,["flow","money_flow","net_flow"])
+
+    if sym_col is None or flow_col is None:
+        return "UNKNOWN"
+
+    df = inst[inst[sym_col]==symbol]
 
     if len(df)==0:
         return "UNKNOWN"
 
-    flow = df.iloc[-1]["flow"]
+    flow = float(df.iloc[-1][flow_col])
 
     if flow>0:
         return "BUYING"
@@ -70,12 +99,18 @@ def sector_check(symbol):
     if len(sec)==0:
         return "UNKNOWN"
 
-    df = sec[sec["symbol"]==symbol]
+    sym_col = find_column(sec,["symbol","stock","ticker"])
+    sec_col = find_column(sec,["sector","industry"])
+
+    if sym_col is None or sec_col is None:
+        return "UNKNOWN"
+
+    df = sec[sec[sym_col]==symbol]
 
     if len(df)==0:
         return "UNKNOWN"
 
-    return df.iloc[0]["sector"]
+    return df.iloc[0][sec_col]
 
 def global_macro():
 
@@ -89,12 +124,17 @@ def global_macro():
     if len(df)==0:
         return "NEUTRAL"
 
-    impact = df.iloc[-1]["impact"]
+    col = find_column(df,["impact","signal"])
 
-    if impact=="positive":
+    if col is None:
+        return "NEUTRAL"
+
+    impact = str(df.iloc[-1][col]).lower()
+
+    if "positive" in impact:
         return "POSITIVE"
 
-    if impact=="negative":
+    if "negative" in impact:
         return "NEGATIVE"
 
     return "NEUTRAL"
@@ -120,12 +160,18 @@ def run_master_brain():
         print("NO STOCK DATA")
         return
 
-    symbols = universe["symbol"].tolist()
+    sym_col = find_column(universe,["symbol","stock","ticker"])
+
+    if sym_col is None:
+        print("SYMBOL COLUMN NOT FOUND")
+        return
+
+    symbols = universe[sym_col].tolist()
 
     market = market_mode()
     macro = global_macro()
 
-    result = []
+    result=[]
 
     for s in symbols[:200]:
 
@@ -142,10 +188,10 @@ def run_master_brain():
             "decision":dec
         })
 
-    output = {
+    output={
         "MARKET_MODE":market,
         "GLOBAL_MACRO":macro,
-        "STOCK_ANALYSIS":result[:20]
+        "TOP_STOCK_ANALYSIS":result[:20]
     }
 
     print(json.dumps(output,indent=2))
