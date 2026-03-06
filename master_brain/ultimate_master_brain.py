@@ -1,76 +1,87 @@
-import json
 import pandas as pd
-from business_evolution_engine import business_strength
+import json
 
 def sector_check(symbol):
 
-    df = pd.read_csv("data/stocks.csv")
+    stocks=pd.read_csv("data/stocks.csv")
 
-    row = df[df["symbol"] == symbol]
+    row=stocks[stocks["symbol"]==symbol]
 
-    if len(row) == 0:
+    if len(row)==0:
         return "UNKNOWN"
 
     return row.iloc[0]["sector"]
 
-def institutional_check(sector):
 
-    df = pd.read_csv("data/institutional_money_flow.csv")
+def business_check(symbol):
 
-    row = df[df["sector"] == sector]
+    try:
 
-    if len(row) == 0:
-        return "UNKNOWN"
+        price=pd.read_csv("data/price_history.csv")
 
-    strength = row.iloc[-1]["institutional_strength"]
+    except:
 
-    if strength > 0:
-        return "BUYING"
+        return "DATA_MISSING"
 
-    return "SELLING"
+    df=price[price["symbol"]==symbol]
 
-def decision(business, institutional):
+    if len(df)<200:
+        return "WEAK"
 
-    if business == "STRONG" and institutional == "BUYING":
+    growth=df["price"].pct_change().mean()
+
+    if growth>0.002:
+        return "STRONG"
+
+    if growth>0:
+
+        return "AVERAGE"
+
+    return "WEAK"
+
+
+def decision(business):
+
+    if business=="STRONG":
+
         return "LONG TERM INVEST"
 
-    if business in ["STRONG","AVERAGE"]:
+    if business=="AVERAGE":
+
         return "TRADE"
 
     return "AVOID"
 
-def run_master_brain():
 
-    stocks = pd.read_csv("data/stocks.csv")
+def run():
 
-    symbols = stocks["symbol"].tolist()
+    stocks=pd.read_csv("data/stocks.csv")
 
-    results = []
+    symbols=stocks["symbol"].tolist()
 
-    for s in symbols[:50]:
+    results=[]
 
-        sector = sector_check(s)
+    for s in symbols[:20]:
 
-        business = business_strength(s)
+        sector=sector_check(s)
 
-        institutional = institutional_check(sector)
+        business=business_check(s)
 
-        final = decision(business,institutional)
+        final=decision(business)
 
         results.append({
-            "stock": s,
-            "sector": sector,
-            "business": business,
-            "institutional": institutional,
-            "final_decision": final
+
+            "stock":s,
+            "sector":sector,
+            "business":business,
+            "decision":final
+
         })
 
-    output = {
-        "BOT": "ULTIMATE BRAIN",
-        "ANALYSIS": results[:20]
-    }
+    print(json.dumps(results,indent=2))
 
-    print(json.dumps(output,indent=2))
 
-if __name__ == "__main__":
-    run_master_brain()
+if __name__=="__main__":
+
+    run()
+
