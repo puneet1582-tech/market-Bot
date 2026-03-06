@@ -7,40 +7,32 @@ from pathlib import Path
 DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 
-HEADERS={"User-Agent":"Mozilla/5.0"}
-
-# ===============================
-# NSE UNIVERSE
-# ===============================
+HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 def fetch_nse_universe():
 
-    url="https://archives.nseindia.com/content/equities/EQUITY_L.csv"
+    url = "https://archives.nseindia.com/content/equities/EQUITY_L.csv"
 
-    r=requests.get(url,headers=HEADERS,timeout=30)
+    r = requests.get(url, headers=HEADERS, timeout=30)
 
-    df=pd.read_csv(StringIO(r.text))
+    df = pd.read_csv(StringIO(r.text))
 
-    df=df.rename(columns={
-        "SYMBOL":"symbol",
-        "NAME OF COMPANY":"company",
-        "ISIN NUMBER":"isin"
+    df = df.rename(columns={
+        "SYMBOL": "symbol",
+        "NAME OF COMPANY": "company",
+        "ISIN NUMBER": "isin"
     })[["symbol","company","isin"]]
 
-    df.to_csv(DATA_DIR/"stocks.csv",index=False)
+    df.to_csv(DATA_DIR/"stocks.csv", index=False)
 
-    print("NSE stocks:",len(df))
+    print("NSE stocks:", len(df))
 
-
-# ===============================
-# SECTOR CLASSIFICATION
-# ===============================
 
 def build_sector():
 
-    df=pd.read_csv(DATA_DIR/"stocks.csv")
+    df = pd.read_csv(DATA_DIR/"stocks.csv")
 
-    keywords={
+    keywords = {
         "BANK":["BANK"],
         "IT":["TECH","INFOTECH","SOFTWARE"],
         "PHARMA":["PHARMA","DRUG"],
@@ -50,78 +42,64 @@ def build_sector():
         "CHEMICAL":["CHEM","INDUSTRIES"]
     }
 
-    sectors=[]
+    sectors = []
 
     for name in df["company"]:
 
-        name=str(name).upper()
+        name = str(name).upper()
 
-        sector="OTHER"
+        sector = "OTHER"
 
         for s,keys in keywords.items():
 
             if any(k in name for k in keys):
 
-                sector=s
+                sector = s
                 break
 
         sectors.append(sector)
 
-    df["sector"]=sectors
+    df["sector"] = sectors
 
-    df.to_csv(DATA_DIR/"stocks.csv",index=False)
+    df.to_csv(DATA_DIR/"stocks.csv", index=False)
 
     print("Sector mapping complete")
 
 
-# ===============================
-# FUNDAMENTALS (YAHOO)
-# ===============================
+def fetch_price_history():
 
-def fetch_fundamentals():
+    stocks = pd.read_csv(DATA_DIR/"stocks.csv")
 
-    stocks=pd.read_csv(DATA_DIR/"stocks.csv")
+    rows = []
 
-    rows=[]
+    for sym in stocks["symbol"]:
 
-    for sym in stocks["symbol"][:200]:
-
-        ticker=sym+".NS"
+        ticker = sym + ".NS"
 
         try:
 
-            t=yf.Ticker(ticker)
+            data = yf.download(ticker, period="5y", progress=False)
 
-            info=t.info
+            if len(data) == 0:
+                continue
 
-            rows.append({
+            for d,p in data["Close"].items():
 
-                "symbol":sym,
-
-                "market_cap":info.get("marketCap"),
-
-                "pe":info.get("trailingPE"),
-
-                "roe":info.get("returnOnEquity"),
-
-                "debt_equity":info.get("debtToEquity")
-
-            })
+                rows.append({
+                    "symbol": sym,
+                    "date": str(d.date()),
+                    "price": float(p)
+                })
 
         except:
-
             continue
 
-    df=pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
 
-    df.to_csv(DATA_DIR/"fundamentals.csv",index=False)
+    df.to_csv(DATA_DIR/"price_history.csv", index=False)
 
-    print("Fundamental rows:",len(df))
+    print("Price history rows:", len(df))
 
-
-# ===============================
-# RUN
-# ===============================
 
 def run():
 
@@ -131,12 +109,10 @@ def run():
 
     build_sector()
 
-    fetch_fundamentals()
+    fetch_price_history()
 
     print("DATA ENGINE COMPLETE")
 
 
-if __name__=="__main__":
-
+if __name__ == "__main__":
     run()
-
