@@ -1,6 +1,6 @@
 import pandas as pd
 
-PRICE_FILE="data/prices/latest_prices.csv"
+PRICE_FILE="data/prices/historical_prices.csv"
 
 def generate_top_opportunities():
 
@@ -9,9 +9,14 @@ def generate_top_opportunities():
     except:
         return []
 
-    df["score"]=df["return_1d"]+df["volume_change"]
+    if "price" not in df.columns:
+        return []
 
-    df=df.sort_values("score",ascending=False)
+    df["return_1d"]=df["price"].pct_change()
+
+    df=df.dropna()
+
+    df=df.sort_values("return_1d",ascending=False)
 
     result=[]
 
@@ -19,7 +24,7 @@ def generate_top_opportunities():
 
         result.append({
             "symbol":r["symbol"],
-            "score":round(float(r["score"]),3)
+            "score":round(float(r["return_1d"]),4)
         })
 
     return result
