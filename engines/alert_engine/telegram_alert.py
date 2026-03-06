@@ -39,6 +39,17 @@ class TelegramAlertEngine:
         msg += f"*Market Mode:* {mode}\n\n"
         msg += "*Top Opportunities*\n"
 
+Sector Strength
+
+
+        from engines.sector_report_engine import sector_report
+
+        msg += "\nSector Strength\n"
+
+        msg += sector_report()
+
+        msg += "\n\nTop Opportunities\n"
+
         for i,s in enumerate(top,1):
             msg += f"{i}. {s['symbol']}  ({round(s.get('score',0),3)})\n"
 
