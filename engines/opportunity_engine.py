@@ -1,57 +1,48 @@
-from engines.news_weight_engine import news_weight
 import pandas as pd
+from engines.news_weight_engine import news_weight
 
-PRICE_FILE="data/prices/historical_prices.csv"
+PRICE_FILE = "data/prices/historical_prices.csv"
 
 def generate_top_opportunities():
 
     try:
-        df=pd.read_csv(PRICE_FILE)
+        df = pd.read_csv(PRICE_FILE)
     except:
         return []
 
-    # ensure required columns
     if "symbol" not in df.columns or "price" not in df.columns:
         return []
 
-    # convert date
+    # ensure date column
     if "date" in df.columns:
-        df["date"]=pd.to_datetime(df["date"])
+        df["date"] = pd.to_datetime(df["date"])
+        df = df.sort_values("date")
 
-        # latest record per stock
-        df=df.sort_values("date")
-    weights=news_weight()
+    # last two rows per stock
+    df = df.groupby("symbol").tail(2)
 
-    df["news_boost"]=df["symbol"].map(weights).fillna(0)
+    # daily return
+    df["return_1d"] = df.groupby("symbol")["price"].pct_change()
 
-    df["return_1d"]=df["return_1d"]+(df["news_boost"]*0.01)
+    df = df.dropna()
 
-        df=df.groupby("symbol").tail(2)
+    # keep latest row per symbol
+    df = df.groupby("symbol").tail(1)
 
-    # calculate return
-    df["return_1d"]=df.groupby("symbol")["price"].pct_change()
+    # news weighting
+    weights = news_weight()
+    df["news_boost"] = df["symbol"].map(weights).fillna(0)
 
-    df=df.dropna()
+    df["score"] = df["return_1d"] + (df["news_boost"] * 0.01)
 
-    # keep latest row per stock
-    df=df.groupby("symbol").tail(1)
+    df = df.sort_values("score", ascending=False)
 
-    # rank
-    df=df.sort_values("return_1d",ascending=False)
-    weights=news_weight()
+    result = []
 
-    df["news_boost"]=df["symbol"].map(weights).fillna(0)
-
-    df["return_1d"]=df["return_1d"]+(df["news_boost"]*0.01)
-
-
-    result=[]
-
-    for _,r in df.head(20).iterrows():
-
+    for _, r in df.head(20).iterrows():
         result.append({
-            "symbol":r["symbol"],
-            "score":round(float(r["return_1d"]*100),2)
+            "symbol": r["symbol"],
+            "score": round(float(r["score"] * 100), 2)
         })
 
     return result
