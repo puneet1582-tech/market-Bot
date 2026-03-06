@@ -1,65 +1,45 @@
 import os
 import requests
-import logging
 from datetime import datetime, timezone
+from engines.sector_report_engine import sector_report
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-logging.basicConfig(level=logging.INFO)
 
-class TelegramAlertEngine:
+def send_message(text):
 
-    def __init__(self):
-        if not BOT_TOKEN or not CHAT_ID:
-            raise RuntimeError("Telegram credentials not set")
+    if not BOT_TOKEN or not CHAT_ID:
+        return
 
-        self.url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    url=f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-    def send(self, text):
+    payload={
+        "chat_id":CHAT_ID,
+        "text":text,
+        "parse_mode":"Markdown"
+    }
 
-        payload = {
-            "chat_id": CHAT_ID,
-            "text": text,
-            "parse_mode": "Markdown"
-        }
-
-        r = requests.post(self.url, json=payload, timeout=10)
-
-        if r.status_code != 200:
-            raise RuntimeError(f"Telegram API error {r.text}")
-
-    def send_market_report(self, result):
-
-        mode = result.get("MARKET_SUMMARY", {}).get("mode", "UNKNOWN")
-        top = result.get("TOP_20", [])[:10]
-
-        msg = f"*Ultimate Brain Report*\n"
-        msg += f"Time: {datetime.now(timezone.utc)}\n\n"
-        msg += f"*Market Mode:* {mode}\n\n"
-        msg += "*Top Opportunities*\n"
-
-Sector Strength
-
-
-        from engines.sector_report_engine import sector_report
-
-        msg += "\nSector Strength\n"
-
-        msg += sector_report()
-
-        msg += "\n\nTop Opportunities\n"
-
-        for i,s in enumerate(top,1):
-            msg += f"{i}. {s['symbol']}  ({round(s.get('score',0),3)})\n"
-
-        self.send(msg)
+    requests.post(url,json=payload,timeout=10)
 
 
 def send_market_report(result):
 
-    try:
-        engine = TelegramAlertEngine()
-        engine.send_market_report(result)
-    except Exception as e:
-        logging.error(f"Telegram error: {e}")
+    mode=result.get("MARKET_SUMMARY",{}).get("mode","UNKNOWN")
+    top=result.get("TOP_20",[])[:10]
+
+    msg="Ultimate Brain Report\n"
+    msg+=f"Time: {datetime.now(timezone.utc)}\n\n"
+
+    msg+=f"Market Mode: {mode}\n\n"
+
+    msg+="Sector Strength\n"
+    msg+=sector_report()
+    msg+="\n\n"
+
+    msg+="Top Opportunities\n"
+
+    for i,s in enumerate(top,1):
+        msg+=f"{i}. {s['symbol']}  ({round(s['score'],2)})\n"
+
+    send_message(msg)
