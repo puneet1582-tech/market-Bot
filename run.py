@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.getcwd())
+
 from core.env_loader import load_env
 load_env()
 

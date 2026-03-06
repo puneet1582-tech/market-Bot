@@ -1,87 +1,148 @@
 import pandas as pd
 import json
+from pathlib import Path
 
-def sector_check(symbol):
+DATA = Path("data")
 
-    stocks=pd.read_csv("data/stocks.csv")
+def load(name):
+    p = DATA / name
+    if p.exists():
+        try:
+            return pd.read_csv(p)
+        except:
+            return pd.DataFrame()
+    return pd.DataFrame()
 
-    row=stocks[stocks["symbol"]==symbol]
-
-    if len(row)==0:
-        return "UNKNOWN"
-
-    return row.iloc[0]["sector"]
-
-
-def business_check(symbol):
-
+def market_mode():
     try:
-
-        price=pd.read_csv("data/price_history.csv")
-
+        vix = load("nifty_volatility.csv")
+        if len(vix)==0:
+            return "NORMAL"
+        last=vix.iloc[-1]["volatility"]
+        if last>25:
+            return "DEFENSIVE"
+        if last<15:
+            return "INVEST"
+        return "TRADE"
     except:
+        return "NORMAL"
 
+def sector_of(symbol,stocks):
+    try:
+        row=stocks[stocks["symbol"]==symbol]
+        if len(row)==0:
+            return "UNKNOWN"
+        s=row.iloc[0]["sector"]
+        if pd.isna(s) or s=="UNKNOWN":
+            return "OTHER"
+        return s
+    except:
+        return "OTHER"
+
+def business_strength(symbol):
+    df=load("quarterly_fundamentals_clean.csv")
+    df=df[df["symbol"]==symbol]
+
+    if len(df)<4:
         return "DATA_MISSING"
 
-    df=price[price["symbol"]==symbol]
+    sales=df["sales"].pct_change().mean()
+    profit=df["profit"].pct_change().mean()
+    cash=df["cashflow"].pct_change().mean()
+    debt=df["debt"].pct_change().mean()
 
-    if len(df)<200:
-        return "WEAK"
+    score=0
+    if sales>0: score+=1
+    if profit>0: score+=1
+    if cash>0: score+=1
+    if debt<0: score+=1
 
-    growth=df["price"].pct_change().mean()
-
-    if growth>0.002:
+    if score>=3:
         return "STRONG"
-
-    if growth>0:
-
+    if score==2:
         return "AVERAGE"
-
     return "WEAK"
 
+def institutional_strength(sector):
+    inst=load("institutional_money_flow.csv")
+    df=inst[inst["sector"]==sector]
 
-def decision(business):
+    if len(df)==0:
+        return "UNKNOWN"
 
-    if business=="STRONG":
+    v=df.iloc[0]["institutional_strength"]
 
-        return "LONG TERM INVEST"
+    if v>0:
+        return "BUYING"
+    if v<0:
+        return "SELLING"
+    return "NEUTRAL"
 
-    if business=="AVERAGE":
+def sector_strength(sector):
+    s=load("sector_strength_rank.csv")
+    df=s[s["sector"]==sector]
 
-        return "TRADE"
+    if len(df)==0:
+        return "NORMAL"
 
-    return "AVOID"
+    r=df.iloc[0]["strength"]
 
+    if r>0.6:
+        return "STRONG"
+    if r<0.3:
+        return "WEAK"
+    return "NORMAL"
+
+def final_decision(business,inst,sector):
+
+    if business=="STRONG" and inst=="BUYING":
+        return "LONG_TERM_INVEST"
+
+    if business in ["STRONG","AVERAGE"] and sector=="STRONG":
+        return "SWING_TRADE"
+
+    if business=="WEAK":
+        return "AVOID"
+
+    return "WATCH"
 
 def run():
 
-    stocks=pd.read_csv("data/stocks.csv")
+    stocks=load("stocks.csv")
+    symbols=list(stocks["symbol"])[:20]
 
-    symbols=stocks["symbol"].tolist()
+    mode=market_mode()
 
-    results=[]
+    output=[]
 
-    for s in symbols[:20]:
+    for s in symbols:
 
-        sector=sector_check(s)
+        sector=sector_of(s,stocks)
+        business=business_strength(s)
+        inst=institutional_strength(sector)
+        sec_strength=sector_strength(sector)
 
-        business=business_check(s)
+        decision=final_decision(business,inst,sec_strength)
 
-        final=decision(business)
+        reason=f"{business} business + {inst} institutional flow + {sec_strength} sector"
 
-        results.append({
-
+        output.append({
             "stock":s,
             "sector":sector,
             "business":business,
-            "decision":final
-
+            "institutional":inst,
+            "sector_strength":sec_strength,
+            "decision":decision,
+            "reason":reason
         })
 
-    print(json.dumps(results,indent=2))
+    result={
+        "BOT":"ULTIMATE_BRAIN",
+        "MARKET_MODE":mode,
+        "ANALYSIS":output
+    }
 
+    print(json.dumps(result,indent=2))
 
 if __name__=="__main__":
-
     run()
-
