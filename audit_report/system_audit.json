@@ -1,0 +1,101 @@
+{
+    "total_files": 2919,
+    "total_folders": 307,
+    "engine_report": {
+        "master_brain": {
+            "found": [
+                "brain_engine.py",
+                "brain_control.py",
+                "run.py",
+                "main.py"
+            ],
+            "missing": []
+        },
+        "fundamental_engines": {
+            "found": [
+                "fundamental_engine.py"
+            ],
+            "missing": [
+                "quarterly_engine.py",
+                "financial_engine.py"
+            ]
+        },
+        "institutional_engines": {
+            "found": [
+                "fii_dii_engine.py",
+                "ownership_engine.py",
+                "promoter_engine.py"
+            ],
+            "missing": []
+        },
+        "buffett_analysis": {
+            "found": [],
+            "missing": [
+                "moat_engine.py",
+                "business_quality_engine.py",
+                "management_engine.py",
+                "compounding_engine.py"
+            ]
+        },
+        "market_intelligence": {
+            "found": [
+                "sector_engine.py",
+                "mode_engine.py"
+            ],
+            "missing": [
+                "sector_money_flow.py"
+            ]
+        },
+        "global_macro": {
+            "found": [
+                "global_news_engine.py"
+            ],
+            "missing": [
+                "macro_engine.py",
+                "policy_engine.py"
+            ]
+        },
+        "opportunity_detection": {
+            "found": [
+                "top20_engine.py",
+                "multibagger_engine.py",
+                "trade_engine.py"
+            ],
+            "missing": []
+        },
+        "data_pipeline": {
+            "found": [
+                "universe_engine.py"
+            ],
+            "missing": [
+                "price_data_engine.py",
+                "data_ingestion.py"
+            ]
+        },
+        "automation": {
+            "found": [
+                "production_autorun.py",
+                "scheduler_engine.py"
+            ],
+            "missing": []
+        },
+        "telegram": {
+            "found": [
+                "alert_engine.py"
+            ],
+            "missing": [
+                "telegram_engine.py"
+            ]
+        },
+        "deployment": {
+            "found": [
+                "render.yaml",
+                "requirements.txt"
+            ],
+            "missing": [
+                "Dockerfile"
+            ]
+        }
+    },
+    "completion_percent": 36.36363636363637
+}
