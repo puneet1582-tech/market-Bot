@@ -1,3 +1,4 @@
+from engines.news_weight_engine import news_weight
 import pandas as pd
 
 PRICE_FILE="data/prices/historical_prices.csv"
@@ -19,6 +20,12 @@ def generate_top_opportunities():
 
         # latest record per stock
         df=df.sort_values("date")
+    weights=news_weight()
+
+    df["news_boost"]=df["symbol"].map(weights).fillna(0)
+
+    df["return_1d"]=df["return_1d"]+(df["news_boost"]*0.01)
+
         df=df.groupby("symbol").tail(2)
 
     # calculate return
@@ -31,6 +38,12 @@ def generate_top_opportunities():
 
     # rank
     df=df.sort_values("return_1d",ascending=False)
+    weights=news_weight()
+
+    df["news_boost"]=df["symbol"].map(weights).fillna(0)
+
+    df["return_1d"]=df["return_1d"]+(df["news_boost"]*0.01)
+
 
     result=[]
 
