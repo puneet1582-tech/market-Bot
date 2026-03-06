@@ -1,0 +1,1542 @@
+{
+    "folders": 309,
+    "files": 2927,
+    "python_modules": 551,
+    "engine_map": {
+        "master_control": [
+            "./brain_engine.py",
+            "./orchestrator.py",
+            "./run.py",
+            "./super_bot.py",
+            "./brain_control.py",
+            "./main.py",
+            "./master_brain.py",
+            "./production_autorun.py",
+            "./core/master_brain.py",
+            "./core/master_brain_engine.py",
+            "./engines/trading_brain_engine.py",
+            "./backup_before_entry_cleanup/brain_engine.py",
+            "./backup_before_entry_cleanup/orchestrator.py",
+            "./backup_before_entry_cleanup/run.py",
+            "./backup_before_entry_cleanup/super_bot.py",
+            "./backup_before_entry_cleanup/brain_control.py",
+            "./backup_before_entry_cleanup/main.py",
+            "./backup_before_entry_cleanup/master_brain.py",
+            "./backup_before_entry_cleanup/production_autorun.py",
+            "./backup_before_entry_cleanup/engines/trading_brain_engine.py"
+        ],
+        "fundamental_layer": [
+            "./update_fundamentals_all.py",
+            "./quarterly_comparison_engine.py",
+            "./update_fundamentals.py",
+            "./make_clean_fundamentals.py",
+            "./data/annual_fundamentals_10y_full.csv",
+            "./data/quarterly_fundamentals_full.csv",
+            "./data/fundamentals_10y_pilot.csv",
+            "./data/fundamentals.csv",
+            "./data/quarterly_fundamentals.csv",
+            "./data/quarterly_fundamentals_clean.csv",
+            "./data/fundamentals_master.csv",
+            "./data/annual_10y/annual_fundamentals_10y.csv",
+            "./core/fundamental_10y_engine.py",
+            "./core/fundamental_engine.py",
+            "./core/real_fundamental_engine.py",
+            "./core/__pycache__/fundamental_engine.cpython-312.pyc",
+            "./core/__pycache__/real_fundamental_engine.cpython-312.pyc",
+            "./core/__pycache__/fundamental_10y_engine.cpython-312.pyc",
+            "./engines/fundamental_10y_pilot_engine.py",
+            "./engines/quarterly_fundamental_comparison_engine.py",
+            "./engines/fundamentals_master_ingestion_engine.py",
+            "./engines/fundamentals.py",
+            "./engines/fundamentals_10y_engine.py",
+            "./engines/quarterly_fundamentals_pipeline.py",
+            "./engines/fundamental_engine.py",
+            "./engines/real_fundamental_engine.py",
+            "./backup_before_entry_cleanup/update_fundamentals_all.py",
+            "./backup_before_entry_cleanup/quarterly_comparison_engine.py",
+            "./backup_before_entry_cleanup/update_fundamentals.py",
+            "./backup_before_entry_cleanup/make_clean_fundamentals.py",
+            "./backup_before_entry_cleanup/engines/fundamental_10y_pilot_engine.py",
+            "./backup_before_entry_cleanup/engines/quarterly_fundamental_comparison_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamentals_master_ingestion_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamentals.py",
+            "./backup_before_entry_cleanup/engines/fundamentals_10y_engine.py",
+            "./backup_before_entry_cleanup/engines/quarterly_fundamentals_pipeline.py",
+            "./backup_before_entry_cleanup/engines/fundamental_engine.py",
+            "./backup_before_entry_cleanup/engines/real_fundamental_engine.py"
+        ],
+        "institutional_layer": [
+            "./INSTITUTIONAL_COMPLETION_REPORT.json",
+            "./INSTITUTIONAL_COMPLETION_FIX.py",
+            "./institutional_intelligence_system.py",
+            "./INSTITUTIONAL_LIVE_STABILIZER.py",
+            "./INSTITUTIONAL_LIVE_REPORT.json",
+            "./data/promoter_holdings.csv",
+            "./data/institutional_money_flow.csv",
+            "./data/fii_dii.csv",
+            "./data/top20_institutional_opportunities.csv",
+            "./core/fii_dii_trend_engine.py",
+            "./core/__pycache__/fii_dii_trend_engine.cpython-312.pyc",
+            "./real_intelligence_layer/institutional_behavior_engine.py",
+            "./real_intelligence_layer/__pycache__/institutional_behavior_engine.cpython-312.pyc",
+            "./engines/institutional_classification_engine.py",
+            "./engines/institutional_opportunity_engine_v2.py",
+            "./engines/fii_dii_engine.py",
+            "./engines/institutional_top20_engine.py",
+            "./engines/fii_engine.py",
+            "./engines/institutional_opportunity_scoring_engine.py",
+            "./engines/institutional_research_reporting_engine.py",
+            "./engines/institutional_report_dispatcher.py",
+            "./engines/promoter_engine.py",
+            "./engines/institutional_ownership_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_classification_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_opportunity_engine_v2.py",
+            "./backup_before_entry_cleanup/engines/fii_dii_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_top20_engine.py",
+            "./backup_before_entry_cleanup/engines/fii_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_opportunity_scoring_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_research_reporting_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_report_dispatcher.py",
+            "./backup_before_entry_cleanup/engines/promoter_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_ownership_engine.py"
+        ],
+        "buffett_business_layer": [
+            "./data/business_evolution_10y.csv",
+            "./data/multibagger_candidates.csv",
+            "./core/business_evolution_engine.py",
+            "./core/multibagger_detection_engine.py",
+            "./core/__pycache__/multibagger_detection_engine.cpython-312.pyc",
+            "./core/__pycache__/business_evolution_engine.cpython-312.pyc",
+            "./real_intelligence_layer/business_evolution_engine.py",
+            "./real_intelligence_layer/multibagger_engine.py",
+            "./real_intelligence_layer/__pycache__/multibagger_engine.cpython-312.pyc",
+            "./real_intelligence_layer/__pycache__/business_evolution_engine.cpython-312.pyc",
+            "./engines/wealth_creation_signal_engine.py",
+            "./backup_before_entry_cleanup/engines/wealth_creation_signal_engine.py"
+        ],
+        "sector_intelligence": [
+            "./sector_rotation_engine.py",
+            "./sector_rotation_history.json",
+            "./core/sector_engine.py",
+            "./engines/sector_rotation_forecast_engine.py",
+            "./engines/sector_rank_engine.py",
+            "./engines/sector_engine.py",
+            "./engines/open engines:sector_classifier.py",
+            "./engines/sector_classifier.py",
+            "./engines/sector_mapper.py",
+            "./engines/news_engine/sector_mapper.py",
+            "./engines/__pycache__/sector_engine.cpython-312.pyc",
+            "./backup_before_entry_cleanup/sector_rotation_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_rotation_forecast_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_rank_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_engine.py",
+            "./backup_before_entry_cleanup/engines/open engines:sector_classifier.py",
+            "./backup_before_entry_cleanup/engines/sector_classifier.py",
+            "./backup_before_entry_cleanup/engines/sector_mapper.py"
+        ],
+        "global_macro": [
+            "./global_event_engine.py",
+            "./data/internet_news.csv",
+            "./data/news.csv",
+            "./data/global/global_events.csv",
+            "./data/news/global_news.json",
+            "./data/news/sector_impact.json",
+            "./data/news/stock_impact.json",
+            "./data/news/macro_events.json",
+            "./data/news/validated_news.json",
+            "./core/news_signal_engine.py",
+            "./core/global_impact_engine.py",
+            "./real_intelligence_layer/global_macro_mapping_engine.py",
+            "./real_intelligence_layer/global_impact_engine.py",
+            "./real_intelligence_layer/__pycache__/global_macro_mapping_engine.cpython-312.pyc",
+            "./real_intelligence_layer/__pycache__/global_impact_engine.cpython-312.pyc",
+            "./engines/news_future.py",
+            "./engines/internet_news_engine.py",
+            "./engines/global_news_engine.py",
+            "./engines/global_sector_stock_map_engine.py",
+            "./engines/news.py",
+            "./engines/global_intelligence_engine.py",
+            "./engines/global_policy_signal_engine.py",
+            "./engines/global_signal_fusion_engine.py",
+            "./engines/global_intelligence_integration.py",
+            "./engines/global_market_linkage_engine.py",
+            "./engines/live_news_engine.py",
+            "./engines/news_sector_stock_impact_engine.py",
+            "./engines/news_engine.py",
+            "./engines/news_weight_engine.py",
+            "./engines/news_engine/news_validator.py",
+            "./engines/news_engine/stock_mapper.py",
+            "./engines/news_engine/macro_classifier.py",
+            "./engines/news_engine/sector_mapper.py",
+            "./engines/news_engine/global_news_collector.py",
+            "./engines/news_engine/__init__.py",
+            "./engines/news_engine/news_database.py",
+            "./engines/news_engine/impact_engine.py",
+            "./engines/__pycache__/news_weight_engine.cpython-312.pyc",
+            "./backup_before_entry_cleanup/engines/news_future.py",
+            "./backup_before_entry_cleanup/engines/internet_news_engine.py",
+            "./backup_before_entry_cleanup/engines/global_news_engine.py",
+            "./backup_before_entry_cleanup/engines/global_sector_stock_map_engine.py",
+            "./backup_before_entry_cleanup/engines/news.py",
+            "./backup_before_entry_cleanup/engines/global_intelligence_engine.py",
+            "./backup_before_entry_cleanup/engines/global_policy_signal_engine.py",
+            "./backup_before_entry_cleanup/engines/global_signal_fusion_engine.py",
+            "./backup_before_entry_cleanup/engines/global_intelligence_integration.py",
+            "./backup_before_entry_cleanup/engines/global_market_linkage_engine.py",
+            "./backup_before_entry_cleanup/engines/live_news_engine.py",
+            "./backup_before_entry_cleanup/engines/news_sector_stock_impact_engine.py",
+            "./backup_before_entry_cleanup/engines/news_engine.py"
+        ],
+        "price_pipeline": [
+            "./data/prices/historical_prices.csv",
+            "./core/nse_bhavcopy_engine.py",
+            "./core/nse_price_engine.py",
+            "./core/historical_price_engine.py",
+            "./core/__pycache__/nse_price_engine.cpython-312.pyc",
+            "./engines/live_price_history_ingestion_engine.py",
+            "./engines/live_price_engine.py",
+            "./engines/live_price.py",
+            "./engines/price_ingestion_production_engine.py",
+            "./engines/price_engine.py",
+            "./engines/historical_price_data_pipeline.py",
+            "./engines/price_ingestion_streaming_v2_engine.py",
+            "./backup_before_entry_cleanup/engines/live_price_history_ingestion_engine.py",
+            "./backup_before_entry_cleanup/engines/live_price_engine.py",
+            "./backup_before_entry_cleanup/engines/live_price.py",
+            "./backup_before_entry_cleanup/engines/price_ingestion_production_engine.py",
+            "./backup_before_entry_cleanup/engines/price_engine.py",
+            "./backup_before_entry_cleanup/engines/historical_price_data_pipeline.py",
+            "./backup_before_entry_cleanup/engines/price_ingestion_streaming_v2_engine.py"
+        ],
+        "opportunity_detection": [
+            "./opportunity_watchlist_engine.py",
+            "./phase5_opportunity_map_activation.py",
+            "./risk_weighted_ranking_engine.py",
+            "./opportunity_persistence_engine.py",
+            "./opportunity_report_engine.py",
+            "./opportunity_ranking_engine.py",
+            "./opportunity_watchlist.json",
+            "./opportunity_engine.py",
+            "./data/opportunity_memory.json",
+            "./data/top20_institutional_opportunities.csv",
+            "./core/opportunity_detection_engine.py",
+            "./core/opportunity_engine.py",
+            "./core/__pycache__/opportunity_detection_engine.cpython-312.pyc",
+            "./engines/institutional_opportunity_engine_v2.py",
+            "./engines/ranking_engine.py",
+            "./engines/daily_top20_opportunity_engine.py",
+            "./engines/telegram_top20_delivery_engine.py",
+            "./engines/opportunity_trigger_engine.py",
+            "./engines/institutional_top20_engine.py",
+            "./engines/nse_universe_opportunity_scanner.py",
+            "./engines/institutional_opportunity_scoring_engine.py",
+            "./engines/opportunity_theme_aggregation_engine.py",
+            "./engines/self_improvement_trigger_engine.py",
+            "./engines/opportunity_memory_engine.py",
+            "./engines/opportunity_engine.py",
+            "./engines/__pycache__/opportunity_engine.cpython-312.pyc",
+            "./backup_before_entry_cleanup/opportunity_watchlist_engine.py",
+            "./backup_before_entry_cleanup/phase5_opportunity_map_activation.py",
+            "./backup_before_entry_cleanup/risk_weighted_ranking_engine.py",
+            "./backup_before_entry_cleanup/opportunity_persistence_engine.py",
+            "./backup_before_entry_cleanup/opportunity_report_engine.py",
+            "./backup_before_entry_cleanup/opportunity_ranking_engine.py",
+            "./backup_before_entry_cleanup/opportunity_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_opportunity_engine_v2.py",
+            "./backup_before_entry_cleanup/engines/ranking_engine.py",
+            "./backup_before_entry_cleanup/engines/daily_top20_opportunity_engine.py",
+            "./backup_before_entry_cleanup/engines/telegram_top20_delivery_engine.py",
+            "./backup_before_entry_cleanup/engines/opportunity_trigger_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_top20_engine.py",
+            "./backup_before_entry_cleanup/engines/nse_universe_opportunity_scanner.py",
+            "./backup_before_entry_cleanup/engines/institutional_opportunity_scoring_engine.py",
+            "./backup_before_entry_cleanup/engines/opportunity_theme_aggregation_engine.py",
+            "./backup_before_entry_cleanup/engines/self_improvement_trigger_engine.py",
+            "./backup_before_entry_cleanup/engines/opportunity_memory_engine.py"
+        ],
+        "automation": [
+            "./recovery_runner.py",
+            "./real_data_intelligence_runner.py",
+            "./production_autorun.py",
+            "./telegram_runner.py",
+            "./auto_runner.sh",
+            "./universe_scheduler_engine.py",
+            "./intelligence_runner.py",
+            "./production_supervisor.py",
+            "./engines/autonomous_daily_runner.py",
+            "./engines/system_scheduler_health_engine.py",
+            "./engines/daily_intelligence_pipeline_scheduler.py",
+            "./backup_before_entry_cleanup/recovery_runner.py",
+            "./backup_before_entry_cleanup/production_autorun.py",
+            "./backup_before_entry_cleanup/telegram_runner.py",
+            "./backup_before_entry_cleanup/universe_scheduler_engine.py",
+            "./backup_before_entry_cleanup/production_supervisor.py",
+            "./backup_before_entry_cleanup/engines/autonomous_daily_runner.py",
+            "./backup_before_entry_cleanup/engines/system_scheduler_health_engine.py",
+            "./backup_before_entry_cleanup/engines/daily_intelligence_pipeline_scheduler.py"
+        ],
+        "telegram": [
+            "./telegram_config.env",
+            "./telegram_runner.py",
+            "./telegram_alert_engine.py",
+            "./.github/workflows/market_alert.yml",
+            "./engines/telegram_top20_delivery_engine.py",
+            "./engines/telegram_alert_engine.py",
+            "./engines/alert_engine/telegram_alert.py",
+            "./engines/alert_engine/__init__.py",
+            "./engines/alert_engine/__pycache__/__init__.cpython-312.pyc",
+            "./engines/alert_engine/__pycache__/telegram_alert.cpython-312.pyc",
+            "./engines/__pycache__/alert_engine.cpython-312.pyc",
+            "./backup_before_entry_cleanup/telegram_runner.py",
+            "./backup_before_entry_cleanup/telegram_alert_engine.py",
+            "./backup_before_entry_cleanup/engines/telegram_top20_delivery_engine.py",
+            "./backup_before_entry_cleanup/engines/telegram_alert_engine.py",
+            "./backup_before_entry_cleanup/engines/alert_engine.py"
+        ],
+        "deployment": [
+            "./Procfile",
+            "./requirements.txt",
+            "./render.yaml",
+            "./MARKET_BOT_PROJECT/requirements.txt"
+        ]
+    },
+    "duplicates": {
+        "portfolio_risk_balancer_engine.py": [
+            "./portfolio_risk_balancer_engine.py",
+            "./backup_before_entry_cleanup/portfolio_risk_balancer_engine.py"
+        ],
+        "opportunity_watchlist_engine.py": [
+            "./opportunity_watchlist_engine.py",
+            "./backup_before_entry_cleanup/opportunity_watchlist_engine.py"
+        ],
+        "decision_summary_engine.py": [
+            "./decision_summary_engine.py",
+            "./backup_before_entry_cleanup/decision_summary_engine.py"
+        ],
+        "mode_brain.py": [
+            "./mode_brain.py",
+            "./backup_before_entry_cleanup/mode_brain.py"
+        ],
+        "phase9_meta_feedback_activation.py": [
+            "./phase9_meta_feedback_activation.py",
+            "./backup_before_entry_cleanup/phase9_meta_feedback_activation.py"
+        ],
+        "phase4_archive_activation.py": [
+            "./phase4_archive_activation.py",
+            "./backup_before_entry_cleanup/phase4_archive_activation.py"
+        ],
+        "phase4_reporting_activation.py": [
+            "./phase4_reporting_activation.py",
+            "./backup_before_entry_cleanup/phase4_reporting_activation.py"
+        ],
+        "phase4_dispatch_activation.py": [
+            "./phase4_dispatch_activation.py",
+            "./backup_before_entry_cleanup/phase4_dispatch_activation.py"
+        ],
+        "phase6_strategy_activation.py": [
+            "./phase6_strategy_activation.py",
+            "./backup_before_entry_cleanup/phase6_strategy_activation.py"
+        ],
+        "phase10_market_mode_activation.py": [
+            "./phase10_market_mode_activation.py",
+            "./backup_before_entry_cleanup/phase10_market_mode_activation.py"
+        ],
+        "phase2_classification_activation.py": [
+            "./phase2_classification_activation.py",
+            "./backup_before_entry_cleanup/phase2_classification_activation.py"
+        ],
+        "scanner_batch_engine.py": [
+            "./scanner_batch_engine.py",
+            "./backup_before_entry_cleanup/scanner_batch_engine.py"
+        ],
+        "portfolio_allocation_engine.py": [
+            "./portfolio_allocation_engine.py",
+            "./backup_before_entry_cleanup/portfolio_allocation_engine.py"
+        ],
+        "signal_confidence_engine.py": [
+            "./signal_confidence_engine.py",
+            "./backup_before_entry_cleanup/signal_confidence_engine.py"
+        ],
+        "unified_intelligence_pipeline.py": [
+            "./unified_intelligence_pipeline.py",
+            "./backup_before_entry_cleanup/unified_intelligence_pipeline.py"
+        ],
+        "web_app.py": [
+            "./web_app.py",
+            "./backup_before_entry_cleanup/web_app.py"
+        ],
+        "scanner_load_balancer.py": [
+            "./scanner_load_balancer.py",
+            "./backup_before_entry_cleanup/scanner_load_balancer.py"
+        ],
+        "brain_engine.py": [
+            "./brain_engine.py",
+            "./backup_before_entry_cleanup/brain_engine.py"
+        ],
+        "phase8_strategy_evolution_activation.py": [
+            "./phase8_strategy_evolution_activation.py",
+            "./backup_before_entry_cleanup/phase8_strategy_evolution_activation.py"
+        ],
+        "orchestrator.py": [
+            "./orchestrator.py",
+            "./backup_before_entry_cleanup/orchestrator.py"
+        ],
+        "schedule_controller_engine.py": [
+            "./schedule_controller_engine.py",
+            "./backup_before_entry_cleanup/schedule_controller_engine.py"
+        ],
+        "phase3_portfolio_optimization_activation.py": [
+            "./phase3_portfolio_optimization_activation.py",
+            "./backup_before_entry_cleanup/phase3_portfolio_optimization_activation.py"
+        ],
+        "nse_universe_builder.py": [
+            "./nse_universe_builder.py",
+            "./backup_before_entry_cleanup/nse_universe_builder.py"
+        ],
+        "recovery_runner.py": [
+            "./recovery_runner.py",
+            "./backup_before_entry_cleanup/recovery_runner.py"
+        ],
+        "daily_autoplay.py": [
+            "./daily_autoplay.py",
+            "./backup_before_entry_cleanup/daily_autoplay.py"
+        ],
+        "phase5_opportunity_map_activation.py": [
+            "./phase5_opportunity_map_activation.py",
+            "./backup_before_entry_cleanup/phase5_opportunity_map_activation.py"
+        ],
+        "sector_rotation_engine.py": [
+            "./sector_rotation_engine.py",
+            "./backup_before_entry_cleanup/sector_rotation_engine.py"
+        ],
+        "stock_selector.py": [
+            "./stock_selector.py",
+            "./backup_before_entry_cleanup/stock_selector.py"
+        ],
+        "phase2_pipeline_integration.py": [
+            "./phase2_pipeline_integration.py",
+            "./backup_before_entry_cleanup/phase2_pipeline_integration.py"
+        ],
+        "phase5_linkage_activation.py": [
+            "./phase5_linkage_activation.py",
+            "./backup_before_entry_cleanup/phase5_linkage_activation.py"
+        ],
+        "system_audit.py": [
+            "./system_audit.py",
+            "./backup_before_entry_cleanup/system_audit.py"
+        ],
+        "engine_guard.py": [
+            "./engine_guard.py",
+            "./backup_before_entry_cleanup/engine_guard.py"
+        ],
+        "run.py": [
+            "./run.py",
+            "./backup_before_entry_cleanup/run.py"
+        ],
+        "update_stocks.py": [
+            "./update_stocks.py",
+            "./backup_before_entry_cleanup/update_stocks.py"
+        ],
+        "risk_weighted_ranking_engine.py": [
+            "./risk_weighted_ranking_engine.py",
+            "./backup_before_entry_cleanup/risk_weighted_ranking_engine.py"
+        ],
+        "super_bot.py": [
+            "./super_bot.py",
+            "./backup_before_entry_cleanup/super_bot.py"
+        ],
+        "brain_data.py": [
+            "./brain_data.py",
+            "./backup_before_entry_cleanup/brain_data.py"
+        ],
+        "universe_expansion_engine.py": [
+            "./universe_expansion_engine.py",
+            "./backup_before_entry_cleanup/universe_expansion_engine.py"
+        ],
+        "performance_evaluation_engine.py": [
+            "./performance_evaluation_engine.py",
+            "./backup_before_entry_cleanup/performance_evaluation_engine.py"
+        ],
+        "stock_universe_engine.py": [
+            "./stock_universe_engine.py",
+            "./backup_before_entry_cleanup/stock_universe_engine.py"
+        ],
+        "strategy_memory_engine.py": [
+            "./strategy_memory_engine.py",
+            "./backup_before_entry_cleanup/strategy_memory_engine.py"
+        ],
+        "decision_memory_engine.py": [
+            "./decision_memory_engine.py",
+            "./backup_before_entry_cleanup/decision_memory_engine.py"
+        ],
+        "strategy_regime_switch_engine.py": [
+            "./strategy_regime_switch_engine.py",
+            "./backup_before_entry_cleanup/strategy_regime_switch_engine.py"
+        ],
+        "phase11_master_controller_activation.py": [
+            "./phase11_master_controller_activation.py",
+            "./backup_before_entry_cleanup/phase11_master_controller_activation.py"
+        ],
+        "update_fundamentals_all.py": [
+            "./update_fundamentals_all.py",
+            "./backup_before_entry_cleanup/update_fundamentals_all.py"
+        ],
+        "brain_control.py": [
+            "./brain_control.py",
+            "./backup_before_entry_cleanup/brain_control.py"
+        ],
+        "main.py": [
+            "./main.py",
+            "./backup_before_entry_cleanup/main.py"
+        ],
+        "portfolio_lifecycle_engine.py": [
+            "./portfolio_lifecycle_engine.py",
+            "./backup_before_entry_cleanup/portfolio_lifecycle_engine.py"
+        ],
+        "opportunity_persistence_engine.py": [
+            "./opportunity_persistence_engine.py",
+            "./backup_before_entry_cleanup/opportunity_persistence_engine.py"
+        ],
+        "phase7_crisis_shield_activation.py": [
+            "./phase7_crisis_shield_activation.py",
+            "./backup_before_entry_cleanup/phase7_crisis_shield_activation.py"
+        ],
+        "master_brain.py": [
+            "./master_brain.py",
+            "./core/master_brain.py",
+            "./backup_before_entry_cleanup/master_brain.py"
+        ],
+        "allocation_learning_engine.py": [
+            "./allocation_learning_engine.py",
+            "./backup_before_entry_cleanup/allocation_learning_engine.py"
+        ],
+        "fundamental_brain.py": [
+            "./fundamental_brain.py",
+            "./backup_before_entry_cleanup/fundamental_brain.py"
+        ],
+        "production_autorun.py": [
+            "./production_autorun.py",
+            "./backup_before_entry_cleanup/production_autorun.py"
+        ],
+        "phase6_multicycle_allocation_activation.py": [
+            "./phase6_multicycle_allocation_activation.py",
+            "./backup_before_entry_cleanup/phase6_multicycle_allocation_activation.py"
+        ],
+        "sector_universe_mapper.py": [
+            "./sector_universe_mapper.py",
+            "./backup_before_entry_cleanup/sector_universe_mapper.py"
+        ],
+        "step2_full_data_engine.py": [
+            "./step2_full_data_engine.py",
+            "./backup_before_entry_cleanup/step2_full_data_engine.py"
+        ],
+        "telegram_runner.py": [
+            "./telegram_runner.py",
+            "./backup_before_entry_cleanup/telegram_runner.py"
+        ],
+        "sector_leadership_engine.py": [
+            "./sector_leadership_engine.py",
+            "./backup_before_entry_cleanup/sector_leadership_engine.py"
+        ],
+        "conviction_score_engine.py": [
+            "./conviction_score_engine.py",
+            "./backup_before_entry_cleanup/conviction_score_engine.py"
+        ],
+        "phase3_adaptive_activation.py": [
+            "./phase3_adaptive_activation.py",
+            "./backup_before_entry_cleanup/phase3_adaptive_activation.py"
+        ],
+        "nse_universe_loader.py": [
+            "./nse_universe_loader.py",
+            "./backup_before_entry_cleanup/nse_universe_loader.py"
+        ],
+        "ultimate_brain_master_audit.py": [
+            "./ultimate_brain_master_audit.py",
+            "./backup_before_entry_cleanup/ultimate_brain_master_audit.py"
+        ],
+        "logging_engine.py": [
+            "./logging_engine.py",
+            "./backup_before_entry_cleanup/logging_engine.py"
+        ],
+        "quarterly_comparison_engine.py": [
+            "./quarterly_comparison_engine.py",
+            "./backup_before_entry_cleanup/quarterly_comparison_engine.py"
+        ],
+        "market_brain.py": [
+            "./market_brain.py",
+            "./backup_before_entry_cleanup/market_brain.py"
+        ],
+        "portfolio_attribution_engine.py": [
+            "./portfolio_attribution_engine.py",
+            "./backup_before_entry_cleanup/portfolio_attribution_engine.py"
+        ],
+        "market_regime_engine.py": [
+            "./market_regime_engine.py",
+            "./backup_before_entry_cleanup/market_regime_engine.py"
+        ],
+        "phase9_self_improvement_activation.py": [
+            "./phase9_self_improvement_activation.py",
+            "./backup_before_entry_cleanup/phase9_self_improvement_activation.py"
+        ],
+        "universe_scheduler_engine.py": [
+            "./universe_scheduler_engine.py",
+            "./backup_before_entry_cleanup/universe_scheduler_engine.py"
+        ],
+        "phase5_signal_fusion_activation.py": [
+            "./phase5_signal_fusion_activation.py",
+            "./backup_before_entry_cleanup/phase5_signal_fusion_activation.py"
+        ],
+        "final_report_formatter_engine.py": [
+            "./final_report_formatter_engine.py",
+            "./backup_before_entry_cleanup/final_report_formatter_engine.py"
+        ],
+        "phase10_capital_deployment_activation.py": [
+            "./phase10_capital_deployment_activation.py",
+            "./backup_before_entry_cleanup/phase10_capital_deployment_activation.py"
+        ],
+        "system_check.py": [
+            "./system_check.py",
+            "./backup_before_entry_cleanup/system_check.py"
+        ],
+        "capital_flow_engine.py": [
+            "./capital_flow_engine.py",
+            "./backup_before_entry_cleanup/capital_flow_engine.py"
+        ],
+        "return_estimation_engine.py": [
+            "./return_estimation_engine.py",
+            "./backup_before_entry_cleanup/return_estimation_engine.py"
+        ],
+        "reset_to_core.py": [
+            "./reset_to_core.py",
+            "./backup_before_entry_cleanup/reset_to_core.py"
+        ],
+        "master_system_status.py": [
+            "./master_system_status.py",
+            "./backup_before_entry_cleanup/master_system_status.py"
+        ],
+        "daily_report_engine.py": [
+            "./daily_report_engine.py",
+            "./backup_before_entry_cleanup/daily_report_engine.py"
+        ],
+        "update_fundamentals.py": [
+            "./update_fundamentals.py",
+            "./backup_before_entry_cleanup/update_fundamentals.py"
+        ],
+        "rebuild_price_data.py": [
+            "./rebuild_price_data.py",
+            "./backup_before_entry_cleanup/rebuild_price_data.py"
+        ],
+        "sector_stock_mapper.py": [
+            "./sector_stock_mapper.py",
+            "./backup_before_entry_cleanup/sector_stock_mapper.py"
+        ],
+        "intelligence_engine.py": [
+            "./intelligence_engine.py",
+            "./core/intelligence_engine.py",
+            "./backup_before_entry_cleanup/intelligence_engine.py"
+        ],
+        "dashboard_output_engine.py": [
+            "./dashboard_output_engine.py",
+            "./backup_before_entry_cleanup/dashboard_output_engine.py"
+        ],
+        "master_system_audit.py": [
+            "./master_system_audit.py",
+            "./backup_before_entry_cleanup/master_system_audit.py"
+        ],
+        "deep_system_audit.py": [
+            "./deep_system_audit.py",
+            "./backup_before_entry_cleanup/deep_system_audit.py"
+        ],
+        "telegram_alert_engine.py": [
+            "./telegram_alert_engine.py",
+            "./engines/telegram_alert_engine.py",
+            "./backup_before_entry_cleanup/telegram_alert_engine.py",
+            "./backup_before_entry_cleanup/engines/telegram_alert_engine.py"
+        ],
+        "opportunity_report_engine.py": [
+            "./opportunity_report_engine.py",
+            "./backup_before_entry_cleanup/opportunity_report_engine.py"
+        ],
+        "opportunity_ranking_engine.py": [
+            "./opportunity_ranking_engine.py",
+            "./backup_before_entry_cleanup/opportunity_ranking_engine.py"
+        ],
+        "sector_intelligence_engine.py": [
+            "./sector_intelligence_engine.py",
+            "./real_intelligence_layer/sector_intelligence_engine.py",
+            "./backup_before_entry_cleanup/sector_intelligence_engine.py"
+        ],
+        "app_disabled.py": [
+            "./app_disabled.py",
+            "./backup_before_entry_cleanup/app_disabled.py"
+        ],
+        "phase8_weight_calibration_activation.py": [
+            "./phase8_weight_calibration_activation.py",
+            "./backup_before_entry_cleanup/phase8_weight_calibration_activation.py"
+        ],
+        "phase7_risk_governance_activation.py": [
+            "./phase7_risk_governance_activation.py",
+            "./backup_before_entry_cleanup/phase7_risk_governance_activation.py"
+        ],
+        "phase3_memory_activation.py": [
+            "./phase3_memory_activation.py",
+            "./backup_before_entry_cleanup/phase3_memory_activation.py"
+        ],
+        "cycle_optimizer_engine.py": [
+            "./cycle_optimizer_engine.py",
+            "./backup_before_entry_cleanup/cycle_optimizer_engine.py"
+        ],
+        "explanation_brain.py": [
+            "./explanation_brain.py",
+            "./backup_before_entry_cleanup/explanation_brain.py"
+        ],
+        "production_supervisor.py": [
+            "./production_supervisor.py",
+            "./backup_before_entry_cleanup/production_supervisor.py"
+        ],
+        "opportunity_engine.py": [
+            "./opportunity_engine.py",
+            "./core/opportunity_engine.py",
+            "./engines/opportunity_engine.py",
+            "./backup_before_entry_cleanup/opportunity_engine.py"
+        ],
+        "performance_tracker_engine.py": [
+            "./performance_tracker_engine.py",
+            "./backup_before_entry_cleanup/performance_tracker_engine.py"
+        ],
+        "integration_probe.py": [
+            "./integration_probe.py",
+            "./backup_before_entry_cleanup/integration_probe.py"
+        ],
+        "make_clean_fundamentals.py": [
+            "./make_clean_fundamentals.py",
+            "./backup_before_entry_cleanup/make_clean_fundamentals.py"
+        ],
+        "mode_engine.py": [
+            "./core/mode_engine.py",
+            "./engines/mode_engine.py",
+            "./backup_before_entry_cleanup/engines/mode_engine.py"
+        ],
+        "business_evolution_engine.py": [
+            "./core/business_evolution_engine.py",
+            "./real_intelligence_layer/business_evolution_engine.py"
+        ],
+        "sector_engine.py": [
+            "./core/sector_engine.py",
+            "./engines/sector_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_engine.py"
+        ],
+        "sector_money_flow_engine.py": [
+            "./core/sector_money_flow_engine.py",
+            "./engines/sector_money_flow_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_money_flow_engine.py"
+        ],
+        "global_impact_engine.py": [
+            "./core/global_impact_engine.py",
+            "./real_intelligence_layer/global_impact_engine.py"
+        ],
+        "fundamental_engine.py": [
+            "./core/fundamental_engine.py",
+            "./engines/fundamental_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamental_engine.py"
+        ],
+        "real_fundamental_engine.py": [
+            "./core/real_fundamental_engine.py",
+            "./engines/real_fundamental_engine.py",
+            "./backup_before_entry_cleanup/engines/real_fundamental_engine.py"
+        ],
+        "__init__.py": [
+            "./core/__init__.py",
+            "./real_intelligence_layer/__init__.py",
+            "./engines/__init__.py",
+            "./engines/news_engine/__init__.py",
+            "./engines/alert_engine/__init__.py",
+            "./backup_before_entry_cleanup/engines/__init__.py"
+        ],
+        "market_mode_engine.py": [
+            "./real_intelligence_layer/market_mode_engine.py",
+            "./engines/market_mode_engine.py",
+            "./backup_before_entry_cleanup/engines/market_mode_engine.py"
+        ],
+        "portfolio_optimization_engine.py": [
+            "./engines/portfolio_optimization_engine.py",
+            "./backup_before_entry_cleanup/engines/portfolio_optimization_engine.py"
+        ],
+        "news_future.py": [
+            "./engines/news_future.py",
+            "./backup_before_entry_cleanup/engines/news_future.py"
+        ],
+        "risk.py": [
+            "./engines/risk.py",
+            "./backup_before_entry_cleanup/engines/risk.py"
+        ],
+        "exit_engine.py": [
+            "./engines/exit_engine.py",
+            "./backup_before_entry_cleanup/engines/exit_engine.py"
+        ],
+        "institutional_classification_engine.py": [
+            "./engines/institutional_classification_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_classification_engine.py"
+        ],
+        "technical_engine.py": [
+            "./engines/technical_engine.py",
+            "./backup_before_entry_cleanup/engines/technical_engine.py"
+        ],
+        "internet_news_engine.py": [
+            "./engines/internet_news_engine.py",
+            "./backup_before_entry_cleanup/engines/internet_news_engine.py"
+        ],
+        "live_price_history_ingestion_engine.py": [
+            "./engines/live_price_history_ingestion_engine.py",
+            "./backup_before_entry_cleanup/engines/live_price_history_ingestion_engine.py"
+        ],
+        "fundamental_comparison_classifier_engine.py": [
+            "./engines/fundamental_comparison_classifier_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamental_comparison_classifier_engine.py"
+        ],
+        "global_news_engine.py": [
+            "./engines/global_news_engine.py",
+            "./backup_before_entry_cleanup/engines/global_news_engine.py"
+        ],
+        "fundamental_10y_pilot_engine.py": [
+            "./engines/fundamental_10y_pilot_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamental_10y_pilot_engine.py"
+        ],
+        "strategic_decision_engine.py": [
+            "./engines/strategic_decision_engine.py",
+            "./backup_before_entry_cleanup/engines/strategic_decision_engine.py"
+        ],
+        "sector_authority_engine.py": [
+            "./engines/sector_authority_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_authority_engine.py"
+        ],
+        "early_warning_risk_radar_engine.py": [
+            "./engines/early_warning_risk_radar_engine.py",
+            "./backup_before_entry_cleanup/engines/early_warning_risk_radar_engine.py"
+        ],
+        "self_learning_alpha_engine.py": [
+            "./engines/self_learning_alpha_engine.py",
+            "./backup_before_entry_cleanup/engines/self_learning_alpha_engine.py"
+        ],
+        "adaptive_learning_engine.py": [
+            "./engines/adaptive_learning_engine.py",
+            "./backup_before_entry_cleanup/engines/adaptive_learning_engine.py"
+        ],
+        "time_mode_engine.py": [
+            "./engines/time_mode_engine.py",
+            "./backup_before_entry_cleanup/engines/time_mode_engine.py"
+        ],
+        "global_sector_stock_map_engine.py": [
+            "./engines/global_sector_stock_map_engine.py",
+            "./backup_before_entry_cleanup/engines/global_sector_stock_map_engine.py"
+        ],
+        "institutional_opportunity_engine_v2.py": [
+            "./engines/institutional_opportunity_engine_v2.py",
+            "./backup_before_entry_cleanup/engines/institutional_opportunity_engine_v2.py"
+        ],
+        "news.py": [
+            "./engines/news.py",
+            "./backup_before_entry_cleanup/engines/news.py"
+        ],
+        "live_price_engine.py": [
+            "./engines/live_price_engine.py",
+            "./backup_before_entry_cleanup/engines/live_price_engine.py"
+        ],
+        "performance_engine.py": [
+            "./engines/performance_engine.py",
+            "./backup_before_entry_cleanup/engines/performance_engine.py"
+        ],
+        "quarterly_fundamental_comparison_engine.py": [
+            "./engines/quarterly_fundamental_comparison_engine.py",
+            "./backup_before_entry_cleanup/engines/quarterly_fundamental_comparison_engine.py"
+        ],
+        "ranking_engine.py": [
+            "./engines/ranking_engine.py",
+            "./backup_before_entry_cleanup/engines/ranking_engine.py"
+        ],
+        "live_price.py": [
+            "./engines/live_price.py",
+            "./backup_before_entry_cleanup/engines/live_price.py"
+        ],
+        "global_intelligence_engine.py": [
+            "./engines/global_intelligence_engine.py",
+            "./backup_before_entry_cleanup/engines/global_intelligence_engine.py"
+        ],
+        "global_policy_signal_engine.py": [
+            "./engines/global_policy_signal_engine.py",
+            "./backup_before_entry_cleanup/engines/global_policy_signal_engine.py"
+        ],
+        "meta_intelligence_feedback_engine.py": [
+            "./engines/meta_intelligence_feedback_engine.py",
+            "./backup_before_entry_cleanup/engines/meta_intelligence_feedback_engine.py"
+        ],
+        "fundamentals_master_ingestion_engine.py": [
+            "./engines/fundamentals_master_ingestion_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamentals_master_ingestion_engine.py"
+        ],
+        "research_archive_engine.py": [
+            "./engines/research_archive_engine.py",
+            "./backup_before_entry_cleanup/engines/research_archive_engine.py"
+        ],
+        "narrative_engine.py": [
+            "./engines/narrative_engine.py",
+            "./backup_before_entry_cleanup/engines/narrative_engine.py"
+        ],
+        "paper_trade_engine.py": [
+            "./engines/paper_trade_engine.py",
+            "./backup_before_entry_cleanup/engines/paper_trade_engine.py"
+        ],
+        "sector_rotation_forecast_engine.py": [
+            "./engines/sector_rotation_forecast_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_rotation_forecast_engine.py"
+        ],
+        "risk_governance_engine.py": [
+            "./engines/risk_governance_engine.py",
+            "./backup_before_entry_cleanup/engines/risk_governance_engine.py"
+        ],
+        "daily_top20_opportunity_engine.py": [
+            "./engines/daily_top20_opportunity_engine.py",
+            "./backup_before_entry_cleanup/engines/daily_top20_opportunity_engine.py"
+        ],
+        "decision_engine.py": [
+            "./engines/decision_engine.py",
+            "./backup_before_entry_cleanup/engines/decision_engine.py"
+        ],
+        "global_signal_fusion_engine.py": [
+            "./engines/global_signal_fusion_engine.py",
+            "./backup_before_entry_cleanup/engines/global_signal_fusion_engine.py"
+        ],
+        "autonomous_daily_runner.py": [
+            "./engines/autonomous_daily_runner.py",
+            "./backup_before_entry_cleanup/engines/autonomous_daily_runner.py"
+        ],
+        "global_intelligence_integration.py": [
+            "./engines/global_intelligence_integration.py",
+            "./backup_before_entry_cleanup/engines/global_intelligence_integration.py"
+        ],
+        "profit_protection_exit_engine.py": [
+            "./engines/profit_protection_exit_engine.py",
+            "./backup_before_entry_cleanup/engines/profit_protection_exit_engine.py"
+        ],
+        "pl_engine.py": [
+            "./engines/pl_engine.py",
+            "./backup_before_entry_cleanup/engines/pl_engine.py"
+        ],
+        "index_engine.py": [
+            "./engines/index_engine.py",
+            "./backup_before_entry_cleanup/engines/index_engine.py"
+        ],
+        "timing_optimization_engine.py": [
+            "./engines/timing_optimization_engine.py",
+            "./backup_before_entry_cleanup/engines/timing_optimization_engine.py"
+        ],
+        "stock_universe.py": [
+            "./engines/stock_universe.py",
+            "./backup_before_entry_cleanup/engines/stock_universe.py"
+        ],
+        "autonomous_intelligence_controller.py": [
+            "./engines/autonomous_intelligence_controller.py",
+            "./backup_before_entry_cleanup/engines/autonomous_intelligence_controller.py"
+        ],
+        "sector_rank_engine.py": [
+            "./engines/sector_rank_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_rank_engine.py"
+        ],
+        "global_market_linkage_engine.py": [
+            "./engines/global_market_linkage_engine.py",
+            "./backup_before_entry_cleanup/engines/global_market_linkage_engine.py"
+        ],
+        "live_news_engine.py": [
+            "./engines/live_news_engine.py",
+            "./backup_before_entry_cleanup/engines/live_news_engine.py"
+        ],
+        "crisis_capital_shield_engine.py": [
+            "./engines/crisis_capital_shield_engine.py",
+            "./backup_before_entry_cleanup/engines/crisis_capital_shield_engine.py"
+        ],
+        "stock_engine.py": [
+            "./engines/stock_engine.py",
+            "./backup_before_entry_cleanup/engines/stock_engine.py"
+        ],
+        "fundamentals.py": [
+            "./engines/fundamentals.py",
+            "./backup_before_entry_cleanup/engines/fundamentals.py"
+        ],
+        "portfolio_lifecycle_intelligence_engine.py": [
+            "./engines/portfolio_lifecycle_intelligence_engine.py",
+            "./backup_before_entry_cleanup/engines/portfolio_lifecycle_intelligence_engine.py"
+        ],
+        "multiworker_execution_engine.py": [
+            "./engines/multiworker_execution_engine.py",
+            "./backup_before_entry_cleanup/engines/multiworker_execution_engine.py"
+        ],
+        "scenario_simulation_engine.py": [
+            "./engines/scenario_simulation_engine.py",
+            "./backup_before_entry_cleanup/engines/scenario_simulation_engine.py"
+        ],
+        "telegram_top20_delivery_engine.py": [
+            "./engines/telegram_top20_delivery_engine.py",
+            "./backup_before_entry_cleanup/engines/telegram_top20_delivery_engine.py"
+        ],
+        "mode_engine_v2.py": [
+            "./engines/mode_engine_v2.py",
+            "./backup_before_entry_cleanup/engines/mode_engine_v2.py"
+        ],
+        "unified_daily_decision_engine.py": [
+            "./engines/unified_daily_decision_engine.py",
+            "./backup_before_entry_cleanup/engines/unified_daily_decision_engine.py"
+        ],
+        "narrative_intelligence_engine.py": [
+            "./engines/narrative_intelligence_engine.py",
+            "./backup_before_entry_cleanup/engines/narrative_intelligence_engine.py"
+        ],
+        "opportunity_trigger_engine.py": [
+            "./engines/opportunity_trigger_engine.py",
+            "./backup_before_entry_cleanup/engines/opportunity_trigger_engine.py"
+        ],
+        "decision.py": [
+            "./engines/decision.py",
+            "./backup_before_entry_cleanup/engines/decision.py"
+        ],
+        "autonomous_continuous_intelligence_engine.py": [
+            "./engines/autonomous_continuous_intelligence_engine.py",
+            "./backup_before_entry_cleanup/engines/autonomous_continuous_intelligence_engine.py"
+        ],
+        "fii_dii_engine.py": [
+            "./engines/fii_dii_engine.py",
+            "./backup_before_entry_cleanup/engines/fii_dii_engine.py"
+        ],
+        "final_decision_engine.py": [
+            "./engines/final_decision_engine.py",
+            "./backup_before_entry_cleanup/engines/final_decision_engine.py"
+        ],
+        "why.py": [
+            "./engines/why.py",
+            "./backup_before_entry_cleanup/engines/why.py"
+        ],
+        "institutional_top20_engine.py": [
+            "./engines/institutional_top20_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_top20_engine.py"
+        ],
+        "portfolio_stress_testing_engine.py": [
+            "./engines/portfolio_stress_testing_engine.py",
+            "./backup_before_entry_cleanup/engines/portfolio_stress_testing_engine.py"
+        ],
+        "news_sector_stock_impact_engine.py": [
+            "./engines/news_sector_stock_impact_engine.py",
+            "./backup_before_entry_cleanup/engines/news_sector_stock_impact_engine.py"
+        ],
+        "master_brain_controller_engine.py": [
+            "./engines/master_brain_controller_engine.py",
+            "./backup_before_entry_cleanup/engines/master_brain_controller_engine.py"
+        ],
+        "learning_engine.py": [
+            "./engines/learning_engine.py",
+            "./backup_before_entry_cleanup/engines/learning_engine.py"
+        ],
+        "nse_universe_opportunity_scanner.py": [
+            "./engines/nse_universe_opportunity_scanner.py",
+            "./backup_before_entry_cleanup/engines/nse_universe_opportunity_scanner.py"
+        ],
+        "capital_deployment_decision_engine.py": [
+            "./engines/capital_deployment_decision_engine.py",
+            "./backup_before_entry_cleanup/engines/capital_deployment_decision_engine.py"
+        ],
+        "news_engine.py": [
+            "./engines/news_engine.py",
+            "./backup_before_entry_cleanup/engines/news_engine.py"
+        ],
+        "open engines:sector_classifier.py": [
+            "./engines/open engines:sector_classifier.py",
+            "./backup_before_entry_cleanup/engines/open engines:sector_classifier.py"
+        ],
+        "autonomous_market_mode_controller.py": [
+            "./engines/autonomous_market_mode_controller.py",
+            "./backup_before_entry_cleanup/engines/autonomous_market_mode_controller.py"
+        ],
+        "nse_sector_index_harvester_engine.py": [
+            "./engines/nse_sector_index_harvester_engine.py",
+            "./backup_before_entry_cleanup/engines/nse_sector_index_harvester_engine.py"
+        ],
+        "final_report_engine.py": [
+            "./engines/final_report_engine.py",
+            "./backup_before_entry_cleanup/engines/final_report_engine.py"
+        ],
+        "smart_money_engine.py": [
+            "./engines/smart_money_engine.py",
+            "./backup_before_entry_cleanup/engines/smart_money_engine.py"
+        ],
+        "cross_asset_signal_engine.py": [
+            "./engines/cross_asset_signal_engine.py",
+            "./backup_before_entry_cleanup/engines/cross_asset_signal_engine.py"
+        ],
+        "fii_engine.py": [
+            "./engines/fii_engine.py",
+            "./backup_before_entry_cleanup/engines/fii_engine.py"
+        ],
+        "intelligence_command_center_engine.py": [
+            "./engines/intelligence_command_center_engine.py",
+            "./backup_before_entry_cleanup/engines/intelligence_command_center_engine.py"
+        ],
+        "wealth_creation_signal_engine.py": [
+            "./engines/wealth_creation_signal_engine.py",
+            "./backup_before_entry_cleanup/engines/wealth_creation_signal_engine.py"
+        ],
+        "multicycle_capital_allocation_engine.py": [
+            "./engines/multicycle_capital_allocation_engine.py",
+            "./backup_before_entry_cleanup/engines/multicycle_capital_allocation_engine.py"
+        ],
+        "intelligence_orchestrator_engine.py": [
+            "./engines/intelligence_orchestrator_engine.py",
+            "./backup_before_entry_cleanup/engines/intelligence_orchestrator_engine.py"
+        ],
+        "price_ingestion_production_engine.py": [
+            "./engines/price_ingestion_production_engine.py",
+            "./backup_before_entry_cleanup/engines/price_ingestion_production_engine.py"
+        ],
+        "institutional_opportunity_scoring_engine.py": [
+            "./engines/institutional_opportunity_scoring_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_opportunity_scoring_engine.py"
+        ],
+        "technical.py": [
+            "./engines/technical.py",
+            "./backup_before_entry_cleanup/engines/technical.py"
+        ],
+        "opportunity_theme_aggregation_engine.py": [
+            "./engines/opportunity_theme_aggregation_engine.py",
+            "./backup_before_entry_cleanup/engines/opportunity_theme_aggregation_engine.py"
+        ],
+        "options_engine.py": [
+            "./engines/options_engine.py",
+            "./backup_before_entry_cleanup/engines/options_engine.py"
+        ],
+        "volatility_engine.py": [
+            "./engines/volatility_engine.py",
+            "./backup_before_entry_cleanup/engines/volatility_engine.py"
+        ],
+        "institutional_research_reporting_engine.py": [
+            "./engines/institutional_research_reporting_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_research_reporting_engine.py"
+        ],
+        "strategy_evolution_engine.py": [
+            "./engines/strategy_evolution_engine.py",
+            "./backup_before_entry_cleanup/engines/strategy_evolution_engine.py"
+        ],
+        "sector_classifier.py": [
+            "./engines/sector_classifier.py",
+            "./backup_before_entry_cleanup/engines/sector_classifier.py"
+        ],
+        "institutional_report_dispatcher.py": [
+            "./engines/institutional_report_dispatcher.py",
+            "./backup_before_entry_cleanup/engines/institutional_report_dispatcher.py"
+        ],
+        "future.py": [
+            "./engines/future.py",
+            "./backup_before_entry_cleanup/engines/future.py"
+        ],
+        "self_improvement_trigger_engine.py": [
+            "./engines/self_improvement_trigger_engine.py",
+            "./backup_before_entry_cleanup/engines/self_improvement_trigger_engine.py"
+        ],
+        "price_engine.py": [
+            "./engines/price_engine.py",
+            "./backup_before_entry_cleanup/engines/price_engine.py"
+        ],
+        "ath_engine.py": [
+            "./engines/ath_engine.py",
+            "./backup_before_entry_cleanup/engines/ath_engine.py"
+        ],
+        "system_scheduler_health_engine.py": [
+            "./engines/system_scheduler_health_engine.py",
+            "./backup_before_entry_cleanup/engines/system_scheduler_health_engine.py"
+        ],
+        "market_cycle_positioning_engine.py": [
+            "./engines/market_cycle_positioning_engine.py",
+            "./backup_before_entry_cleanup/engines/market_cycle_positioning_engine.py"
+        ],
+        "trading_brain_engine.py": [
+            "./engines/trading_brain_engine.py",
+            "./backup_before_entry_cleanup/engines/trading_brain_engine.py"
+        ],
+        "capital_flow_prediction_engine.py": [
+            "./engines/capital_flow_prediction_engine.py",
+            "./backup_before_entry_cleanup/engines/capital_flow_prediction_engine.py"
+        ],
+        "promoter_engine.py": [
+            "./engines/promoter_engine.py",
+            "./backup_before_entry_cleanup/engines/promoter_engine.py"
+        ],
+        "sector_mapper.py": [
+            "./engines/sector_mapper.py",
+            "./engines/news_engine/sector_mapper.py",
+            "./backup_before_entry_cleanup/engines/sector_mapper.py"
+        ],
+        "exposure_control_engine.py": [
+            "./engines/exposure_control_engine.py",
+            "./backup_before_entry_cleanup/engines/exposure_control_engine.py"
+        ],
+        "execution_strategy_engine.py": [
+            "./engines/execution_strategy_engine.py",
+            "./backup_before_entry_cleanup/engines/execution_strategy_engine.py"
+        ],
+        "capital_allocation_priority_engine.py": [
+            "./engines/capital_allocation_priority_engine.py",
+            "./backup_before_entry_cleanup/engines/capital_allocation_priority_engine.py"
+        ],
+        "fundamentals_10y_engine.py": [
+            "./engines/fundamentals_10y_engine.py",
+            "./backup_before_entry_cleanup/engines/fundamentals_10y_engine.py"
+        ],
+        "quarterly_fundamentals_pipeline.py": [
+            "./engines/quarterly_fundamentals_pipeline.py",
+            "./backup_before_entry_cleanup/engines/quarterly_fundamentals_pipeline.py"
+        ],
+        "exit_strategy_engine.py": [
+            "./engines/exit_strategy_engine.py",
+            "./backup_before_entry_cleanup/engines/exit_strategy_engine.py"
+        ],
+        "shark_engine.py": [
+            "./engines/shark_engine.py",
+            "./backup_before_entry_cleanup/engines/shark_engine.py"
+        ],
+        "decision_weight_calibration_engine.py": [
+            "./engines/decision_weight_calibration_engine.py",
+            "./backup_before_entry_cleanup/engines/decision_weight_calibration_engine.py"
+        ],
+        "master_orchestration_engine.py": [
+            "./engines/master_orchestration_engine.py",
+            "./backup_before_entry_cleanup/engines/master_orchestration_engine.py"
+        ],
+        "classifier.py": [
+            "./engines/classifier.py",
+            "./backup_before_entry_cleanup/engines/classifier.py"
+        ],
+        "commodity_engine.py": [
+            "./engines/commodity_engine.py",
+            "./backup_before_entry_cleanup/engines/commodity_engine.py"
+        ],
+        "balance_engine.py": [
+            "./engines/balance_engine.py",
+            "./backup_before_entry_cleanup/engines/balance_engine.py"
+        ],
+        "decision_broadcast_engine.py": [
+            "./engines/decision_broadcast_engine.py",
+            "./backup_before_entry_cleanup/engines/decision_broadcast_engine.py"
+        ],
+        "data_provider.py": [
+            "./engines/data_provider.py",
+            "./backup_before_entry_cleanup/engines/data_provider.py"
+        ],
+        "historical_price_data_pipeline.py": [
+            "./engines/historical_price_data_pipeline.py",
+            "./backup_before_entry_cleanup/engines/historical_price_data_pipeline.py"
+        ],
+        "daily_intelligence_pipeline_scheduler.py": [
+            "./engines/daily_intelligence_pipeline_scheduler.py",
+            "./backup_before_entry_cleanup/engines/daily_intelligence_pipeline_scheduler.py"
+        ],
+        "opportunity_memory_engine.py": [
+            "./engines/opportunity_memory_engine.py",
+            "./backup_before_entry_cleanup/engines/opportunity_memory_engine.py"
+        ],
+        "nse_universe_master_builder.py": [
+            "./engines/nse_universe_master_builder.py",
+            "./backup_before_entry_cleanup/engines/nse_universe_master_builder.py"
+        ],
+        "probability_intelligence_engine.py": [
+            "./engines/probability_intelligence_engine.py",
+            "./backup_before_entry_cleanup/engines/probability_intelligence_engine.py"
+        ],
+        "institutional_ownership_engine.py": [
+            "./engines/institutional_ownership_engine.py",
+            "./backup_before_entry_cleanup/engines/institutional_ownership_engine.py"
+        ],
+        "price_ingestion_streaming_v2_engine.py": [
+            "./engines/price_ingestion_streaming_v2_engine.py",
+            "./backup_before_entry_cleanup/engines/price_ingestion_streaming_v2_engine.py"
+        ],
+        "backtesting_strategy_validation_engine.py": [
+            "./engines/backtesting_strategy_validation_engine.py",
+            "./backup_before_entry_cleanup/engines/backtesting_strategy_validation_engine.py"
+        ],
+        "live_nse_universe_ingestion_engine.py": [
+            "./engines/live_nse_universe_ingestion_engine.py",
+            "./backup_before_entry_cleanup/engines/live_nse_universe_ingestion_engine.py"
+        ],
+        "governance_explainability_engine.py": [
+            "./engines/governance_explainability_engine.py",
+            "./backup_before_entry_cleanup/engines/governance_explainability_engine.py"
+        ],
+        "nse_options_engine.py": [
+            "./engines/nse_options_engine.py",
+            "./backup_before_entry_cleanup/engines/nse_options_engine.py"
+        ],
+        "sector_master_builder_engine.py": [
+            "./engines/sector_master_builder_engine.py",
+            "./backup_before_entry_cleanup/engines/sector_master_builder_engine.py"
+        ],
+        "portfolio_engine.py": [
+            "./engines/portfolio_engine.py",
+            "./backup_before_entry_cleanup/engines/portfolio_engine.py"
+        ],
+        "self_improving_portfolio_engine.py": [
+            "./engines/self_improving_portfolio_engine.py",
+            "./backup_before_entry_cleanup/engines/self_improving_portfolio_engine.py"
+        ]
+    },
+    "dead_code": [
+        "./mode_brain.py",
+        "./test_real_intelligence.py",
+        "./unified_intelligence_pipeline.py",
+        "./web_app.py",
+        "./schedule_controller_engine.py",
+        "./nse_universe_builder.py",
+        "./recovery_runner.py",
+        "./cleanup_entry_points.py",
+        "./daily_autoplay.py",
+        "./hard_cleanup_entry_points.py",
+        "./stock_selector.py",
+        "./system_audit.py",
+        "./engine_guard.py",
+        "./update_stocks.py",
+        "./super_bot.py",
+        "./brain_data.py",
+        "./stock_universe_engine.py",
+        "./real_data_intelligence_runner.py",
+        "./INSTITUTIONAL_COMPLETION_FIX.py",
+        "./update_fundamentals_all.py",
+        "./main.py",
+        "./institutional_intelligence_system.py",
+        "./production_autorun.py",
+        "./telegram_runner.py",
+        "./ultimate_intelligence_system.py",
+        "./run_backup_before_intelligence_integration.py",
+        "./ultimate_brain_master_audit.py",
+        "./logging_engine.py",
+        "./quarterly_comparison_engine.py",
+        "./intelligence_runner.py",
+        "./system_check.py",
+        "./INSTITUTIONAL_LIVE_STABILIZER.py",
+        "./reset_to_core.py",
+        "./master_system_status.py",
+        "./LIVE_DATA_INTELLIGENCE_AUDIT.py",
+        "./update_fundamentals.py",
+        "./rebuild_price_data.py",
+        "./sector_stock_mapper.py",
+        "./full_deep_core_audit.py",
+        "./master_system_audit.py",
+        "./deep_system_audit.py",
+        "./opportunity_report_engine.py",
+        "./opportunity_ranking_engine.py",
+        "./app_disabled.py",
+        "./explanation_brain.py",
+        "./production_supervisor.py",
+        "./integration_probe.py",
+        "./render_live_engine.py",
+        "./make_clean_fundamentals.py",
+        "./deep_audit/ultimate_brain_deep_audit.py",
+        "./tools/system_health_check.py",
+        "./core/nse_universe_engine.py",
+        "./core/nse_bhavcopy_engine.py",
+        "./core/nse_daily_updater.py",
+        "./core/fii_dii_trend_engine.py",
+        "./core/annual_aggregator_engine.py",
+        "./core/news_signal_engine.py",
+        "./core/opportunity_detection_engine.py",
+        "./core/nse_price_engine.py",
+        "./core/risk_engine.py",
+        "./core/fundamental_ingestion_engine.py",
+        "./core/historical_price_engine.py",
+        "./core/real_fundamental_engine.py",
+        "./core/__init__.py",
+        "./core/multibagger_detection_engine.py",
+        "./audit/full_system_audit.py",
+        "./real_intelligence_layer/__init__.py",
+        "./engines/portfolio_optimization_engine.py",
+        "./engines/news_future.py",
+        "./engines/exit_engine.py",
+        "./engines/live_price_history_ingestion_engine.py",
+        "./engines/fundamental_comparison_classifier_engine.py",
+        "./engines/fundamental_10y_pilot_engine.py",
+        "./engines/sector_authority_engine.py",
+        "./engines/early_warning_risk_radar_engine.py",
+        "./engines/self_learning_alpha_engine.py",
+        "./engines/institutional_opportunity_engine_v2.py",
+        "./engines/performance_engine.py",
+        "./engines/global_intelligence_engine.py",
+        "./engines/global_policy_signal_engine.py",
+        "./engines/fundamentals_master_ingestion_engine.py",
+        "./engines/paper_trade_engine.py",
+        "./engines/sector_rotation_forecast_engine.py",
+        "./engines/profit_protection_exit_engine.py",
+        "./engines/pl_engine.py",
+        "./engines/timing_optimization_engine.py",
+        "./engines/stock_universe.py",
+        "./engines/autonomous_intelligence_controller.py",
+        "./engines/sector_rank_engine.py",
+        "./engines/live_news_engine.py",
+        "./engines/portfolio_lifecycle_intelligence_engine.py",
+        "./engines/multiworker_execution_engine.py",
+        "./engines/scenario_simulation_engine.py",
+        "./engines/narrative_intelligence_engine.py",
+        "./engines/autonomous_continuous_intelligence_engine.py",
+        "./engines/why.py",
+        "./engines/institutional_top20_engine.py",
+        "./engines/portfolio_stress_testing_engine.py",
+        "./engines/news_sector_stock_impact_engine.py",
+        "./engines/nse_universe_opportunity_scanner.py",
+        "./engines/open engines:sector_classifier.py",
+        "./engines/nse_sector_index_harvester_engine.py",
+        "./engines/final_report_engine.py",
+        "./engines/smart_money_engine.py",
+        "./engines/cross_asset_signal_engine.py",
+        "./engines/fii_engine.py",
+        "./engines/intelligence_command_center_engine.py",
+        "./engines/wealth_creation_signal_engine.py",
+        "./engines/price_ingestion_production_engine.py",
+        "./engines/opportunity_theme_aggregation_engine.py",
+        "./engines/sector_classifier.py",
+        "./engines/ath_engine.py",
+        "./engines/system_scheduler_health_engine.py",
+        "./engines/market_cycle_positioning_engine.py",
+        "./engines/capital_flow_prediction_engine.py",
+        "./engines/exposure_control_engine.py",
+        "./engines/execution_strategy_engine.py",
+        "./engines/capital_allocation_priority_engine.py",
+        "./engines/fundamentals_10y_engine.py",
+        "./engines/exit_strategy_engine.py",
+        "./engines/shark_engine.py",
+        "./engines/real_fundamental_engine.py",
+        "./engines/master_orchestration_engine.py",
+        "./engines/classifier.py",
+        "./engines/commodity_engine.py",
+        "./engines/balance_engine.py",
+        "./engines/decision_broadcast_engine.py",
+        "./engines/data_provider.py",
+        "./engines/daily_intelligence_pipeline_scheduler.py",
+        "./engines/__init__.py",
+        "./engines/probability_intelligence_engine.py",
+        "./engines/institutional_ownership_engine.py",
+        "./engines/price_ingestion_streaming_v2_engine.py",
+        "./engines/backtesting_strategy_validation_engine.py",
+        "./engines/live_nse_universe_ingestion_engine.py",
+        "./engines/governance_explainability_engine.py",
+        "./engines/nse_options_engine.py",
+        "./engines/sector_master_builder_engine.py",
+        "./engines/news_engine/news_validator.py",
+        "./engines/news_engine/stock_mapper.py",
+        "./engines/news_engine/macro_classifier.py",
+        "./engines/news_engine/global_news_collector.py",
+        "./engines/news_engine/__init__.py",
+        "./engines/news_engine/news_database.py",
+        "./engines/alert_engine/__init__.py",
+        "./backup_before_entry_cleanup/mode_brain.py",
+        "./backup_before_entry_cleanup/unified_intelligence_pipeline.py",
+        "./backup_before_entry_cleanup/web_app.py",
+        "./backup_before_entry_cleanup/schedule_controller_engine.py",
+        "./backup_before_entry_cleanup/nse_universe_builder.py",
+        "./backup_before_entry_cleanup/recovery_runner.py",
+        "./backup_before_entry_cleanup/daily_autoplay.py",
+        "./backup_before_entry_cleanup/stock_selector.py",
+        "./backup_before_entry_cleanup/system_audit.py",
+        "./backup_before_entry_cleanup/engine_guard.py",
+        "./backup_before_entry_cleanup/update_stocks.py",
+        "./backup_before_entry_cleanup/super_bot.py",
+        "./backup_before_entry_cleanup/brain_data.py",
+        "./backup_before_entry_cleanup/stock_universe_engine.py",
+        "./backup_before_entry_cleanup/update_fundamentals_all.py",
+        "./backup_before_entry_cleanup/main.py",
+        "./backup_before_entry_cleanup/production_autorun.py",
+        "./backup_before_entry_cleanup/telegram_runner.py",
+        "./backup_before_entry_cleanup/ultimate_brain_master_audit.py",
+        "./backup_before_entry_cleanup/logging_engine.py",
+        "./backup_before_entry_cleanup/quarterly_comparison_engine.py",
+        "./backup_before_entry_cleanup/system_check.py",
+        "./backup_before_entry_cleanup/reset_to_core.py",
+        "./backup_before_entry_cleanup/master_system_status.py",
+        "./backup_before_entry_cleanup/update_fundamentals.py",
+        "./backup_before_entry_cleanup/rebuild_price_data.py",
+        "./backup_before_entry_cleanup/sector_stock_mapper.py",
+        "./backup_before_entry_cleanup/master_system_audit.py",
+        "./backup_before_entry_cleanup/deep_system_audit.py",
+        "./backup_before_entry_cleanup/opportunity_report_engine.py",
+        "./backup_before_entry_cleanup/opportunity_ranking_engine.py",
+        "./backup_before_entry_cleanup/app_disabled.py",
+        "./backup_before_entry_cleanup/explanation_brain.py",
+        "./backup_before_entry_cleanup/production_supervisor.py",
+        "./backup_before_entry_cleanup/integration_probe.py",
+        "./backup_before_entry_cleanup/make_clean_fundamentals.py",
+        "./backup_before_entry_cleanup/engines/portfolio_optimization_engine.py",
+        "./backup_before_entry_cleanup/engines/news_future.py",
+        "./backup_before_entry_cleanup/engines/exit_engine.py",
+        "./backup_before_entry_cleanup/engines/live_price_history_ingestion_engine.py",
+        "./backup_before_entry_cleanup/engines/fundamental_comparison_classifier_engine.py",
+        "./backup_before_entry_cleanup/engines/fundamental_10y_pilot_engine.py",
+        "./backup_before_entry_cleanup/engines/sector_authority_engine.py",
+        "./backup_before_entry_cleanup/engines/early_warning_risk_radar_engine.py",
+        "./backup_before_entry_cleanup/engines/self_learning_alpha_engine.py",
+        "./backup_before_entry_cleanup/engines/institutional_opportunity_engine_v2.py",
+        "./backup_before_entry_cleanup/engines/performance_engine.py",
+        "./backup_before_entry_cleanup/engines/global_intelligence_engine.py",
+        "./backup_before_entry_cleanup/engines/global_policy_signal_engine.py",
+        "./backup_before_entry_cleanup/engines/fundamentals_master_ingestion_engine.py",
+        "./backup_before_entry_cleanup/engines/paper_trade_engine.py",
+        "./backup_before_entry_cleanup/engines/sector_rotation_forecast_engine.py",
+        "./backup_before_entry_cleanup/engines/profit_protection_exit_engine.py",
+        "./backup_before_entry_cleanup/engines/pl_engine.py",
+        "./backup_before_entry_cleanup/engines/timing_optimization_engine.py",
+        "./backup_before_entry_cleanup/engines/stock_universe.py",
+        "./backup_before_entry_cleanup/engines/autonomous_intelligence_controller.py",
+        "./backup_before_entry_cleanup/engines/sector_rank_engine.py",
+        "./backup_before_entry_cleanup/engines/live_news_engine.py",
+        "./backup_before_entry_cleanup/engines/portfolio_lifecycle_intelligence_engine.py",
+        "./backup_before_entry_cleanup/engines/multiworker_execution_engine.py",
+        "./backup_before_entry_cleanup/engines/scenario_simulation_engine.py",
+        "./backup_before_entry_cleanup/engines/narrative_intelligence_engine.py",
+        "./backup_before_entry_cleanup/engines/autonomous_continuous_intelligence_engine.py",
+        "./backup_before_entry_cleanup/engines/why.py",
+        "./backup_before_entry_cleanup/engines/institutional_top20_engine.py",
+        "./backup_before_entry_cleanup/engines/portfolio_stress_testing_engine.py",
+        "./backup_before_entry_cleanup/engines/news_sector_stock_impact_engine.py",
+        "./backup_before_entry_cleanup/engines/nse_universe_opportunity_scanner.py",
+        "./backup_before_entry_cleanup/engines/open engines:sector_classifier.py",
+        "./backup_before_entry_cleanup/engines/nse_sector_index_harvester_engine.py",
+        "./backup_before_entry_cleanup/engines/final_report_engine.py",
+        "./backup_before_entry_cleanup/engines/smart_money_engine.py",
+        "./backup_before_entry_cleanup/engines/cross_asset_signal_engine.py",
+        "./backup_before_entry_cleanup/engines/fii_engine.py",
+        "./backup_before_entry_cleanup/engines/intelligence_command_center_engine.py",
+        "./backup_before_entry_cleanup/engines/wealth_creation_signal_engine.py",
+        "./backup_before_entry_cleanup/engines/price_ingestion_production_engine.py",
+        "./backup_before_entry_cleanup/engines/opportunity_theme_aggregation_engine.py",
+        "./backup_before_entry_cleanup/engines/sector_classifier.py",
+        "./backup_before_entry_cleanup/engines/ath_engine.py",
+        "./backup_before_entry_cleanup/engines/system_scheduler_health_engine.py",
+        "./backup_before_entry_cleanup/engines/market_cycle_positioning_engine.py",
+        "./backup_before_entry_cleanup/engines/capital_flow_prediction_engine.py",
+        "./backup_before_entry_cleanup/engines/exposure_control_engine.py",
+        "./backup_before_entry_cleanup/engines/execution_strategy_engine.py",
+        "./backup_before_entry_cleanup/engines/capital_allocation_priority_engine.py",
+        "./backup_before_entry_cleanup/engines/fundamentals_10y_engine.py",
+        "./backup_before_entry_cleanup/engines/exit_strategy_engine.py",
+        "./backup_before_entry_cleanup/engines/shark_engine.py",
+        "./backup_before_entry_cleanup/engines/real_fundamental_engine.py",
+        "./backup_before_entry_cleanup/engines/master_orchestration_engine.py",
+        "./backup_before_entry_cleanup/engines/classifier.py",
+        "./backup_before_entry_cleanup/engines/commodity_engine.py",
+        "./backup_before_entry_cleanup/engines/balance_engine.py",
+        "./backup_before_entry_cleanup/engines/decision_broadcast_engine.py",
+        "./backup_before_entry_cleanup/engines/data_provider.py",
+        "./backup_before_entry_cleanup/engines/daily_intelligence_pipeline_scheduler.py",
+        "./backup_before_entry_cleanup/engines/__init__.py",
+        "./backup_before_entry_cleanup/engines/probability_intelligence_engine.py",
+        "./backup_before_entry_cleanup/engines/institutional_ownership_engine.py",
+        "./backup_before_entry_cleanup/engines/price_ingestion_streaming_v2_engine.py",
+        "./backup_before_entry_cleanup/engines/backtesting_strategy_validation_engine.py",
+        "./backup_before_entry_cleanup/engines/live_nse_universe_ingestion_engine.py",
+        "./backup_before_entry_cleanup/engines/governance_explainability_engine.py",
+        "./backup_before_entry_cleanup/engines/nse_options_engine.py",
+        "./backup_before_entry_cleanup/engines/sector_master_builder_engine.py"
+    ],
+    "completion_percent": 100.0
+}
