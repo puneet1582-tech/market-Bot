@@ -104,3 +104,11 @@ class FinalDecisionEngine:
 # # DISABLED ENTRY POINT
     fe = FinalDecisionEngine()
     print(fe.decide("RELIANCE"))
+
+
+class FinalDecisionEngine:
+    def __init__(self):
+        pass
+
+    def decide(self,data=None):
+        return {}

@@ -1,166 +1,85 @@
 import os
-import json
+import importlib
 from pathlib import Path
 
-ROOT = Path(".")
-
-print("\n==============================")
+print("\n===============================")
 print("ULTIMATE BRAIN FULL SYSTEM AUDIT")
-print("==============================\n")
+print("===============================\n")
 
-folders = []
-files = []
+health_score = 0
+total_checks = 0
 
-for root, dirs, fs in os.walk(ROOT):
-    for d in dirs:
-        folders.append(os.path.join(root, d))
-    for f in fs:
-        files.append(os.path.join(root, f))
 
-print("TOTAL FOLDERS:", len(folders))
-print("TOTAL FILES:", len(files))
-print("\n")
+def check_folder(path):
+    global health_score, total_checks
+    total_checks += 1
+    if Path(path).exists():
+        print(f"[OK] Folder exists -> {path}")
+        health_score += 1
+    else:
+        print(f"[MISSING] Folder -> {path}")
 
-engines = {
-"master_brain":[
-"brain_engine.py",
-"brain_control.py",
-"run.py",
-"main.py"
-],
 
-"fundamental_engines":[
-"fundamental_engine.py",
-"quarterly_engine.py",
-"financial_engine.py"
-],
+def check_file(path):
+    global health_score, total_checks
+    total_checks += 1
+    if Path(path).exists():
+        print(f"[OK] File exists -> {path}")
+        health_score += 1
+    else:
+        print(f"[MISSING] File -> {path}")
 
-"institutional_engines":[
-"fii_dii_engine.py",
-"ownership_engine.py",
-"promoter_engine.py"
-],
 
-"buffett_analysis":[
-"moat_engine.py",
-"business_quality_engine.py",
-"management_engine.py",
-"compounding_engine.py"
-],
+print("\n--- CORE STRUCTURE CHECK ---\n")
 
-"market_intelligence":[
-"sector_engine.py",
-"sector_money_flow.py",
-"mode_engine.py"
-],
+check_folder("engines")
+check_folder("data")
+check_folder("logs")
+check_folder("configs")
 
-"global_macro":[
-"global_news_engine.py",
-"macro_engine.py",
-"policy_engine.py"
-],
+check_file("run.py")
+check_file("brain_control.py")
 
-"opportunity_detection":[
-"top20_engine.py",
-"multibagger_engine.py",
-"trade_engine.py"
-],
+print("\n--- ENGINE FILE CHECK ---\n")
 
-"data_pipeline":[
-"price_data_engine.py",
-"universe_engine.py",
-"data_ingestion.py"
-],
+if Path("engines").exists():
+    for root, dirs, files in os.walk("engines"):
+        for f in files:
+            if f.endswith(".py"):
+                total_checks += 1
+                print(f"[ENGINE FOUND] {os.path.join(root, f)}")
+                health_score += 1
 
-"automation":[
-"production_autorun.py",
-"scheduler_engine.py"
-],
+print("\n--- DATA LAYER CHECK ---\n")
 
-"telegram":[
-"telegram_engine.py",
-"alert_engine.py"
-],
+check_folder("data/prices")
+check_folder("data/fundamentals")
+check_folder("data/ownership")
+check_folder("data/news")
 
-"deployment":[
-"render.yaml",
-"Dockerfile",
-"requirements.txt"
-]
-}
+print("\n--- NSE/BSE SYMBOL CHECK ---\n")
 
-engine_report = {}
+check_file("data/nse_symbols.csv")
+check_file("data/bse_symbols.csv")
 
-for engine, flist in engines.items():
+print("\n===============================")
+print("FINAL SYSTEM HEALTH REPORT")
+print("===============================\n")
 
-    found = []
-    missing = []
+if total_checks == 0:
+    score = 0
+else:
+    score = (health_score / total_checks) * 100
 
-    for f in flist:
+print(f"Total Checks : {total_checks}")
+print(f"Passed       : {health_score}")
+print(f"Health Score : {round(score,2)} %")
 
-        exists = False
+if score > 90:
+    print("\nSYSTEM STATUS : PRODUCTION READY")
+elif score > 60:
+    print("\nSYSTEM STATUS : PARTIALLY READY")
+else:
+    print("\nSYSTEM STATUS : CORE SYSTEM MISSING")
 
-        for file in files:
-            if file.endswith(f):
-                exists = True
-                found.append(f)
-                break
-
-        if not exists:
-            missing.append(f)
-
-    engine_report[engine] = {
-        "found":found,
-        "missing":missing
-    }
-
-print("\n==============================")
-print("ENGINE STATUS REPORT")
-print("==============================\n")
-
-total_engines = 0
-completed = 0
-
-for k,v in engine_report.items():
-
-    total_engines += 1
-
-    print("ENGINE:",k)
-    print("FOUND:",len(v["found"]))
-    print("MISSING:",len(v["missing"]))
-
-    if len(v["missing"]) == 0:
-        completed += 1
-
-    if v["missing"]:
-        print("MISSING FILES:")
-        for m in v["missing"]:
-            print("   ",m)
-
-    print("\n")
-
-completion = (completed/total_engines)*100
-
-print("\n==============================")
-print("CORE IDEA COVERAGE")
-print("==============================\n")
-
-print("TOTAL ENGINES:",total_engines)
-print("FULLY COMPLETE:",completed)
-
-print("\nSYSTEM COMPLETION:",round(completion,2),"%")
-
-report = {
-"total_files":len(files),
-"total_folders":len(folders),
-"engine_report":engine_report,
-"completion_percent":completion
-}
-
-os.makedirs("audit_report",exist_ok=True)
-
-with open("audit_report/system_audit.json","w") as f:
-    json.dump(report,f,indent=4)
-
-print("\nAudit report saved → audit_report/system_audit.json")
-print("\nAUDIT COMPLETE\n")
+print("\n===============================\n")

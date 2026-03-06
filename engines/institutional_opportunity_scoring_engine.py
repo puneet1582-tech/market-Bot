@@ -54,3 +54,7 @@ def run_institutional_scoring():
 # DISABLED ENTRY POINT
 # # DISABLED ENTRY POINT
     run_institutional_scoring()
+
+
+def run_scoring():
+    return []
