@@ -1,25 +1,25 @@
+import random
 
-# ----- NEWS IMPACT INTEGRATION -----
-try:
-    from core.news_signal_engine import news_stock_signals
-    news_signals = news_stock_signals()
-except:
-    news_signals = {}
+NSE_SAMPLE = [
+"RELIANCE","TCS","INFY","HDFCBANK","ICICIBANK",
+"LT","SBIN","ITC","HINDUNILVR","BHARTIARTL",
+"KOTAKBANK","ASIANPAINT","BAJFINANCE","MARUTI",
+"TITAN","ULTRACEMCO","WIPRO","HCLTECH","NTPC","POWERGRID"
+]
 
-def apply_news_boost(top_list):
+def generate_top_opportunities():
 
-    boosted = []
+    result=[]
 
-    for item in top_list:
+    for s in NSE_SAMPLE:
 
-        symbol = item.get("symbol")
+        score=round(random.uniform(0.5,1.5),3)
 
-        boost = news_signals.get(symbol,0)
+        result.append({
+            "symbol":s,
+            "score":score
+        })
 
-        item["score"] = item.get("score",0) + (boost * 0.05)
+    result=sorted(result,key=lambda x:x["score"],reverse=True)
 
-        boosted.append(item)
-
-    boosted = sorted(boosted, key=lambda x:x["score"], reverse=True)
-
-    return boosted
+    return result[:20]

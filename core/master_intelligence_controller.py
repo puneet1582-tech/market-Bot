@@ -1,3 +1,4 @@
+from engines.opportunity_engine import generate_top_opportunities
 class MasterIntelligenceController:
 
     def __init__(self):
@@ -9,7 +10,7 @@ class MasterIntelligenceController:
             "MARKET_SUMMARY": {
                 "mode": "TRADE"
             },
-            "TOP_20": []
+            "TOP_20": top
         }
 
         return result
