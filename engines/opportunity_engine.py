@@ -1,25 +1,25 @@
-import random
+import pandas as pd
 
-NSE_SAMPLE = [
-"RELIANCE","TCS","INFY","HDFCBANK","ICICIBANK",
-"LT","SBIN","ITC","HINDUNILVR","BHARTIARTL",
-"KOTAKBANK","ASIANPAINT","BAJFINANCE","MARUTI",
-"TITAN","ULTRACEMCO","WIPRO","HCLTECH","NTPC","POWERGRID"
-]
+PRICE_FILE="data/prices/latest_prices.csv"
 
 def generate_top_opportunities():
 
+    try:
+        df=pd.read_csv(PRICE_FILE)
+    except:
+        return []
+
+    df["score"]=df["return_1d"]+df["volume_change"]
+
+    df=df.sort_values("score",ascending=False)
+
     result=[]
 
-    for s in NSE_SAMPLE:
-
-        score=round(random.uniform(0.5,1.5),3)
+    for _,r in df.head(20).iterrows():
 
         result.append({
-            "symbol":s,
-            "score":score
+            "symbol":r["symbol"],
+            "score":round(float(r["score"]),3)
         })
 
-    result=sorted(result,key=lambda x:x["score"],reverse=True)
-
-    return result[:20]
+    return result
