@@ -44,6 +44,7 @@ def fix_common_issues(file_path):
 
     # add entry point if missing
     if not entry_point_found:
+        pass
 
         new_lines.append("\n\n")
         new_lines.append("if __name__ == '__main__':\n")

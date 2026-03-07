@@ -56,6 +56,7 @@ class UltimateBrainExecutionEngine:
 
 
 if __name__ == "__main__":
+    pass
 
     brain = UltimateBrainExecutionEngine()
 

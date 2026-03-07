@@ -39,6 +39,7 @@ def fetch_ownership(symbol):
         for table in tables:
 
             if "Shareholding Pattern" in table.text:
+                pass
 
                 df = pd.read_html(str(table))[0]
 
@@ -91,4 +92,5 @@ def run():
 
 
 if __name__ == "__main__":
+    pass
 

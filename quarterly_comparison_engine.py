@@ -21,6 +21,7 @@ def load_fundamental_files():
     for f in os.listdir(DATA_DIR):
 
         if f.endswith(".csv"):
+            pass
 
             path = os.path.join(DATA_DIR, f)
 
@@ -136,3 +137,4 @@ def run():
 
 
 if __name__ == "__main__":
+    pass

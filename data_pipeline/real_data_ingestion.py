@@ -96,3 +96,4 @@ def run():
     print("REAL DATA PIPELINE COMPLETE")
 
 if __name__ == "__main__":
+    pass

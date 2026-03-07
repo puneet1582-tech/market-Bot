@@ -47,11 +47,13 @@ def build_fundamental_dataset():
         annual, quarter = safe_download(yahoo_symbol)
 
         if annual is not None and not annual.empty:
+            pass
 
             annual["symbol"] = sym
             annual_all.append(annual)
 
         if quarter is not None and not quarter.empty:
+            pass
 
             quarter["symbol"] = sym
             quarter_all.append(quarter)
@@ -59,6 +61,7 @@ def build_fundamental_dataset():
         time.sleep(DELAY)
 
     if len(annual_all) > 0:
+        pass
 
         annual_df = pd.concat(annual_all)
 
@@ -67,6 +70,7 @@ def build_fundamental_dataset():
         print("Annual fundamentals saved:", len(annual_df))
 
     if len(quarter_all) > 0:
+        pass
 
         quarter_df = pd.concat(quarter_all)
 

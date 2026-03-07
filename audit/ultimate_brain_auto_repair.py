@@ -41,10 +41,12 @@ if not bse_file.exists():
 fde = Path("engines/final_decision_engine.py")
 
 if fde.exists():
+    pass
 
     code = fde.read_text()
 
     if "class FinalDecisionEngine" not in code:
+        pass
 
         patch = """
 
@@ -69,10 +71,12 @@ class FinalDecisionEngine:
 tbe = Path("engines/trading_brain_engine.py")
 
 if tbe.exists():
+    pass
 
     code = tbe.read_text()
 
     if "FinalDecisionEngine" in code and "import" not in code.split("FinalDecisionEngine")[0]:
+        pass
 
         patch = "from engines.final_decision_engine import FinalDecisionEngine\n"
 
@@ -91,6 +95,7 @@ if tbe.exists():
 bad_file = Path("engines/open engines:sector_classifier.py")
 
 if bad_file.exists():
+    pass
 
     new_file = Path("engines/sector_classifier_engine_fixed.py")
 

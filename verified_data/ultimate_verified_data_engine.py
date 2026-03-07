@@ -53,6 +53,7 @@ def build_sector():
         for s,keys in keywords.items():
 
             if any(k in name for k in keys):
+                pass
 
                 sector = s
                 break
@@ -115,3 +116,4 @@ def run():
 
 
 if __name__ == "__main__":
+    pass
