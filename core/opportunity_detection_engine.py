@@ -54,3 +54,7 @@ if __name__ == '__main__':
         run()
     except Exception as e:
         print('Engine Error:', e)
+
+
+def run():
+    print('Engine started:', __name__)
