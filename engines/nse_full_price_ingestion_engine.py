@@ -86,6 +86,7 @@ def run_ingestion():
 
 
 if __name__ == "__main__":
+    pass
 
     os.makedirs(DATA_PATH, exist_ok=True)
 

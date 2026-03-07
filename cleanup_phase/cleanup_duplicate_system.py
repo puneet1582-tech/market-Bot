@@ -21,6 +21,7 @@ for root,dirs,files in os.walk(ROOT):
         backup_path=os.path.join(ROOT,backup_dir,f)
 
         if os.path.exists(backup_path):
+            pass
 
             kept.append(path)
 

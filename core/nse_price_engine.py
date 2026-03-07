@@ -34,6 +34,7 @@ def build_price_dataset():
             r = session.get(BHAVCOPY_URL, headers=HEADERS, timeout=20)
 
             if r.status_code == 200:
+                pass
 
                 from io import StringIO
 

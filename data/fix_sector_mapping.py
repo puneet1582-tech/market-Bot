@@ -32,6 +32,7 @@ def detect_sector(name):
 for i,row in stocks.iterrows():
 
     if row["sector"]=="UNKNOWN":
+        pass
 
         stocks.at[i,"sector"]=detect_sector(row["company"])
 

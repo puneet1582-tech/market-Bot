@@ -73,6 +73,7 @@ class NSEBhavcopyEngine:
             df = self.download_bhavcopy(current_date)
 
             if df is not None and "SYMBOL" in df.columns:
+                pass
 
                 df = df[df["SYMBOL"].isin(universe)]
 

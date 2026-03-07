@@ -106,6 +106,7 @@ class BuffettBusinessQualityEngine:
 
 
 if __name__ == "__main__":
+    pass
 
     engine = BuffettBusinessQualityEngine()
 

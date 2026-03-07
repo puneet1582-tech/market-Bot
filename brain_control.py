@@ -150,6 +150,7 @@ def run_master_pipeline():
 
 
 if __name__ == "__main__":
+    pass
 
     if "--full-check" in sys.argv:
         run_full_check()
@@ -178,6 +179,7 @@ def run_master_pipeline():
 
 
 if __name__ == "__main__":
+    pass
 
     if "--full-check" in sys.argv:
         run_full_check()
