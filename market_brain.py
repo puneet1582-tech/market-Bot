@@ -1,8 +1,9 @@
 import pandas as pd
+from config.paths import FUNDAMENTALS_FILE
 
 
 def load_data():
-    return pd.read_csv("data/fundamentals.csv")
+    return pd.read_csv(FUNDAMENTALS_FILE)
 
 
 def decide_market_mode():
@@ -10,6 +11,7 @@ def decide_market_mode():
 
 
 def stock_score(row):
+
     score = 0
     reason = []
 
