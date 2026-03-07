@@ -53,3 +53,10 @@ def quarterly_growth(financials_dict):
 
     except Exception:
         return {}
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

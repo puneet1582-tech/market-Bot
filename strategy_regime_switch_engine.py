@@ -23,3 +23,10 @@ def adjust_strategy_bias(mode_report, regime_prob):
     except Exception as e:
         print("Strategy switch error:", e)
         return mode_report
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -15,3 +15,10 @@ def log_info(msg):
 
 def log_error(msg):
     logging.error(msg)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

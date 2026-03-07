@@ -41,3 +41,10 @@ def detect_market_cycle(liquidity_signal, volatility_level, trend_strength):
             "timestamp": str(datetime.utcnow()),
             "market_cycle": "UNKNOWN"
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

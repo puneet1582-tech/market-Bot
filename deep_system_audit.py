@@ -41,3 +41,10 @@ for root, dirs, files in os.walk("."):
 
 print("\nAudit completed at:", datetime.now())
 print("\n==============================\n")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

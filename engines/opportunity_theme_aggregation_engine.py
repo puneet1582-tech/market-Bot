@@ -40,3 +40,10 @@ def aggregate_themes(narrative_data, policy_signal, liquidity_signal, sector_rot
         "timestamp": str(datetime.utcnow()),
         "emerging_themes": themes
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

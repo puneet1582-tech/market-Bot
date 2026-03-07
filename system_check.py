@@ -46,3 +46,10 @@ for k, v in status.items():
     print(f"{k}: {v}")
 
 print("\n===== SYSTEM CHECK COMPLETE =====")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

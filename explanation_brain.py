@@ -46,3 +46,10 @@ stock_data = {
 
 print(explain_mode(market_conditions, mode))
 print(explain_stock("TCS", stock_data, mode))
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

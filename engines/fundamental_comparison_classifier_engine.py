@@ -30,3 +30,10 @@ def classify_stock(financial_df):
             return "AVOID"
     except Exception:
         return "UNKNOWN"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

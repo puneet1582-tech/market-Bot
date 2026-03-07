@@ -66,3 +66,10 @@ class IntelligenceEngine:
     result = engine.run()
     print("Combined Intelligence Engine Completed")
     print(list(result.items())[:10])
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

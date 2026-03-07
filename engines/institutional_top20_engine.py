@@ -66,6 +66,11 @@ def run_institutional_top20_engine():
     logging.info("TOP-20 OPPORTUNITIES GENERATED")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_institutional_top20_engine()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -11,3 +11,10 @@ def risk_engine(decision, category):
 
     return "VERY HIGH", "0%"
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

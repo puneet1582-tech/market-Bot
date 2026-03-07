@@ -30,3 +30,10 @@ def evaluate_performance():
             "trade_signals": 0,
             "defensive_signals": 0
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

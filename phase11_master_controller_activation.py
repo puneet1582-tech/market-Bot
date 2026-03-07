@@ -28,3 +28,10 @@ def run_full_system():
 
 # HARDENED: disabled main entry
     run_full_system()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

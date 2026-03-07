@@ -11,3 +11,10 @@ data = {
 
 pd.DataFrame(data).to_csv(OUTPUT, index=False)
 print("Sector mapping created:", OUTPUT)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

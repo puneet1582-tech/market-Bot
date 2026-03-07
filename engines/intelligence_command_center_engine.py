@@ -28,3 +28,10 @@ def health():
         "health": "OK",
         "timestamp": str(datetime.utcnow())
     })
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

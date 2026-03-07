@@ -17,3 +17,10 @@ def main():
 # disabled_entry_point
     output = main()
     print(output)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

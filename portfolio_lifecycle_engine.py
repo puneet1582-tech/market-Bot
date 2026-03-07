@@ -26,3 +26,10 @@ def track_portfolio(allocation):
 
     except Exception as e:
         print("Portfolio lifecycle tracking error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

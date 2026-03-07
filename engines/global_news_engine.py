@@ -13,3 +13,10 @@ def fetch_global_news():
 def run_global_news_engine():
     logging.info("GLOBAL NEWS ENGINE EXECUTED")
     fetch_global_news()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

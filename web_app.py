@@ -53,7 +53,12 @@ def home():
         stocks=report["STOCKS"]
     )
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     app.run(debug=True)
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

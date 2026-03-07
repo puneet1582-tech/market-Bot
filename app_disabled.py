@@ -8,7 +8,12 @@ def home():
     output = subprocess.getoutput("python3 main.py")
     return f"<pre>{output}</pre>"
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     app.run(debug=True)
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

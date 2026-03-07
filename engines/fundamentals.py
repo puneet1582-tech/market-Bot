@@ -12,3 +12,10 @@ def fundamental_score(row):
 
     return score
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

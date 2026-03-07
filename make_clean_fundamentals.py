@@ -15,3 +15,10 @@ df = df.groupby("symbol").head(12)
 df.to_csv("data/quarterly_fundamentals_clean.csv", index=False)
 
 print("quarterly_fundamentals_clean.csv CREATED")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

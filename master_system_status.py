@@ -17,3 +17,10 @@ for f in files:
 dirs = ["data", "logs", "output"]
 for d in dirs:
     print(f"[DIR OK] {d}" if os.path.isdir(d) else f"[DIR MISSING] {d}")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

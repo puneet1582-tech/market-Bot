@@ -22,3 +22,10 @@ class DecisionWeightCalibrationEngine:
             weights["defensive_weight"] *= 1.1
 
         return weights
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

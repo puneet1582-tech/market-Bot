@@ -41,3 +41,10 @@ def broadcast_decision(decision_data, telegram_func=None):
     _write_log(record)
 
     return True
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

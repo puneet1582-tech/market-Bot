@@ -100,8 +100,6 @@ class FinalDecisionEngine:
             "why": reasons
         }
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     fe = FinalDecisionEngine()
     print(fe.decide("RELIANCE"))
 
@@ -112,3 +110,10 @@ class FinalDecisionEngine:
 
     def decide(self,data=None):
         return {}
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

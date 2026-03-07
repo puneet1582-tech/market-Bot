@@ -32,3 +32,10 @@ price = pd.DataFrame(rows)
 price.to_csv("data/price_history.csv", index=False)
 
 print("Price history created:", len(price))
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

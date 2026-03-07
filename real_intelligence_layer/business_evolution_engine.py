@@ -76,3 +76,10 @@ class BusinessEvolutionEngine:
             return "Cyclical / Volatile Business"
         else:
             return "Stable but Moderate Growth Business"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

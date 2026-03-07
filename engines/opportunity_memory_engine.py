@@ -41,3 +41,10 @@ class OpportunityMemoryEngine:
             json.dump(memory, f, indent=2)
 
         return memory
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

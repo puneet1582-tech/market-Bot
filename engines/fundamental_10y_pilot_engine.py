@@ -101,6 +101,11 @@ def run_fundamental_10y_pilot():
     logging.info("10Y FUNDAMENTAL PILOT COMPLETED")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_fundamental_10y_pilot()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

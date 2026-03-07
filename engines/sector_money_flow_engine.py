@@ -55,3 +55,10 @@ def run_sector_money_flow_engine():
     result.to_csv(OUTPUT_FILE, index=False)
 
     logging.info("SECTOR MONEY FLOW COMPUTED SUCCESSFULLY")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

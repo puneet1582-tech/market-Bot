@@ -23,3 +23,10 @@ for i, row in df_stocks.iterrows():
 
 df_stocks.to_csv(STOCKS_PATH, index=False)
 print("SECTOR CLASSIFICATION DONE")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

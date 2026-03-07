@@ -43,3 +43,10 @@ def process_opportunity(stock_symbol, analysis_result, market_mode="TRADE"):
         send_telegram_alert(message)
 
     return signal_mode
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

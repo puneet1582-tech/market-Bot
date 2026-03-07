@@ -40,3 +40,10 @@ print("REMOVED BACKUP FILES:",len(removed))
 
 print("PRIMARY FILES KEPT:",len(kept))
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

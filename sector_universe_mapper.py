@@ -17,3 +17,10 @@ def map_sector_universe(stocks):
         sector_map[sector] = [s for s in stocks if s in sector_stocks]
 
     return sector_map
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

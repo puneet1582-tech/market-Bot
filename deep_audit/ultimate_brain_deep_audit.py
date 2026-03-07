@@ -157,3 +157,10 @@ with open("deep_audit_report/ultimate_brain_audit.json","w") as f:
 
 print("\nREPORT SAVED -> deep_audit_report/ultimate_brain_audit.json\n")
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

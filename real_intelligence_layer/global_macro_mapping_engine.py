@@ -9,3 +9,10 @@ class GlobalMacroMappingEngine:
         result["geopolitical_risk"] = macro_data.get("geopolitical_risk", "Moderate")
 
         return result
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

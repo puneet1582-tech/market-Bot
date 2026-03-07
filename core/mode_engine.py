@@ -52,3 +52,10 @@ class ModeEngine:
     output = engine.run()
     print("Mode Engine Completed")
     print(list(output.items())[:10])
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

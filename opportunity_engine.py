@@ -49,3 +49,10 @@ def calculate_opportunity(symbol, price, market_mode="TRADE", sector_score=0, ca
         "mode": mode,
         "timestamp": str(datetime.now())
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

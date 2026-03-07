@@ -27,3 +27,10 @@ def interpret_policy(policy_event):
         "policy_event": policy_event,
         "market_impact_signal": impact
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

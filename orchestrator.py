@@ -21,3 +21,10 @@ def run_system():
     run_master_brain()
 
     print("\n=== ORCHESTRATION COMPLETE ===\n")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

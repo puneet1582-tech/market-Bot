@@ -43,3 +43,10 @@ def performance_report(filepath="data/trades.csv"):
         "zero": zero,
         "win_rate": win_rate
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

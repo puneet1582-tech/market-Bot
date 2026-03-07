@@ -10,3 +10,10 @@ def load_env():
             if "=" in line:
                 k,v = line.strip().split("=",1)
                 os.environ[k]=v
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

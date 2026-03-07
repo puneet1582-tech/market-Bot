@@ -34,3 +34,10 @@ class MultiCycleCapitalAllocationEngine:
             "macro_bias": strategy.get("macro_bias", "NEUTRAL"),
             "allocation": optimized
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

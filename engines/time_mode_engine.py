@@ -28,3 +28,10 @@ class TimeModeEngine:
             return False, f"TimeMode blocks trading (allowed: {allowed_mode})"
 
         return True, "Time allows trading"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

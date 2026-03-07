@@ -33,3 +33,10 @@ def balance_portfolio(allocation_list, sector_map, max_sector_weight=35):
     except Exception as e:
         print("Risk balancing error:", e)
         return allocation_list
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

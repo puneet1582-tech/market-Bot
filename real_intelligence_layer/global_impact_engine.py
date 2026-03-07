@@ -32,3 +32,10 @@ class GlobalImpactEngine:
             return "Moderate Sensitivity"
         else:
             return "Low Sensitivity"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

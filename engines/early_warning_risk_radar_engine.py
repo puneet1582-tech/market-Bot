@@ -42,3 +42,10 @@ def detect_risk(volatility_series, liquidity_series):
             "risk_flags": [],
             "regime_shift_risk": False
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

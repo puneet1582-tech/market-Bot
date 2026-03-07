@@ -25,3 +25,10 @@ class StrategyEvolutionEngine:
             evolution_signal["trade_bias_adjustment"] = 1
 
         return evolution_signal
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

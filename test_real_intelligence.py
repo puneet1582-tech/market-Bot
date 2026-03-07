@@ -49,3 +49,10 @@ report = engine.run_full_analysis(company_data)
 
 print("\n===== REAL INTELLIGENCE REPORT WITH GLOBAL IMPACT =====")
 print(report)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

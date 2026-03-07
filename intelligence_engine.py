@@ -46,6 +46,10 @@ def run():
 
     print("Top opportunity report saved:", REPORT_FILE)
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
-    run()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

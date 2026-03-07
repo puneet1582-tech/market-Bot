@@ -35,3 +35,10 @@ class AutonomousController:
         while True:
             self.run_cycle(cycle_function)
             time.sleep(self.interval)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -57,3 +57,10 @@ class MasterIntelligenceEngine:
         report["multibagger_analysis"] = multibagger
 
         return report
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

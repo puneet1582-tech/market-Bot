@@ -9,3 +9,10 @@ def apply_global_signal_fusion(dashboard):
         dashboard["fusion_error"] = str(e)
 
     return dashboard
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

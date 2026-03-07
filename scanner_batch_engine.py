@@ -4,3 +4,10 @@
 def create_batches(stock_list, batch_size=25):
     for i in range(0, len(stock_list), batch_size):
         yield stock_list[i:i + batch_size]
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

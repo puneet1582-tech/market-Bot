@@ -21,3 +21,10 @@ def start_guard():
 
         print("Restarting engine in 5 seconds...")
         time.sleep(5)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

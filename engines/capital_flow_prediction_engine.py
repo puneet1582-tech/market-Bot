@@ -37,3 +37,10 @@ def forecast_liquidity(flow_df):
             "liquidity_signal": "UNKNOWN",
             "rolling_net_flow": 0
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

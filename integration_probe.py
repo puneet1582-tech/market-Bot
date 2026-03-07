@@ -21,3 +21,10 @@ for m in modules:
         print(f"[OK] {m}")
     except Exception as e:
         print(f"[ERROR] {m} -> {e}")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

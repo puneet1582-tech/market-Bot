@@ -26,3 +26,10 @@ def update_sector_rotation(sector_scores):
 
     except Exception as e:
         print("Sector rotation update error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

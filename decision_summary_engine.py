@@ -25,3 +25,10 @@ def generate_decision_summary(conviction_ranked, allocation):
     except Exception as e:
         print("Decision summary error:", e)
         return ""
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

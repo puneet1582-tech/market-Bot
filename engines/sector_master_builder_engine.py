@@ -79,6 +79,11 @@ def run_sector_master_builder():
     logging.info(f"SECTOR MASTER BUILT: {len(sector_master)} symbols")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_sector_master_builder()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

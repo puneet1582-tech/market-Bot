@@ -35,3 +35,10 @@ def forecast_sector_rotation(sector_returns_df):
             "next_cycle_leaders": [],
             "lagging_sectors": []
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

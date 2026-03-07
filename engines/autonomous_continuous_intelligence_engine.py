@@ -34,3 +34,10 @@ def record_signal(signal_data):
 
 def get_memory():
     return load_memory()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

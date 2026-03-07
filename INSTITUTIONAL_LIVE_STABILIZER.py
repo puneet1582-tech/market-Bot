@@ -97,3 +97,10 @@ for k,v in REPORT.items():
     print(k, ":", v)
 print("Report saved as INSTITUTIONAL_LIVE_REPORT.json")
 print("======================================")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

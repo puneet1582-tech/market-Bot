@@ -29,3 +29,10 @@ def calculate_signal_confidence(conviction_ranked, persistent_list, regime_prob)
     except Exception as e:
         print("Confidence calculation error:", e)
         return conviction_ranked
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

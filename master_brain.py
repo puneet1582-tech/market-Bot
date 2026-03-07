@@ -36,3 +36,10 @@ def run_master_brain():
     run_autonomous_daily_cycle()
 
     logging.info("MASTER BRAIN EXECUTION COMPLETED")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

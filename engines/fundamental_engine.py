@@ -84,3 +84,10 @@ class FundamentalEngine:
             result["reason"] = "INSUFFICIENT HISTORY (< 3 YEARS)"
 
         return result
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

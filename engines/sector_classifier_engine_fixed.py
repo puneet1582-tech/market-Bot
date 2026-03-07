@@ -25,7 +25,12 @@ class SectorClassifier:
         self.stocks.to_csv(STOCKS_PATH, index=False)
         print("SECTOR CLASSIFICATION DONE")
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     sc = SectorClassifier()
     sc.classify()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

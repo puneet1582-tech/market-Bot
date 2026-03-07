@@ -25,3 +25,10 @@ class StrategicDecisionEngine:
             strategy["recommended_focus"] = classification.get("DEFENSIVE", [])[:10]
 
         return strategy
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

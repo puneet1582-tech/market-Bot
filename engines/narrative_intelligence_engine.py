@@ -21,3 +21,10 @@ def map_narrative(narrative):
         "narrative": narrative,
         "impacted_sectors": sectors
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

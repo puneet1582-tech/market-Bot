@@ -97,3 +97,10 @@ class Fundamental10YEngine:
                 scores[symbol] = self.score_company(records)
 
         return scores
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

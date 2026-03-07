@@ -11,3 +11,10 @@ def check_exit(buy_price, live_price, sl_pct=5, target_pct=10):
         return "TARGET HIT"
     else:
         return "HOLD"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

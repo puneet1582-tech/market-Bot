@@ -35,3 +35,10 @@ def generate_execution_plan(opportunity_list, timing_decision):
         "timestamp": str(datetime.utcnow()),
         "execution_plan": plan
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

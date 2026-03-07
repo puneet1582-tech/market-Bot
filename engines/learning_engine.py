@@ -27,3 +27,10 @@ class LearningEngine:
         total = len(self.df)
 
         return round((correct / total) * 100, 2)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -47,3 +47,10 @@ def detect_opportunities():
     print("Top stocks:", len(top))
     print("Saved:", OUT_FILE)
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

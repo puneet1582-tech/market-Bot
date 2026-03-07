@@ -28,3 +28,10 @@ class RiskGovernanceEngine:
             "risk_state": risk_state,
             "protected_portfolio": adjusted
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

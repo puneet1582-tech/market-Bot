@@ -12,3 +12,10 @@ def rank_sectors(results):
 
     ranked = sorted(sector_scores.items(), key=lambda x: x[1], reverse=True)
     return ranked
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

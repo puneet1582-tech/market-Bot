@@ -47,3 +47,10 @@ def send_top20():
         "timestamp": str(datetime.utcnow()),
         "status": "sent"
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

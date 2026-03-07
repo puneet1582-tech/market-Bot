@@ -25,3 +25,10 @@ print("System aligned back to locked architecture sequence.")
 
 print("\nReset completed at:", datetime.now())
 print("\n==============================\n")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

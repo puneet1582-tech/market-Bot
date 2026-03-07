@@ -42,3 +42,10 @@ class CrisisCapitalShieldEngine:
             "crisis_mode": True,
             "shielded_portfolio": shielded
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

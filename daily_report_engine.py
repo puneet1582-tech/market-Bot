@@ -21,3 +21,10 @@ def generate_daily_report(dashboard):
 
     except Exception as e:
         return f"Report error: {e}"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

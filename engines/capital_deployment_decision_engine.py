@@ -25,3 +25,10 @@ class CapitalDeploymentDecisionEngine:
             execution_plan["deployment_actions"].append(action)
 
         return execution_plan
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)
