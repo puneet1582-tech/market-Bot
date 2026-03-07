@@ -1,0 +1,74 @@
+
+ENGINE: master_brain
+  ./master_brain.py
+  ./core/master_brain.py
+
+ENGINE: ultimate_brain_master_audit
+  ./ultimate_brain_master_audit.py
+  ./audit/ultimate_brain_master_audit.py
+
+ENGINE: intelligence_engine
+  ./intelligence_engine.py
+  ./core/intelligence_engine.py
+
+ENGINE: telegram_alert_engine
+  ./telegram_alert_engine.py
+  ./engines/telegram_alert_engine.py
+
+ENGINE: __init__
+  ./__init__.py
+  ./core/__init__.py
+  ./real_intelligence_layer/__init__.py
+  ./engines/__init__.py
+  ./engines/news_engine/__init__.py
+  ./engines/alert_engine/__init__.py
+
+ENGINE: sector_intelligence_engine
+  ./sector_intelligence_engine.py
+  ./real_intelligence_layer/sector_intelligence_engine.py
+
+ENGINE: opportunity_engine
+  ./opportunity_engine.py
+  ./core/opportunity_engine.py
+  ./engines/opportunity_engine.py
+
+ENGINE: nse_price_engine
+  ./verified_data/nse_price_engine.py
+  ./core/nse_price_engine.py
+
+ENGINE: mode_engine
+  ./core/mode_engine.py
+  ./engines/mode_engine.py
+
+ENGINE: business_evolution_engine
+  ./core/business_evolution_engine.py
+  ./master_brain/business_evolution_engine.py
+  ./real_intelligence_layer/business_evolution_engine.py
+
+ENGINE: sector_engine
+  ./core/sector_engine.py
+  ./engines/sector_engine.py
+
+ENGINE: sector_money_flow_engine
+  ./core/sector_money_flow_engine.py
+  ./engines/sector_money_flow_engine.py
+
+ENGINE: global_impact_engine
+  ./core/global_impact_engine.py
+  ./real_intelligence_layer/global_impact_engine.py
+
+ENGINE: fundamental_engine
+  ./core/fundamental_engine.py
+  ./engines/fundamental_engine.py
+
+ENGINE: real_fundamental_engine
+  ./core/real_fundamental_engine.py
+  ./engines/real_fundamental_engine.py
+
+ENGINE: market_mode_engine
+  ./real_intelligence_layer/market_mode_engine.py
+  ./engines/market_mode_engine.py
+
+ENGINE: sector_mapper
+  ./engines/sector_mapper.py
+  ./engines/news_engine/sector_mapper.py
