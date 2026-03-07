@@ -7,3 +7,10 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 FUNDAMENTALS_FILE = os.path.join(DATA_DIR, "fundamentals.csv")
 
 PRICE_FILE = os.path.join(DATA_DIR, "price_data.csv")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

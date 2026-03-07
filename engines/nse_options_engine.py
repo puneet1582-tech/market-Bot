@@ -50,3 +50,10 @@ def options_signal(symbol):
         reasons.append("PCR neutral")
 
     return score, reasons
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

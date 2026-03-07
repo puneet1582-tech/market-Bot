@@ -11,3 +11,10 @@ def build_dashboard(mode_report, sector_scores, ranked, perf_summary, return_sum
     }
 
     return dashboard
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

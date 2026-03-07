@@ -53,6 +53,11 @@ def run_price_ingestion():
 
     logging.info("PRICE HISTORY INGESTION COMPLETED")
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_price_ingestion()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

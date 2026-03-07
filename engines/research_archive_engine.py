@@ -37,3 +37,10 @@ class ResearchArchiveEngine:
             json.dump(archive, f, indent=2)
 
         return archive
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

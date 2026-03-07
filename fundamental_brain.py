@@ -61,3 +61,10 @@ for symbol in stocks:
 print("REAL FUNDAMENTAL DATA (NIFTY50, IN CRORES) READY")
 for k, v in fundamental_data.items():
     print(k, v)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

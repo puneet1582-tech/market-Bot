@@ -38,3 +38,10 @@ def sector_strength():
         strength[sector] = sub["ret"].mean()
 
     return strength
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

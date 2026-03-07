@@ -14,3 +14,10 @@ def detect_sector_leaders(opportunity_list):
                 leaders[sector] = op
 
     return leaders
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

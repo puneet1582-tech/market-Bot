@@ -24,3 +24,10 @@ def calculate_conviction_scores(opportunity_list, sector_scores, capital_flow, p
         conviction_output.append(op)
 
     return conviction_output
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

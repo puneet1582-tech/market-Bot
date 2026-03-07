@@ -11,3 +11,10 @@ class ScenarioSimulationEngine:
         elif volatility < 15:
             return round(base_probability * 1.15, 2)
         return base_probability
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

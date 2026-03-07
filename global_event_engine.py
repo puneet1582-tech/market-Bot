@@ -21,3 +21,10 @@ class GlobalEventEngine:
 
     def get_sector_impact(self, sector):
         return self.event_sector_impact.get(self.current_event, {}).get(sector.upper(), 0)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

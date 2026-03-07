@@ -27,3 +27,10 @@ def risk_weighted_rank(opportunity_list):
     except Exception as e:
         print("Risk ranking error:", e)
         return opportunity_list
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

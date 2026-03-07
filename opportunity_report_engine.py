@@ -14,3 +14,10 @@ def generate_report(ranked_opportunities, sector_scores):
     except Exception as e:
         print("Report generation error:", e)
         return {}
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

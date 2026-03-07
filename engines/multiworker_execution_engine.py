@@ -19,3 +19,10 @@ def run_parallel(symbols, worker_function, max_workers=8):
                 pass
 
     return results
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

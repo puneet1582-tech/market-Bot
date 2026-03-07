@@ -51,3 +51,10 @@ def analyze_real_fundamental(stock):
         score -= 1
 
     return score, reasons
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

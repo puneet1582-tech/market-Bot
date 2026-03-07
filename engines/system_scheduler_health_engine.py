@@ -29,3 +29,10 @@ def scheduler_loop(task_function, interval_seconds=300):
             print("SYSTEM ERROR:", e, flush=True)
 
         time.sleep(interval_seconds)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

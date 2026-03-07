@@ -44,3 +44,10 @@ def home():
     t = threading.Thread(target=engine_loop)
     t.start()
     app.run(host="0.0.0.0", port=10000)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

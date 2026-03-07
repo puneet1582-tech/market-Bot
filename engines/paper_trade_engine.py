@@ -18,3 +18,10 @@ def paper_trade_decision(stock, signal, live_price):
     else:
         return "HOLD"
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

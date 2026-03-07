@@ -155,6 +155,11 @@ def home():
         global_data=brain["global_data"]
     )
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     app.run(debug=True)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

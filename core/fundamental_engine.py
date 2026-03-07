@@ -98,3 +98,10 @@ class FundamentalEngine:
             results[symbol] = self.analyze_symbol(records_sorted)
 
         return results
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

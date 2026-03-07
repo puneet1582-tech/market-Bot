@@ -174,6 +174,11 @@ def run_institutional_v2():
     logging.info("TOP-20 V2 BUILT SUCCESSFULLY")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_institutional_v2()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -26,3 +26,10 @@ def update_watchlist(top_opportunities):
 
     except Exception as e:
         print("Watchlist update error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

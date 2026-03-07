@@ -24,3 +24,10 @@ def generate_portfolio_allocation(conviction_ranked, top_n=10):
     except Exception as e:
         print("Allocation error:", e)
         return []
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

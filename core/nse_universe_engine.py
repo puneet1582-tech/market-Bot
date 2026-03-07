@@ -64,3 +64,10 @@ def build_nse_universe():
     print("Total stocks:", len(df))
     print("Saved:", OUT_FILE)
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

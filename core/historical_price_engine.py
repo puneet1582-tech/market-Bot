@@ -85,3 +85,10 @@ class HistoricalPriceEngine:
     engine = HistoricalPriceEngine()
     count = engine.run()
     print(f"Historical Data Stored | Rows: {count}")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

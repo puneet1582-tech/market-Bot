@@ -30,3 +30,10 @@ def format_final_report(dashboard):
     except Exception as e:
         print("Final report format error:", e)
         return "Report formatting error"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

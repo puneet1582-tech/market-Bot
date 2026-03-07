@@ -25,3 +25,10 @@ def estimate_returns():
 
     except:
         return {"estimated_return_score": 0}
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

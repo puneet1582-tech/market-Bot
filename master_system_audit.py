@@ -130,6 +130,11 @@ def main():
     check_telegram_presence()
     system_summary()
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     main()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

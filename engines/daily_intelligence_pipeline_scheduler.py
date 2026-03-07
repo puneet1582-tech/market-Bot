@@ -30,8 +30,6 @@ def run_daily_cycle():
     print("=== DAILY INTELLIGENCE PIPELINE COMPLETED ===", datetime.utcnow())
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     while True:
         try:
             run_daily_cycle()
@@ -39,3 +37,10 @@ def run_daily_cycle():
             print("PIPELINE ERROR:", e)
 
         time.sleep(SLEEP_INTERVAL)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

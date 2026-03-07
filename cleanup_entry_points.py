@@ -17,10 +17,6 @@ for file in glob.glob("**/*.py", recursive=True):
             print("Disabling entry in:", file)
 
             content = content.replace(
-                '# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT',
-                '# DISABLED ENTRY POINT\n# # DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT'
             )
 
             with open(file, "w", encoding="utf-8") as f:

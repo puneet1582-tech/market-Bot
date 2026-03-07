@@ -62,6 +62,11 @@ def run_engine():
     return len(rows)
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     print("Processed:", run_engine())
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

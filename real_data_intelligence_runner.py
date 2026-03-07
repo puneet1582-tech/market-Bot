@@ -91,3 +91,10 @@ def build_company_data(symbol):
 
     print("\n===== REAL DATA INTELLIGENCE REPORT =====")
     print(report)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

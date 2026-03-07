@@ -32,3 +32,10 @@ def fetch_price(symbol):
     except Exception as e:
         print("YAHOO FETCH ERROR:", e)
         return None
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

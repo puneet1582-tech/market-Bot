@@ -11,3 +11,10 @@ def rank_sectors(sector_map, news_impact, inet_impact):
 reverse=True)
     return ranked
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

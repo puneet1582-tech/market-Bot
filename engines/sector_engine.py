@@ -75,3 +75,10 @@ class SectorEngine:
         ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
         return [(sector, score, "; ".join(reasons.get(sector, []))) for sector, score in ranked]
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

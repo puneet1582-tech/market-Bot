@@ -38,3 +38,10 @@ def evaluate_lifecycle(entry_price, current_price):
             "timestamp": str(datetime.utcnow()),
             "lifecycle_stage": "UNKNOWN"
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

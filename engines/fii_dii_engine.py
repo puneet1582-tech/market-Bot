@@ -58,3 +58,10 @@ def get_money_flow(filepath="data/fii_dii.csv"):
         "ranked_sectors": ranked,
         "reason": reason
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -16,3 +16,10 @@ for p in PIPELINE:
         print("Error:", e)
 
 print("\nRecovery completed:", datetime.now())
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -40,3 +40,10 @@ def decide_mode(conditions):
         return "INVEST MODE"
     else:
         return "TRADE MODE"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -28,3 +28,10 @@ def add_stock_to_universe(stock_symbol):
 
     except Exception as e:
         print("Universe expansion error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -38,3 +38,10 @@ def compute_cross_asset_signals(asset_returns_df):
             "equity_commodity_corr": 0,
             "equity_currency_corr": 0
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

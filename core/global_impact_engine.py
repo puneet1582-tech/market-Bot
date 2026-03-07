@@ -63,3 +63,10 @@ class GlobalImpactEngine:
     result = engine.run()
     print("Global Impact Engine Completed")
     print(result)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

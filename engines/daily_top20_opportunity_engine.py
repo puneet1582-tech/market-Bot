@@ -31,6 +31,11 @@ def generate_top20():
         }
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     print(generate_top20())
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

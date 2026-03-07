@@ -24,7 +24,6 @@ for file in glob.glob("**/*.py", recursive=True):
             print("Hard disabling entry in:", file)
 
             new_content = pattern.sub(
-                '# DISABLED ENTRY POINT',
                 content
             )
 

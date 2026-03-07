@@ -16,3 +16,10 @@ def rank_opportunities(opportunity_list):
     except Exception as e:
         print("Ranking error:", e)
         return opportunity_list
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

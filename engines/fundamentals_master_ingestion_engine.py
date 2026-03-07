@@ -61,6 +61,11 @@ def run_fundamental_ingestion():
     logging.info("FUNDAMENTAL MASTER INGESTION COMPLETED")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_fundamental_ingestion()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

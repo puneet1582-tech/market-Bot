@@ -98,3 +98,10 @@ class NSEBhavcopyEngine:
     engine = NSEBhavcopyEngine()
     count = engine.run()
     print(f"10-Year Bhavcopy Stored | Rows: {count}")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

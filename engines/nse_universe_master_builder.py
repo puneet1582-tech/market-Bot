@@ -27,6 +27,11 @@ def download_universe():
     }
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     print(download_universe())
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

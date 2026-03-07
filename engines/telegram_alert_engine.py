@@ -26,3 +26,10 @@ def send_telegram_alert(message: str):
 
 def test_alert():
     return send_telegram_alert("STEP-2 LIVE TEST: Telegram Alert Engine Working")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

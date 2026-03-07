@@ -37,3 +37,10 @@ def optimize_timing(exposure_ratio, volatility_level, market_cycle):
             "timestamp": str(datetime.utcnow()),
             "timing_decision": "WAIT"
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

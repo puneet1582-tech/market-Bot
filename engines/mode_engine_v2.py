@@ -33,3 +33,10 @@ class ModeEngineV2:
             return "INVEST", "; ".join(reasons)
 
         return "TRADE", "; ".join(reasons)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

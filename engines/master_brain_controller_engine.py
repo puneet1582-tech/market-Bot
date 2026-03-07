@@ -8,3 +8,10 @@ class MasterBrainController:
 def run_master_brain_controller():
     controller = MasterBrainController()
     controller.run()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

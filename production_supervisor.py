@@ -26,8 +26,6 @@ def run_engine(engine):
         time.sleep(5)
         run_engine(engine)
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     log("Supervisor started")
     while True:
         for engine in ENGINES:
@@ -36,3 +34,10 @@ def run_engine(engine):
             else:
                 log(f"Missing engine: {engine}")
         time.sleep(3600)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -27,3 +27,10 @@ def store_strategy_memory(market_mode, allocation):
 
     except Exception as e:
         print("Strategy memory error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

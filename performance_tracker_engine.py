@@ -28,3 +28,10 @@ def log_performance(symbol, decision_mode, price):
 
     except Exception as e:
         print("Performance log error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

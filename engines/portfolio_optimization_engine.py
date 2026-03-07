@@ -41,3 +41,10 @@ def optimize_allocation(current_allocation, attribution_data):
             "timestamp": str(datetime.utcnow()),
             "optimized_allocation": current_allocation
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

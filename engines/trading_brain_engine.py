@@ -60,3 +60,10 @@ class TradingBrainEngine:
                 "money_flow": money_flow["reason"]
             }
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

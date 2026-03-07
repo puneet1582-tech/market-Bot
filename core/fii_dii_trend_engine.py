@@ -25,3 +25,10 @@ def build_institutional_trend():
     print("FII/DII TREND ENGINE COMPLETE")
     print("Sectors analyzed:", len(df))
     print("Saved:", OUT_FILE)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

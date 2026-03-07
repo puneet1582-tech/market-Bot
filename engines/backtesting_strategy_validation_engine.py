@@ -35,3 +35,10 @@ def evaluate_strategy(decisions_df, price_history_df):
         })
 
     return pd.DataFrame(results)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

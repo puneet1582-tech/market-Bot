@@ -37,3 +37,10 @@ def calculate_exit(entry_price, current_price):
             "timestamp": str(datetime.utcnow()),
             "exit_signal": "UNKNOWN"
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

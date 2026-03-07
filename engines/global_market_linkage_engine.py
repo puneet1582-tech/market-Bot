@@ -20,3 +20,10 @@ class GlobalMarketLinkageEngine:
             bias = "NEUTRAL"
 
         return {"avg_move": round(avg_move, 3), "bias": bias}
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

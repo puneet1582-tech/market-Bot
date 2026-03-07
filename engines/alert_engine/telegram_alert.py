@@ -43,3 +43,10 @@ def send_market_report(result):
         msg+=f"{i}. {s['symbol']}  ({round(s['score'],2)})\n"
 
     send_message(msg)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

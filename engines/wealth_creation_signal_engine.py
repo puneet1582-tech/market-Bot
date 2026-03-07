@@ -30,3 +30,10 @@ def identify_wealth_creators(financial_growth_df):
             "timestamp": str(datetime.utcnow()),
             "wealth_creator_candidates": []
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

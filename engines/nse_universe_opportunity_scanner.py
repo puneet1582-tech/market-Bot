@@ -34,3 +34,10 @@ def generate_opportunity_list(price_feed):
         })
 
     return rank_opportunities(opportunities)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

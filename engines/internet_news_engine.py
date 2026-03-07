@@ -24,3 +24,10 @@ def internet_sector_impact(news_list):
 
     return impact
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -14,3 +14,10 @@ class InstitutionalBehaviorEngine:
         if not series or len(series) < 2:
             return "Insufficient Data"
         return "Accumulating" if series[-1] > series[0] else "Distributing"
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

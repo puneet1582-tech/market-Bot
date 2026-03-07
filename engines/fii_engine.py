@@ -40,3 +40,10 @@ def fii_dii_signal(sector, data):
         reasons.append("DII selling")
 
     return score, reasons
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

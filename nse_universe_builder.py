@@ -27,3 +27,10 @@ def build_initial_universe():
         print("Initial NSE universe created")
     except Exception as e:
         print("Universe build error:", e)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

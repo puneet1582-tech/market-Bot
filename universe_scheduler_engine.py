@@ -25,3 +25,10 @@ def run_universe_scheduler():
         except Exception as e:
             print("Universe scheduler error:", e)
             time.sleep(3600)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

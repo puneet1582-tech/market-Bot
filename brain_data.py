@@ -37,3 +37,10 @@ print("TOTAL STOCKS:", len(stocks))
 print("SECTORS:")
 for s in sectors:
     print(s, ":", sectors[s])
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

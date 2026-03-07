@@ -154,3 +154,10 @@ print("Missing Capabilities:", missing)
 print("Next Action:", REPORT["next_action_required"])
 print("Full Report Saved: LIVE_DATA_AUDIT_REPORT.json")
 print("========================================")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

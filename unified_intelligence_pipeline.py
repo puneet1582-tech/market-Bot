@@ -31,3 +31,10 @@ for engine in PIPELINE_ENGINES:
 
 print("\nPipeline completed:", datetime.now())
 log("Pipeline execution completed")
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

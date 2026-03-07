@@ -16,3 +16,10 @@ def news_stock_signals():
             signals[s] = signals.get(s,0) + 1
 
     return signals
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

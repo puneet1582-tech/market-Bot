@@ -59,3 +59,10 @@ def build_fundamental_core():
     print("FUNDAMENTAL CORE DATASET BUILT")
     print("Rows:", len(core))
     print("Saved:", OUT_FILE)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

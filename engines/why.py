@@ -21,3 +21,10 @@ def why_engine(market_mode, market_why, sector_result, stock_result, money_flow_
     reasons.append(f"Risk level: {risk}")
 
     return " | ".join(reasons)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

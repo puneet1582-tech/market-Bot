@@ -26,3 +26,10 @@ df["date"]=datetime.today().strftime("%Y-%m-%d")
 df.to_csv("data/price_history.csv",mode="a",index=False,header=False)
 
 print("NSE price data added:",len(df))
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

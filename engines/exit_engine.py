@@ -22,3 +22,10 @@ def exit_engine(row, decision, tech, nf, score):
 
     return "HOLD"
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

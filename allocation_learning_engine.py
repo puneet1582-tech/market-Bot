@@ -27,3 +27,10 @@ def allocation_learning_adjustment(allocation_list, attribution_data):
     except Exception as e:
         print("Allocation learning error:", e)
         return allocation_list
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

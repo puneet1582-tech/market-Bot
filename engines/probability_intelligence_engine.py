@@ -12,3 +12,10 @@ class ProbabilityIntelligenceEngine:
             (sector_strength * 0.25)
         )
         return round(score, 2)
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

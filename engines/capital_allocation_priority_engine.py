@@ -36,3 +36,10 @@ def allocate_capital(classified_stocks, total_capital, priority_map=None):
         "timestamp": str(datetime.utcnow()),
         "capital_allocation": allocation
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

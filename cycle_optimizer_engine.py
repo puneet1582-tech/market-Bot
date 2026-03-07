@@ -13,3 +13,10 @@ def optimized_cycle_interval(stock_count, base_interval=300):
             return base_interval + 300
     except:
         return base_interval
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

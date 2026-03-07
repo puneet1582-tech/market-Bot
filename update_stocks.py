@@ -16,3 +16,10 @@ stocks.to_csv("data/stocks.csv", index=False)
 
 print("NSE STOCK UNIVERSE UPDATED")
 print("Total stocks:", len(stocks))
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

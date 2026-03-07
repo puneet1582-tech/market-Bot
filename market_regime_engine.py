@@ -37,3 +37,10 @@ def estimate_market_regime(market_data):
             "bear_probability": 33,
             "sideways_probability": 34
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

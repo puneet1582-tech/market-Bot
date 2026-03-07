@@ -48,3 +48,10 @@ def build_business_evolution():
     print("Companies analyzed:", len(out))
     print("Saved:", OUT_FILE)
 
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

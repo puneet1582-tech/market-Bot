@@ -24,3 +24,10 @@ class SelfImprovingPortfolioEngine:
                 optimized[sym] = round((optimized[sym] / total_weight) * 100, 2)
 
         return optimized
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

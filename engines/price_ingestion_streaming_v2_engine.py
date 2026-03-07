@@ -102,6 +102,11 @@ def run_price_ingestion_streaming_v2():
     logging.info("PRICE INGESTION STREAMING V2 COMPLETED")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_price_ingestion_streaming_v2()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

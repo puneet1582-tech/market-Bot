@@ -16,3 +16,10 @@ except Exception as e:
     print("Telegram Automation Error:", e)
 
 print("\nCompleted:", datetime.now())
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

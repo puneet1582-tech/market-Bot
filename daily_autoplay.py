@@ -15,3 +15,10 @@ for script in PIPELINE:
         print(f"Error running {script}: {e}")
 
 print("\nCompleted:", datetime.now())
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

@@ -31,3 +31,10 @@ class NewsEngine:
             "news_impact": impact,
             "headlines": df["headline"].tolist()
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

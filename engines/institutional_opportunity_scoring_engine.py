@@ -51,10 +51,15 @@ def run_institutional_scoring():
     logging.info("TOP-20 OPPORTUNITY LIST GENERATED")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_institutional_scoring()
 
 
 def run_scoring():
     return []
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

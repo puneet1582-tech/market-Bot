@@ -50,6 +50,11 @@ def run_live_nse_universe_ingestion():
     download_nse_universe()
     clean_universe()
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_live_nse_universe_ingestion()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

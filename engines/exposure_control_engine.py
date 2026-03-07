@@ -22,3 +22,10 @@ def determine_exposure(market_cycle):
         "market_cycle": market_cycle,
         "recommended_exposure_ratio": exposure
     }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

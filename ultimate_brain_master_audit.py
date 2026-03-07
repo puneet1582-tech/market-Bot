@@ -96,6 +96,4 @@ def main():
 
     print("\n===== DEEP AUDIT COMPLETE =====\n")
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     main()

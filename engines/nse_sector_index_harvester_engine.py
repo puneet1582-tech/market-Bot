@@ -96,6 +96,11 @@ def run_sector_index_harvester():
     logging.info(f"Sector base built. Total classified symbols: {len(final_df)}")
 
 
-# DISABLED ENTRY POINT
-# # DISABLED ENTRY POINT
     run_sector_index_harvester()
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)

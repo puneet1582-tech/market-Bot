@@ -36,3 +36,10 @@ class PriceEngine:
             "current_price": current,
             "ath_drop_percent": float(ath_drop)
         }
+
+
+if __name__ == '__main__':
+    try:
+        run()
+    except Exception as e:
+        print('Engine Error:', e)
