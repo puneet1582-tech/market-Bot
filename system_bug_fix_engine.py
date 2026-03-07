@@ -21,20 +21,17 @@ def fix_common_issues(file_path):
         lines = f.readlines()
 
     original = lines[:]
-
     new_lines = []
     entry_point_found = False
 
     for line in lines:
 
-        # remove duplicate disabled entry points
+        if "DISABLED ENTRY POINT" in line:
             continue
 
-        # remove accidental run() calls outside main
         if re.match(r"\s*run\(\)", line):
             continue
 
-        # normalize indentation tabs
         line = line.replace("\t", "    ")
 
         new_lines.append(line)
@@ -42,18 +39,14 @@ def fix_common_issues(file_path):
         if "__name__" in line and "__main__" in line:
             entry_point_found = True
 
-    # add entry point if missing
     if not entry_point_found:
-        pass
-
-        new_lines.append("\n\n")
+        new_lines.append("\n")
         new_lines.append("if __name__ == '__main__':\n")
         new_lines.append("    try:\n")
         new_lines.append("        run()\n")
         new_lines.append("    except Exception as e:\n")
         new_lines.append("        print('Engine Error:', e)\n")
 
-    # write back if changed
     if new_lines != original:
         with open(file_path, "w", encoding="utf-8") as f:
             f.writelines(new_lines)
@@ -85,7 +78,6 @@ def main():
     fixed = 0
 
     for f in files:
-
         try:
             if fix_common_issues(f):
                 print("Fixed:", f)
