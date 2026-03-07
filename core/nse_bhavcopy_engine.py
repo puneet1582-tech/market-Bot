@@ -106,3 +106,10 @@ if __name__ == '__main__':
         run()
     except Exception as e:
         print('Engine Error:', e)
+class NSEBhavcopyEngine:
+
+    def __init__(self):
+        print("Bhavcopy Engine initialized")
+
+    def run(self):
+        print("Downloading NSE Bhavcopy")
