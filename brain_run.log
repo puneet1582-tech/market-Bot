@@ -1,7 +1,8 @@
 
 ULTIMATE BRAIN MASTER CONTROLLER
 
-Skipped core.nse_bhavcopy_engine (no run function)
+Running core.nse_bhavcopy_engine
+Bhavcopy download failed
 Running core.nse_universe_engine
 Engine started: core.nse_universe_engine
 Running core.fundamental_ingestion_engine
@@ -11,10 +12,14 @@ Running core.fii_dii_trend_engine
 Engine started: core.fii_dii_trend_engine
 Running core.business_evolution_engine
 Engine started: core.business_evolution_engine
-Skipped core.global_impact_engine (no run function)
+Running core.global_impact_engine
+Global Impact Engine Running
+Global Impact Engine Completed
 Running core.news_signal_engine
 Engine started: core.news_signal_engine
-Skipped core.mode_engine (no run function)
+Running core.mode_engine
+Market Mode Engine Running
+Market Mode Engine Completed
 Running core.opportunity_detection_engine
 Engine started: core.opportunity_detection_engine
 
