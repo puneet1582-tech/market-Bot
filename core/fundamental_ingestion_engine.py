@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-import requests
 import random
 
 def run():
@@ -15,39 +14,41 @@ def run():
         print("Universe file missing")
         return
 
-    symbols=pd.read_csv(universe_file)["symbol"].dropna().tolist()
+    df=pd.read_csv(universe_file)
+
+    # handle column case
+    if "symbol" in df.columns:
+        symbols=df["symbol"].dropna().tolist()
+    elif "SYMBOL" in df.columns:
+        symbols=df["SYMBOL"].dropna().tolist()
+    else:
+        print("No symbol column found")
+        return
 
     rows=[]
 
     for s in symbols[:200]:
 
-        revenue=random.randint(1000,100000)
-        profit=random.randint(100,20000)
-        debt=random.randint(0,50000)
-        equity=random.randint(100,50000)
-
         rows.append({
             "symbol":s,
             "year":2025,
-            "revenue":revenue,
-            "profit":profit,
-            "debt":debt,
-            "equity":equity
+            "revenue":random.randint(1000,100000),
+            "profit":random.randint(100,20000),
+            "debt":random.randint(0,50000),
+            "equity":random.randint(100,50000)
         })
 
-    df=pd.DataFrame(rows)
+    new_df=pd.DataFrame(rows)
 
     path="data/fundamentals/fundamental_10y.csv"
 
     if os.path.exists(path):
-
         old=pd.read_csv(path)
+        new_df=pd.concat([old,new_df])
 
-        df=pd.concat([old,df])
+    new_df.to_csv(path,index=False)
 
-    df.to_csv(path,index=False)
-
-    print("Fundamental data updated:",len(df),"rows")
+    print("Fundamental data updated:",len(new_df),"rows")
 
     print("Fundamental Ingestion Engine Completed")
 
