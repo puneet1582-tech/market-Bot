@@ -1,97 +1,48 @@
 import requests
-import zipfile
 import pandas as pd
 import os
-from datetime import datetime,timedelta
-
-def download_for_date(d):
-
-    date_str=d.strftime("%d%m%Y")
-    year=d.strftime("%Y")
-    month=d.strftime("%b").upper()
-
-    url=f"https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date_str}bhav.csv.zip"
-
-    headers={
-        "User-Agent":"Mozilla/5.0",
-        "Accept":"*/*",
-        "Connection":"keep-alive"
-    }
-
-    r=requests.get(url,headers=headers,timeout=20)
-
-    if r.status_code!=200:
-        return None
-
-    os.makedirs("data/bhavcopy",exist_ok=True)
-
-    zip_path=f"data/bhavcopy/{date_str}.zip"
-
-    with open(zip_path,"wb") as f:
-        f.write(r.content)
-
-    with zipfile.ZipFile(zip_path,"r") as z:
-        z.extractall("data/bhavcopy")
-
-    return True
-
 
 def run():
 
-    today=datetime.now()
+    url="https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050"
 
-    for i in range(7):
+    headers={
+        "User-Agent":"Mozilla/5.0",
+        "Accept":"application/json",
+        "Referer":"https://www.nseindia.com/"
+    }
 
-        d=today-timedelta(days=i)
+    session=requests.Session()
 
-        ok=download_for_date(d)
+    session.get("https://www.nseindia.com",headers=headers)
 
-        if ok:
+    r=session.get(url,headers=headers)
 
-            csv_file=None
+    if r.status_code!=200:
+        print("NSE API blocked:",r.status_code)
+        return
 
-            for f in os.listdir("data/bhavcopy"):
-                if f.endswith(".csv"):
-                    csv_file=f
-                    break
+    data=r.json()["data"]
 
-            if not csv_file:
-                print("CSV not found")
-                return
+    rows=[]
 
-            df=pd.read_csv(f"data/bhavcopy/{csv_file}")
+    for s in data:
 
-            df=df[df["SERIES"]=="EQ"]
+        rows.append({
+            "symbol":s["symbol"],
+            "open":s.get("open"),
+            "high":s.get("dayHigh"),
+            "low":s.get("dayLow"),
+            "close":s.get("lastPrice"),
+            "volume":s.get("totalTradedVolume"),
+            "date":s.get("lastUpdateTime")
+        })
 
-            df=df[
-                [
-                    "SYMBOL",
-                    "OPEN",
-                    "HIGH",
-                    "LOW",
-                    "CLOSE",
-                    "TOTTRDQTY",
-                    "TIMESTAMP"
-                ]
-            ]
+    df=pd.DataFrame(rows)
 
-            df.columns=[
-                "symbol",
-                "open",
-                "high",
-                "low",
-                "close",
-                "volume",
-                "date"
-            ]
+    os.makedirs("data/prices",exist_ok=True)
 
-            os.makedirs("data/prices",exist_ok=True)
+    df.to_csv("data/prices/latest_prices.csv",index=False)
 
-            df.to_csv("data/prices/latest_prices.csv",index=False)
-
-            print("Bhavcopy Engine Completed")
-
-            return
-
-    print("Bhavcopy not found for last 7 days")
+    print("Market Data Downloaded from NSE API")
 
