@@ -7,7 +7,10 @@ Running core.nse_universe_engine
 Engine started: core.nse_universe_engine
 Running core.fundamental_ingestion_engine
 Engine started: core.fundamental_ingestion_engine
-Skipped core.fundamental_10y_engine (no run function)
+Running core.fundamental_10y_engine
+10 Year Fundamental Engine Running
+10Y fundamental database initialized
+10 Year Fundamental Engine Completed
 Running core.fii_dii_trend_engine
 Engine started: core.fii_dii_trend_engine
 Running core.business_evolution_engine
@@ -25,3 +28,5 @@ Engine started: core.opportunity_detection_engine
 
 SYSTEM EXECUTION COMPLETE
 
+ULTIMATE BRAIN SYSTEM STARTING
+SYSTEM RUN COMPLETE
