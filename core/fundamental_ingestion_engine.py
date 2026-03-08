@@ -14,16 +14,10 @@ def run():
         print("Universe file missing")
         return
 
-    df=pd.read_csv(universe_file)
+    # headerless universe file
+    df=pd.read_csv(universe_file,header=None)
 
-    # handle column case
-    if "symbol" in df.columns:
-        symbols=df["symbol"].dropna().tolist()
-    elif "SYMBOL" in df.columns:
-        symbols=df["SYMBOL"].dropna().tolist()
-    else:
-        print("No symbol column found")
-        return
+    symbols=df[0].dropna().tolist()
 
     rows=[]
 
