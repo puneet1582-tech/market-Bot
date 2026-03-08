@@ -1,115 +1,66 @@
-"""
-ULTIMATE BRAIN
-NSE OFFICIAL BHAVCOPY ENGINE
-10-YEAR FULL BUILD
-Institutional Deterministic Mode
-"""
-
 import requests
 import zipfile
-import io
 import pandas as pd
-from datetime import datetime, timedelta
-from pathlib import Path
-from tqdm import tqdm
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-RAW_PATH = PROJECT_ROOT / "data" / "raw_bhavcopy"
-PRICE_PATH = PROJECT_ROOT / "data" / "prices"
-UNIVERSE_FILE = PROJECT_ROOT / "data" / "universe" / "nse_universe.csv"
-
-BASE_URL = "https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip"
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0",
-    "Accept-Encoding": "gzip, deflate",
-    "Accept-Language": "en-US,en;q=0.9"
-}
-
-START_DATE = datetime.utcnow() - timedelta(days=365*10)
-END_DATE = datetime.utcnow()
-
+import os
+from datetime import datetime
 
 class NSEBhavcopyEngine:
 
-    def __init__(self):
-        RAW_PATH.mkdir(parents=True, exist_ok=True)
-        PRICE_PATH.mkdir(parents=True, exist_ok=True)
-        self.output_file = PRICE_PATH / "historical_prices.csv"
-
-    def load_universe(self):
-        df = pd.read_csv(UNIVERSE_FILE)
-        return set(df["symbol"].dropna().unique())
-
-    def download_bhavcopy(self, date):
-        date_str = date.strftime("%d%b%Y").upper()
-        year = date.strftime("%Y")
-        month = date.strftime("%b").upper()
-
-        url = BASE_URL.format(year=year, month=month, date=date_str)
-
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=10)
-            if r.status_code != 200:
-                return None
-
-            z = zipfile.ZipFile(io.BytesIO(r.content))
-            file_name = z.namelist()[0]
-            df = pd.read_csv(z.open(file_name))
-            return df
-        except:
-            return None
-
     def run(self):
 
-        universe = self.load_universe()
-        all_rows = []
+        today=datetime.now()
 
-        total_days = (END_DATE - START_DATE).days
-        current_date = START_DATE
+        date_str=today.strftime("%d%m%Y")
 
-        for _ in tqdm(range(total_days)):
+        year=today.strftime("%Y")
+        month=today.strftime("%b").upper()
 
-            df = self.download_bhavcopy(current_date)
+        url=f"https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date_str}bhav.csv.zip"
 
-            if df is not None and "SYMBOL" in df.columns:
-                pass
+        os.makedirs("data/bhavcopy",exist_ok=True)
 
-                df = df[df["SYMBOL"].isin(universe)]
+        zip_path=f"data/bhavcopy/{date_str}.zip"
 
-                for _, row in df.iterrows():
-                    all_rows.append({
-                        "date": current_date.strftime("%Y-%m-%d"),
-                        "symbol": row["SYMBOL"],
-                        "price": row["CLOSE"]
-                    })
+        r=requests.get(url,headers={"User-Agent":"Mozilla/5.0"})
 
-            current_date += timedelta(days=1)
+        if r.status_code!=200:
+            print("Bhavcopy download failed")
+            return
 
-        if not all_rows:
-            raise RuntimeError("No bhavcopy data fetched")
+        with open(zip_path,"wb") as f:
+            f.write(r.content)
 
-        out_df = pd.DataFrame(all_rows)
-        out_df.to_csv(self.output_file, index=False)
+        with zipfile.ZipFile(zip_path,"r") as z:
+            z.extractall("data/bhavcopy")
 
-        return len(all_rows)
+        csv_file=[f for f in os.listdir("data/bhavcopy") if f.endswith(".csv")][0]
 
+        df=pd.read_csv(f"data/bhavcopy/{csv_file}")
 
-# HARDENED: disabled main entry
-    engine = NSEBhavcopyEngine()
-    count = engine.run()
-    print(f"10-Year Bhavcopy Stored | Rows: {count}")
+        df=df[df["SERIES"]=="EQ"]
 
+        df=df[[
+            "SYMBOL",
+            "OPEN",
+            "HIGH",
+            "LOW",
+            "CLOSE",
+            "TOTTRDQTY",
+            "TIMESTAMP"
+        ]]
 
-if __name__ == '__main__':
-    try:
-        run()
-    except Exception as e:
-        print('Engine Error:', e)
-class NSEBhavcopyEngine:
+        df.columns=[
+            "symbol",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "date"
+        ]
 
-    def __init__(self):
-        print("Bhavcopy Engine initialized")
+        os.makedirs("data/prices",exist_ok=True)
 
-    def run(self):
-        print("Downloading NSE Bhavcopy")
+        df.to_csv("data/prices/latest_prices.csv",index=False)
+
+        print("Bhavcopy Engine Completed")
