@@ -7,7 +7,7 @@ Running core.nse_universe_engine
 Engine started: core.nse_universe_engine
 Running core.fundamental_ingestion_engine
 Fundamental Ingestion Engine Running
-Engine failed: core.fundamental_ingestion_engine -> 'symbol'
+No symbol column found
 Running core.fundamental_10y_engine
 10 Year Fundamental Engine Running
 10Y fundamental database loaded: 0 rows
