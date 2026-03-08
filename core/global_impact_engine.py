@@ -1,7 +1,5 @@
-class SectorEngine:
+def run():
 
-    def run(self):
+    print("Global Impact Engine Running")
 
-        print("Global Impact Engine Running")
-
-        print("Global Impact Engine Completed")
+    print("Global Impact Engine Completed")
