@@ -1,30 +1,18 @@
-# ENGINE GUARD WITH UNIVERSE SCHEDULER
+import sys
+import os
 
-import subprocess
-import time
-import threading
-from universe_scheduler_engine import run_universe_scheduler
+ROOT = os.path.dirname(os.path.abspath(__file__))
 
-def start_guard():
-    # ---- Start Universe Scheduler Thread ----
-    scheduler_thread = threading.Thread(target=run_universe_scheduler)
-    scheduler_thread.daemon = True
-    scheduler_thread.start()
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 
-    # ---- Engine Restart Guard Loop ----
-    while True:
-        try:
-            process = subprocess.Popen(["python", "main.py"])
-            process.wait()
-        except Exception as e:
-            print("Engine crashed:", e)
+CORE = os.path.join(ROOT, "core")
+ENG = os.path.join(ROOT, "engines")
 
-        print("Restarting engine in 5 seconds...")
-        time.sleep(5)
+if CORE not in sys.path:
+    sys.path.append(CORE)
 
+if ENG not in sys.path:
+    sys.path.append(ENG)
 
-if __name__ == '__main__':
-    try:
-        run()
-    except Exception as e:
-        print('Engine Error:', e)
+print("ENGINE PATHS INITIALIZED")
