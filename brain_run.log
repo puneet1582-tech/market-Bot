@@ -9,7 +9,7 @@ Running core.fundamental_ingestion_engine
 Engine started: core.fundamental_ingestion_engine
 Running core.fundamental_10y_engine
 10 Year Fundamental Engine Running
-10Y fundamental database initialized
+10Y fundamental database loaded: 0 rows
 10 Year Fundamental Engine Completed
 Running core.fii_dii_trend_engine
 Engine started: core.fii_dii_trend_engine
