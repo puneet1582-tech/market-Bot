@@ -5,60 +5,85 @@ import os
 from datetime import datetime
 
 def run():
+    try:
+        today = datetime.now()
+        date_str = today.strftime("%d%m%Y")
+        year = today.strftime("%Y")
+        month = today.strftime("%b").upper()
 
-    today=datetime.now()
+        url = f"https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date_str}bhav.csv.zip"
 
-    date_str=today.strftime("%d%m%Y")
+        session = requests.Session()
 
-    year=today.strftime("%Y")
-    month=today.strftime("%b").upper()
+        headers = {
+            "User-Agent": "Mozilla/5.0",
+            "Accept": "*/*",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Connection": "keep-alive",
+            "Referer": "https://www.nseindia.com/"
+        }
 
-    url=f"https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date_str}bhav.csv.zip"
+        # cookie initialize
+        session.get("https://www.nseindia.com", headers=headers, timeout=10)
 
-    os.makedirs("data/bhavcopy",exist_ok=True)
+        r = session.get(url, headers=headers, timeout=20)
 
-    zip_path=f"data/bhavcopy/{date_str}.zip"
+        if r.status_code != 200:
+            print("Bhavcopy not available today:", r.status_code)
+            return
 
-    r=requests.get(url,headers={"User-Agent":"Mozilla/5.0"})
+        os.makedirs("data/bhavcopy", exist_ok=True)
 
-    if r.status_code!=200:
-        print("Bhavcopy download failed")
-        return
+        zip_path = f"data/bhavcopy/{date_str}.zip"
 
-    with open(zip_path,"wb") as f:
-        f.write(r.content)
+        with open(zip_path, "wb") as f:
+            f.write(r.content)
 
-    with zipfile.ZipFile(zip_path,"r") as z:
-        z.extractall("data/bhavcopy")
+        with zipfile.ZipFile(zip_path, "r") as z:
+            z.extractall("data/bhavcopy")
 
-    csv_file=[f for f in os.listdir("data/bhavcopy") if f.endswith(".csv")][0]
+        csv_file = None
+        for f in os.listdir("data/bhavcopy"):
+            if f.endswith(".csv"):
+                csv_file = f
+                break
 
-    df=pd.read_csv(f"data/bhavcopy/{csv_file}")
+        if not csv_file:
+            print("CSV file not found")
+            return
 
-    df=df[df["SERIES"]=="EQ"]
+        df = pd.read_csv(f"data/bhavcopy/{csv_file}")
 
-    df=df[[
-        "SYMBOL",
-        "OPEN",
-        "HIGH",
-        "LOW",
-        "CLOSE",
-        "TOTTRDQTY",
-        "TIMESTAMP"
-    ]]
+        df = df[df["SERIES"] == "EQ"]
 
-    df.columns=[
-        "symbol",
-        "open",
-        "high",
-        "low",
-        "close",
-        "volume",
-        "date"
-    ]
+        df = df[
+            [
+                "SYMBOL",
+                "OPEN",
+                "HIGH",
+                "LOW",
+                "CLOSE",
+                "TOTTRDQTY",
+                "TIMESTAMP",
+            ]
+        ]
 
-    os.makedirs("data/prices",exist_ok=True)
+        df.columns = [
+            "symbol",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "date",
+        ]
 
-    df.to_csv("data/prices/latest_prices.csv",index=False)
+        os.makedirs("data/prices", exist_ok=True)
 
-    print("Bhavcopy Engine Completed")
+        df.to_csv("data/prices/latest_prices.csv", index=False)
+
+        print("Bhavcopy Engine Completed")
+
+    except Exception as e:
+        print("Bhavcopy engine error:", e)
+
