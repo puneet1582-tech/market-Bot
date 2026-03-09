@@ -1,4 +1,12 @@
+import sys
+import os
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from core.master_brain_engine import MasterBrainEngine
+import json
 
 class MasterIntelligenceController:
 
@@ -13,7 +21,6 @@ class MasterIntelligenceController:
 
         try:
             with open("data/master_brain_report.json","w") as f:
-                import json
                 json.dump(report,f,indent=2)
         except:
             pass
