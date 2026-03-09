@@ -16,75 +16,70 @@ def safe_read(path):
     return pd.DataFrame()
 
 
+def normalize_numeric(df, col):
+
+    if col not in df.columns:
+        return df
+
+    df[col] = (
+        df[col]
+        .astype(str)
+        .str.replace(",", "", regex=False)
+        .str.replace(" ", "", regex=False)
+    )
+
+    df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    return df
+
+
 def run():
 
     prices = safe_read(PRICE_FILE)
     sector_map = safe_read(SECTOR_MAP)
 
-    if prices.empty or sector_map.empty:
-        print("Missing price or sector data")
+    if prices.empty:
+        print("market_prices missing")
         return
 
+    prices = normalize_numeric(prices,"close")
+    prices = normalize_numeric(prices,"volume")
+
+    prices = prices.dropna(subset=["close","volume"])
+
+    prices["value_traded"] = prices["close"] * prices["volume"]
+
+    prices.to_csv(STOCK_OUTPUT,index=False)
+
+
+    if sector_map.empty:
+        print("sector map missing")
+        return
 
     df = prices.merge(sector_map,on="symbol",how="left")
 
-
-    df["value_traded"] = df["close"] * df["volume"]
-
-
     sector_flow = (
-        df.groupby("sector")
-        .agg(
-            total_volume=("volume","sum"),
-            total_value=("value_traded","sum"),
-            avg_price=("close","mean"),
-            stock_count=("symbol","nunique")
-        )
+        df.groupby("sector")["value_traded"]
+        .sum()
+        .sort_values(ascending=False)
         .reset_index()
     )
-
-
-    sector_flow["flow_strength"] = sector_flow["total_value"].rank(ascending=False)
-
-
-    stock_flow = (
-        df.groupby(["symbol","sector"])
-        .agg(
-            volume=("volume","sum"),
-            value=("value_traded","sum"),
-            avg_price=("close","mean")
-        )
-        .reset_index()
-    )
-
-
-    stock_flow["money_rank"] = stock_flow["value"].rank(ascending=False)
-
-
-    top_sectors = sector_flow.sort_values("flow_strength").head(5)
-
-    rotation = df[df["sector"].isin(top_sectors["sector"])]
-
-    rotation = (
-        rotation.groupby(["symbol","sector"])
-        .agg(
-            value=("value_traded","sum"),
-            volume=("volume","sum")
-        )
-        .reset_index()
-    )
-
-    rotation = rotation.sort_values("value",ascending=False)
-
 
     sector_flow.to_csv(SECTOR_OUTPUT,index=False)
-    stock_flow.to_csv(STOCK_OUTPUT,index=False)
-    rotation.to_csv(ROTATION_OUTPUT,index=False)
+
+
+    sector_flow["prev_flow"] = sector_flow["value_traded"].shift(1)
+
+    sector_flow["rotation_signal"] = (
+        sector_flow["value_traded"] > sector_flow["prev_flow"]
+    )
+
+    sector_flow.to_csv(ROTATION_OUTPUT,index=False)
 
 
     print("Capital flow analysis complete")
-    print("Sector flows:",len(sector_flow))
-    print("Stock flows:",len(stock_flow))
+    print("Stocks analyzed:",len(prices))
+    print("Sectors analyzed:",len(sector_flow))
 
 
 if __name__ == "__main__":
