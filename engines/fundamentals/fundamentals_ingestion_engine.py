@@ -2,27 +2,17 @@ import pandas as pd
 import os
 import glob
 
-
-INPUT_DIR = "data/raw/fundamentals"
-OUTPUT_FILE = "data/processed/company_fundamentals_10y.csv"
-
-
-REQUIRED_COLUMNS = [
-    "symbol",
-    "year",
-    "revenue",
-    "profit",
-    "operating_margin",
-    "roe",
-    "roce",
-    "debt",
-    "free_cash_flow"
-]
+RAW_PATH = "data/fundamentals/raw"
+OUT_PATH = "data/fundamentals/processed/fundamentals_master.csv"
 
 
 def load_files():
 
-    files = glob.glob(os.path.join(INPUT_DIR,"*.csv"))
+    files = glob.glob(f"{RAW_PATH}/*.csv")
+
+    if not files:
+        print("No fundamentals files found")
+        return None
 
     frames = []
 
@@ -32,78 +22,62 @@ def load_files():
 
             df = pd.read_csv(f)
 
+            if "symbol" not in df.columns:
+                continue
+
             frames.append(df)
 
-        except:
+        except Exception as e:
 
-            pass
-
-    if frames:
-
-        return pd.concat(frames,ignore_index=True)
-
-    return pd.DataFrame()
+            print("File error:",f)
 
 
-def normalize_schema(df):
+    if not frames:
+        return None
 
-    for col in REQUIRED_COLUMNS:
-
-        if col not in df.columns:
-
-            df[col] = None
-
-    df = df[REQUIRED_COLUMNS]
-
-    return df
+    return pd.concat(frames,ignore_index=True)
 
 
-def clean_numeric(df):
+
+def normalize(df):
+
+    cols = [c.lower() for c in df.columns]
+
+    df.columns = cols
 
     numeric_cols = [
         "revenue",
         "profit",
-        "operating_margin",
+        "net_profit",
         "roe",
         "roce",
-        "debt",
-        "free_cash_flow"
+        "debt"
     ]
 
     for c in numeric_cols:
 
-        df[c] = (
-            df[c]
-            .astype(str)
-            .str.replace(",","")
-        )
+        if c in df.columns:
 
-        df[c] = pd.to_numeric(df[c],errors="coerce")
+            df[c] = pd.to_numeric(df[c],errors="coerce")
 
     return df
+
 
 
 def run():
 
     df = load_files()
 
-    if df.empty:
+    if df is None:
 
         print("No fundamentals files found")
 
         return
 
-
-    df = normalize_schema(df)
-
-    df = clean_numeric(df)
-
-    df = df.sort_values(
-        ["symbol","year"]
-    )
+    df = normalize(df)
 
     df.to_csv(
-        OUTPUT_FILE,
+        OUT_PATH,
         index=False
     )
 
