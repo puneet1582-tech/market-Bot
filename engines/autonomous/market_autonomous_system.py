@@ -51,6 +51,8 @@ class SystemState:
     @staticmethod
     def write(state):
 
+        os.makedirs("runtime/state", exist_ok=True)
+
         with open(STATE_FILE, "w") as f:
             f.write(state)
 
