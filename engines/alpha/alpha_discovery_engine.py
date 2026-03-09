@@ -16,38 +16,49 @@ def safe_read(path):
     return pd.DataFrame()
 
 
-def classify_alpha(signal_string):
+def compute_signal_density(signal_string):
 
     s = str(signal_string)
 
-    strong_business = "STRONG_BUSINESS" in s
-    strong_sector = "STRONG_SECTOR" in s
-    inst_buying = "INSTITUTIONAL_BUYING" in s
-    momentum = "PRICE_MOMENTUM" in s
-    macro_tailwind = "GLOBAL_TAILWIND" in s
-    macro_headwind = "GLOBAL_HEADWIND" in s
+    signals = s.split("|")
 
-    density = sum([
-        strong_business,
-        strong_sector,
-        inst_buying,
-        momentum,
-        macro_tailwind
-    ])
+    score = 0
 
-    if macro_headwind:
-        return "MACRO_RISK"
+    for sig in signals:
 
-    if density >= 4:
+        if sig == "STRONG_BUSINESS":
+            score += 3
+
+        elif sig == "INSTITUTIONAL_BUYING":
+            score += 3
+
+        elif sig == "STRONG_SECTOR":
+            score += 2
+
+        elif sig == "PRICE_MOMENTUM":
+            score += 2
+
+        elif sig == "GLOBAL_TAILWIND":
+            score += 1
+
+        elif sig == "GLOBAL_HEADWIND":
+            score -= 2
+
+    return score
+
+
+def classify_alpha(score):
+
+    if score >= 7:
         return "COMPOUNDING_ALPHA"
 
-    if density == 3:
+    if score >= 5:
         return "ROTATION_ALPHA"
 
-    if density == 2 and momentum:
+    if score >= 3:
         return "MOMENTUM_ALPHA"
 
-    return "NEUTRAL"
+    return "NO_ALPHA"
 
 
 def run():
@@ -61,30 +72,41 @@ def run():
 
     df = signals.copy()
 
-    df["alpha_type"] = df["signals"].apply(classify_alpha)
+    df["signal_score"] = df["signals"].apply(
+        compute_signal_density
+    )
+
+    df["alpha_type"] = df["signal_score"].apply(
+        classify_alpha
+    )
 
     market_mode = "NEUTRAL"
 
     if not market.empty:
         market_mode = market.iloc[0]["market_mode"]
 
-    def adjust(row):
+    if market_mode == "RISK":
 
-        alpha = row["alpha_type"]
+        df.loc[
+            df["alpha_type"] == "MOMENTUM_ALPHA",
+            "alpha_type"
+        ] = "WEAK_ALPHA"
 
-        if market_mode == "RISK":
-            if alpha in ["ROTATION_ALPHA","MOMENTUM_ALPHA"]:
-                return "WEAK_ALPHA"
 
-        return alpha
+    alpha_df = df[
+        df["alpha_type"].isin(
+            [
+                "COMPOUNDING_ALPHA",
+                "ROTATION_ALPHA",
+                "MOMENTUM_ALPHA"
+            ]
+        )
+    ]
 
-    df["alpha_adjusted"] = df.apply(adjust,axis=1)
-
-    alpha_df = df[df["alpha_adjusted"].isin([
-        "COMPOUNDING_ALPHA",
-        "ROTATION_ALPHA",
-        "MOMENTUM_ALPHA"
-    ])]
+    alpha_df = alpha_df.sort_values(
+        by="signal_score",
+        ascending=False
+    )
 
     alpha_df.to_csv(
         OUTPUT_FILE,
