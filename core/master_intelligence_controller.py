@@ -1,29 +1,34 @@
-from market_brain import generate_report
+from core.master_brain_engine import MasterBrainEngine
 
 class MasterIntelligenceController:
 
-    def execute(self):
+    def __init__(self):
+        self.brain = MasterBrainEngine()
 
-        print("Running Market Brain Analysis")
+    def run(self):
 
-        report = generate_report()
+        print("MASTER INTELLIGENCE CONTROLLER STARTED")
 
-        result = {
-            "MARKET_SUMMARY": {
-                "mode": report["MODE"]
-            },
-            "STOCK_ANALYSIS": report["STOCKS"]
-        }
+        report = self.brain.run()
 
-        return result
+        try:
+            with open("data/master_brain_report.json","w") as f:
+                import json
+                json.dump(report,f,indent=2)
+        except:
+            pass
 
+        print("MASTER INTELLIGENCE REPORT GENERATED")
 
-if __name__ == '__main__':
-    try:
-        run()
-    except Exception as e:
-        print('Engine Error:', e)
+        return report
 
 
 def run():
-    print('Engine started:', __name__)
+
+    controller = MasterIntelligenceController()
+
+    return controller.run()
+
+
+if __name__ == "__main__":
+    run()
