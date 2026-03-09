@@ -4,67 +4,54 @@ import pandas as pd
 BHAVCOPY_DIR = "data/bhavcopy"
 OUTPUT_FILE = "data/processed/market_prices.csv"
 
-def find_latest_bhavcopy():
+def latest_csv():
     files = [f for f in os.listdir(BHAVCOPY_DIR) if f.endswith(".csv")]
     if not files:
-        raise Exception("No bhavcopy CSV found")
+        raise Exception("No CSV found in data/bhavcopy. Ensure ZIP extracted.")
     files.sort()
     return os.path.join(BHAVCOPY_DIR, files[-1])
 
-def find_col(cols, options):
-    for opt in options:
-        for c in cols:
-            if opt.lower() in c.lower():
+def detect_error_file(path):
+    with open(path, "r", errors="ignore") as f:
+        first = f.readline().strip()
+    if first.startswith('{"error"'):
+        raise Exception(f"Bhavcopy file is NSE error response: {first}")
+
+def pick(colnames, keys):
+    for k in keys:
+        for c in colnames:
+            if k.lower() in c.lower():
                 return c
     return None
 
-def parse_bhavcopy():
+def parse():
+    path = latest_csv()
+    print("Loading:", path)
+    detect_error_file(path)
 
-    file_path = find_latest_bhavcopy()
-    print(f"Loading Bhavcopy: {file_path}")
+    df = pd.read_csv(path)
+    cols = list(df.columns)
 
-    df = pd.read_csv(file_path)
+    sym = pick(cols, ["symbol"])
+    opn = pick(cols, ["open"])
+    hig = pick(cols, ["high"])
+    low = pick(cols, ["low"])
+    cls = pick(cols, ["close"])
+    vol = pick(cols, ["qty","volume"])
 
-    cols = df.columns.tolist()
+    needed = [sym, opn, hig, low, cls, vol]
+    if None in needed:
+        raise Exception(f"Required columns missing. Columns present: {cols}")
 
-    symbol = find_col(cols, ["symbol"])
-    open_p = find_col(cols, ["open"])
-    high_p = find_col(cols, ["high"])
-    low_p = find_col(cols, ["low"])
-    close_p = find_col(cols, ["close"])
-    volume = find_col(cols, ["qty", "volume"])
-    date = find_col(cols, ["timestamp", "date"])
-
-    required = [symbol, open_p, high_p, low_p, close_p, volume]
-
-    if None in required:
-        raise Exception(f"Required columns not found. Available columns: {cols}")
-
-    df = df[[symbol, open_p, high_p, low_p, close_p, volume]]
-
-    df.columns = [
-        "symbol",
-        "open",
-        "high",
-        "low",
-        "close",
-        "volume"
-    ]
-
-    if date:
-        df["date"] = pd.to_datetime(df[date], errors="coerce")
-    else:
-        df["date"] = pd.Timestamp.today()
-
-    df = df[df["symbol"].notna()]
+    out = df[[sym, opn, hig, low, cls, vol]].copy()
+    out.columns = ["symbol","open","high","low","close","volume"]
+    out = out[out["symbol"].notna()]
 
     os.makedirs("data/processed", exist_ok=True)
+    out.to_csv(OUTPUT_FILE, index=False)
 
-    df.to_csv(OUTPUT_FILE, index=False)
-
-    print("Bhavcopy parsed successfully")
-    print(f"Saved to {OUTPUT_FILE}")
-    print(f"Total stocks processed: {len(df)}")
+    print("Parsed OK. Rows:", len(out))
+    print("Saved:", OUTPUT_FILE)
 
 if __name__ == "__main__":
-    parse_bhavcopy()
+    parse()
