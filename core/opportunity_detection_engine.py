@@ -4,13 +4,19 @@ class OpportunityDetectionEngine:
 
     def __init__(self):
 
+        self.business_file = "data/fundamentals.csv"
         self.price_file = "data/price_history.csv"
-        self.fundamental_file = "data/fundamentals.csv"
         self.sector_file = "data/sector_map.csv"
+        self.institutional_file = "data/fii_dii.csv"
 
     def run(self):
 
         print("Opportunity Detection Engine Running")
+
+        try:
+            fundamentals = pd.read_csv(self.business_file)
+        except:
+            fundamentals = pd.DataFrame()
 
         try:
             price = pd.read_csv(self.price_file)
@@ -18,47 +24,57 @@ class OpportunityDetectionEngine:
             price = pd.DataFrame()
 
         try:
-            fundamentals = pd.read_csv(self.fundamental_file)
-        except:
-            fundamentals = pd.DataFrame()
-
-        try:
             sector = pd.read_csv(self.sector_file)
         except:
             sector = pd.DataFrame()
 
-        if price.empty or fundamentals.empty:
+        try:
+            institutional = pd.read_csv(self.institutional_file)
+        except:
+            institutional = pd.DataFrame()
+
+        if fundamentals.empty:
             return []
 
-        merged = price.merge(fundamentals, on="symbol", how="inner")
+        merged = fundamentals.copy()
+
+        if not price.empty and "symbol" in price.columns:
+            merged = merged.merge(price, on="symbol", how="left")
 
         if not sector.empty and "symbol" in sector.columns:
             merged = merged.merge(sector, on="symbol", how="left")
 
-        candidates = []
+        if not institutional.empty and "symbol" in institutional.columns:
+            merged = merged.merge(institutional, on="symbol", how="left")
+
+        opportunities = []
 
         for _, row in merged.iterrows():
 
-            roe = row.get("roe", 0)
-            growth = row.get("revenue_growth", 0)
-            debt = row.get("debt_to_equity", 0)
-
             try:
-                if roe > 15 and growth > 10 and debt < 1:
-                    candidates.append({
-                        "symbol": row.get("symbol"),
-                        "sector": row.get("sector", "unknown"),
+
+                symbol = row.get("symbol")
+
+                revenue_growth = row.get("revenue_growth",0)
+                roe = row.get("roe",0)
+                debt = row.get("debt_to_equity",0)
+                fii_change = row.get("fii_change",0)
+
+                if revenue_growth > 12 and roe > 18 and debt < 1 and fii_change >= 0:
+
+                    opportunities.append({
+                        "symbol": symbol,
                         "roe": roe,
-                        "growth": growth
+                        "revenue_growth": revenue_growth,
+                        "sector": row.get("sector","unknown")
                     })
+
             except:
                 continue
 
-        result = candidates[:20]
-
         print("Opportunity Detection Engine Completed")
 
-        return result
+        return opportunities[:20]
 
 
 def run():
