@@ -1,36 +1,57 @@
 import pandas as pd
-import os
 
-DATA_FILE = "data/institutional_money_flow.csv"
-OUT_FILE = "data/sector_strength_rank.csv"
+class SectorMoneyFlowEngine:
 
-def build_sector_strength():
+    def __init__(self):
+        self.sector_map_file = "data/sector_map.csv"
+        self.price_file = "data/price_history.csv"
 
-    if not os.path.exists(DATA_FILE):
-        print("Institutional money flow file missing.")
-        return
+    def run(self):
 
-    df = pd.read_csv(DATA_FILE)
+        print("Sector Money Flow Engine Running")
 
-    if "sector" not in df.columns:
-        print("Sector column missing.")
-        return
+        try:
+            sector = pd.read_csv(self.sector_map_file)
+        except:
+            sector = pd.DataFrame()
 
-    df = df.sort_values("institutional_strength", ascending=False)
+        try:
+            price = pd.read_csv(self.price_file)
+        except:
+            price = pd.DataFrame()
 
-    df.to_csv(OUT_FILE, index=False)
+        if sector.empty or price.empty:
+            return {}
 
-    print("SECTOR MONEY FLOW ENGINE COMPLETE")
-    print("Sectors ranked:", len(df))
-    print("Saved:", OUT_FILE)
+        if "symbol" not in price.columns or "symbol" not in sector.columns:
+            return {}
 
+        merged = price.merge(sector, on="symbol", how="left")
 
-if __name__ == '__main__':
-    try:
-        run()
-    except Exception as e:
-        print('Engine Error:', e)
+        sector_flow = {}
+
+        for _, row in merged.iterrows():
+
+            sec = row.get("sector", "unknown")
+            change = row.get("price_change", 0)
+
+            if sec not in sector_flow:
+                sector_flow[sec] = 0
+
+            try:
+                sector_flow[sec] += float(change)
+            except:
+                continue
+
+        print("Sector Money Flow Engine Completed")
+
+        return sector_flow
 
 
 def run():
-    print('Engine started:', __name__)
+    engine = SectorMoneyFlowEngine()
+    return engine.run()
+
+
+if __name__ == "__main__":
+    run()
