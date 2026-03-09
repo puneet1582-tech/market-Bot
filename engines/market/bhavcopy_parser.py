@@ -8,9 +8,15 @@ def find_latest_bhavcopy():
     files = [f for f in os.listdir(BHAVCOPY_DIR) if f.endswith(".csv")]
     if not files:
         raise Exception("No bhavcopy CSV found")
-
     files.sort()
     return os.path.join(BHAVCOPY_DIR, files[-1])
+
+def find_col(cols, options):
+    for opt in options:
+        for c in cols:
+            if opt.lower() in c.lower():
+                return c
+    return None
 
 def parse_bhavcopy():
 
@@ -19,17 +25,22 @@ def parse_bhavcopy():
 
     df = pd.read_csv(file_path)
 
-    required_cols = [
-        "SYMBOL",
-        "OPEN",
-        "HIGH",
-        "LOW",
-        "CLOSE",
-        "TOTTRDQTY",
-        "TIMESTAMP"
-    ]
+    cols = df.columns.tolist()
 
-    df = df[required_cols]
+    symbol = find_col(cols, ["symbol"])
+    open_p = find_col(cols, ["open"])
+    high_p = find_col(cols, ["high"])
+    low_p = find_col(cols, ["low"])
+    close_p = find_col(cols, ["close"])
+    volume = find_col(cols, ["qty", "volume"])
+    date = find_col(cols, ["timestamp", "date"])
+
+    required = [symbol, open_p, high_p, low_p, close_p, volume]
+
+    if None in required:
+        raise Exception(f"Required columns not found. Available columns: {cols}")
+
+    df = df[[symbol, open_p, high_p, low_p, close_p, volume]]
 
     df.columns = [
         "symbol",
@@ -37,13 +48,15 @@ def parse_bhavcopy():
         "high",
         "low",
         "close",
-        "volume",
-        "date"
+        "volume"
     ]
 
-    df = df[df["symbol"].notna()]
+    if date:
+        df["date"] = pd.to_datetime(df[date], errors="coerce")
+    else:
+        df["date"] = pd.Timestamp.today()
 
-    df["date"] = pd.to_datetime(df["date"], dayfirst=True)
+    df = df[df["symbol"].notna()]
 
     os.makedirs("data/processed", exist_ok=True)
 
