@@ -4,14 +4,14 @@ import pandas as pd
 import os
 
 
-from run_company_intelligence import run as run_company
-from run_ownership_intelligence import run as run_ownership
-from run_sector_intelligence import run as run_sector
-from run_global_macro import run as run_macro
-from run_signal_fusion import run as run_signals
-from run_alpha_engine import run as run_alpha
-from run_opportunity_engine import run as run_opportunity
-from run_master_brain import run as run_master
+from engines.market.company_intelligence_engine import run as run_company
+from engines.market.ownership_intelligence_engine import run as run_ownership
+from engines.market.sector_intelligence_engine import run as run_sector
+from engines.macro.global_macro_engine import run as run_macro
+from engines.signals.signal_fusion_engine import run as run_signals
+from engines.alpha.alpha_discovery_engine import run as run_alpha
+from engines.opportunity.opportunity_intelligence_engine import run as run_opportunity
+from engines.master.master_brain_engine import run as run_master
 
 
 RUN_LOG = "data/system_runs/run_history.csv"
@@ -23,19 +23,21 @@ def record_run(step,status,duration,error=""):
         "timestamp":pd.Timestamp.now(),
         "step":step,
         "status":status,
-        "duration_sec":duration,
+        "duration":duration,
         "error":error
     }
 
-    df = pd.DataFrame([row])
-
     if os.path.exists(RUN_LOG):
 
-        prev = pd.read_csv(RUN_LOG)
+        df = pd.read_csv(RUN_LOG)
+        df = pd.concat([df,pd.DataFrame([row])])
 
-        df = pd.concat([prev,df],ignore_index=True)
+    else:
+
+        df = pd.DataFrame([row])
 
     df.to_csv(RUN_LOG,index=False)
+
 
 
 def execute_step(name,func):
@@ -44,13 +46,15 @@ def execute_step(name,func):
 
     try:
 
+        print("RUNNING:",name)
+
         func()
 
         duration = round(time.time()-start,2)
 
         record_run(name,"SUCCESS",duration)
 
-        print(f"{name} completed in {duration}s")
+        print("SUCCESS:",name)
 
     except Exception as e:
 
@@ -58,7 +62,7 @@ def execute_step(name,func):
 
         record_run(name,"FAILED",duration,str(e))
 
-        print(f"{name} failed")
+        print("FAILED:",name)
 
         print(traceback.format_exc())
 
@@ -71,30 +75,27 @@ def run_pipeline():
     steps = [
 
         ("Company Intelligence",run_company),
-
         ("Ownership Intelligence",run_ownership),
-
         ("Sector Intelligence",run_sector),
-
         ("Global Macro Intelligence",run_macro),
-
         ("Signal Fusion",run_signals),
-
         ("Alpha Discovery",run_alpha),
-
         ("Opportunity Intelligence",run_opportunity),
-
-        ("Master Brain Decision",run_master)
+        ("Master Brain",run_master)
 
     ]
 
-    print("Starting Institutional Pipeline")
+    start = time.time()
 
     for name,func in steps:
 
         execute_step(name,func)
 
-    print("Pipeline execution complete")
+    total = round(time.time()-start,2)
+
+    print("PIPELINE COMPLETE")
+    print("TOTAL TIME:",total,"seconds")
+
 
 
 if __name__ == "__main__":
