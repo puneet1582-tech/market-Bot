@@ -1,11 +1,12 @@
 import os
 import requests
 import zipfile
+import pandas as pd
 from datetime import datetime
 
 DATA_FOLDER = "data/bhavcopy"
 
-def run():
+def download_bhavcopy():
     today = datetime.today()
     date = today.strftime("%d%m%Y")
     year = today.strftime("%Y")
@@ -36,8 +37,5 @@ def run():
         print("Download Error:", e)
 
 
-if __name__ == '__main__':
-    try:
-        run()
-    except Exception as e:
-        print('Engine Error:', e)
+if __name__ == "__main__":
+    download_bhavcopy()

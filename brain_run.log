@@ -7,10 +7,11 @@ Running core.nse_universe_engine
 Engine started: core.nse_universe_engine
 Running core.fundamental_ingestion_engine
 Fundamental Ingestion Engine Running
-No symbol column found
+Fundamental data updated: 10 rows
+Fundamental Ingestion Engine Completed
 Running core.fundamental_10y_engine
 10 Year Fundamental Engine Running
-10Y fundamental database loaded: 0 rows
+10Y fundamental database loaded: 10 rows
 10 Year Fundamental Engine Completed
 Running core.fii_dii_trend_engine
 Engine started: core.fii_dii_trend_engine
