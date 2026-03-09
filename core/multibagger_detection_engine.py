@@ -1,41 +1,60 @@
 import pandas as pd
-import os
 
-DATA_FILE = "data/business_evolution_10y.csv"
-OUT_FILE = "data/multibagger_candidates.csv"
+class MultibaggerDetectionEngine:
 
-def detect_multibaggers():
+    def __init__(self):
 
-    if not os.path.exists(DATA_FILE):
-        print("Business evolution data missing.")
-        return
+        self.fundamental_file = "data/fundamentals.csv"
+        self.price_file = "data/price_history.csv"
 
-    df = pd.read_csv(DATA_FILE)
+    def run(self):
 
-    if "revenue_growth" not in df.columns:
-        print("Required columns missing.")
-        return
+        print("Multibagger Detection Engine Running")
 
-    candidates = df[
-        (df["revenue_growth"] > 0) &
-        (df["profit_growth"] > 0)
-    ]
+        try:
+            fundamentals = pd.read_csv(self.fundamental_file)
+        except:
+            fundamentals = pd.DataFrame()
 
-    candidates = candidates.sort_values("revenue_growth", ascending=False)
+        try:
+            price = pd.read_csv(self.price_file)
+        except:
+            price = pd.DataFrame()
 
-    candidates.to_csv(OUT_FILE, index=False)
+        if fundamentals.empty:
+            return []
 
-    print("MULTIBAGGER DETECTION COMPLETE")
-    print("Candidates found:", len(candidates))
-    print("Saved:", OUT_FILE)
+        candidates = []
 
+        for _, row in fundamentals.iterrows():
 
-if __name__ == '__main__':
-    try:
-        run()
-    except Exception as e:
-        print('Engine Error:', e)
+            try:
+                roe = row.get("roe",0)
+                growth = row.get("revenue_growth",0)
+                debt = row.get("debt_to_equity",0)
+
+                if roe > 18 and growth > 15 and debt < 0.8:
+
+                    candidates.append({
+                        "symbol": row.get("symbol"),
+                        "roe": roe,
+                        "growth": growth
+                    })
+
+            except:
+                continue
+
+        print("Multibagger Detection Engine Completed")
+
+        return candidates[:10]
 
 
 def run():
-    print('Engine started:', __name__)
+
+    engine = MultibaggerDetectionEngine()
+
+    return engine.run()
+
+
+if __name__ == "__main__":
+    run()
