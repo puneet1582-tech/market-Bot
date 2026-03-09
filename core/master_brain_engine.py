@@ -12,6 +12,7 @@ from core.global_impact_engine import GlobalImpactEngine
 from core.multibagger_detection_engine import MultibaggerDetectionEngine
 from core.business_quality_engine import BusinessQualityEngine
 from core.institutional_flow_engine import InstitutionalFlowEngine
+from core.mode_engine import MarketModeEngine
 
 
 class MasterBrainEngine:
@@ -25,6 +26,7 @@ class MasterBrainEngine:
         self.multibagger_engine = MultibaggerDetectionEngine()
         self.business_engine = BusinessQualityEngine()
         self.institutional_engine = InstitutionalFlowEngine()
+        self.market_mode_engine = MarketModeEngine()
 
     def run(self):
 
@@ -37,8 +39,10 @@ class MasterBrainEngine:
         multibagger_output = self.multibagger_engine.run()
         business_output = self.business_engine.run()
         institutional_output = self.institutional_engine.run()
+        market_mode_output = self.market_mode_engine.run()
 
         final_report = {
+            "market_mode": market_mode_output,
             "top_opportunities": opportunity_output,
             "multibagger_candidates": multibagger_output,
             "business_quality": business_output,
