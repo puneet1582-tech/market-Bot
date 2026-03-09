@@ -16,18 +16,14 @@ def main():
 
     steps = [
 
-        "engines/market/bhavcopy_parser.py",
-        "engines/market/liquidity_filter.py",
-        "engines/market/momentum_engine.py",
-        "engines/market/opportunity_engine.py",
-        "engines/market/decision_engine.py"
+        "engines/market/company_intelligence_engine.py"
 
     ]
 
     for step in steps:
         run_step(step)
 
-    print("\nPipeline completed successfully")
+    print("\nCompany intelligence completed")
 
 
 if __name__ == "__main__":
