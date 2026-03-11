@@ -8,10 +8,41 @@ INDEX_OUTPUT = "data/memory/market_memory_index.csv"
 CLUSTER_OUTPUT = "data/memory/pattern_clusters.csv"
 
 
+REQUIRED_COLUMNS = [
+    "symbol",
+    "sector",
+    "alpha_adjusted",
+    "signals"
+]
+
+
 def safe_read(path):
-    if os.path.exists(path):
-        return pd.read_csv(path)
-    return pd.DataFrame()
+
+    if not os.path.exists(path):
+        print("Feature store missing")
+        return pd.DataFrame()
+
+    try:
+        df = pd.read_csv(path)
+        return df
+    except Exception as e:
+        print("Feature store read error:",e)
+        return pd.DataFrame()
+
+
+def validate_schema(df):
+
+    missing = []
+
+    for col in REQUIRED_COLUMNS:
+        if col not in df.columns:
+            missing.append(col)
+
+    if missing:
+        print("Schema error. Missing columns:",missing)
+        return False
+
+    return True
 
 
 def normalize_signal(signal):
@@ -21,35 +52,36 @@ def normalize_signal(signal):
 
     s = str(signal)
 
-    parts = s.split("|")
+    s = s.replace(" ","")
+    s = s.upper()
 
-    parts = sorted(parts)
-
-    return "|".join(parts)
-
-
-def build_index(df):
-
-    df["signal_key"] = df["signals"].apply(normalize_signal)
-
-    index = (
-        df.groupby("signal_key")
-        .size()
-        .reset_index(name="occurrences")
-    )
-
-    return index
+    return s
 
 
 def build_clusters(df):
 
-    cluster = (
+    df["signals"] = df["signals"].apply(normalize_signal)
+
+    clusters = (
         df.groupby(["sector","alpha_adjusted"])
         .size()
         .reset_index(name="count")
+        .sort_values("count",ascending=False)
     )
 
-    return cluster
+    return clusters
+
+
+def build_memory_index(df):
+
+    memory = (
+        df.groupby("signals")
+        .size()
+        .reset_index(name="frequency")
+        .sort_values("frequency",ascending=False)
+    )
+
+    return memory
 
 
 def run():
@@ -60,17 +92,21 @@ def run():
         print("Feature store empty")
         return
 
-    index = build_index(df)
+    if not validate_schema(df):
+        print("Memory engine aborted (schema invalid)")
+        return
 
     clusters = build_clusters(df)
 
-    index.to_csv(INDEX_OUTPUT,index=False)
+    memory_index = build_memory_index(df)
 
     clusters.to_csv(CLUSTER_OUTPUT,index=False)
 
-    print("Market memory index created")
-    print("Unique patterns:",len(index))
-    print("Sector clusters:",len(clusters))
+    memory_index.to_csv(INDEX_OUTPUT,index=False)
+
+    print("Memory index built")
+    print("Patterns:",len(memory_index))
+    print("Clusters:",len(clusters))
 
 
 if __name__ == "__main__":
