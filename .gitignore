@@ -1,4 +1,35 @@
+
+# data
+data/
+
+# logs
+logs/
+
+# python cache
 __pycache__/
 *.pyc
+
+# environment
+.env
+
+# zip files
+*.zip
+
+EOFcat << 'EOF' > .gitignore
+
+# data
+data/
+
+# logs
+logs/
+
+# python cache
 __pycache__/
 *.pyc
+
+# environment
+.env
+
+# zip files
+*.zip
+
