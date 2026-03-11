@@ -3,16 +3,28 @@ import requests
 import zipfile
 import os
 import time
+import logging
 from datetime import datetime, timedelta
 from io import BytesIO
+
 
 OUTPUT_DIR="data/bhavcopy"
 OUTPUT_FILE="data/bhavcopy/cm_today_bhav.csv"
 
 os.makedirs(OUTPUT_DIR,exist_ok=True)
 
-ARCHIVE_URL="https://archives.nseindia.com/content/historical/EQUITIES"
-NEW_ARCHIVE="https://nsearchives.nseindia.com/content/historical/EQUITIES"
+logging.basicConfig(
+    filename="logs/bhavcopy_engine.log",
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+
+ARCHIVE_SOURCES=[
+"https://archives.nseindia.com/content/historical/EQUITIES",
+"https://nsearchives.nseindia.com/content/historical/EQUITIES"
+]
+
 
 HEADERS={
 "User-Agent":"Mozilla/5.0",
@@ -20,97 +32,105 @@ HEADERS={
 "Connection":"keep-alive"
 }
 
-def build_url(date):
+
+def build_url(base,date):
 
     year=date.strftime("%Y")
     month=date.strftime("%b").upper()
     day=date.strftime("%d%b%Y").upper()
 
-    return [
-        f"{ARCHIVE_URL}/{year}/{month}/cm{day}bhav.csv.zip",
-        f"{NEW_ARCHIVE}/{year}/{month}/cm{day}bhav.csv.zip"
-    ]
+    return f"{base}/{year}/{month}/cm{day}bhav.csv.zip"
 
 
-def download(url):
+def download_zip(url):
 
     try:
 
-        r=requests.get(url,headers=HEADERS,timeout=15)
+        r=requests.get(url,headers=HEADERS,timeout=20)
 
-        if r.status_code!=200:
-            return None
+        if r.status_code==200:
 
-        return r.content
+            return BytesIO(r.content)
 
-    except:
+    except Exception:
+
         return None
 
-
-def extract_zip(content):
-
-    with zipfile.ZipFile(BytesIO(content)) as z:
-
-        name=z.namelist()[0]
-
-        df=pd.read_csv(z.open(name))
-
-        return df
+    return None
 
 
-def find_latest_bhavcopy():
+def parse_zip(zip_bytes):
+
+    z=zipfile.ZipFile(zip_bytes)
+
+    name=z.namelist()[0]
+
+    df=pd.read_csv(z.open(name))
+
+    return df
+
+
+def try_sources(date):
+
+    for base in ARCHIVE_SOURCES:
+
+        url=build_url(base,date)
+
+        logging.info(f"Trying {url}")
+
+        data=download_zip(url)
+
+        if data:
+
+            try:
+
+                df=parse_zip(data)
+
+                logging.info("Bhavcopy downloaded")
+
+                return df
+
+            except Exception:
+
+                continue
+
+    return None
+
+
+def find_latest():
 
     today=datetime.utcnow()
 
     for i in range(10):
 
-        d=today-timedelta(days=i)
+        date=today-timedelta(days=i)
 
-        urls=build_url(d)
+        df=try_sources(date)
 
-        for url in urls:
+        if df is not None:
 
-            print("Trying:",url)
-
-            content=download(url)
-
-            if content:
-
-                df=extract_zip(content)
-
-                return df
+            return df
 
         time.sleep(1)
 
-    raise Exception("Bhavcopy download failed")
-
-
-def clean(df):
-
-    df=df[df["SERIES"]=="EQ"]
-
-    df=df.rename(columns={
-        "SYMBOL":"symbol",
-        "CLOSE":"close",
-        "TOTTRDQTY":"volume"
-    })
-
-    df=df[["symbol","close","volume"]]
-
-    return df
+    return None
 
 
 def run():
 
-    print("Downloading NSE bhavcopy...")
+    logging.info("Bhavcopy engine start")
 
-    df=find_latest_bhavcopy()
+    df=find_latest()
 
-    df=clean(df)
+    if df is None:
+
+        raise Exception("Bhavcopy download failed")
 
     df.to_csv(OUTPUT_FILE,index=False)
 
-    print("Saved:",OUTPUT_FILE)
+    logging.info("Bhavcopy saved")
+
+    print("Bhavcopy rows:",len(df))
 
 
 if __name__=="__main__":
