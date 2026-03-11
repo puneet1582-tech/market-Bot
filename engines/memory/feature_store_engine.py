@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-from datetime import datetime
 
 
 SIGNAL_FILE = "data/processed/signal_matrix.csv"
@@ -21,28 +20,38 @@ def run():
     alpha = safe_read(ALPHA_FILE)
 
     if signals.empty:
-        print("Signal data missing")
+        print("Signal matrix missing")
         return
 
-    today = datetime.utcnow().strftime("%Y-%m-%d")
-
-    signals["date"] = today
+    df = signals.copy()
 
     if not alpha.empty:
-        alpha["alpha_flag"] = True
-        df = signals.merge(alpha[["symbol","alpha_flag"]], on="symbol", how="left")
-    else:
-        df = signals.copy()
-        df["alpha_flag"] = False
 
+        alpha_map = alpha[["symbol","alpha_adjusted"]]
+
+        df = df.merge(
+            alpha_map,
+            on="symbol",
+            how="left"
+        )
+
+    else:
+
+        df["alpha_adjusted"] = "NEUTRAL"
+
+
+    os.makedirs("data/memory",exist_ok=True)
 
     if os.path.exists(FEATURE_STORE):
 
-        hist = pd.read_csv(FEATURE_STORE)
+        old = pd.read_csv(FEATURE_STORE)
 
-        df = pd.concat([hist,df],ignore_index=True)
+        df = pd.concat([old,df],ignore_index=True)
 
-        df = df.drop_duplicates(subset=["date","symbol"],keep="last")
+        df = df.drop_duplicates(
+            subset=["symbol","signals","alpha_adjusted"],
+            keep="last"
+        )
 
     df.to_csv(FEATURE_STORE,index=False)
 
