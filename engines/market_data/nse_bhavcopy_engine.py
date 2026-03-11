@@ -2,111 +2,144 @@ import pandas as pd
 import requests
 import zipfile
 import os
+import time
 from datetime import datetime
 from io import BytesIO
 
 
-UNIVERSE_FILE = "data/universe/nse_equity_universe.csv"
-OUTPUT_FILE = "data/market/price_history.csv"
+OUTPUT_DIR = "data/bhavcopy"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+BASE_URLS = [
+"https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip",
+"https://www1.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip"
+]
 
 
 HEADERS = {
-    "User-Agent":"Mozilla/5.0",
-    "Accept":"*/*",
-    "Connection":"keep-alive"
+"User-Agent": "Mozilla/5.0",
+"Accept": "*/*",
+"Connection": "keep-alive",
+"Accept-Language": "en-US,en;q=0.9"
 }
 
 
-def build_url():
+def get_session():
 
-    today=datetime.now()
+    session = requests.Session()
+    session.headers.update(HEADERS)
 
-    date=today.strftime("%d%m%Y")
+    try:
+        session.get("https://www.nseindia.com", timeout=10)
+    except:
+        pass
 
-    url=f"https://archives.nseindia.com/content/historical/EQUITIES/{today.strftime('%Y')}/{today.strftime('%b').upper()}/cm{date}bhav.csv.zip"
+    return session
 
-    return url
+
+def build_dates():
+
+    today = datetime.now()
+    return {
+        "year": today.strftime("%Y"),
+        "month": today.strftime("%b").upper(),
+        "date": today.strftime("%d%b%Y").upper()
+    }
+
+
+def download_from_url(session, url):
+
+    r = session.get(url, timeout=20)
+
+    if r.status_code != 200:
+        return None
+
+    try:
+        z = zipfile.ZipFile(BytesIO(r.content))
+        file = z.namelist()[0]
+
+        df = pd.read_csv(z.open(file))
+        return df
+
+    except:
+        return None
 
 
 def download_bhavcopy():
 
-    url=build_url()
+    session = get_session()
+    date = build_dates()
 
-    r=requests.get(url,headers=HEADERS,timeout=30)
+    for base in BASE_URLS:
 
-    if r.status_code!=200:
-        raise Exception("Bhavcopy download failed")
+        url = base.format(**date)
 
-    z=zipfile.ZipFile(BytesIO(r.content))
+        try:
 
-    name=z.namelist()[0]
+            df = download_from_url(session, url)
 
-    df=pd.read_csv(z.open(name))
+            if df is not None:
+                return df
 
-    return df
+        except:
+            continue
+
+    raise Exception("Bhavcopy download failed from all sources")
 
 
-def normalize(df):
+def clean_equity(df):
 
-    mapping={
-        "SYMBOL":"symbol",
-        "OPEN":"open",
-        "HIGH":"high",
-        "LOW":"low",
-        "CLOSE":"close",
-        "TOTTRDQTY":"volume",
-        "TIMESTAMP":"date"
-    }
+    df = df[df["SERIES"] == "EQ"]
 
-    df=df.rename(columns=mapping)
+    df = df.rename(columns={
+        "SYMBOL": "symbol",
+        "CLOSE": "close",
+        "TOTTRDQTY": "volume"
+    })
 
-    keep=list(mapping.values())
-
-    df=df[keep]
-
-    df["date"]=pd.to_datetime(df["date"],errors="coerce")
+    df = df[["symbol", "close", "volume"]]
 
     return df
 
 
-def filter_universe(df):
+def save(df):
 
-    universe=pd.read_csv(UNIVERSE_FILE)
+    date = datetime.now().strftime("%Y%m%d")
 
-    symbols=set(universe["SYMBOL"].astype(str))
+    path = f"{OUTPUT_DIR}/bhav_{date}.csv"
 
-    df=df[df["symbol"].astype(str).isin(symbols)]
+    df.to_csv(path, index=False)
 
-    return df
-
-
-def append_master(df):
-
-    if os.path.exists(OUTPUT_FILE):
-
-        master=pd.read_csv(OUTPUT_FILE)
-
-        df=pd.concat([master,df],ignore_index=True)
-
-        df=df.drop_duplicates(["symbol","date"])
-
-    df.to_csv(OUTPUT_FILE,index=False)
+    print("Saved:", path)
 
 
 def run():
 
     print("Downloading NSE bhavcopy...")
 
-    df=download_bhavcopy()
+    for attempt in range(3):
 
-    df=normalize(df)
+        try:
 
-    df=filter_universe(df)
+            df = download_bhavcopy()
 
-    append_master(df)
+            df = clean_equity(df)
 
-    print("Price history updated:",len(df))
+            save(df)
+
+            print("Bhavcopy download success")
+
+            return
+
+        except Exception as e:
+
+            print("Attempt failed:", attempt+1)
+
+            time.sleep(3)
+
+    raise Exception("Bhavcopy engine failed after retries")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     run()
