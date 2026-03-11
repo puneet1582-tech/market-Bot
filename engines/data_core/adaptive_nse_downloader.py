@@ -19,133 +19,113 @@ OUTPUT="data/raw_bhavcopy/latest_bhavcopy.csv"
 
 
 HEADERS={
-"user-agent":"Mozilla/5.0",
-"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-"accept-language":"en-US,en;q=0.9"
+"User-Agent":"Mozilla/5.0",
+"Accept":"*/*",
+"Connection":"keep-alive"
 }
+
+
+def generate_dates():
+
+    today=datetime.utcnow().date()
+
+    dates=[]
+
+    for i in range(7):
+        d=today-timedelta(days=i)
+        dates.append(d)
+
+    return dates
+
+
+def build_url(date):
+
+    dd=date.strftime("%d")
+    mmm=date.strftime("%b").upper()
+    yyyy=date.strftime("%Y")
+
+    url=f"https://archives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip"
+
+    return url
 
 
 def try_download(url):
 
     try:
 
-        r=requests.get(url,headers=HEADERS,timeout=20)
+        r=requests.get(url,headers=HEADERS,timeout=15)
 
         if r.status_code!=200:
             return None
 
-        if url.endswith(".zip"):
+        z=zipfile.ZipFile(BytesIO(r.content))
 
-            z=zipfile.ZipFile(BytesIO(r.content))
+        name=z.namelist()[0]
 
-            for name in z.namelist():
+        df=pd.read_csv(z.open(name))
 
-                if name.endswith(".csv"):
-
-                    return pd.read_csv(z.open(name))
-
-        else:
-
-            return pd.read_csv(BytesIO(r.content))
+        return df
 
     except Exception as e:
 
-        logging.warning(f"FAILED SOURCE {url}")
-
+        logging.warning(f"Download failed {url}")
         return None
 
 
-def build_urls(date):
+def normalize(df):
 
-    dd=date.strftime("%d")
-    mmm=date.strftime("%b").upper()
-    yyyy=date.strftime("%Y")
+    cols=df.columns.str.lower()
 
-    urls=[
-
-    f"https://archives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip",
-
-    f"https://nsearchives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip",
-
-    f"https://www1.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip"
-
-    ]
-
-    return urls
-
-
-def fetch():
-
-    today=datetime.utcnow()
-
-    for i in range(10):
-
-        date=today-timedelta(days=i)
-
-        urls=build_urls(date)
-
-        for url in urls:
-
-            logging.info(f"TRY {url}")
-
-            df=try_download(url)
-
-            if df is not None and len(df)>10:
-
-                logging.info(f"SUCCESS {url}")
-
-                return df
-
-        time.sleep(1)
-
-    return None
-
-
-def clean(df):
-
-    df=df.rename(columns=str.lower)
+    df.columns=cols
 
     keep=[
-
     "symbol",
     "open",
     "high",
     "low",
     "close",
-    "tottrdqty",
-    "timestamp"
-
+    "tottrdqty"
     ]
 
-    cols=[c for c in keep if c in df.columns]
+    df=df[keep]
 
-    df=df[cols]
-
-    df=df.rename(columns={"tottrdqty":"volume"})
-
-    df=df[df["symbol"].str.len()>1]
+    df=df.rename(columns={
+    "tottrdqty":"volume"
+    })
 
     return df
 
 
 def run():
 
-    df=fetch()
+    dates=generate_dates()
 
-    if df is None:
+    for d in dates:
 
-        raise Exception("DATA INGESTION FAILED")
+        url=build_url(d)
 
-    df=clean(df)
+        logging.info(f"Trying {url}")
 
-    os.makedirs(os.path.dirname(OUTPUT),exist_ok=True)
+        df=try_download(url)
 
-    df.to_csv(OUTPUT,index=False)
+        if df is not None:
 
-    print("BHAVCOPY INGESTED")
-    print("ROWS:",len(df))
+            df=normalize(df)
+
+            os.makedirs("data/raw_bhavcopy",exist_ok=True)
+
+            df.to_csv(OUTPUT,index=False)
+
+            print("BHAVCOPY DOWNLOADED")
+
+            logging.info("SUCCESS")
+
+            return
+
+        time.sleep(2)
+
+    raise Exception("DATA INGESTION FAILED")
 
 
 if __name__=="__main__":
-
     run()

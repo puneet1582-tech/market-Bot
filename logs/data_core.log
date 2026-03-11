@@ -58,3 +58,10 @@
 2026-03-11 02:25:32,823 | INFO | TRY https://nsearchives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm02MAR2026bhav.csv.zip
 2026-03-11 02:25:32,937 | INFO | TRY https://www1.nseindia.com/content/historical/EQUITIES/2026/MAR/cm02MAR2026bhav.csv.zip
 2026-03-11 02:25:32,967 | WARNING | FAILED SOURCE https://www1.nseindia.com/content/historical/EQUITIES/2026/MAR/cm02MAR2026bhav.csv.zip
+2026-03-11 02:31:18,156 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm11MAR2026bhav.csv.zip
+2026-03-11 02:31:20,431 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm10MAR2026bhav.csv.zip
+2026-03-11 02:31:22,540 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm09MAR2026bhav.csv.zip
+2026-03-11 02:31:24,630 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm08MAR2026bhav.csv.zip
+2026-03-11 02:31:26,715 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm07MAR2026bhav.csv.zip
+2026-03-11 02:31:28,808 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm06MAR2026bhav.csv.zip
+2026-03-11 02:31:30,916 | INFO | Trying https://archives.nseindia.com/content/historical/EQUITIES/2026/MAR/cm05MAR2026bhav.csv.zip
