@@ -6,111 +6,107 @@ import time
 from datetime import datetime, timedelta
 from io import BytesIO
 
-
 OUTPUT_DIR="data/bhavcopy"
 OUTPUT_FILE="data/bhavcopy/cm_today_bhav.csv"
 
 os.makedirs(OUTPUT_DIR,exist_ok=True)
 
-
-BASE_URL="https://archives.nseindia.com/content/historical/EQUITIES"
-
+ARCHIVE_URL="https://archives.nseindia.com/content/historical/EQUITIES"
+NEW_ARCHIVE="https://nsearchives.nseindia.com/content/historical/EQUITIES"
 
 HEADERS={
-"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-"Accept-Language":"en-US,en;q=0.5",
+"User-Agent":"Mozilla/5.0",
+"Accept":"*/*",
 "Connection":"keep-alive"
 }
-
 
 def build_url(date):
 
     year=date.strftime("%Y")
     month=date.strftime("%b").upper()
-    d=date.strftime("%d%b%Y").upper()
+    day=date.strftime("%d%b%Y").upper()
 
-    return f"{BASE_URL}/{year}/{month}/cm{d}bhav.csv.zip"
+    return [
+        f"{ARCHIVE_URL}/{year}/{month}/cm{day}bhav.csv.zip",
+        f"{NEW_ARCHIVE}/{year}/{month}/cm{day}bhav.csv.zip"
+    ]
 
 
-def download(session,url):
+def download(url):
 
-    r=session.get(url,headers=HEADERS,timeout=20)
+    try:
 
-    if r.status_code!=200:
+        r=requests.get(url,headers=HEADERS,timeout=15)
+
+        if r.status_code!=200:
+            return None
+
+        return r.content
+
+    except:
         return None
-
-    return r.content
 
 
 def extract_zip(content):
 
-    z=zipfile.ZipFile(BytesIO(content))
-    name=z.namelist()[0]
+    with zipfile.ZipFile(BytesIO(content)) as z:
 
-    df=pd.read_csv(z.open(name))
+        name=z.namelist()[0]
 
-    return df
+        df=pd.read_csv(z.open(name))
 
-
-def normalize_columns(df):
-
-    cols=[c.strip().upper() for c in df.columns]
-
-    df.columns=cols
-
-    rename_map={
-    "SYMBOL":"symbol",
-    "CLOSE":"close",
-    "TOTTRDQTY":"volume"
-    }
-
-    df=df.rename(columns=rename_map)
-
-    return df
+        return df
 
 
-def try_dates(session):
+def find_latest_bhavcopy():
 
-    today=datetime.now()
+    today=datetime.utcnow()
 
-    for i in range(7):
+    for i in range(10):
 
         d=today-timedelta(days=i)
 
-        url=build_url(d)
+        urls=build_url(d)
 
-        print("Trying:",url)
+        for url in urls:
 
-        content=download(session,url)
+            print("Trying:",url)
 
-        if content:
+            content=download(url)
 
-            print("Downloaded:",d.date())
+            if content:
 
-            return content
+                df=extract_zip(content)
+
+                return df
 
         time.sleep(1)
 
-    return None
+    raise Exception("Bhavcopy download failed")
+
+
+def clean(df):
+
+    df=df[df["SERIES"]=="EQ"]
+
+    df=df.rename(columns={
+        "SYMBOL":"symbol",
+        "CLOSE":"close",
+        "TOTTRDQTY":"volume"
+    })
+
+    df=df[["symbol","close","volume"]]
+
+    return df
 
 
 def run():
 
     print("Downloading NSE bhavcopy...")
 
-    session=requests.Session()
+    df=find_latest_bhavcopy()
 
-    session.get("https://www.nseindia.com",headers=HEADERS)
-
-    content=try_dates(session)
-
-    if not content:
-        raise Exception("Bhavcopy download failed")
-
-    df=extract_zip(content)
-
-    df=normalize_columns(df)
+    df=clean(df)
 
     df.to_csv(OUTPUT_FILE,index=False)
 
