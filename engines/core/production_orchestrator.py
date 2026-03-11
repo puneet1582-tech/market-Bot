@@ -6,6 +6,7 @@ from engines.market.company_intelligence_engine import run as run_company
 from engines.market.ownership_intelligence_engine import run as run_ownership
 from engines.market.sector_intelligence_engine import run as run_sector
 from engines.market.market_mode_engine import run as run_market
+from engines.macro.global_macro_engine import run as run_macro
 from engines.master.master_brain_engine import run as run_master
 
 
@@ -18,36 +19,37 @@ logging.basicConfig(
 
 class PipelineStep:
 
-    def __init__(self, name, func):
-        self.name = name
-        self.func = func
+    def __init__(self,name,func):
+        self.name=name
+        self.func=func
 
     def execute(self):
 
-        start = time.time()
+        start=time.time()
 
         logging.info(f"START {self.name}")
 
         try:
+
             self.func()
 
-            duration = round(time.time() - start,2)
+            duration=round(time.time()-start,2)
 
             logging.info(f"SUCCESS {self.name} ({duration}s)")
 
-        except Exception as e:
+        except Exception:
 
             logging.error(f"FAILED {self.name}")
             logging.error(traceback.format_exc())
 
-            raise e
+            raise
 
 
 class MasterPipeline:
 
     def __init__(self):
 
-        self.steps = [
+        self.steps=[
 
             PipelineStep(
                 "Company Intelligence Engine",
@@ -70,33 +72,42 @@ class MasterPipeline:
             ),
 
             PipelineStep(
+                "Global Macro Engine",
+                run_macro
+            ),
+
+            PipelineStep(
                 "Master Brain Engine",
                 run_master
             )
 
         ]
 
+
     def run(self):
 
         logging.info("PIPELINE START")
 
-        start = time.time()
+        start=time.time()
 
         for step in self.steps:
+
             step.execute()
 
-        total = round(time.time() - start,2)
+        total=round(time.time()-start,2)
 
         logging.info(f"PIPELINE COMPLETE ({total}s)")
+
         print("SYSTEM PIPELINE COMPLETE")
 
 
 def run():
 
-    pipeline = MasterPipeline()
+    pipeline=MasterPipeline()
 
     pipeline.run()
 
 
-if __name__ == "__main__":
+if __name__=="__main__":
+
     run()
