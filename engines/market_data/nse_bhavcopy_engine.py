@@ -3,139 +3,118 @@ import requests
 import zipfile
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from io import BytesIO
 
 
-OUTPUT_DIR = "data/bhavcopy"
-OUTPUT_FILE = "data/bhavcopy/cm_today_bhav.csv"
+OUTPUT_DIR="data/bhavcopy"
+OUTPUT_FILE="data/bhavcopy/cm_today_bhav.csv"
 
 os.makedirs(OUTPUT_DIR,exist_ok=True)
 
 
-URL_PATTERNS = [
-
-"https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip",
-
-"https://www1.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip",
-
-"https://nsearchives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip"
-
-]
+BASE_URL="https://archives.nseindia.com/content/historical/EQUITIES"
 
 
-HEADERS = {
-
-"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-"Accept":"*/*",
-"Connection":"keep-alive",
-"Accept-Language":"en-US,en;q=0.9"
-
+HEADERS={
+"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
+"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+"Accept-Language":"en-US,en;q=0.5",
+"Connection":"keep-alive"
 }
 
 
-def get_session():
+def build_url(date):
 
-    s=requests.Session()
+    year=date.strftime("%Y")
+    month=date.strftime("%b").upper()
+    d=date.strftime("%d%b%Y").upper()
 
-    s.headers.update(HEADERS)
-
-    try:
-
-        s.get("https://www.nseindia.com",timeout=10)
-
-    except:
-        pass
-
-    return s
-
-
-def generate_dates():
-
-    today=datetime.today()
-
-    for i in range(5):
-
-        d=today - pd.Timedelta(days=i)
-
-        yield d.strftime("%d%b%Y").upper(),d.strftime("%Y"),d.strftime("%b").upper()
+    return f"{BASE_URL}/{year}/{month}/cm{d}bhav.csv.zip"
 
 
 def download(session,url):
 
-    try:
+    r=session.get(url,headers=HEADERS,timeout=20)
 
-        r=session.get(url,timeout=15)
+    if r.status_code!=200:
+        return None
 
-        if r.status_code==200:
+    return r.content
 
-            return r.content
 
-    except:
-        pass
+def extract_zip(content):
+
+    z=zipfile.ZipFile(BytesIO(content))
+    name=z.namelist()[0]
+
+    df=pd.read_csv(z.open(name))
+
+    return df
+
+
+def normalize_columns(df):
+
+    cols=[c.strip().upper() for c in df.columns]
+
+    df.columns=cols
+
+    rename_map={
+    "SYMBOL":"symbol",
+    "CLOSE":"close",
+    "TOTTRDQTY":"volume"
+    }
+
+    df=df.rename(columns=rename_map)
+
+    return df
+
+
+def try_dates(session):
+
+    today=datetime.now()
+
+    for i in range(7):
+
+        d=today-timedelta(days=i)
+
+        url=build_url(d)
+
+        print("Trying:",url)
+
+        content=download(session,url)
+
+        if content:
+
+            print("Downloaded:",d.date())
+
+            return content
+
+        time.sleep(1)
 
     return None
 
 
-def extract(content):
-
-    z=zipfile.ZipFile(BytesIO(content))
-
-    name=z.namelist()[0]
-
-    z.extract(name,OUTPUT_DIR)
-
-    return os.path.join(OUTPUT_DIR,name)
-
-
-def normalize(csv_path):
-
-    df=pd.read_csv(csv_path)
-
-    df=df[df["SERIES"]=="EQ"]
-
-    df=df.rename(columns={
-
-    "SYMBOL":"symbol",
-
-    "CLOSE":"close",
-
-    "TOTTRDQTY":"volume"
-
-    })
-
-    df=df[["symbol","close","volume"]]
-
-    df.to_csv(OUTPUT_FILE,index=False)
-
-
 def run():
-
-    session=get_session()
 
     print("Downloading NSE bhavcopy...")
 
-    for date,year,month in generate_dates():
+    session=requests.Session()
 
-        for pattern in URL_PATTERNS:
+    session.get("https://www.nseindia.com",headers=HEADERS)
 
-            url=pattern.format(date=date,year=year,month=month)
+    content=try_dates(session)
 
-            content=download(session,url)
+    if not content:
+        raise Exception("Bhavcopy download failed")
 
-            if content:
+    df=extract_zip(content)
 
-                csv_path=extract(content)
+    df=normalize_columns(df)
 
-                normalize(csv_path)
+    df.to_csv(OUTPUT_FILE,index=False)
 
-                print("Bhavcopy saved:",OUTPUT_FILE)
-
-                return
-
-        time.sleep(2)
-
-    raise Exception("Bhavcopy download failed across all sources")
+    print("Saved:",OUTPUT_FILE)
 
 
 if __name__=="__main__":
