@@ -1,9 +1,9 @@
 import requests
-import zipfile
 import pandas as pd
+import zipfile
 import logging
-import time
 import os
+import time
 from datetime import datetime,timedelta
 from io import BytesIO
 
@@ -19,131 +19,133 @@ OUTPUT="data/raw_bhavcopy/latest_bhavcopy.csv"
 
 
 HEADERS={
-    "User-Agent":"Mozilla/5.0",
-    "Accept":"*/*",
-    "Connection":"keep-alive"
+"user-agent":"Mozilla/5.0",
+"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+"accept-language":"en-US,en;q=0.9"
 }
 
 
-def download(url):
+def try_download(url):
 
     try:
+
         r=requests.get(url,headers=HEADERS,timeout=20)
 
         if r.status_code!=200:
             return None
 
-        return r.content
+        if url.endswith(".zip"):
+
+            z=zipfile.ZipFile(BytesIO(r.content))
+
+            for name in z.namelist():
+
+                if name.endswith(".csv"):
+
+                    return pd.read_csv(z.open(name))
+
+        else:
+
+            return pd.read_csv(BytesIO(r.content))
 
     except Exception as e:
 
-        logging.error(str(e))
-        return None
-
-
-
-def extract_zip(content):
-
-    try:
-
-        z=zipfile.ZipFile(BytesIO(content))
-
-        for f in z.namelist():
-
-            if f.endswith(".csv"):
-
-                return pd.read_csv(z.open(f))
-
-    except:
+        logging.warning(f"FAILED SOURCE {url}")
 
         return None
 
 
+def build_urls(date):
 
-def normalize(df):
-
-    cols=[c.upper() for c in df.columns]
-
-    df.columns=cols
-
-    if "SYMBOL" not in cols:
-        return None
-
-    df=df[df["SERIES"]=="EQ"]
-
-    return df
-
-
-
-def build_urls(d):
-
-    dd=d.strftime("%d")
-    mm=d.strftime("%m")
-    yyyy=d.strftime("%Y")
-    mmm=d.strftime("%b").upper()
+    dd=date.strftime("%d")
+    mmm=date.strftime("%b").upper()
+    yyyy=date.strftime("%Y")
 
     urls=[
 
-        f"https://archives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip",
+    f"https://archives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip",
 
-        f"https://nsearchives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip"
+    f"https://nsearchives.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip",
+
+    f"https://www1.nseindia.com/content/historical/EQUITIES/{yyyy}/{mmm}/cm{dd}{mmm}{yyyy}bhav.csv.zip"
 
     ]
 
     return urls
 
 
+def fetch():
 
-def search():
+    today=datetime.utcnow()
 
-    today=datetime.today()
+    for i in range(10):
 
-    for i in range(0,10):
+        date=today-timedelta(days=i)
 
-        d=today-timedelta(days=i)
+        urls=build_urls(date)
 
-        urls=build_urls(d)
+        for url in urls:
 
-        for u in urls:
+            logging.info(f"TRY {url}")
 
-            logging.info(f"TRY {u}")
+            df=try_download(url)
 
-            data=download(u)
+            if df is not None and len(df)>10:
 
-            if not data:
-                continue
+                logging.info(f"SUCCESS {url}")
 
-            df=extract_zip(data)
-
-            if df is None:
-                continue
-
-            df=normalize(df)
-
-            if df is None:
-                continue
-
-            df.to_csv(OUTPUT,index=False)
-
-            logging.info("SUCCESS")
-
-            return True
+                return df
 
         time.sleep(1)
 
-    return False
+    return None
 
+
+def clean(df):
+
+    df=df.rename(columns=str.lower)
+
+    keep=[
+
+    "symbol",
+    "open",
+    "high",
+    "low",
+    "close",
+    "tottrdqty",
+    "timestamp"
+
+    ]
+
+    cols=[c for c in keep if c in df.columns]
+
+    df=df[cols]
+
+    df=df.rename(columns={"tottrdqty":"volume"})
+
+    df=df[df["symbol"].str.len()>1]
+
+    return df
 
 
 def run():
 
-    ok=search()
+    df=fetch()
 
-    if not ok:
+    if df is None:
+
         raise Exception("DATA INGESTION FAILED")
 
-    print("Bhavcopy downloaded")
+    df=clean(df)
+
+    os.makedirs(os.path.dirname(OUTPUT),exist_ok=True)
+
+    df.to_csv(OUTPUT,index=False)
+
+    print("BHAVCOPY INGESTED")
+    print("ROWS:",len(df))
 
 
 if __name__=="__main__":
+
     run()
