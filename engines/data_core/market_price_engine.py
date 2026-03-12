@@ -1,62 +1,36 @@
 import pandas as pd
 import os
 
-INPUT_DIR="data/historical_prices"
-OUTPUT="data/processed/market_prices.csv"
-
+INPUT_FILE = "data/bhavcopy/cm_today_bhav.csv"
+OUTPUT_FILE = "data/processed/market_prices.csv"
 
 def run():
 
-    files=os.listdir(INPUT_DIR)
-
-    all_data=[]
-
-    for f in files:
-
-        if not f.endswith(".csv"):
-            continue
-
-        path=os.path.join(INPUT_DIR,f)
-
-        try:
-
-            df=pd.read_csv(path)
-
-            if "symbol" not in df.columns:
-                continue
-
-            df=df.rename(columns={
-                "Date":"date",
-                "Open":"open",
-                "High":"high",
-                "Low":"low",
-                "Close":"close",
-                "Volume":"volume"
-            })
-
-            df=df[["date","symbol","open","high","low","close","volume"]]
-
-            all_data.append(df)
-
-        except Exception as e:
-
-            print("skip",f,e)
-
-
-    if len(all_data)==0:
-
-        print("no data found")
+    if not os.path.exists(INPUT_FILE):
+        print("Bhavcopy file missing")
         return
 
+    df = pd.read_csv(INPUT_FILE)
 
-    master=pd.concat(all_data)
+    df = df.rename(columns={
+        "SYMBOL":"symbol",
+        "CLOSE":"close",
+        "TOTTRDQTY":"volume"
+    })
 
-    master.sort_values(["date","symbol"],inplace=True)
+    df = df[["symbol","close","volume"]]
 
-    master.to_csv(OUTPUT,index=False)
+    df["close"] = pd.to_numeric(df["close"],errors="coerce")
+    df["volume"] = pd.to_numeric(df["volume"],errors="coerce")
 
-    print("MASTER PRICE DATABASE CREATED")
+    df = df.dropna()
 
+    os.makedirs("data/processed",exist_ok=True)
 
-if __name__=="__main__":
+    df.to_csv(OUTPUT_FILE,index=False)
+
+    print("MARKET PRICE DATA CREATED")
+    print("TOTAL STOCKS:",len(df))
+
+if __name__ == "__main__":
     run()
