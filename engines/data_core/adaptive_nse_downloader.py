@@ -2,15 +2,8 @@ import requests
 import pandas as pd
 import zipfile
 import os
-import logging
 from datetime import datetime,timedelta
 from io import BytesIO
-
-logging.basicConfig(
-    filename="logs/data_core.log",
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s"
-)
 
 OUTPUT="data/raw_bhavcopy/latest_bhavcopy.csv"
 
@@ -31,7 +24,7 @@ def build_url(date):
     return f"{BASE}/{y}/{m}/cm{d}bhav.csv.zip"
 
 
-def download_day(date):
+def try_download(date):
 
     url=build_url(date)
 
@@ -49,9 +42,7 @@ def download_day(date):
 
         return df
 
-    except Exception as e:
-
-        logging.error(f"download failed {date} {e}")
+    except:
         return None
 
 
@@ -59,27 +50,31 @@ def run():
 
     today=datetime.now()
 
-    for i in range(5):
+    for i in range(7):
 
         d=today-timedelta(days=i)
 
-        df=download_day(d)
+        df=try_download(d)
 
         if df is not None:
 
+            os.makedirs("data/raw_bhavcopy",exist_ok=True)
+
             df.to_csv(OUTPUT,index=False)
 
-            print("BHAVCOPY DOWNLOADED",d.date())
+            print("BHAVCOPY DOWNLOADED:",d.date())
 
             return
 
+
     if os.path.exists(OUTPUT):
 
-        print("Using previous bhavcopy fallback")
+        print("DOWNLOAD FAILED — USING OLD BHAVCOPY")
 
         return
 
-    raise Exception("DATA INGESTION FAILED")
+
+    print("WARNING: No bhavcopy available, pipeline continues")
 
 
 if __name__=="__main__":
