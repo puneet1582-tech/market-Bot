@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import os
+from io import StringIO
 
 URL="https://archives.nseindia.com/content/equities/EQUITY_L.csv"
 
@@ -15,18 +16,23 @@ def run():
 
     print("\n===== BUILDING NSE MASTER UNIVERSE =====")
 
-    r=requests.get(URL,headers=HEADERS)
+    r=requests.get(URL,headers=HEADERS,timeout=30)
 
-    df=pd.read_csv(pd.compat.StringIO(r.text))
+    if r.status_code!=200:
+        print("NSE request failed")
+        return
+
+    df=pd.read_csv(StringIO(r.text))
 
     df=df.rename(columns={
         "SYMBOL":"symbol",
-        "NAME OF COMPANY":"company"
+        "NAME OF COMPANY":"company",
+        " SERIES":"series"
     })
 
-    df=df[["symbol","company"," SERIES"]]
+    df=df[["symbol","company","series"]]
 
-    df=df[df[" SERIES"]=="EQ"]
+    df=df[df["series"]=="EQ"]
 
     df=df.drop_duplicates("symbol")
 
@@ -35,7 +41,6 @@ def run():
     df.to_csv(OUT,index=False)
 
     print("TOTAL NSE STOCKS:",len(df))
-
     print("UNIVERSE FILE CREATED")
 
 if __name__=="__main__":
